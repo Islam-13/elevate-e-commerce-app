@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --color-bg-main: #feedf7;
+  --color-main: ##f82ba9;
+  --color-title: #160e4b;
+  --color-mini-paragraph: ##757f95;
+
+  --color-star: #fba707;
+  --color-price: #f05454;
+  --color-icon: #8c52ff;
+
+  --radius-rd-sm: 10px;
+  --radius-rd-md: 20px;
+  --radius-rd-full: 100px;
+}
