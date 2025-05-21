@@ -1,0 +1,117 @@
+<!-- Specail Gifts -->
+
+<section class="p-4 my-5">
+  <div class="contariner flex flex-col gap-6 w-[90%] mx-auto">
+
+    <div class="main-gifts">
+      <div class="grid grid-cols-12 gap-4">
+        <div
+          class="left-side col-span-12 md:col-span-3 sm:w-full max-w-[301px] min-h-[440px]"
+        >
+          <div class="image-container">
+            <div class="left-image">
+              <div class="left-details flex flex-col justify-between">
+                <p class="title">Start $10.99</p>
+                <p class="sec-title pb-[0.55px]">
+                  Special Gifts Box For Your Love
+                </p>
+                <button
+                  class="shop-now max-w-[144px]"
+                  (click)="onButtonClick()"
+                >
+                  Shop Now <span class="arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rigth-side col-span-12 md:col-span-9 sm:w-full">
+          <owl-carousel-o [options]="mainSliderOptions">
+            @for (image of imageSlides; track image.id) {
+            <ng-template carouselSlide>
+              <div class="image-container max-w-[956px] max-h-[440px]">
+                <div
+                  class="right-image"
+                  [ngStyle]="{ 'background-image': 'url(' + image.src + ')' }"
+                  [attr.aria-label]="image.alt"
+                >
+                  <div class="right-details flex flex-col justify-between p-5">
+                    <h6 class="right-head">Best Gift Shop</h6>
+                    <p class="right-tiltle1">
+                      Choose Perfect <span class="gift">Gifts</span> From Us
+                    </p>
+                    <p class="right-tiltle2">
+                      Culpa ducimus nesciunt aliquam non rerum esse recusandae
+                      omnis. Rerum optio dolores et.
+                    </p>
+                    <button
+                      class="shop-now max-w-[144px]"
+                      (click)="onButtonClick()"
+                    >
+                      Shop Now <span class="arrow">→</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            }
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
+
+    <div class="secondary-gifts">
+      <div class="grid grid-cols-12 gap-4">
+
+        <div class="gifts-box flex flex-col items-end justify-center gap-3.5 col-span-12 md:col-span-4 sm:w-full min-w-[410px] min-h-[272px] ">
+          <div class="offer-details pr-4">
+            <p style="color: var(--color-main)" class="max-w-[188px] min-h-[19px] mb-3.5 " >Gifts Box</p>
+          <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px] ">Awesome Gifts Box Collectons</p>
+          <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" (click)="onButtonClick()">Shop Now</button>
+
+
+          </div>
+          </div>
+
+
+       <div class="occasion-gifts-1 flex flex-col items-end gap-3.5 justify-center col-span-12 md:col-span-4 sm:w-full min-w-[410px] min-h-[272px] ">
+         <div class="offer-details pr-4">
+           <p style="color: var(--color-main)" class=" min-w-[188px] min-h-[19px] mb-3.5 " >Occasion Gifts</p>
+        <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px]">Awesome Gifts Box Collectons</p>
+        <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" (click)="onButtonClick()">Discover Now</button>
+
+          </div>
+
+      </div>
+
+
+       <div class="occasion-gifts-2 flex flex-col items-end gap-3.5  justify-center col-span-12 md:col-span-4 sm:w-full min-w-[410px] min-h-[272px] ">
+         <div class="offer-details pr-4  ">
+          <p style="color: white " class="    min-w-[188px] min-h-[19px] mb-3.5" >Occasion Gifts</p>
+        <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px]">Awesome Gifts Box Collectons</p>
+        <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" (click)="onButtonClick()">Discover Now</button>
+
+
+          </div>
+              </div>
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+
+  </div>
+</section>

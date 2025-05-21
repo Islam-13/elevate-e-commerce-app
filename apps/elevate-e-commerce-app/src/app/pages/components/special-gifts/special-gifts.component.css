@@ -1,0 +1,238 @@
+
+
+
+
+
+.left-image {
+  background-image: url('./../../../../../public/images/special-gifts/Red-christmas-gifts-with-white-ribbon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 14px;
+
+
+  overflow: hidden;
+
+}
+.right-side{
+   position: relative;
+  /* max-width: 100%; */
+  overflow: hidden;
+}
+
+ .owl-nav button {
+  position: absolute;
+  top: 45%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white !important;
+  font-size: 24px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 50%;
+}
+ .owl-nav .owl-prev {
+  right: 30px;
+}
+
+ .owl-nav .owl-next {
+  right: 10px;
+}
+ .owl-dots {
+  text-align: center;
+  margin-top: 10px;
+}
+ .owl-dots .owl-dot span {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+ .owl-dots .owl-dot.active span {
+  background: #f39c12;
+}
+.right-image {
+  /* background-image: url('./../../../../../public/images/special-gifts/Main-Background.jpg'); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 13.98px;
+  overflow: hidden;
+
+}
+
+.left-details {
+  width: 248px;
+  height: 157px;
+  margin: 230px 37px 37px 16px;
+
+  gap: 11.18px;
+
+}
+
+.title {
+
+  width: 214px;
+  height: 63px;
+
+   font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 16.77px;
+  line-height: 30.2px;
+  letter-spacing: 4.66px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  color: rgba(248, 43, 169, 1);
+
+
+}
+
+.sec-title {
+   font-family: "Inter", sans-serif;
+  font-weight:600;
+  font-size: 26.09px;
+  line-height: 31.31px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: var(--color-blue-17, rgba(22, 14, 75, 1));
+
+
+
+}
+
+.shop-now {
+  background: rgba(248, 43, 169, 1);
+  box-shadow: 0px 0px 37.28px 4.66px hsla(0, 0%, 0%, 0.05);
+  font-family: "Roboto", sans-serif;
+  color: white;
+
+
+  border-radius: 9.32px;
+  gap: 4.66px;
+  padding-top: 6.52px;
+  padding-right: 13.98px;
+  padding-bottom: 6.52px;
+  padding-left: 13.98px;
+
+
+
+
+}
+
+.right-head{
+font-family: "Inter", sans-serif;
+font-weight: 700;
+font-size: 20px;
+line-height: 24.6px;
+letter-spacing: 3.73px;
+vertical-align: middle;
+text-transform: uppercase;
+
+color: hsla(323, 94%, 57%, 1);
+
+
+}
+span .gift{
+color: hsla(323, 94%, 57%, 1);
+
+}
+
+.right-tiltle1{
+font-family: "Inter", sans-serif;
+font-weight: 700;
+font-size: 45px;
+line-height: 50.33px;
+letter-spacing: 0%;
+vertical-align: middle;
+text-transform: capitalize;
+width: 343px;
+height: 101px;
+color:hsla(248, 69%, 17%, 1);
+
+
+}
+.right-tiltle2{
+font-family: "Inter", sans-serif;
+font-weight: 400;
+font-size: 16px;
+line-height: 27.96px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: hsla(248, 69%, 17%, 1);
+width: 357px;
+height: 84px;
+
+}
+
+.right-details{
+  width: 381px;
+height: 320px;
+margin: 60px 519px 60px 56px;
+gap: 24px;
+
+}
+
+.gifts-box{
+   background-image: url('./../../../../../public/images/special-gifts/Confetti lying near present.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  overflow: hidden;
+
+}
+
+.gift-button{
+font-family: "Inter", sans-serif;
+font-weight: 400;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+text-transform: capitalize;
+color: white;
+width: 85;
+height: 33;
+gap: 8px;
+border-radius: 20px;
+padding: 8px;
+
+
+}
+
+.occasion-gifts-1{
+   background-image: url('./../../../../../public/images/special-gifts/Top view hand holding gift box on work space.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.occasion-gifts-2{
+   background-image: url('./../../../../../public/images/special-gifts/Christmas shopping composition with presents and cart.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.desc-gift{
+  font-family: "Inter", sans-serif;
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: right;
+/* vertical-align: middle; */
+text-transform: capitalize;
+
+}
+
+.offer-details{
+text-align: right;
+
+}
