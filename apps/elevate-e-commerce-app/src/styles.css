@@ -8,11 +8,11 @@
   font-style: normal;
 }
 
-@theme {
+:root {
   --color-bg-main: #feedf7;
-  --color-main: ##f82ba9;
+  --color-main: #f82ba9;
   --color-title: #160e4b;
-  --color-mini-paragraph: ##757f95;
+  --color-mini-paragraph: #757f95;
 
   --color-star: #fba707;
   --color-price: #f05454;
