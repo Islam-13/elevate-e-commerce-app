@@ -4,8 +4,8 @@
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default'; */
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -23,4 +23,27 @@
   --radius-rd-sm: 10px;
   --radius-rd-md: 20px;
   --radius-rd-full: 100px;
+}
+
+body {
+  font-family: 'Inter';
+}
+
+.heading {
+  @apply relative w-fit text-xl lg:text-3xl text-center text-title font-bold capitalize;
+}
+
+.underline {
+  @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1;
+}
+
+.marquee-item {
+  animation: marquee-move var(--speed) linear infinite;
+  animation-delay: calc(var(--single-slide-speed) * var(--position) * -1);
+}
+
+@keyframes marquee-move {
+  to {
+    transform: translateX(calc(-100cqw - 100%));
+  }
 }
