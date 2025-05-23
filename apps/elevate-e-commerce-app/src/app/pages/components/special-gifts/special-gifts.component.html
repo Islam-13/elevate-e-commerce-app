@@ -15,7 +15,7 @@
                 <p class="sec-title pb-[0.55px]">
                   Special Gifts Box For Your Love
                 </p>
-               <app-primary-btn></app-primary-btn>
+               <app-primary-btn label="Shop Now →"></app-primary-btn>
               </div>
             </div>
           </div>
@@ -40,7 +40,11 @@
                       Culpa ducimus nesciunt aliquam non rerum esse recusandae
                       omnis. Rerum optio dolores et.
                     </p>
-                 <app-primary-btn></app-primary-btn>
+                    
+
+                      <app-primary-btn  label="Shop Now →"></app-primary-btn>
+                    
+
                   </div>
                 </div>
               </div>
@@ -54,37 +58,24 @@
     <div class="secondary-gifts">
       <div class="grid grid-cols-12 gap-3.5">
 
-        <div class="gifts-box flex flex-col items-end justify-center   col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px] ">
+
+        @for (gift of gifts; track gift.id) {
+          <div class="gifts-box  flex flex-col items-end justify-center   col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px] "
+           [ngStyle]="{ 'background-image': 'url(' + gift.src + ')' }"
+                  [attr.aria-label]="gift.alt">
           <div class="offer-details pr-4">
-            <p style="color: var(--color-main)" class="max-w-[188px] min-h-[19px] mb-3.5 " >Gifts Box</p>
-          <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px] ">Awesome Gifts Box Collectons</p>
-          <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" >Shop Now</button>
+            <p style="color: var(--color-main)" class="max-w-[188px] min-h-[19px] mb-3.5 " > {{gift.title}}</p>
+          <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px] ">{{gift.details}}</p>
+          <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" >{{gift.button_text}}</button>
 
 
           </div>
           </div>
+        }
+        
 
 
-       <div class="occasion-gifts-1 flex flex-col items-end   justify-center col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px] ">
-         <div class="offer-details pr-4">
-           <p style="color: var(--color-main)" class=" min-w-[188px] min-h-[19px] mb-3.5 " >Occasion Gifts</p>
-        <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px]">Awesome Gifts Box Collectons</p>
-        <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" >Discover Now</button>
-
-          </div>
-
-      </div>
-
-
-       <div class="occasion-gifts-2 flex flex-col items-end   justify-center col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px] ">
-         <div class="offer-details pr-4  ">
-          <p style="color: white " class="    min-w-[188px] min-h-[19px] mb-3.5" >Occasion Gifts</p>
-        <p style="color: var(--color-title);" class="desc-gift max-w-[192px] min-h-[72px]">Awesome Gifts Box Collectons</p>
-        <button style="background-color: var(--color-main);" class="gift-button max-w-[144px]" >Discover Now</button>
-
-
-          </div>
-              </div>
+      
 
 
 

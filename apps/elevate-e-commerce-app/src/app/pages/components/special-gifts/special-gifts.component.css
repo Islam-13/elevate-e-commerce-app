@@ -133,24 +133,7 @@ padding-left: 13.22px;
 
 }
 
-.shop-now {
-  background: rgba(248, 43, 169, 1);
-  box-shadow: 0px 0px 37.28px 4.66px hsla(0, 0%, 0%, 0.05);
-  font-family: "Roboto", sans-serif;
-  color: white;
 
-
-  border-radius: 9.32px;
-  gap: 4.66px;
-  padding-top: 6.52px;
-  padding-right: 13.98px;
-  padding-bottom: 6.52px;
-  padding-left: 13.98px;
-
-
-
-
-}
 
 .right-head {
   font-family: "Inter", sans-serif;
@@ -208,10 +191,11 @@ span .gift {
 }
 
 .gifts-box {
-  background-image: url('./../../../../../public/images/special-gifts/Confetti lying near present.png');
+  /* background-image: url('./../../../../../public/images/special-gifts/Confetti lying near present.png'); */
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: right;
   background-size: cover;
+ 
   border-radius: 20px;
   overflow: hidden;
 
@@ -235,23 +219,23 @@ span .gift {
 
 }
 
-.occasion-gifts-1 {
+/* .occasion-gifts-1 {
   background-image: url('./../../../../../public/images/special-gifts/Top view hand holding gift box on work space.png');
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
   border-radius: 20px;
   overflow: hidden;
-}
+} */
 
-.occasion-gifts-2 {
+/* .occasion-gifts-2 {
   background-image: url('./../../../../../public/images/special-gifts/Christmas shopping composition with presents and cart.png');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 20px;
   overflow: hidden;
-}
+} */
 
 .desc-gift {
   font-family: "Inter", sans-serif;
