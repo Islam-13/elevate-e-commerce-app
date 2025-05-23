@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { PrimaryBtnComponent } from "../../../shared/ui/primary-btn/primary-btn.component";
 
 @Component({
   selector: 'app-special-gifts',
-  imports: [CommonModule,CarouselModule],
+  imports: [CommonModule, CarouselModule, PrimaryBtnComponent],
   templateUrl: './special-gifts.component.html',
   styleUrl: './special-gifts.component.css',
 })
@@ -43,8 +44,6 @@ mainSliderOptions: OwlOptions = {
 
 
 
-   onButtonClick() {
-    alert('Button clicked!');
-  }
+  
 
 }
