@@ -8,7 +8,7 @@
   font-style: normal;
 }
 
-:root {
+@theme {
   --color-bg-main: #feedf7;
   --color-main: #f82ba9;
   --color-title: #160e4b;
@@ -21,4 +21,17 @@
   --radius-rd-sm: 10px;
   --radius-rd-md: 20px;
   --radius-rd-full: 100px;
+}
+
+/* carousel ...> Categories */
+
+.p-carousel-indicator-active .p-carousel-indicator-button {
+  background: #f82ba9 !important;
+}
+
+.p-carousel-indicator-button:hover {
+  background: #f82ba9 !important;
+}
+.p-carousel-indicator-list  {
+  display: none !important;
 }
