@@ -20,7 +20,7 @@
   overflow: hidden;
 }
 
- .owl-nav button {
+ ::ng-deep .owl-nav button {
   position: absolute;
   top: 45%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -30,29 +30,31 @@
   border: none;
   border-radius: 50%;
 }
- .owl-nav .owl-prev {
+ ::ng-deep .owl-nav .owl-prev {
   right: 30px;
 }
 
- .owl-nav .owl-next {
+ ::ng-deep .owl-nav .owl-next {
   right: 10px;
 }
- .owl-dots {
+ ::ng-deep .owl-dots {
   text-align: center;
   margin-top: 10px;
 }
 
- .owl-dots .owl-dot span {
+ ::ng-deep .owl-theme .owl-dots .owl-dot span {
   width: 12px;
   height: 12px;
-  background: #fff;
+   background: var(--color-main);
+
   display: inline-block;
   margin: 5px;
   border-radius: 50%;
 }
 
- .owl-dots .owl-dot.active span {
-  background: #f39c12;
+ ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
+  background: red;
+;
 }
 .right-image {
   /* background-image: url('./../../../../../public/images/special-gifts/Main-Background.jpg'); */
@@ -206,7 +208,7 @@ padding: 8px;
 .occasion-gifts-1{
    background-image: url('./../../../../../public/images/special-gifts/Top view hand holding gift box on work space.png');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: right;
   background-size: cover;
   border-radius: 20px;
   overflow: hidden;
@@ -215,7 +217,7 @@ padding: 8px;
 .occasion-gifts-2{
    background-image: url('./../../../../../public/images/special-gifts/Christmas shopping composition with presents and cart.png');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 50% 50%;
   background-size: cover;
   border-radius: 20px;
   overflow: hidden;
