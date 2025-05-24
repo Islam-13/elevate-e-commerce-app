@@ -2,8 +2,8 @@
 @import 'tailwindcss';
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -23,8 +23,30 @@
   --radius-rd-full: 100px;
 }
 
-/* carousel ...> Categories */
+body {
+  font-family: 'Inter';
+}
 
+.heading {
+  @apply relative w-fit text-xl lg:text-3xl text-center text-title font-bold capitalize;
+}
+
+.underline {
+  @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1;
+}
+
+.marquee-item {
+  animation: marquee-move var(--speed) linear infinite;
+  animation-delay: calc(var(--single-slide-speed) * var(--position) * -1);
+}
+
+@keyframes marquee-move {
+  to {
+    transform: translateX(calc(-100cqw - 100%));
+  }
+}
+
+/* carousel ...> Categories */
 .p-carousel-indicator-active .p-carousel-indicator-button {
   background: #f82ba9 !important;
 }
@@ -32,6 +54,7 @@
 .p-carousel-indicator-button:hover {
   background: #f82ba9 !important;
 }
+
 .p-carousel-indicator-list  {
   display: none !important;
 }
