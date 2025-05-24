@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { HomeComponent } from './pages/home/home.component';
-
+import { HomeComponent } from "./pages/home/home.component";
 
 @Component({
   imports: [HomeComponent],
