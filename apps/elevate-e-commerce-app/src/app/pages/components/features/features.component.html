@@ -1,8 +1,8 @@
 <section class="py-8 container mx-auto">
-    @for (feature of features; track feature.id) {
-        <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+  <div class="grid  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          @for (feature of features; track feature.id) {
 
-    <div class="box h-[120px] px-4  justify-around py-8 flex items-center bg-[#feedf7] rounded-[1.25rem] gap-8">
+    <div class="box h-[120px] px-4  justify-around py-8 flex items-center bg-[#feedf7]  gap-8">
       <div class="w-20 min-w-20 h-20 rounded-full text-4xl bg-[#f82ba9] flex items-center justify-center text-white ">
          <img [src]="feature.src" [alt]="feature.alt" />
       </div>
@@ -15,12 +15,12 @@
     </div>
 
 
-    
 
 
+
+  }
   </div>
-    }
-  
+
 
 
 </section>
