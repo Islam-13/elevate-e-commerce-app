@@ -1,0 +1,40 @@
+<div class="card w-[min(300px,100%)]">
+  <div class="relative rounded-rd-md bg-bg-main h-[270px] overflow-clip">
+    <img
+      [src]="imgCover()"
+      [alt]="title()"
+      class="w-full h-full object-cover"
+    />
+    <span
+      class="absolute top-2 right-2 bg-main text-white text-xs rounded-4xl py-0.5 px-2 font-medium uppercase"
+      >new
+    </span>
+  </div>
+
+  <div class="flex items-center justify-between mt-4 px-4">
+    <div class="flex flex-col gap-2">
+      <h5 class="text-title font-semibold capitalize">
+        {{ title() }}
+      </h5>
+
+      <app-star-rating [rate]="rateAvg()" />
+
+      <p>
+        <span class="text-[#F05454]">
+          {{ priceAfterDiscount() | currency }}
+        </span>
+        <span class="text-[#DEE2E6] line-through">
+          {{ price() | currency }}
+        </span>
+      </p>
+    </div>
+
+    <button class="flex items-center justify-between cursor-pointer">
+      <span
+        class="rounded-full bg-icon w-10 h-10 flex items-center justify-center"
+      >
+        <i class="fa-solid fa-bag-shopping text-white text-xl"></i>
+      </span>
+    </button>
+  </div>
+</div>
