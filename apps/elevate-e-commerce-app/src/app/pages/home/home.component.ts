@@ -5,10 +5,11 @@ import { CategoriesComponent } from "../components/categories/categories.compone
 import { PopularItemsComponent } from "../components/popular-items/popular-items.component";
 
 import { TrustedByComponent } from '../components/trusted-by/trusted-by.component';
+import { FeaturesComponent } from "../components/features/features.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, TrustedByComponent,  CategoriesComponent, PopularItemsComponent],
+  imports: [CommonModule, TrustedByComponent, CategoriesComponent, PopularItemsComponent, FeaturesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
