@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+
 import { HomeComponent } from './pages/home/home.component';
 import { FeaturesComponent } from "./pages/components/features/features.component";
+
 
 @Component({
   imports: [HomeComponent, FeaturesComponent],
