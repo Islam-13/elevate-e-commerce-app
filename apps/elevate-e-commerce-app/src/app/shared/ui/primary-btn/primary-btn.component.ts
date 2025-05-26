@@ -8,5 +8,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './primary-btn.component.css',
 })
 export class PrimaryBtnComponent {
-   @Input() label = 'Default';
+  @Input({ required: true }) label = 'Default';
 }

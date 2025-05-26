@@ -5,9 +5,7 @@
   background-size: cover;
   border-radius: 14px;
 
-
   overflow: hidden;
-
 }
 
 .right-side {
@@ -27,50 +25,43 @@
   border-radius: 50%;
 } */
 
-::ng-deep .owl-theme .owl-dots, .owl-theme .owl-nav{
-/* position: absolute; */
+::ng-deep .owl-theme .owl-dots,
+.owl-theme .owl-nav {
+  /* position: absolute; */
 }
 ::ng-deep .owl-nav .owl-prev {
- top: 375px;
- right: 83px;
-
+  top: 375px;
+  right: 83px;
 }
 ::ng-deep .owl-nav .owl-next {
- top: 375px;
- right: 30px;
-
+  top: 375px;
+  right: 30px;
 }
-::ng-deep .owl-theme .owl-nav [class*=owl-]{
+::ng-deep .owl-theme .owl-nav [class*='owl-'] {
   background-color: white;
   color: rgba(117, 127, 149, 1);
   max-width: 41px;
   height: 41px;
 
-border-radius: 46.6px;
-padding-top: 8.39px;
-padding-right: 13.22px;
-padding-bottom: 8.39px;
-padding-left: 13.22px;
+  border-radius: 46.6px;
+  padding-top: 8.39px;
+  padding-right: 13.22px;
+  padding-bottom: 8.39px;
+  padding-left: 13.22px;
   position: absolute;
-
-
 }
 
-::ng-deep .owl-theme .owl-dots{
-    position: absolute;
+::ng-deep .owl-theme .owl-dots {
+  position: absolute;
   top: 409px;
   right: 433px;
 }
-
 
 ::ng-deep .owl-theme .owl-dots .owl-dot span {
   width: 7px;
   height: 7px;
   border-radius: 46.6px;
   background: var(--color-main);
-
-  
-
 }
 
 ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
@@ -78,9 +69,6 @@ padding-left: 13.22px;
   height: 7px;
   border-radius: 46.6px;
   background: var(--color-main);
-   
-
-  ;
 }
 
 .right-image {
@@ -91,7 +79,6 @@ padding-left: 13.22px;
   border-radius: 13.98px;
   overflow: hidden;
   /* position: relative; */
-
 }
 
 .left-details {
@@ -100,15 +87,13 @@ padding-left: 13.22px;
   margin: 230px 37px 37px 16px;
 
   gap: 11.18px;
-
 }
 
 .title {
-
   width: 214px;
   height: 63px;
 
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: 16.77px;
   line-height: 30.2px;
@@ -116,46 +101,35 @@ padding-left: 13.22px;
   vertical-align: middle;
   text-transform: uppercase;
   color: rgba(248, 43, 169, 1);
-
-
 }
 
 .sec-title {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 26.09px;
   line-height: 31.31px;
   letter-spacing: 0%;
   vertical-align: middle;
   color: var(--color-blue-17, rgba(22, 14, 75, 1));
-
-
-
 }
 
-
-
 .right-head {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24.6px;
   letter-spacing: 3.73px;
   vertical-align: middle;
   text-transform: uppercase;
-
   color: hsla(323, 94%, 57%, 1);
-
-
 }
 
 span .gift {
   color: hsla(323, 94%, 57%, 1);
-
 }
 
 .right-tiltle1 {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 45px;
   line-height: 50.33px;
@@ -165,12 +139,10 @@ span .gift {
   width: 343px;
   height: 101px;
   color: hsla(248, 69%, 17%, 1);
-
-
 }
 
 .right-tiltle2 {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 27.96px;
@@ -179,7 +151,6 @@ span .gift {
   color: hsla(248, 69%, 17%, 1);
   width: 357px;
   height: 84px;
-
 }
 
 .right-details {
@@ -187,7 +158,6 @@ span .gift {
   height: 320px;
   margin: 60px 519px 60px 16px;
   /* gap: 24px; */
-
 }
 
 .gifts-box {
@@ -195,14 +165,13 @@ span .gift {
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
- 
+
   border-radius: 20px;
   overflow: hidden;
-
 }
 
 .gift-button {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
@@ -215,8 +184,6 @@ span .gift {
   gap: 8px;
   border-radius: 20px;
   padding: 8px;
-
-
 }
 
 /* .occasion-gifts-1 {
@@ -238,7 +205,7 @@ span .gift {
 } */
 
 .desc-gift {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 100%;
@@ -246,10 +213,8 @@ span .gift {
   text-align: right;
   /* vertical-align: middle; */
   text-transform: capitalize;
-
 }
 
 .offer-details {
   text-align: right;
-
 }
