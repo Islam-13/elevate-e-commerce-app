@@ -1,11 +1,7 @@
 <div class="w-fit flex items-center gap-1">
-  @for(star of maxRate; track $index ) { @if (rate() > $index) {
-  <span>
-    <i class="fa-solid fa-star text-star"></i>
-  </span>
-  } @else {
-  <span>
-    <i class="fa-regular fa-star text-star"></i>
-  </span>
-  } }
+  @for(star of maxRate; track $index ) {
+  <i
+    [class]="`fa-${rate() > $index ? 'solid':'regular'} fa-star text-star`"
+  ></i>
+  }
 </div>
