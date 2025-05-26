@@ -8,9 +8,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './star-rating.component.css',
 })
 export class StarRatingComponent {
+  maxRate = new Array(5);
   rate = input.required<number>();
-
-  getRate() {
-    return new Array(this.rate());
-  }
 }
