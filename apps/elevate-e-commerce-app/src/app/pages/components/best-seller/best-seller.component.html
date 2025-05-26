@@ -1,1 +1,56 @@
-<p>best-seller works!</p>
+<section id="best-seller" class="bg-white">
+  <div
+    class="my-8 mx-4 lg:mx-20 flex flex-col items-center justify-between sm:flex-row border border-teeal-600"
+  >
+    <div class="w-full sm:w-[300px] p-2">
+      <div class="flex flex-col gap-4 lg:gap-7">
+        <h6 class="text-main font-bold tracking-[4px] uppercase">
+          Premium Gifts
+        </h6>
+
+        <div>
+          <h2 class="heading">
+            <span class="block"
+              >Best <span class="text-main">seller</span>
+            </span>
+            <span class="block">
+              <span class="text-main">gifts</span> and products
+            </span>
+          </h2>
+
+          <p class="text-mini-paragraph mt-2">
+            Recusandae tempora aut laborum molestias veniam. A commodi sequi
+            accusantium ullam cupiditate. Neque quidem qui et autem dolor dicta
+            necessitatibus ut ad.
+          </p>
+        </div>
+
+        <app-primary-btn label="Explore More">
+          <span><i class="fa-solid fa-arrow-right"></i></span>
+        </app-primary-btn>
+      </div>
+    </div>
+
+    <div class="p-2 w-[min(318px,100%)] lg:w-[calc(100%-320px)]">
+      @if (isLoading()) {
+      <app-loader />
+      } @else if(!error() && !isLoading()) {
+      <owl-carousel-o [options]="customOptions">
+        @for (p of products(); track $index) {
+        <ng-template carouselSlide [id]="p.id">
+          <app-card
+            [title]="p.title"
+            [imgCover]="p.imgCover"
+            [price]="p.price"
+            [priceAfterDiscount]="p.priceAfterDiscount"
+            [rateAvg]="p.rateAvg"
+          />
+        </ng-template>
+        }
+      </owl-carousel-o>
+      } @else {
+      <app-err-msg [message]="error()" />
+      }
+    </div>
+  </div>
+</section>

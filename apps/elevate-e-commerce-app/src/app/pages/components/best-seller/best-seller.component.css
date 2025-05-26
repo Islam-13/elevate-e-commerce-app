@@ -1,0 +1,32 @@
+::ng-deep #best-seller .owl-theme .owl-nav [class*='owl-'] {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  color: white;
+  background-color: var(--color-main);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  transition: all 500ms ease-in-out;
+}
+
+::ng-deep #best-seller .owl-theme .owl-nav [class*='owl-']:hover {
+  background-color: var(--color-main);
+  opacity: 0.5;
+}
+
+::ng-deep #best-seller .owl-nav .owl-prev {
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+::ng-deep #best-seller .owl-nav .owl-next {
+  transform: translateY(-50%);
+  top: 40%;
+  right: 0;
+}
