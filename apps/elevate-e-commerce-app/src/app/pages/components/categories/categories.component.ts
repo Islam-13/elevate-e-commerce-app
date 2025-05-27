@@ -2,6 +2,7 @@ import { CategoriesInterfaces } from './../../../shared/interfaces/categories-in
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriesService } from '../../../shared/services/categories/categories.service';
+ featurs/categories-b
 import { CategoryCardComponent } from '../category-card/category-card.component';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
@@ -10,10 +11,16 @@ import { TagModule } from 'primeng/tag';
 @Component({
   selector: 'app-categories',
   imports: [CommonModule, CategoryCardComponent, CarouselModule, ButtonModule, TagModule],
+
+
+@Component({
+  selector: 'app-categories',
+  imports: [CommonModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
 export class CategoriesComponent implements OnInit {
+ featurs/categories-b
 
   private readonly _categoriesService = inject(CategoriesService);
   categories: WritableSignal<CategoriesInterfaces> = signal({} as CategoriesInterfaces);
@@ -57,4 +64,23 @@ export class CategoriesComponent implements OnInit {
 
   
 
+  private readonly _categoriesService = inject(CategoriesService);
+  categories: WritableSignal<CategoriesInterfaces> = signal ({} as CategoriesInterfaces);
+
+
+getAllCategories(): void {
+  this._categoriesService.getAllCategories().subscribe({
+    next: (res) => {
+      const slicedCategories = res.categories.slice(0, 5); 
+      this.categories.set({
+        ...res,
+        categories: slicedCategories
+      });
+    },
+  });
+}
+
+  ngOnInit(): void {
+      this.getAllCategories();
+  }
 }

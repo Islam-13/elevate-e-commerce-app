@@ -1,0 +1,7 @@
+<div class="w-fit flex items-center gap-1">
+  @for(star of maxRate; track $index ) {
+  <i
+    [class]="`fa-${rate() > $index ? 'solid':'regular'} fa-star text-star`"
+  ></i>
+  }
+</div>

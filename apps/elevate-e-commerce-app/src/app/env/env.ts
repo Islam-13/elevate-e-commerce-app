@@ -1,4 +1,5 @@
-export const environment = {
-  production: true,
-  apiUrl: 'https://flower.elevateegy.com/api/v1',
+ featurs/categories-b
+
+export const env = {
+  baseURL: 'https://flower.elevateegy.com/api/v1',
 };

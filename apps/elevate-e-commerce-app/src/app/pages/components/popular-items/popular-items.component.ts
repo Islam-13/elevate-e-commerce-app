@@ -1,7 +1,10 @@
+ featurs/categories-b
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopularItemsService } from '../../../shared/services/popular-items/popular-items.service';
 import { PopularItemsInterface } from '../../../shared/interfaces/popular-items-interface/popular-items-interface';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-popular-items',
@@ -9,6 +12,7 @@ import { PopularItemsInterface } from '../../../shared/interfaces/popular-items-
   templateUrl: './popular-items.component.html',
   styleUrl: './popular-items.component.css',
 })
+ featurs/categories-b
 export class PopularItemsComponent implements OnInit {
 
   private readonly _popularItemsService = inject(PopularItemsService);
@@ -31,3 +35,4 @@ getAllProducts(): void {
 }
 
 
+export class PopularItemsComponent {}

@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
-/* @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default'; */
 
 @font-face {
   font-family: 'Inter';
@@ -10,7 +8,7 @@
   font-style: normal;
 }
 
-@theme {
+:root {
   --color-bg-main: #feedf7;
   --color-main: #f82ba9;
   --color-title: #160e4b;
@@ -30,11 +28,15 @@ body {
 }
 
 .heading {
-  @apply relative w-fit text-xl lg:text-3xl text-center text-title font-bold capitalize;
+  @apply text-xl text-title font-bold capitalize lg:text-3xl;
 }
 
 .underline {
   @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1;
+}
+
+.btn-primary {
+  @apply w-fit flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer;
 }
 
 .marquee-item {
