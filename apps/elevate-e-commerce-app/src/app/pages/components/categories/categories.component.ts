@@ -1,11 +1,13 @@
 import { CategoriesInterfaces } from './../../../shared/interfaces/categories-interfaces/categories-interfaces';
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriesService } from '../../../shared/services/categories/categories.service';
 import { CategoryCardComponent } from '../category-card/category-card.component';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-categories',
@@ -13,15 +15,17 @@ import { TagModule } from 'primeng/tag';
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit , OnDestroy {
 
   private readonly _categoriesService = inject(CategoriesService);
   categories: WritableSignal<CategoriesInterfaces> = signal({} as CategoriesInterfaces);
 
   responsiveOptions: any[] = [];
+  private subscription!: Subscription
 
-  ngOnInit(): void {
-    this._categoriesService.getAllCategories().subscribe({
+
+    getAllCategories(): void{
+      this._categoriesService.getAllCategories().subscribe({
       next: (res) => {
         const slicedCategories = res.categories;
         this.categories.set({
@@ -30,7 +34,11 @@ export class CategoriesComponent implements OnInit {
         });
       }
     });
+  }
 
+
+      ngOnInit(): void {
+    this.getAllCategories();
     this.responsiveOptions = [
       {
         breakpoint: '1400px',
@@ -54,7 +62,11 @@ export class CategoriesComponent implements OnInit {
       }
     ];
   }
-
-  
-
+  ngOnDestroy(): void {
+    if (this.subscription){
+      this.subscription.unsubscribe();
+    }
+  }
 }
+
+
