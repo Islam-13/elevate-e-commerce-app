@@ -21,7 +21,7 @@
         </div>
 
         <div class="rigth-side relative col-span-12 md:col-span-9 sm:w-full">
-          <owl-carousel-o class="" [options]="mainSliderOptions">
+          <owl-carousel-o class=" " [options]="mainSliderOptions">
             @for (image of imageSlides; track image.id) {
             <ng-template carouselSlide class="absolute">
               <div class="image-container max-w-[956px] max-h-[440px]">
@@ -56,29 +56,29 @@
     </div>
 
     <div class="secondary-gifts">
-      <div class="grid grid-cols-12 gap-3.5">
+      <div class="grid grid-cols-12 gap-3.5 text-center md:text-right ">
         @for (gift of gifts; track gift.id) {
         <div
-          class="gifts-box flex flex-col items-end justify-center col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px]"
+          class="gifts-box flex flex-col items-center md:items-end  justify-center col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px]"
           [ngStyle]="{ 'background-image': 'url(' + gift.src + ')' }"
           [attr.aria-label]="gift.alt"
         >
-          <div class="offer-details pr-4">
+          <div class="offer-details    pr-4">
             <p
               style="color: var(--color-main)"
-              class="max-w-[188px] min-h-[19px] mb-3.5"
+              class="max-w-[188px] md:text-right  min-h-[19px] mb-3.5  "
             >
               {{ gift.title }}
             </p>
             <p
               style="color: var(--color-title)"
-              class="desc-gift max-w-[192px] min-h-[72px]"
+              class="desc-gift md:text-right  mb-[14px] mt-[14px] max-w-[201px] max-h-[48px]  md:max-w-[201px] md:min-h-[72px]"
             >
               {{ gift.details }}
             </p>
             <button
               style="background-color: var(--color-main)"
-              class="gift-button max-w-[144px]"
+              class="gift-button  max-w-[144px] "
             >
               {{ gift.button_text }}
             </button>
