@@ -5,6 +5,13 @@ import { HomeComponent } from './pages/home/home.component';
 
 @Component({
   imports: [HomeComponent, CategoriesComponent, PopularItemsComponent],
+
+import { HomeComponent } from './pages/home/home.component';
+import { FeaturesComponent } from "./pages/components/features/features.component";
+
+
+@Component({
+  imports: [HomeComponent, FeaturesComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
