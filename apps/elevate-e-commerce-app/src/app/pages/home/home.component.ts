@@ -5,7 +5,7 @@ import { CategoriesComponent } from '../components/categories/categories.compone
 import { SpecialGiftsComponent } from '../components/special-gifts/special-gifts.component';
 import { BestSellerComponent } from '../components/best-seller/best-seller.component';
 import { TrustedByComponent } from '../components/trusted-by/trusted-by.component';
-import { FeaturesComponent } from '../components/features/features.component';
+import { FeaturesComponent } from "../components/features/features.component";
 
 @Component({
   selector: 'app-home',
