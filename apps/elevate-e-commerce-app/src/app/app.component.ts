@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 
 import { HomeComponent } from './pages/home/home.component';
-import { FeaturesComponent } from "./pages/components/features/features.component";
 import { NavbarComponent } from '@shared/navbar/navbar.component';
-import { RouterOutlet } from '@angular/router';
-
+import { FooterComponent } from './shared/ui/footer/footer.component';
 
 @Component({
-  imports: [HomeComponent, FeaturesComponent,NavbarComponent,RouterOutlet],
+  imports: [HomeComponent, FooterComponent, NavbarComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
