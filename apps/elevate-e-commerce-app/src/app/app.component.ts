@@ -7,11 +7,10 @@ import { HomeComponent } from './pages/home/home.component';
   imports: [HomeComponent, CategoriesComponent, PopularItemsComponent],
 
 import { HomeComponent } from './pages/home/home.component';
-import { FeaturesComponent } from "./pages/components/features/features.component";
-
+import { FooterComponent } from './shared/ui/footer/footer.component';
 
 @Component({
-  imports: [HomeComponent, FeaturesComponent],
+  imports: [HomeComponent, FooterComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
