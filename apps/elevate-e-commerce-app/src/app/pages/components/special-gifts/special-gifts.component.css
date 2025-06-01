@@ -14,16 +14,7 @@
   overflow: hidden;
 }
 
-/* ::ng-deep .owl-nav button {
-  position: absolute;
-  top: 45%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white !important;
-  font-size: 24px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 50%;
-} */
+
 
 ::ng-deep .owl-nav .owl-prev {
   top: 375px;
@@ -158,6 +149,7 @@ span .gift {
   color: hsla(248, 69%, 17%, 1);
   width: 357px;
   height: 84px;
+  
 }
 
 .right-details {
