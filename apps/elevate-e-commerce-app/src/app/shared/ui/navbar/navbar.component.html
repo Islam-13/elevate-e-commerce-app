@@ -1,0 +1,61 @@
+<nav class=" navbar px-4 py-3">
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <div class="flex items-center m-1">
+      <img src="././images/logo/logo.png" alt="logo" class="h-15">
+
+    </div>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex space-x-6 font-medium ">
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/allcategory" routerLinkActive="active">All Category</a></li>
+      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="flex items-center space-x-4">
+      <button><i class="fas fa-search" style="color: var(--color-main);"></i></button>
+      <div class="relative">
+        <i class="fas fa-heart" style="color: var(--color-main);"></i>
+        <span class="absolute -top-2 -right-2 text-xs text-white rounded-full w-4 h-4 flex items-center justify-center"
+          style="background-color: var(--color-main);">0</span>
+      </div>
+      <div class="relative">
+        <i class="fas fa-shopping-bag" style="color: var(--color-main);"></i>
+        <span class="absolute -top-2 -right-2 text-xs text-white rounded-full w-4 h-4 flex items-center justify-center"
+          style="background-color: var(--color-main);">0</span>
+      </div>
+      <button><i class="fas fa-user" style="color: var(--color-main);"></i></button>
+      <!-- Language -->
+      <button (click)="toggleLanguage()"
+        class="text-sm border px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+        {{ currentLang === 'en' ? 'EN' : 'AR' }}
+        <i class="fas fa-globe"></i>
+      </button>
+
+      <!-- Dark Mode -->
+      <button (click)="toggleDarkMode()"
+        class="text-sm border px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+        {{ isDarkMode ? ' Light' : ' Dark' }}
+        <span><i class="fas fa-moon"></i></span>
+      </button>
+
+      <!-- Mobile Menu Button -->
+      <button (click)="toggleMenu()" class="md:hidden focus:outline-none text-xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Responsive nav -->
+  <div *ngIf="menuOpen" class="md:hidden mt-2 px-4">
+    <ul class="flex flex-col space-y-2 font-medium">
+      <li><a routerLink="/home" routerLinkActive="active" >Home</a></li>
+      <li><a routerLink="/allcategory" routerLinkActive="active">AllCategory</a></li>
+      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+    </ul>
+  </div>
+</nav>
