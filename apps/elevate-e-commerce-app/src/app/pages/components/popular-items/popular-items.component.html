@@ -1,39 +1,28 @@
 <section class="py-8 container mx-auto">
-  <div class="title">
+  <div class="title flex justify-between items-center flex-wrap">
       <h1 class="text-2xl font-bold text-title my-6">Popular Items</h1>
+      <ul class="flex items-center gap-4 flex-wrap shrink-0 my-6">
+  @for (item of categories(); track $index) {
+  <li>
+    <button
+      (click)="filterByCategory(item._id)"
+      [ngClass]="{'text-main border-main border-b': currentCategory() === item._id,
+                'text-title': currentCategory() !== item._id}"
+      class="pb-1 text-xl capitalize cursor-pointer transition duration-200">
+      {{ item.name }}</button>
+  </li>
+}
+      </ul>
   </div>
   <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     @for (item of products(); track item._id) {
-      <div class="flex flex-col h-full">
-        <div class="bg-bg-main shadow rounded-lg overflow-hidden flex justify-center items-center h-48">
-          <img [src]="item.imgCover" [alt]="item.title" class="h-full object-cover" />
-        </div>
-
-        <div class="p-4 flex flex-col justify-between flex-grow">
-          <h2 class="text-base font-semibold text-title leading-tight">
-            {{ item.title }}
-          </h2>
-
-          <div class="text-sm text-title mt-1">
-            ⭐ {{ item.rateAvg }}
-          </div>
-
-          <div class="flex justify-between items-center mt-2">
-            <div class="flex items-center space-x-2">
-              <span class="text-price font-bold text-sm">
-                ${{ item.priceAfterDiscount }}
-              </span>
-              <span class="text-mini-paragraph line-through text-xs">
-                ${{ item.price }}
-              </span>
-            </div>
-
-            <div class="w-8 h-8 rounded-full bg-icon flex justify-center items-center">
-              <img src="./images/icon-prod/Icon.png" alt="product icon" class="w-4 h-4 object-contain text-white" />
-            </div>
-          </div>
-        </div>
-      </div>
-    }
+    <app-card
+      [title]="item.title"
+      [imgCover]="item.imgCover"
+      [price]="item.price"
+      [priceAfterDiscount]="item.priceAfterDiscount"
+      [rateAvg]="item.rateAvg" >
+    </app-card>
+      }
   </div>
 </section>

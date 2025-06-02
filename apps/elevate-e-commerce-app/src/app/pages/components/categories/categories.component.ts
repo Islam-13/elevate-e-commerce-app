@@ -25,7 +25,7 @@ export class CategoriesComponent implements OnInit , OnDestroy {
 
 
     getAllCategories(): void{
-      this._categoriesService.getAllCategories().subscribe({
+    this.subscription = this._categoriesService.getAllCategories().subscribe({
       next: (res) => {
         const slicedCategories = res.categories;
         this.categories.set({

@@ -6,6 +6,7 @@ import { SpecialGiftsComponent } from '../components/special-gifts/special-gifts
 import { BestSellerComponent } from '../components/best-seller/best-seller.component';
 import { TrustedByComponent } from '../components/trusted-by/trusted-by.component';
 import { FeaturesComponent } from "../components/features/features.component";
+import { PopularItemsComponent } from '../components/popular-items/popular-items.component';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { FeaturesComponent } from "../components/features/features.component";
     TrustedByComponent,
     BestSellerComponent,
     FeaturesComponent,
+    PopularItemsComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
