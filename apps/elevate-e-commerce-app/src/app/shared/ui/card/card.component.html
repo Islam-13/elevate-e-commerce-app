@@ -1,10 +1,22 @@
 <div class="card w-[min(300px,100%)]">
-  <div class="rounded-rd-md bg-bg-main h-[270px] overflow-clip">
+  <div class="relative rounded-rd-md bg-bg-main h-[270px] overflow-clip group">
     <img
       [src]="imgCover()"
       [alt]="title()"
       class="w-full h-full object-cover"
     />
+    <div
+      class="absolute inset-0 bg-main/70 flex items-center justify-center gap-10 translate-y-1/1 group-hover:translate-y-0 duration-500 ease-in-out"
+      aria-label="overlay"
+    >
+      <button>
+        <i class="fa-regular fa-eye icon bg-main"></i>
+      </button>
+
+      <button>
+        <i class="fa-regular fa-heart icon bg-main"></i>
+      </button>
+    </div>
   </div>
 
   <div class="flex items-center justify-between mt-4 px-4">
@@ -16,7 +28,7 @@
       <app-star-rating [rate]="rateAvg()" />
 
       <p>
-        <span class="text-[#F05454]">
+        <span class="text-price">
           {{ priceAfterDiscount() | currency }}
         </span>
         <span class="text-[#DEE2E6] line-through">
@@ -25,12 +37,8 @@
       </p>
     </div>
 
-    <button class="flex items-center justify-between cursor-pointer">
-      <span
-        class="rounded-full bg-icon w-10 h-10 flex items-center justify-center"
-      >
-        <i class="fa-solid fa-bag-shopping text-white text-xl"></i>
-      </span>
+    <button>
+      <i class="fa-solid fa-bag-shopping icon bg-icon"></i>
     </button>
   </div>
 </div>
