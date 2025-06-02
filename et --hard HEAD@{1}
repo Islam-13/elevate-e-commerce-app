@@ -1,0 +1,14 @@
+[33m71323f6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/finish-category[m[33m, [m[1;31morigin/feature/finish-category[m[33m, [m[1;32mfeature/categories-c[m[33m)[m HEAD@{0}: reset: moving to HEAD
+[33m71323f6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/finish-category[m[33m, [m[1;31morigin/feature/finish-category[m[33m, [m[1;32mfeature/categories-c[m[33m)[m HEAD@{1}: checkout: moving from feature/categories-c to feature/finish-category
+[33m71323f6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/finish-category[m[33m, [m[1;31morigin/feature/finish-category[m[33m, [m[1;32mfeature/categories-c[m[33m)[m HEAD@{2}: pull --tags origin feature/categories-c: Merge made by the 'ort' strategy.
+[33mb3dbf3d[m HEAD@{3}: commit: new commit
+[33m0a7f7df[m HEAD@{4}: reset: moving to HEAD
+[33m0a7f7df[m HEAD@{5}: reset: moving to HEAD
+[33m0a7f7df[m HEAD@{6}: commit: finshed editing the categories
+[33me4ce3fb[m[33m ([m[1;32mfeaturs/categories-b[m[33m)[m HEAD@{7}: checkout: moving from featurs/categories-b to feature/categories-c
+[33me4ce3fb[m[33m ([m[1;32mfeaturs/categories-b[m[33m)[m HEAD@{8}: commit: finsh categories
+[33mfc688fd[m[33m ([m[1;32mfeature/categories[m[33m)[m HEAD@{9}: checkout: moving from feature/categories to featurs/categories-b
+[33mfc688fd[m[33m ([m[1;32mfeature/categories[m[33m)[m HEAD@{10}: commit: finish categories
+[33m45c1251[m HEAD@{11}: commit: finish static categories
+[33md81c58c[m[33m ([m[1;32mmain[m[33m)[m HEAD@{12}: checkout: moving from main to feature/categories
+[33md81c58c[m[33m ([m[1;32mmain[m[33m)[m HEAD@{13}: clone: from https://github.com/Islam-13/elevate-e-commerce-app.git

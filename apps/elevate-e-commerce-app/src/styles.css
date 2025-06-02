@@ -23,6 +23,20 @@
   --radius-rd-full: 100px;
 }
 
+/* carousel ...> Categories */
+
+.p-carousel-indicator-active .p-carousel-indicator-button {
+  background: #f82ba9 !important;
+}
+
+.p-carousel-indicator-button:hover {
+  background: #f82ba9 !important;
+}
+.p-carousel-indicator-list  {
+  display: none !important;
+}
+
+
 body {
   font-family: 'Inter';
 }
