@@ -2,7 +2,7 @@
   <div class="container mx-auto flex items-center justify-between">
     <!-- Logo -->
     <div class="flex items-center m-1">
-      <img src="././images/logo/logo.png" alt="logo" class="h-15">
+      <img src="././images/logo/logo.png" alt="logo" class="h-15  logo">
 
     </div>
 
@@ -50,12 +50,22 @@
   </div>
 
   <!-- Responsive nav -->
-  <div *ngIf="menuOpen" class="md:hidden mt-2 px-4">
-    <ul class="flex flex-col space-y-2 font-medium">
+   @if (menuOpen) {
+  <div class="md:hidden mt-2 px-4">
+   <ul class="flex flex-col space-y-2 font-medium">
       <li><a routerLink="/home" routerLinkActive="active" >Home</a></li>
       <li><a routerLink="/allcategory" routerLinkActive="active">AllCategory</a></li>
       <li><a routerLink="/about" routerLinkActive="active">About</a></li>
       <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
     </ul>
   </div>
+}
+  <!-- <div *ngIf="menuOpen" class="md:hidden mt-2 px-4">
+    <ul class="flex flex-col space-y-2 font-medium">
+      <li><a routerLink="/home" routerLinkActive="active" >Home</a></li>
+      <li><a routerLink="/allcategory" routerLinkActive="active">AllCategory</a></li>
+      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+    </ul>
+  </div> -->
 </nav>
