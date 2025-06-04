@@ -23,6 +23,20 @@
   --radius-rd-full: 100px;
 }
 
+/* carousel ...> Categories */
+
+.p-carousel-indicator-active .p-carousel-indicator-button {
+  background: #f82ba9 !important;
+}
+
+.p-carousel-indicator-button:hover {
+  background: #f82ba9 !important;
+}
+.p-carousel-indicator-list  {
+  display: none !important;
+}
+
+
 body {
   font-family: 'Inter';
 }
@@ -37,6 +51,10 @@ body {
 
 .btn-primary {
   @apply w-fit flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer;
+}
+
+.icon {
+  @apply w-10 h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
 }
 
 .marquee-item {
