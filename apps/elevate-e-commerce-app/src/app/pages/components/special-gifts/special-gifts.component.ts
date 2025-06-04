@@ -2,14 +2,26 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { PrimaryBtnComponent } from '../../../shared/ui/primary-btn/primary-btn.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-special-gifts',
-  imports: [CommonModule, CarouselModule, PrimaryBtnComponent],
+  imports: [CommonModule, CarouselModule, PrimaryBtnComponent,TranslateModule],
   templateUrl: './special-gifts.component.html',
   styleUrl: './special-gifts.component.css',
 })
 export class SpecialGiftsComponent {
+ constructor(private translate: TranslateService) {
+    this.translate.addLangs(['ar', 'en' ]);
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+     this.translate.use(this.translate.getBrowserLang() || "en");
+  }
+  useLanguage(language: string): void {
+    this.translate.use(language);
+}
+
   mainSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -33,7 +45,7 @@ export class SpecialGiftsComponent {
     { id: 2, src: './images/special-gifts/Background2.jpg', alt: 'Image 1' },
     { id: 4, src: './images/special-gifts/Background3.jpg', alt: 'Image 3' },
     { id: 5, src: './images/special-gifts/Background6.jpg', alt: 'Image 4' },
-   
+
   ];
 
   // Gifts array
