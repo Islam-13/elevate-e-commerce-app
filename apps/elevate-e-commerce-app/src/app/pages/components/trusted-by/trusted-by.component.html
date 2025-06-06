@@ -1,6 +1,4 @@
-<section class="max-w-[1440px] mx-auto">
-
-<section class="max-w-[1440px] mx-auto my-6 lg:my-20">
+<section class="my-6 md:my-20">
   <div
     class="bg-bg-main flex flex-col items-center gap-4 px-6 py-4 lg:py-10 lg:mx-20 lg:gap-10 lg:rounded-rd-md"
   >
@@ -20,14 +18,12 @@
         class="w-max grid [container-type:inline-size] grid-cols-[var(--track-width)_[track]_0px_[resting]]"
       >
         @for (item of images; track $index) {
-
         <div
           [style]="`--position: ${$index + 1}`"
           class="marquee-item w-[var(--width)] h-[var(--height)] [grid-area:resting]"
         >
           <img [src]="item.src" alt="company logo" />
         </div>
-
         }
       </div>
     </div>
