@@ -29,10 +29,10 @@ export class ThemeService {
 
   private setTheme(isDark: boolean) {
     if (isDark) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
       this.isDark.set(true);
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
       this.isDark.set(false);
     }
   }

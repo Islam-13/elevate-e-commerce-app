@@ -10,7 +10,7 @@
 
 :root {
   &,
-  &.light {
+  &[data-theme='light'] {
     --color-bg-main: #feedf7;
     --color-main: #f82ba9;
     --color-title: #160e4b;
@@ -22,7 +22,7 @@
     --bg-color: #fff;
   }
 
-  &.dark {
+  &[data-theme='dark'] {
     --color-bg-main: #3f3f46;
     --color-main: #d75458;
     --color-title: #ffc2d0;

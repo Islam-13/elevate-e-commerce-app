@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from '@shared/ui/footer/footer.component';
