@@ -20,6 +20,7 @@
     --color-icon: #8c52ff;
 
     --bg-color: #fff;
+    --normal-txt: #000;
   }
 
   &[data-theme='dark'] {
@@ -32,6 +33,7 @@
     --color-icon: #cd2e33;
 
     --bg-color: #000;
+    --normal-txt: #fafafa;
   }
 }
 
@@ -40,6 +42,7 @@
   --color-main: var(--color-main);
   --color-title: var(--color-title);
   --color-mini-paragraph: var(--color-mini-paragraph);
+  --color-normal-txt: var(--normal-txt);
 
   --color-price: var(--color-price);
   --color-icon: var(--color-icon);
@@ -80,7 +83,7 @@ body {
 }
 
 .icon {
-  @apply w-10 h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
+  @apply min-w-10 min-h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
 }
 
 .marquee-item {
