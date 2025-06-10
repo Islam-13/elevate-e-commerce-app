@@ -12,12 +12,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrl: './special-gifts.component.css',
 })
 export class SpecialGiftsComponent {
- constructor(private translate: TranslateService) {
-    this.translate.addLangs(['ar', 'en' ]);
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
-     this.translate.use(this.translate.getBrowserLang() || "en");
-  }
+
 
 
   mainSliderOptions: OwlOptions = {
