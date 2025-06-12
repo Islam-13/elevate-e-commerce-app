@@ -3,9 +3,10 @@ import { Component, inject } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from '@shared/ui/footer/footer.component';
 import { ThemeService } from '@shared/services/theme/theme.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  imports: [HomeComponent, FooterComponent],
+  imports: [HomeComponent, FooterComponent,TranslateModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -18,4 +19,13 @@ export class AppComponent {
   toggleTheme() {
     this._theme.toggleTheme();
   }
+    constructor(private translate: TranslateService) {
+        this.translate.addLangs(['ar', 'en' ]);
+        this.translate.setDefaultLang('en');
+        this.translate.use('en');
+         this.translate.use(this.translate.getBrowserLang() || "en");
+      }
+      useLanguage(language: string): void {
+        this.translate.use(language);
+    }
 }
