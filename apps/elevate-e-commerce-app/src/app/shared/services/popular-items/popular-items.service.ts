@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient , HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { PopularItemsInterface } from '../../interfaces/popular-items-interface/popular-items-interface';
-import { env } from '../../../env/env';
+import { env } from '@env/env';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PopularItemsService {
-    private readonly _httpClient = inject(HttpClient);
+  private readonly _httpClient = inject(HttpClient);
 
   getAllProducts(filters?: {
     keyword?: string;
@@ -30,9 +30,9 @@ export class PopularItemsService {
         }
       });
     }
-    return this._httpClient.get<PopularItemsInterface>(env.baseURL + '/products', { params });
+    return this._httpClient.get<PopularItemsInterface>(
+      env.baseURL + '/products',
+      { params }
+    );
   }
 }
-
-
-

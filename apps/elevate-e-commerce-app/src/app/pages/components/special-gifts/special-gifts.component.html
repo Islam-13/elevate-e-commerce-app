@@ -1,4 +1,6 @@
-<!-- Specail Gifts -->
+<button (click)="useLanguage('en')">english</button><br />
+
+<button (click)="useLanguage('ar')">arabic</button>
 
 <section class="p-4 my-5">
   <div class="contariner flex flex-col gap-6 w-[90%] mx-auto">
@@ -10,9 +12,13 @@
           <div class="image-container">
             <div class="left-image">
               <div class="left-details flex flex-col justify-between">
-                <p class="title">Start $10.99</p>
+                <!-- <p class="title">Start $10.99</p> -->
+                <p class="title">
+                  {{'home.special.leftSide.title' | translate}}
+                </p>
                 <p class="sec-title pb-[0.55px]">
-                  Special Gifts Box For Your Love
+                  <!-- Special Gifts Box For Your Love -->
+                  {{'home.special.leftSide.details' | translate}}
                 </p>
                 <app-primary-btn label="Shop Now →"></app-primary-btn>
               </div>
@@ -32,14 +38,25 @@
                 >
                   <div
                     class="right-details sm:mt-[15px] sm:ml-[16px] sm:w-[153px] flex flex-col md:pl-[30px] md:pb-[60px]"
+                    id="tr-text"
                   >
-                    <h6 class="right-head mb-[24px]">Best Gift Shop</h6>
+                    <!-- <h6 class="right-head mb-[24px]"> Best Gift Shop </h6> -->
+                    <h6 class="right-head mb-[24px]">
+                      {{'home.special.slider.title' | translate}}
+                    </h6>
                     <p class="right-tiltle1 sm:w-[153px] mb-[16px]">
-                      Choose Perfect <span class="gift">Gifts</span> From Us
+                      <!-- Choose Perfect <span class="gift">Gifts</span> From Us -->
+                      {{'home.special.slider.subtitle1' | translate}}
+                      <span class="gift"
+                        >{{'home.special.slider.subtitle.span' |
+                        translate}}</span
+                      >
+                      {{'home.special.slider.subtitle2' | translate}}
                     </p>
                     <p class="right-tiltle2 mb-[24px]">
-                      Culpa ducimus nesciunt aliquam non rerum esse recusandae
-                      omnis. Rerum optio dolores et.
+                      <!-- Culpa ducimus nesciunt aliquam non rerum esse recusandae
+                      omnis. Rerum optio dolores et. -->
+                      {{'home.special.slider.details' | translate}}
                     </p>
 
                     <app-primary-btn label="Shop Now">
@@ -56,30 +73,27 @@
     </div>
 
     <div class="secondary-gifts">
-      <div class="grid grid-cols-12 gap-3.5 text-center md:text-right ">
+      <div
+        class="grid grid-cols-12 gap-3.5 text-center md:text-right place-items-center"
+      >
         @for (gift of gifts; track gift.id) {
         <div
-          class="gifts-box flex flex-col items-center md:items-end  justify-center col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px]"
+          class="gifts-box flex flex-col items-center md:items-end justify-center col-span-12 md:col-span-4 sm:w-full max-w-[410px] min-h-[272px]"
           [ngStyle]="{ 'background-image': 'url(' + gift.src + ')' }"
           [attr.aria-label]="gift.alt"
         >
-          <div class="offer-details    pr-4">
+          <div class="offer-details pr-4">
             <p
-              style="color: var(--color-main)"
-              class="max-w-[188px] md:text-right  min-h-[19px] mb-3.5  "
+              class="max-w-[188px] md:text-right min-h-[19px] mb-3.5 text-title"
             >
               {{ gift.title }}
             </p>
             <p
-              style="color: var(--color-title)"
-              class="desc-gift md:text-right  mb-[14px] mt-[14px] max-w-[201px] max-h-[48px]  md:max-w-[201px] md:min-h-[72px]"
+              class="desc-gift md:text-right mb-[14px] mt-[14px] max-w-[201px] max-h-[48px] md:max-w-[201px] md:min-h-[72px]"
             >
               {{ gift.details }}
             </p>
-            <button
-              style="background-color: var(--color-main)"
-              class="gift-button  max-w-[144px] "
-            >
+            <button class="gift-button max-w-[144px] bg-main">
               {{ gift.button_text }}
             </button>
           </div>

@@ -14,16 +14,7 @@
   overflow: hidden;
 }
 
-/* ::ng-deep .owl-nav button {
-  position: absolute;
-  top: 45%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white !important;
-  font-size: 24px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 50%;
-} */
+
 
 ::ng-deep .owl-nav .owl-prev {
   top: 375px;
@@ -158,6 +149,7 @@ span .gift {
   color: hsla(248, 69%, 17%, 1);
   width: 357px;
   height: 84px;
+  
 }
 
 .right-details {
@@ -224,4 +216,42 @@ span .gift {
 
 /* .offer-details {
   text-align: right;
+} */
+/* div
+{
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 1rem 2rem;
+}
+
+p, .translated
+{
+  background-color: #d4f3ff;
+  padding:0.5rem 1rem;
+}
+
+button {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #005f73;
+  }
+}
+
+.title {
+  background-color: #bde8f8;
+  padding: 0.5rem 2rem 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 } */
