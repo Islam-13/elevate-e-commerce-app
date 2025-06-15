@@ -6,6 +6,7 @@ import { SpecialGiftsComponent } from '../components/special-gifts/special-gifts
 import { BestSellerComponent } from '../components/best-seller/best-seller.component';
 import { TrustedByComponent } from '../components/trusted-by/trusted-by.component';
 import { FeaturesComponent } from '../components/features/features.component';
+import { GalleryComponent } from '../components/gallery/gallery.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { FeaturesComponent } from '../components/features/features.component';
     TrustedByComponent,
     BestSellerComponent,
     FeaturesComponent,
+    GalleryComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
