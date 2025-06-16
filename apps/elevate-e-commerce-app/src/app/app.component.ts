@@ -11,7 +11,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, HomeComponent, TranslateModule],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, TranslateModule],
 })
 export class AppComponent {
   title = 'elevate-e-commerce-app';
