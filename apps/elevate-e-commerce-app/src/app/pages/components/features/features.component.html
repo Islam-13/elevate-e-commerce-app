@@ -1,36 +1,29 @@
-<section class="py-8 container mx-auto">
-  <div class="grid  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-[#feedf7] justify-center rounded-rd-md">
-          @for (feature of features; track feature.id) {
+<section class="py-8 mx-4 lg:mx-20">
+  <div
+    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-bg-main justify-center rounded-rd-md"
+  >
+    @for (feature of features; track feature.id) {
 
-    <div class="box min-w-[159px]  px-4  py-8 md:flex md:flex-row gap-4 justify-center sm:flex  sm:flex-col  ">
-
-<div class="w-[65px] h-[65px] rounded-full text-4xl bg-[#f82ba9] flex items-center justify-center mx-auto md:mx-0 text-white  ">
-         <img class=""   [src]="feature.src" [alt]="feature.alt" />
+    <div
+      class="box min-w-[159px] px-4 py-8 md:flex md:flex-row gap-4 justify-center sm:flex sm:flex-col"
+    >
+      <div
+        class="min-w-[65px] w-[65px] h-[65px] rounded-full text-4xl bg-main flex items-center justify-center mx-auto md:mx-0 text-white"
+      >
+        <img class="" [src]="feature.src" [alt]="feature.alt" />
       </div>
 
-      <div class="title min-w-[159px] max-h-[58px] text-center md:text-start items-center pt-3.5 ">
-        <div class="font-semibold  min-w-[200px]  text-[#160e4b]">
-         {{feature.title}}
+      <div
+        class="title min-w-[159px] max-h-[58px] text-center md:text-start items-center pt-3.5"
+      >
+        <div class="font-semibold text-title">
+          {{ feature.title | translate }}
         </div>
-        <p class="text-sm min-w-[165px]   text-[#757f95]">{{feature.details}}</p>
+        <p class="text-sm min-w-[165px] text-mini-paragraph">
+         {{ feature.details | translate }}
+        </p>
       </div>
-
-
-
-</div>
-
-
-
-
-
-
-  }
+    </div>
+    }
   </div>
-
-
-
 </section>
-
-
-
-

@@ -5,7 +5,7 @@ import { Product } from '@shared/interfaces/best-seller';
 import { CardComponent } from '@shared/ui/card/card.component';
 import { ErrMsgComponent } from '@shared/ui/err-msg/err-msg.component';
 import { LoaderComponent } from '@shared/ui/loader/loader.component';
-import { BestSellerService } from '@shared/services/best-seller.service';
+import { BestSellerService } from '@shared/services/best-seller/best-seller.service';
 import { PrimaryBtnComponent } from '@shared/ui/primary-btn/primary-btn.component';
 
 @Component({
@@ -64,7 +64,10 @@ export class BestSellerComponent implements OnInit {
 
     const subscrition = this._bestSeller.getBestSeller().subscribe({
       next: (res) => this.products.set(res),
-      error: (err) => this.error.set(err.message),
+      error: (err) => {
+        this.isLoading.set(false);
+        this.error.set(err);
+      },
       complete: () => this.isLoading.set(false),
     });
 

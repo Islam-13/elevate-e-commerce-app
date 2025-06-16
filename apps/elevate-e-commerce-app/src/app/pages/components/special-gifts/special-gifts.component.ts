@@ -2,14 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { PrimaryBtnComponent } from '../../../shared/ui/primary-btn/primary-btn.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-special-gifts',
-  imports: [CommonModule, CarouselModule, PrimaryBtnComponent],
+  imports: [CommonModule, CarouselModule, PrimaryBtnComponent,TranslateModule],
   templateUrl: './special-gifts.component.html',
   styleUrl: './special-gifts.component.css',
 })
 export class SpecialGiftsComponent {
+
+
+
   mainSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -33,34 +38,35 @@ export class SpecialGiftsComponent {
     { id: 2, src: './images/special-gifts/Background2.jpg', alt: 'Image 1' },
     { id: 4, src: './images/special-gifts/Background3.jpg', alt: 'Image 3' },
     { id: 5, src: './images/special-gifts/Background6.jpg', alt: 'Image 4' },
-   
+
   ];
 
   // Gifts array
 
-  gifts = [
-    {
-      id: 1,
-      src: './images/special-gifts/ConfettiLying.png',
-      details: 'Awesome Gifts Box Collectons',
-      title: 'Gifts Box',
-      button_text: 'Shop Now',
-    },
-    {
-      id: 2,
-      src: './images/special-gifts/TopView.png',
-      alt: 'occasion-gifts-1',
-      title: 'Occasion Gifts',
-      details: 'Best Occasion Gifts Collections',
-      button_text: 'Discover Now',
-    },
-    {
-      id: 3,
-      src: './images/special-gifts/ChristmasShopping.png',
-      alt: 'occasion-gifts-2',
-      title: 'Occasion Gifts',
-      details: 'Combo Sets Gift Box Up To 50% Off',
-      button_text: 'Discover Now',
-    },
-  ];
+   gifts = [
+  {
+    id: 1,
+    src: './images/special-gifts/ConfettiLying.png',
+    title: 'gifts.gift01Title',
+    details: 'gifts.gift01Details',
+    button_text: 'gifts.gift01Button',
+    alt: 'gifts.gift01Alt'
+  },
+  {
+    id: 2,
+    src: './images/special-gifts/TopView.png',
+    title: 'gifts.gift02Title',
+    details: 'gifts.gift02Details',
+    button_text: 'gifts.gift02Button',
+    alt: 'gifts.gift02Alt'
+  },
+  {
+    id: 3,
+    src: './images/special-gifts/ChristmasShopping.png',
+    title: 'gifts.gift03Title',
+    details: 'gifts.gift03Details',
+    button_text: 'gifts.gift03Button',
+    alt: 'gifts.gift03Alt'
+  }
+];
 }
