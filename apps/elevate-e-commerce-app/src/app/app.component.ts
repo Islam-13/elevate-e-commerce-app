@@ -4,9 +4,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from '@shared/ui/footer/footer.component';
 import { ThemeService } from '@shared/services/theme/theme.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [HomeComponent, FooterComponent,TranslateModule],
+  imports: [ FooterComponent,TranslateModule,RouterOutlet],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
