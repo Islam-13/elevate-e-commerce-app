@@ -1,4 +1,4 @@
-<app-categories />
+<app-categories [categories]="categories()" />
 
 <app-special-gifts />
 
@@ -6,7 +6,7 @@
 
 <app-best-seller />
 
-<app-popular-items />
+<app-popular-items [categories]="categories()" />
 
 <app-about-us />
 

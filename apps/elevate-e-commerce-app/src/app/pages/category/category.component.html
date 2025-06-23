@@ -1,0 +1,116 @@
+<main class="m-4 grid grid-cols-[300px_1fr] lg:m-20">
+  <aside class="flex flex-col gap-6">
+    <!-- search -->
+    <section class="cat-section">
+      <h3>Search</h3>
+
+      <input
+        type="search"
+        placeholder="Search By The Name"
+        class="shadow-[0px_1px_10px_0px_#0000000d] py-2 px-4 rounded-rd-md text-mini-paragraph"
+      />
+    </section>
+    <!-- categories -->
+    <section class="cat-section">
+      <h3>Category</h3>
+      <div class="cat-underline"></div>
+
+      <div>
+        @for(category of categories(); track $index) {
+        <div
+          class="flex items-center justify-between gap-1 text-mini-paragraph"
+        >
+          <div class="flex items-center gap-2.5">
+            <input type="checkbox" [id]="category.name" />
+            <label [for]="category.name">{{ category.name }}</label>
+          </div>
+          <span>({{ category.productsCount }})</span>
+        </div>
+        }
+      </div>
+    </section>
+    <!-- occasions -->
+    <section class="cat-section">
+      <h3>Occasions</h3>
+      <div class="cat-underline"></div>
+
+      <div>
+        @for(occasion of occasions(); track $index) {
+        <div
+          class="flex items-center justify-between gap-1 text-mini-paragraph"
+        >
+          <div class="flex items-center gap-2.5">
+            <input type="checkbox" [id]="occasion.name" />
+            <label [for]="occasion.name">{{ occasion.name }}</label>
+          </div>
+          <span>({{ occasion.productsCount }})</span>
+        </div>
+        }
+      </div>
+    </section>
+    <!-- price rating range -->
+    <section class="cat-section">
+      <h3>Price Rating</h3>
+      <div class="cat-underline"></div>
+
+      <div>
+        <p class="text-main mb-2">${{ minVal }} - ${{ maxVal }}</p>
+
+        <div class="price-filter">
+          <input
+            type="range"
+            min="0"
+            max="5000"
+            value="0"
+            [(ngModel)]="minVal"
+          />
+          <input
+            type="range"
+            min="0"
+            max="5000"
+            value="5000"
+            [(ngModel)]="maxVal"
+          />
+          <div class="progress"></div>
+        </div>
+      </div>
+    </section>
+    <!-- rating stars -->
+    <section class="cat-section">
+      <h3>Ratings</h3>
+      <div class="cat-underline"></div>
+
+      <div>
+        @for(rate of maxRate; track $index){
+
+        <div class="flex items-center gap-2.5">
+          <input type="checkbox" [id]="$index" />
+          <label [for]="$index">
+            <span>
+              <i
+                [class]="`fa-${maxRate.length > $index + 0 ? 'solid':'regular'} fa-star text-main`"
+              ></i>
+              <i
+                [class]="`fa-${maxRate.length > $index + 1  ? 'solid':'regular'} fa-star text-main`"
+              ></i>
+              <i
+                [class]="`fa-${maxRate.length > $index + 2  ? 'solid':'regular'} fa-star text-main`"
+              ></i>
+              <i
+                [class]="`fa-${maxRate.length > $index + 3 ? 'solid':'regular'} fa-star text-main`"
+              ></i>
+              <i
+                [class]="`fa-${maxRate.length > $index + 4 ? 'solid':'regular'} fa-star text-main`"
+              ></i>
+            </span>
+          </label>
+        </div>
+
+        }
+      </div>
+    </section>
+  </aside>
+
+  <!-- display products -->
+  <section></section>
+</main>
