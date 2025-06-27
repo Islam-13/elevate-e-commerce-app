@@ -4,11 +4,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from '@shared/ui/footer/footer.component';
 import { ThemeService } from '@shared/services/theme/theme.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+  
+ 
 import { CategoryComponent } from './pages/category/category.component';
 
 @Component({
   imports: [HomeComponent, FooterComponent, TranslateModule, CategoryComponent],
-  selector: 'app-root',
+   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
