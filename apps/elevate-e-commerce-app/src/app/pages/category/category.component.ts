@@ -32,7 +32,6 @@ export class CategoryComponent implements OnInit {
   getAllCategories() {
     const subscription = this._categoriesService.getAllCategories().subscribe({
       next: (data) => {
-        console.log(data);
         this.categories.set(data);
       },
       error: (err) => {

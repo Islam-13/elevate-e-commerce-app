@@ -1,18 +1,13 @@
 import { Route } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 
 export const appRoutes: Route[] = [
- {
-            path:'',
-            redirectTo:'home',
-            pathMatch:'full',
-      },
-      {  
-        path: 'home',
-        loadComponent: () =>
-          import('./pages/home/home.component').then(
-            (c) => c.HomeComponent
-          ),
-      },
-    {path: 'AllProducts',loadComponent: () =>import('./pages/allproducts/allproducts.component').then((c) => c.AllproductsComponent)},
-
+  { path: '', component: HomeComponent },
+  {
+    path: 'category',
+    loadComponent: () =>
+      import('./pages/category/category.component').then(
+        (c) => c.CategoryComponent
+      ),
+  },
 ];
