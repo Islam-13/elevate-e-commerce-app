@@ -1,0 +1,83 @@
+.cat-section {
+  border-radius: var(--radius-rd-md);
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  box-shadow: 0px 1px 10px 0px #0000000d;
+}
+
+h3 {
+  color: var(--color-title);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.cat-underline {
+  height: 1px;
+  background: var(--color-mini-paragraph);
+}
+
+input {
+  accent-color: var(--color-main);
+}
+
+.price-filter {
+  position: relative;
+  height: 6px;
+  background: var(--color-mini-paragraph);
+  border-radius: 4px;
+}
+
+.progress {
+  position: absolute;
+  height: 100%;
+  border-radius: 4px;
+  background-color: var(--color-main);
+}
+
+.price-filter input[type='range'] {
+  position: absolute;
+  pointer-events: none;
+  appearance: none;
+  background: transparent;
+
+  height: 100%;
+  width: 100%;
+}
+
+.price-filter input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  aspect-ratio: 1/1;
+  background: var(--color-main);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.price-filter input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.price-filter input[type='range']::-moz-range-thumb {
+  appearance: none;
+  width: 18px;
+  aspect-ratio: 1/1;
+  background: var(--color-main);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.price-filter input[type='range']::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
