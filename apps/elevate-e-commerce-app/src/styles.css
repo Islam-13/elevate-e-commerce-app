@@ -70,6 +70,10 @@ body {
   background: var(--bg-color);
 }
 
+button {
+  cursor: pointer;
+}
+
 .heading {
   @apply text-xl text-title font-bold capitalize lg:text-3xl;
 }

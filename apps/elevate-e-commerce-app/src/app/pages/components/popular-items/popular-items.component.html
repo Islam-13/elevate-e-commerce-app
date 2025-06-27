@@ -4,7 +4,7 @@
   >
     <h1 class="heading">Popular Items</h1>
     <ul class="flex items-center gap-4 flex-wrap shrink-0 my-6">
-      @for (item of categories(); track $index) {
+      @for (item of categories().slice(0,4); track $index) {
       <li>
         <button
           (click)="filterByCategory(item._id)"

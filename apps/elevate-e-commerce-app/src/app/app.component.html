@@ -1,23 +1,5 @@
-<!-- temp nav -->
-<div class="bg-bg-main text-center">
-  @if (_theme.isDark()) {
-  <button (click)="toggleTheme()">
-    <i class="fa-regular fa-sun"></i>
-  </button>
-  } @else {
-  <button (click)="toggleTheme()">
-    <i class="fa-regular fa-moon"></i>
-  </button>
-  }
-</div>
-<div class="flex gap-1.5">
-  <button (click)="useLanguage('en')">English</button>
+<app-navbar />
 
-  <button (click)="useLanguage('ar')">Arabic</button>
-</div>
-
-<!-- <app-home /> -->
-
-<app-category />
+<router-outlet />
 
 <app-footer />

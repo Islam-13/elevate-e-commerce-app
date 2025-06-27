@@ -1,0 +1,93 @@
+<header>
+  <div class="relative flex justify-between items-center mx-4 lg:mx-20 py-2">
+    <app-logo />
+
+    <nav
+      class="bg-[var(--bg-color)] fixed top-0 z-20 w-[235px] py-6 px-4 md:static md:w-auto md:p-0 duration-700 ease-in-out"
+      [class]="isOpen() ? 'left-0' : '-left-[235px]'"
+    >
+      <div class="flex justify-between items-center mb-4 md:hidden">
+        <app-logo />
+
+        <button
+          class="border rounded-full w-9 aspect-square text-xl text-title"
+          (click)="toggleMenu()"
+          aria-label="close menu button"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <ul class="flex flex-col gap-6 font-medium text-title md:flex-row">
+        @for (link of navLinks; track $index) {
+        <li>
+          <a
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="active"
+            [routerLink]="link.url"
+            class="hover:text-main duration-500 ease-in"
+          >
+            {{ link.name }}
+          </a>
+        </li>
+        }
+      </ul>
+    </nav>
+
+    @if(isOpen()){
+    <div class="overlay fixed inset-0 bg-black/50 z-10"></div>
+    }
+
+    <nav class="flex gap-3 text-main">
+      <ul class="flex items-center">
+        <li class="p-2">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </li>
+
+        <li class="p-2">
+          @if (lang() === "en") {
+          <button aria-label="language button" (click)="useLanguage('ar')">
+            ع
+          </button>
+
+          } @else {
+          <button aria-label="language button" (click)="useLanguage('en')">
+            ENG
+          </button>
+          }
+        </li>
+
+        <li class="p-2">
+          <button (click)="toggleTheme()" aria-label="mode button">
+            @if (_theme.isDark()) {
+            <i class="fa-regular fa-sun"></i>
+            } @else {
+            <i class="fa-regular fa-moon"></i>
+            }
+          </button>
+        </li>
+
+        <!-- <button class="btn-primary">Login</button> -->
+
+        <button class="p-2" aria-label="wishlist button">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+
+        <button class="p-2" aria-label="wishlist button">
+          <i class="fa-solid fa-bag-shopping"></i>
+        </button>
+
+        <button class="p-2" aria-label="account button">
+          <i class="fa-regular fa-user"></i>
+        </button>
+
+        <button
+          class="p-2 md:hidden"
+          aria-label="menu button"
+          (click)="toggleMenu()"
+        >
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </ul>
+    </nav>
+  </div>
+</header>
