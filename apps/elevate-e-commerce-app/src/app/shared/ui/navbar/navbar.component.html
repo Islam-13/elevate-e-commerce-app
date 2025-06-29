@@ -1,4 +1,4 @@
-<header>
+<header #header>
   <div class="relative flex justify-between items-center mx-4 lg:mx-20 py-2">
     <app-logo />
 
@@ -21,9 +21,10 @@
         @for (link of navLinks; track $index) {
         <li>
           <a
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLinkActive="active"
             [routerLink]="link.url"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="isOpen.set(false)"
             class="hover:text-main duration-500 ease-in"
           >
             {{ link.name }}
@@ -32,10 +33,6 @@
         }
       </ul>
     </nav>
-
-    @if(isOpen()){
-    <div class="overlay fixed inset-0 bg-black/50 z-10"></div>
-    }
 
     <nav class="flex gap-3 text-main">
       <ul class="flex items-center">
@@ -91,3 +88,7 @@
     </nav>
   </div>
 </header>
+
+@if(isOpen()){
+<div class="overlay fixed inset-0 bg-black/50 z-10"></div>
+}
