@@ -1,18 +1,15 @@
 import { Component } from '@angular/core';
-import { HomeComponent } from './pages/home/home.component';
+import { RouterOutlet } from '@angular/router';
+
 import { FooterComponent } from '@shared/ui/footer/footer.component';
-
-
-
-
+import { NavbarComponent } from './shared/ui/navbar/navbar.component';
 
 @Component({
-  imports: [HomeComponent, FooterComponent,],
+  imports: [NavbarComponent, RouterOutlet, FooterComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'elevate-e-commerce-app';
-
+  title = 'elevate-e-commerce';
 }

@@ -1,19 +1,21 @@
-<section class="py-8 container mx-auto">
+<section class="py-8 mx-4 lg:mx-20">
   <div class="card">
     <p-carousel
-      [value]="categories().categories"
+      [value]="categories()"
       [numVisible]="5"
       [numScroll]="1"
       [circular]="false"
-      [responsiveOptions]="responsiveOptions">
+      [responsiveOptions]="responsiveOptions"
+    >
       <ng-template let-item pTemplate="item">
-      <div class="mx-2">
-        <app-category-card
-          [image]="item.image"
-          [name]="item.name"
-          [productsCount]="item.productsCount">
-        </app-category-card>
-              </div>
+        <div class="mx-2">
+          <app-category-card
+            [image]="item.image"
+            [name]="item.name"
+            [productsCount]="item.productsCount"
+          >
+          </app-category-card>
+        </div>
       </ng-template>
     </p-carousel>
   </div>

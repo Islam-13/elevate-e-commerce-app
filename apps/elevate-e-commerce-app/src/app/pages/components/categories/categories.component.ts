@@ -1,57 +1,23 @@
-import {
-  Component,
-  inject,
-  OnDestroy,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Component, input, OnInit } from '@angular/core';
 
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 
-import { CategoriesInterfaces } from '@shared/interfaces/categories-interfaces/categories-interfaces';
-import { CategoriesService } from '@shared/services/categories/categories.service';
 import { CategoryCardComponent } from '../category-card/category-card.component';
+import { Category } from '@shared/interfaces/categories-interfaces/categories-interfaces';
 
 @Component({
   selector: 'app-categories',
-  imports: [
-    CommonModule,
-    CategoryCardComponent,
-    CarouselModule,
-    ButtonModule,
-    TagModule,
-  ],
+  imports: [CategoryCardComponent, CarouselModule, ButtonModule, TagModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
-export class CategoriesComponent implements OnInit, OnDestroy {
-  private readonly _categoriesService = inject(CategoriesService);
-  categories: WritableSignal<CategoriesInterfaces> = signal(
-    {} as CategoriesInterfaces
-  );
-
+export class CategoriesComponent implements OnInit {
+  categories = input.required<Category[]>();
   responsiveOptions: any[] = [];
-  private subscription!: Subscription;
-
-  getAllCategories(): void {
-    this.subscription = this._categoriesService.getAllCategories().subscribe({
-      next: (res) => {
-        const slicedCategories = res.categories;
-        this.categories.set({
-          ...res,
-          categories: slicedCategories,
-        });
-      },
-    });
-  }
 
   ngOnInit(): void {
-    this.getAllCategories();
     this.responsiveOptions = [
       {
         breakpoint: '1400px',
@@ -74,10 +40,5 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         numScroll: 1,
       },
     ];
-  }
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }
