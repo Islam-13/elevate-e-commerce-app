@@ -1,6 +1,8 @@
+
 h1 {
   position: relative;
   z-index: 3;
+  display: inline-block;
 }
 
 h1::after {
@@ -8,7 +10,7 @@ h1::after {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 27%;
+  width: 148px;
   height: 2px;
   background-color: var(--color-main);
   display: block;
@@ -20,7 +22,7 @@ h1::before {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 70%;
+  width: 78.5%;
   height: 9px;
   background-color: rgba(254, 237, 247, 1);
   border-top-right-radius: 50px;
