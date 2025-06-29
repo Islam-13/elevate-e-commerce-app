@@ -7,12 +7,14 @@ import { ErrMsgComponent } from '@shared/ui/err-msg/err-msg.component';
 import { LoaderComponent } from '@shared/ui/loader/loader.component';
 import { BestSellerService } from '@shared/services/best-seller/best-seller.service';
 import { PrimaryBtnComponent } from '@shared/ui/primary-btn/primary-btn.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-best-seller',
   templateUrl: './best-seller.component.html',
   styleUrl: './best-seller.component.css',
   imports: [
+    TranslateModule,
     CarouselModule,
     ErrMsgComponent,
     CardComponent,

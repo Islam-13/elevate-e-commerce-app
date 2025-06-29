@@ -1,18 +1,21 @@
-<section class="my-6 md:my-20">
+<section class="my-6 lg:my-8 lg:mx-20">
   <div
-    class="bg-bg-main flex flex-col items-center gap-4 px-6 py-4 lg:py-10 lg:mx-20 lg:gap-10 lg:rounded-rd-md"
+    class="wrapper bg-bg-main flex flex-col items-center gap-4 px-6 py-4 lg:py-10 lg:gap-10 lg:rounded-rd-md"
   >
     <h3 class="heading">
       <span class="inline-block relative">
-        Trusted by over
+        {{ 'home.trustedBy.h3.span1' | translate }}
         <span class="underline"></span>
       </span>
-      <span class="text-main"> 4.5k+</span> companies
+      <span class="text-main">
+        {{ 'home.trustedBy.h3.span2' | translate }}</span
+      >
+      {{ 'home.trustedBy.h3.span3' | translate }}
     </h3>
 
     <div
       [style]="settings"
-      class="max-w-[95%] m-auto overflow-hidden [mask-image:linear-gradient(to_right,transparent,#fff_20%,#fff_80%,transparent)]"
+      class="[direction:ltr] max-w-[95%] m-auto overflow-hidden [mask-image:linear-gradient(to_right,transparent,#fff_20%,#fff_80%,transparent)]"
     >
       <div
         class="w-max grid [container-type:inline-size] grid-cols-[var(--track-width)_[track]_0px_[resting]]"

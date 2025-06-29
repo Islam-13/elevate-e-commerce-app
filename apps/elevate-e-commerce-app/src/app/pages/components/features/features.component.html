@@ -1,6 +1,6 @@
-<section class="py-8 mx-4 lg:mx-20">
+<section class="py-8 my-6 lg:my-8 mx-4 lg:mx-20">
   <div
-    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-bg-main justify-center rounded-rd-md"
+    class="wrapper grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-bg-main justify-center rounded-rd-md"
   >
     @for (feature of features; track feature.id) {
 
@@ -20,7 +20,7 @@
           {{ feature.title | translate }}
         </div>
         <p class="text-sm min-w-[165px] text-mini-paragraph">
-         {{ feature.details | translate }}
+          {{ feature.details | translate }}
         </p>
       </div>
     </div>

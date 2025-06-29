@@ -1,5 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { LocalStorageService } from '../localStorage/local-storage.service';
+import { DOCUMENT } from '@angular/common';
+import { of, tap } from 'rxjs';
+import { CookiesService } from '../cookies/cookies.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,38 +10,43 @@ export class ThemeService {
   isDark = signal<boolean>(false);
 
   private readonly THEME_KEY = 'theme';
-  private _localStorage = inject(LocalStorageService);
+  private readonly cookies = inject(CookiesService);
+  private readonly root = inject(DOCUMENT);
 
   constructor() {
     this.themeInit();
   }
 
-  private themeInit() {
-    if (this._localStorage.isBrowser) {
-      const storedTheme = this._localStorage.get(this.THEME_KEY);
-      const deviceTheme = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ).matches;
+  themeInit() {
+    const storedTheme = this.cookies.getCookie(this.THEME_KEY);
 
-      const isDrak = storedTheme ? storedTheme == 'dark' : deviceTheme;
-
-      this.setTheme(isDrak);
+    if (storedTheme) {
+      this.setTheme(storedTheme);
     }
+
+    return of(storedTheme).pipe(
+      tap(() => {
+        console.log(`Init Theme is  ==> ${storedTheme}`);
+      })
+    );
   }
 
-  private setTheme(isDark: boolean) {
-    if (isDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+  private setTheme(theme: string) {
+    this.root.documentElement.setAttribute('data-theme', theme);
+
+    if (theme == 'dark') {
       this.isDark.set(true);
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      this.isDark.set(false);
-    }
+    } else this.isDark.set(false);
   }
 
   toggleTheme() {
-    this.setTheme(!this.isDark());
+    const currentTheme = this.cookies.getCookie(this.THEME_KEY);
 
-    this._localStorage.set(this.THEME_KEY, !this.isDark() ? 'light' : 'dark');
+    const newTheme =
+      currentTheme == 'light' || currentTheme == '' ? 'dark' : 'light';
+
+    this.setTheme(newTheme);
+
+    this.cookies.setCookie(this.THEME_KEY, newTheme, { expireNum: 400 });
   }
 }

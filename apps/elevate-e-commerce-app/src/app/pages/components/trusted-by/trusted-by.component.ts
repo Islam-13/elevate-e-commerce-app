@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-trusted-by',
+  imports: [TranslateModule],
   templateUrl: './trusted-by.component.html',
   styleUrl: './trusted-by.component.css',
 })

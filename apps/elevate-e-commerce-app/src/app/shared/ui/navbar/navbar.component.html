@@ -1,5 +1,7 @@
-<header #header>
-  <div class="relative flex justify-between items-center mx-4 lg:mx-20 py-2">
+<header #header class="mx-4 lg:mx-20">
+  <div
+    class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2"
+  >
     <app-logo />
 
     <nav
@@ -17,6 +19,7 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
+
       <ul class="flex flex-col gap-6 font-medium text-title md:flex-row">
         @for (link of navLinks; track $index) {
         <li>
@@ -27,7 +30,7 @@
             (click)="isOpen.set(false)"
             class="hover:text-main duration-500 ease-in"
           >
-            {{ link.name }}
+            {{ link.name | translate }}
           </a>
         </li>
         }
@@ -41,13 +44,13 @@
         </li>
 
         <li class="p-2">
-          @if (lang() === "en") {
-          <button aria-label="language button" (click)="useLanguage('ar')">
+          @if (_lang.lang() === "en") {
+          <button aria-label="language button" (click)="_lang.changeLang('ar')">
             ع
           </button>
 
           } @else {
-          <button aria-label="language button" (click)="useLanguage('en')">
+          <button aria-label="language button" (click)="_lang.changeLang('en')">
             ENG
           </button>
           }

@@ -1,5 +1,5 @@
-<section class="mx-4 lg:mx-20">
-  <div class="flex flex-col gap-4 md:flex-row md:gap-10 lg:gap-20">
+<section class="my-6 lg:my-8 mx-4 lg:mx-20">
+  <div class="wrapper flex flex-col gap-4 md:flex-row md:gap-10 lg:gap-20">
     <!-- left side -->
     <div class="md:w-2/5 flex justify-center items-center gap-2 p-2">
       <div class="w-[min(330px,100%)] relative shape">
@@ -19,57 +19,60 @@
 
     <!-- right side -->
     <div class="flex flex-col gap-4 md:gap-6 md:w-3/5">
-      <h6 class="text-main font-bold tracking-[4px] uppercase">about us</h6>
+      <h6 class="text-main font-bold uppercase">
+        {{ 'home.aboutUs.h6' | translate }}
+      </h6>
 
       <div>
         <h2 class="heading">
           <span class="block">
-            We Provide Best And Quality
-            <span class="text-main">Gifts</span>
+            {{ 'home.aboutUs.h2.span1' | translate }}
+            <span class="text-main">
+              {{ 'home.aboutUs.h2.span2' | translate }}</span
+            >
           </span>
           <span class="block">
-            <span class="text-main">Box</span> Product For You
+            <span class="text-main">
+              {{ 'home.aboutUs.h2.span3' | translate }}</span
+            >
+            {{ 'home.aboutUs.h2.span4' | translate }}
           </span>
         </h2>
 
         <p class="text-mini-paragraph mt-2">
-          Recusandae tempora aut laborum molestias veniam. A commodi sequi
-          accusantium ullam cupiditate. Neque quidem qui et autem dolor dicta
-          necessitatibus ut ad.
+          {{ 'home.aboutUs.p' | translate }}
         </p>
       </div>
 
-      <app-primary-btn label="Discover More">
-        <span><i class="fa-solid fa-arrow-right"></i></span>
-      </app-primary-btn>
+      <app-primary-btn [label]="'home.bestSeller.btn' | translate" />
 
       <ul class="grid gap-y-2 gap-x-4 md:grid-cols-2 text-normal-txt">
         <li class="flex items-center gap-2">
           <span class="icon bg-icon">
             <i class="fa-solid fa-check"></i>
           </span>
-          <span>Streamlined Shipping Experience</span>
+          <span>{{ 'home.aboutUs.list.1' | translate }}</span>
         </li>
 
         <li class="flex items-center gap-2">
           <span class="icon bg-icon">
             <i class="fa-solid fa-check"></i>
           </span>
-          <span>Competitive Price & Easy To Shop</span>
+          <span>{{ 'home.aboutUs.list.2' | translate }}</span>
         </li>
 
         <li class="flex items-center gap-2">
           <span class="icon bg-icon">
             <i class="fa-solid fa-check"></i>
           </span>
-          <span>Affordable Modern Design</span>
+          <span>{{ 'home.aboutUs.list.3' | translate }}</span>
         </li>
 
         <li class="flex items-center gap-2">
           <span class="icon bg-icon">
             <i class="fa-solid fa-check"></i>
           </span>
-          <span>We Made Awesome Products</span>
+          <span>{{ 'home.aboutUs.list.4' | translate }}</span>
         </li>
       </ul>
     </div>

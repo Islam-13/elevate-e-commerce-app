@@ -12,10 +12,11 @@ import { Product } from '../../../shared/interfaces/popular-items-interface/popu
 import { Subscription } from 'rxjs';
 import { CardComponent } from '@shared/ui/card/card.component';
 import { Category } from '@shared/interfaces/categories-interfaces/categories-interfaces';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-items',
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, CardComponent, TranslateModule],
   templateUrl: './popular-items.component.html',
   styleUrl: './popular-items.component.css',
 })

@@ -7,11 +7,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { NavLink } from '@shared/interfaces/navbar';
 import { ThemeService } from '@shared/services/theme/theme.service';
 import { LogoComponent } from '../logo/logo.component';
+import { TranslateMangerService } from '@shared/services/translate/translate.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,34 +22,23 @@ import { LogoComponent } from '../logo/logo.component';
 })
 export class NavbarComponent {
   navLinks: NavLink[] = [
-    { name: 'Home', url: '/' },
-    { name: 'All Category', url: '/category' },
-    { name: 'About', url: '/about' },
-    { name: 'Contact', url: '/contact' },
+    { name: 'navbar.navLink.home', url: '/' },
+    { name: 'navbar.navLink.category', url: '/category' },
+    { name: 'navbar.navLink.about', url: '/about' },
+    { name: 'navbar.navLink.contact', url: '/contact' },
   ];
 
   isOpen = signal<boolean>(false);
-  lang = signal<string>('en');
+
   private header = viewChild<ElementRef<HTMLElement>>('header');
 
   _theme = inject(ThemeService);
-
-  constructor(private translate: TranslateService) {
-    this.translate.addLangs(['ar', 'en']);
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
-    this.translate.use(this.translate.getBrowserLang() || 'en');
-  }
+  _lang = inject(TranslateMangerService);
 
   @HostListener('document:click', ['$event']) detectClick(e: Event) {
     if (!this.header()?.nativeElement.contains(e.target as HTMLElement)) {
       this.isOpen.set(false);
     }
-  }
-
-  useLanguage(language: string): void {
-    this.translate.use(language);
-    this.lang.set(language);
   }
 
   toggleTheme() {

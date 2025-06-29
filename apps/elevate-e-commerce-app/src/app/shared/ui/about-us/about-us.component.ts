@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PrimaryBtnComponent } from '../primary-btn/primary-btn.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about-us',
-  imports: [CommonModule, PrimaryBtnComponent],
+  imports: [TranslateModule, PrimaryBtnComponent],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css',
 })
