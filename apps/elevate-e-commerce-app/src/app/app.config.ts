@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -15,6 +16,7 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { appInit } from '@shared/utils/app.utils';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -22,6 +24,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => appInit()),
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
