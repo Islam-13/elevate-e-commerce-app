@@ -1,4 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -22,6 +29,7 @@ export class NavbarComponent {
 
   isOpen = signal<boolean>(false);
   lang = signal<string>('en');
+  private header = viewChild<ElementRef<HTMLElement>>('header');
 
   _theme = inject(ThemeService);
 
@@ -30,6 +38,12 @@ export class NavbarComponent {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
     this.translate.use(this.translate.getBrowserLang() || 'en');
+  }
+
+  @HostListener('document:click', ['$event']) detectClick(e: Event) {
+    if (!this.header()?.nativeElement.contains(e.target as HTMLElement)) {
+      this.isOpen.set(false);
+    }
   }
 
   useLanguage(language: string): void {
