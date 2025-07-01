@@ -10,6 +10,7 @@ import { PopularItemsComponent } from '../components/popular-items/popular-items
 import { AboutUsComponent } from '../../shared/ui/about-us/about-us.component';
 import { Category } from '@shared/interfaces/categories-interfaces/categories-interfaces';
 import { CategoriesService } from '@shared/services/categories/categories.service';
+import { GalleryComponent } from "../components/gallery/gallery.component";
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,8 @@ import { CategoriesService } from '@shared/services/categories/categories.servic
     PopularItemsComponent,
     FeaturesComponent,
     AboutUsComponent,
-  ],
+    GalleryComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
