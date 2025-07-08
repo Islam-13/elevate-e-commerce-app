@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -15,11 +16,15 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+ bugFix/ngrx-files
 import { provideStore } from '@ngrx/store';
 import { filterReduser } from './store/filter.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { FilterEffects } from './store/filter.effect';
 
+
+import { appInit } from '@shared/utils/app.utils';
+ main
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -27,6 +32,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => appInit()),
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),

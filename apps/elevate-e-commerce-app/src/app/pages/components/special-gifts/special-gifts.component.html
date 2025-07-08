@@ -1,5 +1,5 @@
-<section class="p-4 my-5">
-  <div class="contariner flex flex-col gap-6 w-[90%] mx-auto">
+<section class="my-6 lg:my-8 mx-4 lg:mx-20">
+  <div class="wrapper flex flex-col gap-6 w-[90%] mx-auto">
     <div class="main-gifts">
       <div class="grid grid-cols-12 gap-4">
         <div class="left-side col-span-12 md:col-span-3 min-h-[440px]">
@@ -12,13 +12,17 @@
                 <p class="sec-title pb-[0.55px]">
                   {{ 'home.special.leftSide.details' | translate }}
                 </p>
-                <app-primary-btn [label]="'home.shopNowLabel' | translate"></app-primary-btn>
+                <app-primary-btn
+                  [label]="'home.shopNowLabel' | translate"
+                ></app-primary-btn>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="rigth-side relative col-span-12 md:col-span-9 sm:w-full">
+        <div
+          class="rigth-side relative col-span-12 md:col-span-9 sm:w-full [direction:ltr]"
+        >
           <owl-carousel-o class=" " [options]="mainSliderOptions">
             @for (image of imageSlides; track image.id) {
             <ng-template carouselSlide class="absolute">
@@ -46,7 +50,9 @@
                       {{ 'home.special.slider.details' | translate }}
                     </p>
 
-                   <app-primary-btn [label]="'home.shopNowLabel' | translate"></app-primary-btn>
+                    <app-primary-btn
+                      [label]="'home.shopNowLabel' | translate"
+                    ></app-primary-btn>
                   </div>
                 </div>
               </div>
@@ -71,7 +77,7 @@
             <p
               class="max-w-[188px] md:text-right min-h-[19px] mb-3.5 text-title"
             >
-               {{ gift.title | translate }}
+              {{ gift.title | translate }}
             </p>
             <p
               class="desc-gift md:text-right mb-[14px] mt-[14px] max-w-[201px] max-h-[48px] md:max-w-[201px] md:min-h-[72px]"
@@ -79,7 +85,7 @@
               {{ gift.details | translate }}
             </p>
             <button class="gift-button max-w-[144px] bg-main">
-               {{ gift.button_text | translate }}
+              {{ gift.button_text | translate }}
             </button>
           </div>
         </div>
