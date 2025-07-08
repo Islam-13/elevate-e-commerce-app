@@ -5,6 +5,12 @@ import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
 import { AllproductsComponent } from "../allproducts/allproducts.component";
+import { Store } from '@ngrx/store';
+import { selectFilterProducts } from '../../store/filter.selector';
+import { selectedItem } from '@shared/interfaces/filter-items-interfaces';
+import { loadSelectedCategories } from '../../store/filter.actions';
+import { Observable } from 'rxjs';
+import { Product } from '@shared/interfaces/carditem-interfaces';
 
 @Component({
   selector: 'app-category',
@@ -13,6 +19,26 @@ import { AllproductsComponent } from "../allproducts/allproducts.component";
   styleUrl: './category.component.css',
 })
 export class CategoryComponent implements OnInit {
+
+  selectedCategories: Category[] = [];
+    products$: Observable<Product[]>;
+  constructor(private store: Store) {
+    this.products$ = this.store.select(selectFilterProducts);
+  }
+
+  onCategoriesChange(e: any, category: Category) {
+  const checked = e.target.checked;
+
+  if (checked) {
+    this.selectedCategories.push(category);
+  } else {
+    this.selectedCategories = this.selectedCategories.filter(
+      (c) => c._id !== category._id
+    );
+  }
+}
+
+
   minVal = 0;
   maxVal = 5000;
 

@@ -2,15 +2,19 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { FilterState } from "./filter.state";
 
 export const selectFilterState = createFeatureSelector<FilterState>("filter");
-export const selectFilterProducts = createSelector(selectFilterState, (state) => {
-  if (
-    state.filterList.length === 0 &&
+
+function isFilterEmpty(state: FilterState): boolean {
+  return (
     state.selectedCategories.length === 0 &&
     state.selectedOccasions.length === 0 &&
     state.selectedRating.length === 0 &&
-    state.selectedName === ""
-  ) {
-    return state.products;
+    state.selectedName.trim() === ""
+  );
+}
+
+export const selectFilterProducts = createSelector(
+  selectFilterState,
+  (state) => {
+    return isFilterEmpty(state) ? state.products : state.filterList;
   }
-  return state.filterList;
-});
+);

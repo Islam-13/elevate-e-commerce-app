@@ -4,7 +4,6 @@
     <!-- search -->
     <section class="cat-section">
       <h3>Search</h3>
-
       <input
         type="search"
         placeholder="Search By The Name"
@@ -19,10 +18,11 @@
       <div>
         @for(category of categories(); track $index) {
         <div
-          class="flex items-center justify-between gap-1 text-mini-paragraph"
-        >
+          class="flex items-center justify-between gap-1 text-mini-paragraph">
           <div class="flex items-center gap-2.5">
-            <input type="checkbox" [id]="category.name" />
+            <input type="checkbox" [id]="category.name"
+            (change)="onCategoriesChange($event , category)"
+            />
             <label [for]="category.name">{{ category.name }}</label>
           </div>
           <span>({{ category.productsCount }})</span>
