@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -20,6 +21,7 @@ import { filterReduser } from './store/filter.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { FilterEffects } from './store/filter.effect';
 
+import { appInit } from '@shared/utils/app.utils';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -27,6 +29,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => appInit()),
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
