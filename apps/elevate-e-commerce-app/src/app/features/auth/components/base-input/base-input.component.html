@@ -1,0 +1,25 @@
+  <!------- Reusable Input Component ------->
+    <input class="py-4 px-6 border-2 border-pink-400 rounded mb-5 " [type]="type()"
+    [placeholder]="placeholder()" [formControlName]="formControlName()">
+
+
+
+<!--------------------------------------
+----- HOW TO USE <app-base-input> ------
+----------------------------------------
+1 ==> Wrap it in a reactive form:
+    <form [formGroup]="myForm">
+        <app-base-input
+            formControlName="..."
+            type="..."
+            placeholder="...">
+            </app-base-input>
+    </form>
+
+2 ==> Three required inputs:
+    • formControlName  – string
+    • type             – 'text' | 'email' | 'password' | 'number'
+    • placeholder      – string
+
+*** Component Must be inside a <form [formGroup]="...">.
+-->
