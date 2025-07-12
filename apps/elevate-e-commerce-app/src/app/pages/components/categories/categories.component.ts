@@ -7,13 +7,18 @@ import { TagModule } from 'primeng/tag';
 import { CategoryCardComponent } from '../category-card/category-card.component';
 import { Category } from '@shared/interfaces/categories-interfaces/categories-interfaces';
 
+
+
 @Component({
   selector: 'app-categories',
-  imports: [CategoryCardComponent, CarouselModule, ButtonModule, TagModule],
+  imports: [CategoryCardComponent, CarouselModule, ButtonModule, TagModule ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
 export class CategoriesComponent implements OnInit {
+
+
+
   categories = input.required<Category[]>();
   responsiveOptions: any[] = [];
 

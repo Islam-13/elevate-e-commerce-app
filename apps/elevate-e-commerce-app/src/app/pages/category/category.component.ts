@@ -4,10 +4,11 @@ import { Category } from '@shared/interfaces/categories-interfaces/categories-in
 import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
+import { AllproductsComponent } from "../allproducts/allproducts.component";
 
 @Component({
   selector: 'app-category',
-  imports: [FormsModule],
+  imports: [FormsModule, AllproductsComponent],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
 })
