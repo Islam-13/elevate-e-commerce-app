@@ -1,0 +1,30 @@
+<!------- Reusable Input Component ------->
+<input class="py-3 px-7 border-2 border-amber-200 rounded"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="value()"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+/>
+
+
+<!---------------------------------------------------------------
+    <app-base-input>  –  Quick Reference Sheet  
+-----------------------------------------------------------------
+    <form [formGroup]="myForm" (ngSubmit)="save()">
+        <app-base-input
+            formControlName="email"       
+            type="email"                   
+            placeholder="Email address">  
+        </app-base-input>
+
+        <app-base-input
+            formControlName="password"
+            type="password"
+            [disabled]="true"    If you want
+            placeholder="Password">
+        </app-base-input>
+
+        <button type="submit">Submit</button>
+    </form> -->
