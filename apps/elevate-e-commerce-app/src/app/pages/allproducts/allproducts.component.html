@@ -1,18 +1,19 @@
 <div class="max-w-md mx-auto my-10">
-   <select id="sort" [(ngModel)]="selectedSortOption"(change)="sortProducts(selectedSortOption)"
-    class="w-full p-2 border border-gray-300 rounded-md shadow-sm "
+  <select
+    id="sort"
+    [(ngModel)]="selectedSortOption"
+    (change)="sortProducts(selectedSortOption)"
+    class="w-full p-2 border border-gray-300 rounded-md shadow-sm"
   >
-      <option value="priceAsc" selected>Sort by Price (Low to High)</option>
+    <option value="priceAsc" selected>Sort by Price (Low to High)</option>
     <option value="priceDesc">Sort by Price (High to Low)</option>
-   </select>
-
- 
+  </select>
 </div>
 
- <div
-    class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center sm:place-items-start"
-  >
-    @for (item of allProducts(); track item._id) {
+<div
+  class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center sm:place-items-start"
+>
+  @for (item of allProducts(); track item._id) {
     <app-card
       [title]="item.title"
       [imgCover]="item.imgCover"
@@ -21,5 +22,5 @@
       [rateAvg]="item.rateAvg"
     >
     </app-card>
-    }
-  </div>
+  }
+</div>

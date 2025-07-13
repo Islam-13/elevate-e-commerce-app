@@ -1,10 +1,19 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Category } from '@shared/interfaces/categories-interfaces/categories-interfaces';
 import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
 import { AllproductsComponent } from "../allproducts/allproducts.component";
+
+import { Store } from '@ngrx/store';
+import {
+  loadSelectedCategories,
+  loadSelectedOccasions,
+  loadSelectedPrice,
+  loadSelectedRating,
+  ApplyFilters
+} from '../../store/filter.actions';
 
 @Component({
   selector: 'app-category',
@@ -24,6 +33,18 @@ export class CategoryComponent implements OnInit {
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _occasionsService = inject(OccasionsService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly store = inject(Store);
+
+  selectedCategories: Category[] = [];
+  selectedOccasions: Occasion[] = [];
+  selectedRatings: number[] = [];
+
+  private priceEffect = effect(() => {
+    this.store.dispatch(
+      loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal })
+    );
+    this.store.dispatch(ApplyFilters()); 
+  });
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -49,7 +70,6 @@ export class CategoryComponent implements OnInit {
   getAllOccasions() {
     const subscription = this._occasionsService.getOccasions().subscribe({
       next: (data) => {
-        console.log(data);
         this.occasions.set(data);
       },
       error: (err) => {
@@ -61,5 +81,65 @@ export class CategoryComponent implements OnInit {
     });
 
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+
+  onCategoryChange(event: Event, category: Category) {
+    const checked = (event.target as HTMLInputElement)?.checked ?? false;
+
+    if (checked) {
+      this.selectedCategories.push(category);
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(c => c._id !== category._id);
+    }
+
+    const selectedCategories = this.selectedCategories.map((cat) => ({
+      _id: cat._id,
+      type: 'category'
+    }));
+
+    this.store.dispatch(loadSelectedCategories({ selectedCategories }));
+    this.store.dispatch(ApplyFilters());
+  }
+
+  onOccasionChange(event: Event, occasion: Occasion) {
+    const checked = (event.target as HTMLInputElement)?.checked ?? false;
+
+    if (checked) {
+      this.selectedOccasions.push(occasion);
+    } else {
+      this.selectedOccasions = this.selectedOccasions.filter(o => o._id !== occasion._id);
+    }
+
+    const selectedOccasions = this.selectedOccasions.map((occ) => ({
+      _id: occ._id,
+      type: 'occasion'
+    }));
+
+    this.store.dispatch(loadSelectedOccasions({ selectedOccasions }));
+    this.store.dispatch(ApplyFilters());
+  }
+
+  onRateChange(event: Event, rating: number) {
+    const checked = (event.target as HTMLInputElement)?.checked ?? false;
+
+    if (checked) {
+      this.selectedRatings.push(rating);
+    } else {
+      this.selectedRatings = this.selectedRatings.filter(r => r !== rating);
+    }
+
+    const selectedRating = this.selectedRatings.map((r) => ({
+      _id: r.toString(),
+      rating: r,
+      type: 'rating'
+    }));
+
+    this.store.dispatch(loadSelectedRating({ selectedRating }));
+    this.store.dispatch(ApplyFilters());
+  }
+
+  onPriceChange() {
+    this.store.dispatch(loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal }));
+    this.store.dispatch(ApplyFilters());
   }
 }
