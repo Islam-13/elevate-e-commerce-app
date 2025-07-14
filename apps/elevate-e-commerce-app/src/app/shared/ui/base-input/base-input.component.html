@@ -1,13 +1,17 @@
 <!------- Reusable Input Component ------->
-<input class="py-3 px-7 border-2 border-amber-200 rounded"
-    [type]="type()"
-    [placeholder]="placeholder()"
-    [disabled]="disabled()"
-    [value]="value()"
-    (input)="onInput($event)"
-    (blur)="onTouched()"
-/>
+<label class="block capitalize text-sm font-medium mb-1.5" for="">{{
+  label()
+}}</label>
 
+<input
+  class="w-full p-4 rounded-rd-sm border-2 border-zinc-300 placeholder:text-zinc-400"
+  [type]="type()"
+  [placeholder]="placeholder()"
+  [disabled]="disabled()"
+  [value]="value()"
+  (input)="onInput($event)"
+  (blur)="onTouched()"
+/>
 
 <!---------------------------------------------------------------
     <app-base-input>  –  Quick Reference Sheet  

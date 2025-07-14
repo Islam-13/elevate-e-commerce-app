@@ -1,7 +1,10 @@
 import { Component, forwardRef, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-base-input',
@@ -12,18 +15,18 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => BaseInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class BaseInputComponent implements ControlValueAccessor {
-
   /* ===== required API props ===== */
-  type        = input<'text' | 'email' | 'password'>('text');
+  label = input<string>('');
+  type = input.required<'text' | 'email' | 'password' | 'tel'>();
   placeholder = input<string>(' ');
 
   /* ===== internal state (signals) ===== */
-  value    = signal<string>('');
+  value = signal<string>('');
   disabled = signal<boolean>(false);
 
   writeValue(v: string | null): void {
