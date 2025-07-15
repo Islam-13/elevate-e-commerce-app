@@ -24,7 +24,6 @@ import {
 export class CategoryComponent implements OnInit {
   minVal = 0;
   maxVal = 5000;
-
   maxRate = new Array(5);
 
   categories = signal<Category[]>([]);
@@ -43,7 +42,7 @@ export class CategoryComponent implements OnInit {
     this.store.dispatch(
       loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal })
     );
-    this.store.dispatch(ApplyFilters()); 
+    this.store.dispatch(ApplyFilters());
   });
 
   ngOnInit(): void {

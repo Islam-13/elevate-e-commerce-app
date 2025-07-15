@@ -11,7 +11,7 @@ import {
   loadSelectedRating,
 } from "./filter.actions";
 
-export const initalState: FilterState = {
+export const initialState: FilterState = {
   products: [],
   filterList: [],
   selectedCategories: [],
@@ -25,7 +25,7 @@ export const initalState: FilterState = {
 };
 
 export const filterReduser = createReducer(
-  initalState,
+  initialState,
   on(loadProductsToFilter, (state, { products }) => {
     return {
       ...state,
