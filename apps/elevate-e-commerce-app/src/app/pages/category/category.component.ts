@@ -1,10 +1,16 @@
-import { Component, DestroyRef, inject, OnInit, signal, effect } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+  effect,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Category } from '@shared/interfaces/categories-interfaces/categories-interfaces';
 import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
-import { AllproductsComponent } from "../allproducts/allproducts.component";
 
 import { Store } from '@ngrx/store';
 import {
@@ -12,8 +18,10 @@ import {
   loadSelectedOccasions,
   loadSelectedPrice,
   loadSelectedRating,
-  ApplyFilters
+  ApplyFilters,
+  clearAllFilters
 } from '../../store/filter.actions';
+import { AllproductsComponent } from "../allproducts/allproducts.component";
 
 @Component({
   selector: 'app-category',
@@ -25,6 +33,7 @@ export class CategoryComponent implements OnInit {
   minVal = 0;
   maxVal = 5000;
   maxRate = new Array(5);
+  searchTerm = '';
 
   categories = signal<Category[]>([]);
   occasions = signal<Occasion[]>([]);
@@ -140,5 +149,67 @@ export class CategoryComponent implements OnInit {
   onPriceChange() {
     this.store.dispatch(loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal }));
     this.store.dispatch(ApplyFilters());
+  }
+
+  clearFilters() {
+    this.selectedCategories = [];
+    this.selectedOccasions = [];
+    this.selectedRatings = [];
+    this.minVal = 0;
+    this.maxVal = 5000;
+    this.searchTerm = '';
+
+    this.store.dispatch(clearAllFilters());
+    this.store.dispatch(ApplyFilters());
+  }
+
+  onSearchChange() {
+    const term = this.searchTerm.toLowerCase();
+
+    this.selectedCategories = this.categories().filter(c =>
+      c.name.toLowerCase().includes(term)
+    );
+
+    const selectedCategories = this.selectedCategories.map((cat) => ({
+      _id: cat._id,
+      type: 'category'
+    }));
+    this.store.dispatch(loadSelectedCategories({ selectedCategories }));
+
+    this.selectedOccasions = this.occasions().filter(o =>
+      o.name.toLowerCase().includes(term)
+    );
+
+    const selectedOccasions = this.selectedOccasions.map((occ) => ({
+      _id: occ._id,
+      type: 'occasion'
+    }));
+    this.store.dispatch(loadSelectedOccasions({ selectedOccasions }));
+
+    this.selectedRatings = [1, 2, 3, 4, 5].filter((r) => {
+      const label = 'rating ' + r + ' star' + (r > 1 ? 's' : '');
+      return label.toLowerCase().includes(term);
+    });
+
+    const selectedRating = this.selectedRatings.map((r) => ({
+      _id: r.toString(),
+      rating: r,
+      type: 'rating'
+    }));
+    this.store.dispatch(loadSelectedRating({ selectedRating }));
+
+    this.store.dispatch(ApplyFilters());
+  }
+
+  isCategorySelected(id: string): boolean {
+    return this.selectedCategories.some(c => c._id === id);
+  }
+
+  isOccasionSelected(id: string): boolean {
+    return this.selectedOccasions.some(o => o._id === id);
+  }
+
+  isRatingSelected(rating: number): boolean {
+    return this.selectedRatings.includes(rating);
   }
 }

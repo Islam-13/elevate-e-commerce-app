@@ -1,0 +1,85 @@
+<section>
+  <h3 class="text-center text-title text-3xl">
+    {{ 'auth.register.h' | translate }}
+  </h3>
+
+  <hr class="text-zinc-400 mb-6 mt-4" />
+
+  <form>
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-5">
+        <app-base-input
+          [label]="'auth.input.firstName' | translate"
+          type="text"
+          placeholder="Jonathan"
+        />
+
+        <app-base-input
+          [label]="'auth.input.lastName' | translate"
+          type="text"
+          placeholder="Adrian"
+        />
+      </div>
+
+      <div>
+        <app-base-input
+          [label]="'auth.input.email' | translate"
+          type="email"
+          placeholder="user@example.com"
+        />
+      </div>
+
+      <div>
+        <app-base-input
+          [label]="'auth.input.phone' | translate"
+          type="tel"
+          placeholder="01012345678"
+        />
+      </div>
+
+      <div>
+        <label class="block capitalize text-sm font-medium" for="">{{
+          'auth.input.gender' | translate
+        }}</label>
+        <select
+          class="w-full p-4 rounded-rd-sm border-2 border-zinc-300 placeholder:text-zinc-400 cursor-pointer"
+          name=""
+          id=""
+        >
+          <option aria-readonly="true">Select gender</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+
+      <div>
+        <app-base-input
+          [label]="'auth.input.password' | translate"
+          type="password"
+          placeholder="********"
+        />
+      </div>
+
+      <div>
+        <app-base-input
+          [label]="'auth.input.confirmPassword' | translate"
+          type="password"
+          placeholder="********"
+        />
+      </div>
+    </div>
+
+    <button class="auth-btn">
+      {{ 'auth.register.create' | translate }}
+    </button>
+
+    <hr class="text-zinc-400 my-5" />
+
+    <p class="text-center">
+      <span>{{ 'auth.register.alreadyHaveAccount' | translate }}</span>
+      <a class="text-main" routerLink="/auth/login">
+        {{ 'auth.register.loginLink' | translate }}</a
+      >
+    </p>
+  </form>
+</section>

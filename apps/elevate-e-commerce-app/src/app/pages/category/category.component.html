@@ -1,6 +1,6 @@
 <main class="m-4 grid grid-cols-[300px_1fr] lg:m-20">
   <aside class="flex flex-col gap-6">
-    <button class="btn-primary justify-center">Clear</button>
+    <button class="btn-primary justify-center" (click)="clearFilters()">Clear</button>
 
     <!-- Search -->
     <section class="cat-section">
@@ -8,6 +8,8 @@
       <input
         type="search"
         placeholder="Search By The Name"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
         class="shadow-[0px_1px_10px_0px_#0000000d] py-2 px-4 rounded-rd-md text-mini-paragraph"
       />
     </section>
@@ -24,6 +26,7 @@
             <input
               type="checkbox"
               [id]="category.name"
+              [checked]="isCategorySelected(category._id)"
               (change)="onCategoryChange($event, category)"
             />
             <label [for]="category.name">{{ category.name }}</label>
@@ -46,6 +49,7 @@
             <input
               type="checkbox"
               [id]="occasion.name"
+              [checked]="isOccasionSelected(occasion._id)"
               (change)="onOccasionChange($event, occasion)"
             />
             <label [for]="occasion.name">{{ occasion.name }}</label>
@@ -60,10 +64,8 @@
     <section class="cat-section">
       <h3>Price Rating</h3>
       <div class="cat-underline"></div>
-
       <div>
         <p class="text-main mb-2">${{ minVal }} - ${{ maxVal }}</p>
-
         <div class="price-filter">
           <input
             type="range"
@@ -84,26 +86,27 @@
       </div>
     </section>
 
-  <!-- Rating Stars -->
-<section class="cat-section">
-  <h3>Ratings</h3>
-  <div class="cat-underline"></div>
+    <!-- Rating Stars -->
+    <section class="cat-section">
+      <h3>Ratings</h3>
+      <div class="cat-underline"></div>
 
-  <div>
-    @for(rate of maxRate; track $index) {
-    <div class="flex items-center gap-2.5">
-      <input
-        type="checkbox"
-        [id]="'rate' + $index"
-        (change)="onRateChange($event, $index + 1)"
-      />
-      <label [for]="'rate' + $index">
-        Rating {{ $index + 1 }} Star{{ $index + 1 > 1 ? 's' : '' }}
-      </label>
-    </div>
-    }
-  </div>
-</section>
+      <div>
+        @for(rate of maxRate; track $index) {
+        <div class="flex items-center gap-2.5">
+          <input
+            type="checkbox"
+            [id]="'rate' + $index"
+            [checked]="isRatingSelected($index + 1)"
+            (change)="onRateChange($event, $index + 1)"
+          />
+          <label [for]="'rate' + $index">
+            Rating {{ $index + 1 }} Star{{ $index + 1 > 1 ? 's' : '' }}
+          </label>
+        </div>
+        }
+      </div>
+    </section>
   </aside>
 
   <!-- Display products -->

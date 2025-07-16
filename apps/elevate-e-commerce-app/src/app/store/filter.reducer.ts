@@ -2,7 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { FilterState } from "./filter.state";
 import {
   ApplyFilters,
-  clearFilter,
+  clearAllFilters,
   loadProductsToFilter,
   loadSelectedCategories,
   loadSelectedName,
@@ -113,7 +113,7 @@ export const filterReduser = createReducer(
     };
   }),
 
-  on(clearFilter, (state) => {
+  on(clearAllFilters, (state) => {
     return {
       ...state,
       filterList: [],

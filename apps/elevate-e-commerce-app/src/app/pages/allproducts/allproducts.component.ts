@@ -1,9 +1,19 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../../shared/ui/card/card.component';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { selectFilterProducts, selectSelectedCategories, selectSelectedOccasions, selectSelectedPrice, selectSelectedRating } from '../../store/filter.selector';
+
+import {
+  selectFilterProducts,
+  selectSelectedCategories,
+  selectSelectedOccasions,
+  selectSelectedPrice,
+  selectSelectedRating
+} from '../../store/filter.selector';
+
+import { loadProductsToFilter } from '../../store/filter.actions';
+import { PopularItemsService } from '@shared/services/popular-items/popular-items.service';
 
 @Component({
   selector: 'app-allproducts',
@@ -12,17 +22,27 @@ import { selectFilterProducts, selectSelectedCategories, selectSelectedOccasions
   templateUrl: './allproducts.component.html',
   styleUrl: './allproducts.component.css',
 })
-export class AllproductsComponent  {
+export class AllproductsComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly popularItemsService = inject(PopularItemsService);
 
-  selectedSortOption = 'priceAsc';
+  selectedSortOption = signal('priceAsc');
 
   categories = this.store.selectSignal(selectSelectedCategories);
   occasions = this.store.selectSignal(selectSelectedOccasions);
   rating = this.store.selectSignal(selectSelectedRating);
   price = this.store.selectSignal(selectSelectedPrice);
-
   filteredProducts = this.store.selectSignal(selectFilterProducts);
+
+  ngOnInit(): void {
+    this.loadProductsFromService();
+  }
+
+  private loadProductsFromService(): void {
+    this.popularItemsService.getAllProducts().subscribe((res) => {
+      this.store.dispatch(loadProductsToFilter({ products: res.products }));
+    });
+  }
 
   allProducts = computed(() => {
     let result = [...this.filteredProducts()];
@@ -52,12 +72,14 @@ export class AllproductsComponent  {
 
     if (selectedRating.length > 0) {
       const ratingValues = selectedRating.map((r) => r.rating || 0);
-      result = result.filter((p) => ratingValues.includes(Math.round(p.rateAvg)));
+      result = result.filter((p) =>
+        ratingValues.includes(Math.round(p.rateAvg))
+      );
     }
 
-    if (this.selectedSortOption === 'priceAsc') {
+    if (this.selectedSortOption() === 'priceAsc') {
       result.sort((a, b) => a.priceAfterDiscount - b.priceAfterDiscount);
-    } else if (this.selectedSortOption === 'priceDesc') {
+    } else if (this.selectedSortOption() === 'priceDesc') {
       result.sort((a, b) => b.priceAfterDiscount - a.priceAfterDiscount);
     }
 
@@ -65,8 +87,6 @@ export class AllproductsComponent  {
   });
 
   sortProducts(option: string): void {
-  this.selectedSortOption = option;
-}
-
-
+    this.selectedSortOption.set(option); 
+  }
 }

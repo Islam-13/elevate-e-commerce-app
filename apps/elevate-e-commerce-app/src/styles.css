@@ -11,28 +11,32 @@
 :root {
   &,
   &[data-theme='light'] {
-    --color-bg-main: #feedf7;
-    --color-main: #f82ba9;
-    --color-title: #160e4b;
-    --color-mini-paragraph: #757f95;
+    --color-bg-main: #fbeaea;
+    --color-main: #a6252a;
+    --color-title: #741c21;
+    --color-mini-paragraph: #71717a;
 
-    --color-price: #f05454;
-    --color-icon: #8c52ff;
+    --color-span: #ff668b;
 
-    --bg-color: #fff;
-    --normal-txt: #000;
+    --color-price: #741c21;
+    --color-icon: #a6252a;
+
+    --bg-color: #fafafa;
+    --normal-txt: #27272a;
   }
 
   &[data-theme='dark'] {
     --color-bg-main: #3f3f46;
-    --color-main: #d75458;
+    --color-main: #ffc2d0;
     --color-title: #ffc2d0;
     --color-mini-paragraph: #a1a1aa;
+
+    --color-span: #d75458;
 
     --color-price: #ffc2d0;
     --color-icon: #cd2e33;
 
-    --bg-color: #000;
+    --bg-color: #27272a;
     --normal-txt: #fafafa;
   }
 }
@@ -43,6 +47,8 @@
   --color-title: var(--color-title);
   --color-mini-paragraph: var(--color-mini-paragraph);
   --color-normal-txt: var(--normal-txt);
+
+  --color-span: var(--color-span);
 
   --color-price: var(--color-price);
   --color-icon: var(--color-icon);
@@ -68,6 +74,7 @@
 body {
   font-family: 'Inter';
   background: var(--bg-color);
+  color: var(--normal-txt);
 }
 
 button {
@@ -90,6 +97,10 @@ button {
 
 .btn-primary {
   @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2;
+}
+
+.auth-btn {
+  @apply w-full bg-main rounded-rd-sm py-2.5 text-zinc-700 my-9;
 }
 
 .icon {

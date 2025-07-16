@@ -2,11 +2,11 @@
 <div class="max-w-md mx-auto my-10">
   <select
     id="sort"
-    [(ngModel)]="selectedSortOption"
-    (change)="sortProducts(selectedSortOption)"
+    [ngModel]="selectedSortOption()"
+    (ngModelChange)="sortProducts($event)"
     class="w-full p-2 border border-gray-300 rounded-md shadow-sm"
   >
-    <option value="priceAsc" selected>Sort by Price (Low to High)</option>
+    <option value="priceAsc">Sort by Price (Low to High)</option>
     <option value="priceDesc">Sort by Price (High to Low)</option>
   </select>
 </div>
