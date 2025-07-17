@@ -106,7 +106,6 @@ export class CategoryComponent implements OnInit {
     }));
 
     this.store.dispatch(loadSelectedCategories({ selectedCategories }));
-    this.store.dispatch(ApplyFilters());
   }
 
   onOccasionChange(event: Event, occasion: Occasion) {
@@ -124,7 +123,6 @@ export class CategoryComponent implements OnInit {
     }));
 
     this.store.dispatch(loadSelectedOccasions({ selectedOccasions }));
-    this.store.dispatch(ApplyFilters());
   }
 
   onRateChange(event: Event, rating: number) {
@@ -143,12 +141,10 @@ export class CategoryComponent implements OnInit {
     }));
 
     this.store.dispatch(loadSelectedRating({ selectedRating }));
-    this.store.dispatch(ApplyFilters());
   }
 
   onPriceChange() {
     this.store.dispatch(loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal }));
-    this.store.dispatch(ApplyFilters());
   }
 
   clearFilters() {
@@ -158,9 +154,7 @@ export class CategoryComponent implements OnInit {
     this.minVal = 0;
     this.maxVal = 5000;
     this.searchTerm = '';
-
     this.store.dispatch(clearAllFilters());
-    this.store.dispatch(ApplyFilters());
   }
 
   onSearchChange() {
