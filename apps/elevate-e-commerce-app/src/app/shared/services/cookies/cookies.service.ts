@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { CookiesCustomOptions } from '@shared/interfaces/cookies';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
-
+ 
 @Injectable({
   providedIn: 'root',
 })
