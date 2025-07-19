@@ -61,5 +61,41 @@
 
   "home.trustedBy.h3.span1": "موثوقون في أكثر من",
   "home.trustedBy.h3.span2": "4.5k+",
-  "home.trustedBy.h3.span3": "شركة"
+  "home.trustedBy.h3.span3": "شركة",
+
+  "auth.login.h": "مرحبا بعودتك",
+  "auth.login.forgetpassword": "هل نسيت كلمة السر؟",
+  "auth.login.loginBtn": "تسجيل الدخول",
+
+  "auth.register.h": "كن جزءا من عائلتنا",
+  "auth.register.create": "أنشئ الحساب",
+  "auth.register.alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "auth.register.loginLink": "سجل دخولك",
+
+  "auth.forgetPassword.h": "نسيت كلمة السر",
+  "auth.forgetPassword.p": "لا تقلق, سنرسل لك تعليمات لتساعدك على استعادتها",
+  "auth.forgetPassword.continueBtn": "استمرار",
+
+  "auth.verifyCode.h": "ادخل الرقم المرسل",
+  "auth.verifyCode.p": "لقد ارسلنا اليك رقم مكون من 6 ارقام",
+  "auth.verifyCode.sendCode": "ارسال كود جديد",
+  "auth.verifyCode.verifyBtn": "تأكيد الرقم",
+
+  "auth.updatePassword.h": "أنشئ كلمة السر الجديدة",
+  "auth.updatePassword.p": "استخدم كلمة سر قوية لحساب أكثر امانا",
+  "auth.updatePassword.resetBtn": "إعادة تعيين كلمة المرور",
+
+  "auth.dontHaveAccount": "للآن ليس لديك حساب؟",
+  "auth.createAccountNow": "أنشئ حسابك الآن",
+
+  "auth.input.firstName": "الاسم الأول",
+  "auth.input.lastName": "اسم العائلة",
+  "auth.input.email": "البريد الإلكتروني",
+  "auth.input.password": "كلمة السر",
+  "auth.input.confirmPassword": "أكد كلمة السر",
+  "auth.input.phone": "رقم الهاتف المحمول",
+  "auth.input.gender": "الجنس",
+
+  "auth.needHelp": "تحتاج مساعدة؟",
+  "auth.contact": " تواصل معنا"
 }

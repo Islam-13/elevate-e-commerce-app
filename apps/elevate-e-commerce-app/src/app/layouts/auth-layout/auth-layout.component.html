@@ -1,0 +1,42 @@
+<main class="flex">
+  <!-- left side  -->
+  <div class="w-full min-h-dvh m-3 md:w-1/2 flex justify-center items-center">
+    <div class="w-[min(100%,400px)]">
+      <header class="mb-10 text-end">
+        @if (_lang.lang() === "en") {
+        <button aria-label="language button" (click)="_lang.changeLang('ar')">
+          العربية
+        </button>
+
+        } @else {
+        <button aria-label="language button" (click)="_lang.changeLang('en')">
+          english
+        </button>
+        }
+      </header>
+
+      <div class="flex flex-col gap-10 items-center">
+        <div>
+          <img src="images/auth-separator.svg" alt="" />
+        </div>
+
+        <div class="w-full">
+          <router-outlet />
+        </div>
+
+        <div>
+          <img class="rotate-180" src="images/auth-separator.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- right side  -->
+  <div class="hidden md:block w-1/2">
+    <img
+      class="w-full h-full object-cover"
+      src="images/auth-cover.png"
+      alt=""
+    />
+  </div>
+</main>

@@ -1,13 +1,50 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 
 export const appRoutes: Route[] = [
-  { path: '', component: HomeComponent },
   {
-    path: 'category',
-    loadComponent: () =>
-      import('./pages/category/category.component').then(
-        (c) => c.CategoryComponent
-      ),
+    path: 'auth',
+
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./auth/pages/register/register.component').then(
+            (c) => c.RegisterComponent
+          ),
+      },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./auth/pages/login/login.component').then(
+            (c) => c.LoginComponent
+          ),
+      },
+      {
+        path: 'forget-password',
+        loadComponent: () =>
+          import('./auth/pages/forget-password/forget-password.component').then(
+            (c) => c.ForgetPasswordComponent
+          ),
+      },
+    ],
   },
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      {
+        path: 'category',
+        loadComponent: () =>
+          import('./pages/category/category.component').then(
+            (c) => c.CategoryComponent
+          ),
+      },
+    ],
+  },
+  {path:"product-details/:id",loadComponent:()=>import("./pages/product-details/product-details.component").then(c=>c.ProductDetailsComponent)},
 ];

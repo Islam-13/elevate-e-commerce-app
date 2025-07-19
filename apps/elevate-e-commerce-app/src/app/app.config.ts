@@ -17,6 +17,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { appInit } from '@shared/utils/app.utils';
+import { provideStore } from '@ngrx/store';
+import { filterReduser } from './store/filter.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { FilterEffects } from './store/filter.effect';
+
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -32,13 +37,17 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG(),
     importProvidersFrom([
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: httpLoaderFactory,
-          deps: [HttpClient],
-        },
-      }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpLoaderFactory,
+                deps: [HttpClient],
+            },
+        }),
     ]),
-  ],
+    provideStore(
+      {filter : filterReduser}
+    ),
+    provideEffects(FilterEffects),
+],
 };

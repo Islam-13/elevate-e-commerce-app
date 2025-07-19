@@ -60,5 +60,41 @@
 
   "home.trustedBy.h3.span1": "Trusted by over",
   "home.trustedBy.h3.span2": "4.5k+",
-  "home.trustedBy.h3.span3": "companies"
+  "home.trustedBy.h3.span3": "companies",
+
+  "auth.login.h": "Welcome back!",
+  "auth.login.forgetpassword": "Forget your password?",
+  "auth.login.loginBtn": "Login",
+
+  "auth.register.h": "Become part of our family!",
+  "auth.register.create": "Create Account",
+  "auth.register.alreadyHaveAccount": "Already have an account?",
+  "auth.register.loginLink": "Login",
+
+  "auth.forgetPassword.h": "Forget Password",
+  "auth.forgetPassword.p": "Don't Worry, we'll send you instructions to help you reset it.",
+  "auth.forgetPassword.continueBtn": "Continue",
+
+  "auth.verifyCode.h": "Enter the OTP Code",
+  "auth.verifyCode.p": "We have sent you a 6-digit code.",
+  "auth.verifyCode.sendCode": "Send a new code",
+  "auth.verifyCode.verifyBtn": "Verify OTP",
+
+  "auth.updatePassword.h": "Create a new password",
+  "auth.updatePassword.p": "Set a strong password to secure your account.",
+  "auth.updatePassword.resetBtn": "Reset Password",
+
+  "auth.dontHaveAccount": "Don't have an account yet?",
+  "auth.createAccountNow": "Create one now!",
+
+  "auth.input.firstName": "First name",
+  "auth.input.lastName": "Last name",
+  "auth.input.email": "Email",
+  "auth.input.password": "Password",
+  "auth.input.confirmPassword": "Confirm password",
+  "auth.input.phone": "Phone",
+  "auth.input.gender": "Gender",
+
+  "auth.needHelp": "Need Help?",
+  "auth.contact": " Contact us"
 }
