@@ -17,6 +17,7 @@
 >
   @for (item of allProducts(); track item._id) {
     <app-card
+      [productId]="item._id"
       [title]="item.title"
       [imgCover]="item.imgCover"
       [price]="item.price"

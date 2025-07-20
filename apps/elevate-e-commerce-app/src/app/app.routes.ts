@@ -46,4 +46,5 @@ export const appRoutes: Route[] = [
       },
     ],
   },
+  {path:"product-details/:id",loadComponent:()=>import("./pages/product-details/product-details.component").then(c=>c.ProductDetailsComponent)},
 ];

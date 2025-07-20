@@ -41,6 +41,7 @@
         @for (p of products(); track $index) {
         <ng-template carouselSlide [id]="p.id">
           <app-card
+            [productId]="p._id"
             [title]="p.title"
             [imgCover]="p.imgCover"
             [price]="p.price"

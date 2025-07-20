@@ -11,6 +11,7 @@ import { Category } from '@shared/interfaces/categories-interfaces/categories-in
 import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
+import { AllproductsComponent } from "../allproducts/allproducts.component";
 
 import { Store } from '@ngrx/store';
 import {
@@ -21,9 +22,9 @@ import {
   ApplyFilters,
   clearAllFilters
 } from '../../store/filter.actions';
-import { AllproductsComponent } from "../allproducts/allproducts.component";
-
-@Component({
+  
+ 
+ @Component({
   selector: 'app-category',
   imports: [FormsModule, AllproductsComponent],
   templateUrl: './category.component.html',

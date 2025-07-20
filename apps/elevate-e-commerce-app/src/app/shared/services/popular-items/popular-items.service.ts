@@ -35,4 +35,7 @@ export class PopularItemsService {
       { params }
     );
   }
+   getProductById(id:string):Observable<any>{
+   return this._httpClient.get(`${env.baseURL}/products/${id}`)
+  }
 }
