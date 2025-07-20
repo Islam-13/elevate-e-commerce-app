@@ -7,5 +7,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './err-msg.component.css',
 })
 export class ErrMsgComponent {
-  message = input.required<string>();
+  text = input.required<string>();
 }

@@ -66,7 +66,7 @@
           </button>
         </li>
 
-        <!-- <button class="btn-primary">Login</button> -->
+        @if (token()) {
 
         <button class="p-2" aria-label="wishlist button">
           <i class="fa-regular fa-heart"></i>
@@ -79,6 +79,13 @@
         <button class="p-2" aria-label="account button">
           <i class="fa-regular fa-user"></i>
         </button>
+
+        } @else {
+
+        <a class="btn-primary" routerLink="/auth/login">Login</a>
+
+        <!-- <button class="btn-primary">Login</button> -->
+        }
 
         <button
           class="p-2 md:hidden"
