@@ -22,8 +22,9 @@ import {
   ApplyFilters,
   clearAllFilters
 } from '../../store/filter.actions';
+  
  
-@Component({
+ @Component({
   selector: 'app-category',
   imports: [FormsModule, AllproductsComponent],
   templateUrl: './category.component.html',
