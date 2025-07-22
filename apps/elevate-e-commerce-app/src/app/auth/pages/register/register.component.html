@@ -5,73 +5,150 @@
 
   <hr class="text-zinc-400 mb-6 mt-4" />
 
-  <form>
+  @if(errorMsg()) {
+  <app-err-msg [text]="errorMsg()" />
+  }
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="flex flex-col gap-4">
       <div class="flex items-center gap-5">
-        <app-base-input
-          [label]="'auth.input.firstName' | translate"
-          type="text"
-          placeholder="Jonathan"
-        />
+        <div>
+          @let fNameCtrl = registerForm.get("firstName");
 
-        <app-base-input
-          [label]="'auth.input.lastName' | translate"
-          type="text"
-          placeholder="Adrian"
-        />
+          <app-base-input
+            [label]="'auth.input.firstName' | translate"
+            type="text"
+            placeholder="Jonathan"
+            formControlName="firstName"
+          />
+
+          @if (fNameCtrl?.errors && fNameCtrl?.touched) { @if
+          (fNameCtrl?.getError("required")) {
+          <app-ctrl-error text="First Name is required!" />
+          } @else if (fNameCtrl?.getError("minlength") ||
+          fNameCtrl?.getError("maxlength")) {
+          <app-ctrl-error text="At least 3 chars and up to 15 chars long." />
+          } }
+        </div>
+
+        <div>
+          @let lNameCtrl = registerForm.get("lastName");
+
+          <app-base-input
+            [label]="'auth.input.lastName' | translate"
+            type="text"
+            placeholder="Adrian"
+            formControlName="lastName"
+          />
+
+          @if (lNameCtrl?.errors && lNameCtrl?.touched) { @if
+          (lNameCtrl?.getError("required")) {
+          <app-ctrl-error text="Last Name is required!" />
+          } @else if (lNameCtrl?.getError("minlength") ||
+          lNameCtrl?.getError("maxlength")) {
+          <app-ctrl-error text="At least 3 chars and up to 15 chars long." />
+          } }
+        </div>
       </div>
 
       <div>
+        @let emailCtrl = registerForm.get("email");
+
         <app-base-input
           [label]="'auth.input.email' | translate"
           type="email"
           placeholder="user@example.com"
+          formControlName="email"
         />
+
+        @if (emailCtrl?.errors && emailCtrl?.touched) { @if
+        (emailCtrl?.getError("required")) {
+        <app-ctrl-error text="Email is required!" />
+        } @else if (emailCtrl?.getError("email")) {
+        <app-ctrl-error text="Email is invalid!" />
+        } }
       </div>
 
       <div>
+        @let phoneCtrl = registerForm.get('phone');
+
         <app-base-input
           [label]="'auth.input.phone' | translate"
           type="tel"
           placeholder="01012345678"
+          formControlName="phone"
         />
+
+        @if (phoneCtrl?.errors && phoneCtrl?.touched) { @if
+        (phoneCtrl?.getError("required")) {
+        <app-ctrl-error text="Phone is required!" />
+        } @else if (phoneCtrl?.getError("pattern")) {
+        <app-ctrl-error text="Invalid phone number." />
+        } }
       </div>
 
       <div>
+        @let genderdCtrl = registerForm.get("gender");
+
         <label class="block capitalize text-sm font-medium" for="">{{
           'auth.input.gender' | translate
         }}</label>
         <select
           class="w-full p-4 rounded-rd-sm border-2 border-zinc-300 placeholder:text-zinc-400 cursor-pointer"
-          name=""
-          id=""
+          formControlName="gender"
         >
           <option aria-readonly="true">Select gender</option>
-          <option>Male</option>
-          <option>Female</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
         </select>
+
+        @if (genderdCtrl?.errors && genderdCtrl?.touched) { @if
+        (genderdCtrl?.getError("required")) {
+        <app-ctrl-error text="Gender is required!" />
+        } }
       </div>
 
       <div>
+        @let passwordCtrl = registerForm.get("password");
+
         <app-base-input
           [label]="'auth.input.password' | translate"
           type="password"
           placeholder="********"
+          formControlName="password"
         />
+
+        @if (passwordCtrl?.errors && passwordCtrl?.touched) { @if
+        (passwordCtrl?.getError("required")) {
+        <app-ctrl-error text="Password is required!" />
+        } @else if (passwordCtrl?.getError("pattern")) {
+        <app-ctrl-error text="Password is required! bla bla" />
+        } }
       </div>
 
       <div>
+        @let rePasswordCtrl = registerForm.get('rePassword');
+
         <app-base-input
           [label]="'auth.input.confirmPassword' | translate"
           type="password"
           placeholder="********"
+          formControlName="rePassword"
         />
+
+        @if ((registerForm.errors?.['misMatch'] || rePasswordCtrl?.errors) &&
+        rePasswordCtrl?.touched) { @if (rePasswordCtrl?.getError("required")) {
+        <app-ctrl-error text="Confirm Password is required!" />
+        } @else if (registerForm.errors?.['misMatch']) {
+        <app-ctrl-error text="Password and Confirm Password are not matched!" />
+        } }
       </div>
     </div>
 
-    <button class="auth-btn">
-      {{ 'auth.register.create' | translate }}
-    </button>
+    <app-submit-btn
+      [isSubmitting]="isSubmitting()"
+      [label]="'auth.register.create' | translate"
+    />
 
     <hr class="text-zinc-400 my-5" />
 

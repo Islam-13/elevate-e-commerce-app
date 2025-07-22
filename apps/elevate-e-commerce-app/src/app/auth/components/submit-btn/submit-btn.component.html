@@ -1,0 +1,7 @@
+<button class="auth-btn" [disabled]="isSubmitting()">
+  @if(isSubmitting()) {
+  <i class="fa-solid fa-spinner animate-spin" aria-label="is submitting"></i>
+  } @else {
+  {{ label() }}
+  }
+</button>

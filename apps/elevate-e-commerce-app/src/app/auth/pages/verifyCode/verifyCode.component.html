@@ -1,0 +1,53 @@
+<div>
+  <h3 class="text-2xl font-semibold">
+    {{ 'auth.verifyCode.h' | translate }}
+  </h3>
+
+  <p class="text-sm">
+    {{ 'auth.verifyCode.p' | translate }}
+  </p>
+</div>
+
+<hr class="text-zinc-400 mb-6 mt-4" />
+
+@if(errorMsg()) {
+<app-err-msg [text]="errorMsg()" />
+}
+
+<form [formGroup]="verifyCodeForm" (ngSubmit)="onSubmit()">
+  <div
+    class="flex items-center justify-center gap-2.5"
+    formArrayName="resetCode"
+  >
+    @for (item of otpDigits; track $index) {
+    <div
+      class="w-[45px] aspect-square rounded-rd-sm border border-zinc-400 flex items-center justify-center"
+    >
+      <input
+        type="text"
+        maxlength="1"
+        class="block w-full h-full text-center"
+        [formControlName]="$index"
+        (input)="onOtpInput($event, $index)"
+        (keydown)="onKeyDown($event, $index)"
+      />
+    </div>
+    }
+  </div>
+
+  <div class="text-end px-5 py-3.5">
+    <button>{{ 'auth.verifyCode.sendCode' | translate }}</button>
+  </div>
+
+  <app-submit-btn
+    [isSubmitting]="isSubmitting()"
+    [label]="'auth.verifyCode.verifyBtn' | translate"
+  />
+
+  <hr class="text-zinc-400 my-5" />
+
+  <p class="text-center">
+    <span>{{ 'auth.needHelp' | translate }}</span>
+    <a class="text-main" href="">{{ 'auth.contact' | translate }}</a>
+  </p>
+</form>

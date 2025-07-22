@@ -21,7 +21,8 @@ import { provideStore } from '@ngrx/store';
 import { filterReduser } from './store/filter.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { FilterEffects } from './store/filter.effect';
-
+import { BASE_URL } from 'auth-apis';
+import { env } from '@env/env';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -31,23 +32,22 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAppInitializer(() => appInit()),
     provideHttpClient(withFetch()),
+    { provide: BASE_URL, useValue: env.baseURL },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideAnimationsAsync(),
     providePrimeNG(),
     importProvidersFrom([
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: httpLoaderFactory,
-                deps: [HttpClient],
-            },
-        }),
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: httpLoaderFactory,
+          deps: [HttpClient],
+        },
+      }),
     ]),
-    provideStore(
-      {filter : filterReduser}
-    ),
+    provideStore({ filter: filterReduser }),
     provideEffects(FilterEffects),
-],
+  ],
 };

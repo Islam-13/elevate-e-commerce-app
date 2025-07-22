@@ -23,6 +23,7 @@
     "@primeng/themes": "^19.1.2",
     "@tailwindcss/postcss": "^4.1.7",
     "animate.css": "^4.1.1",
+    "auth-apis": "^0.0.1",
     "express": "^4.21.2",
     "ngx-cookie-service-ssr": "^19.1.2",
     "ngx-owl-carousel-o": "^19.0.2",

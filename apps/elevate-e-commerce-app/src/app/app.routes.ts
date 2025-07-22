@@ -2,11 +2,12 @@ import { Route } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
+import { loggedUserGuard } from './auth/guards/loggedin.guard';
 
 export const appRoutes: Route[] = [
   {
     path: 'auth',
-
+    canActivate: [loggedUserGuard],
     component: AuthLayoutComponent,
     children: [
       {
@@ -26,9 +27,9 @@ export const appRoutes: Route[] = [
       {
         path: 'forget-password',
         loadComponent: () =>
-          import('./auth/pages/forget-password/forget-password.component').then(
-            (c) => c.ForgetPasswordComponent
-          ),
+          import(
+            './auth/pages/forget-password-steps/forget-password-steps.component'
+          ).then((c) => c.ForgetPasswordStepsComponent),
       },
     ],
   },

@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   inject,
+  OnInit,
   signal,
   viewChild,
 } from '@angular/core';
@@ -13,6 +14,7 @@ import { NavLink } from '@shared/interfaces/navbar';
 import { ThemeService } from '@shared/services/theme/theme.service';
 import { LogoComponent } from '../logo/logo.component';
 import { TranslateMangerService } from '@shared/services/translate/translate.service';
+import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +22,7 @@ import { TranslateMangerService } from '@shared/services/translate/translate.ser
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   navLinks: NavLink[] = [
     { name: 'navbar.navLink.home', url: '/' },
     { name: 'navbar.navLink.category', url: '/category' },
@@ -29,11 +31,18 @@ export class NavbarComponent {
   ];
 
   isOpen = signal<boolean>(false);
+  token = signal<boolean>(false);
 
   private header = viewChild<ElementRef<HTMLElement>>('header');
 
   _theme = inject(ThemeService);
   _lang = inject(TranslateMangerService);
+
+  private readonly _localStorage = inject(LocalStorageService);
+
+  ngOnInit(): void {
+    this.token.set(this._localStorage.get('userToken') ? true : false);
+  }
 
   @HostListener('document:click', ['$event']) detectClick(e: Event) {
     if (!this.header()?.nativeElement.contains(e.target as HTMLElement)) {
