@@ -6,17 +6,15 @@ import {
 } from '@angular/forms';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { timer } from 'rxjs';
 import { env } from '@env/env';
 import { BaseInputComponent } from '@shared/ui/base-input/base-input.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
-import { CtrlErrorComponent } from '../../components/ctrl-error/ctrl-error.component';
 import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.component';
 import { AuthApiService } from 'auth-apis';
-import { ToastService } from '@shared/services/toast/toast.service';
 import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
 import { equalValues } from '@shared/utils/validateRePassword';
+import { Message } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-password',
@@ -24,10 +22,9 @@ import { equalValues } from '@shared/utils/validateRePassword';
     TranslateModule,
     BaseInputComponent,
     ReactiveFormsModule,
-    ErrMsgComponent,
-    CtrlErrorComponent,
     SubmitBtnComponent,
     RouterLink,
+    Message,
   ],
   templateUrl: './updatePassword.component.html',
   styleUrl: './updatePassword.component.css',
@@ -39,7 +36,7 @@ export class UpdatePasswordComponent implements OnInit {
   errorMsg = signal<string>('');
 
   private readonly _authApi = inject(AuthApiService);
-  private readonly _toast = inject(ToastService);
+  private readonly _toast = inject(MessageService);
   private readonly _router = inject(Router);
   private readonly _localStorage = inject(LocalStorageService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -66,6 +63,15 @@ export class UpdatePasswordComponent implements OnInit {
     );
   }
 
+  showToast() {
+    this._toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Password has been reset successfully',
+      life: 4000,
+    });
+  }
+
   onSubmit() {
     if (this.resetForm.invalid) {
       this.resetForm.markAllAsTouched();
@@ -78,9 +84,7 @@ export class UpdatePasswordComponent implements OnInit {
         .resetPassword(this.resetForm.value)
         .subscribe({
           next: (res) => {
-            timer(4000).subscribe(() => this._toast.message.set(''));
-            this._toast.type.set('success');
-            this._toast.message.set('Password has been reset successfully!');
+            this.showToast();
 
             this._localStorage.set('userToken', res.token);
             sessionStorage.removeItem('forgetEmail');

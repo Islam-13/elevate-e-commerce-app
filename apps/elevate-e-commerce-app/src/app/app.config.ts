@@ -24,6 +24,9 @@ import { FilterEffects } from './store/filter.effect';
 import { BASE_URL } from 'auth-apis';
 import { env } from '@env/env';
 
+import Aura from '@primeng/themes/aura';
+import { MessageService } from 'primeng/api';
+
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
 ) => new TranslateHttpLoader(http, './i18n/', '.json');
@@ -37,7 +40,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideAnimationsAsync(),
-    providePrimeNG(),
+    providePrimeNG({ theme: { preset: Aura } }),
+    MessageService,
     importProvidersFrom([
       TranslateModule.forRoot({
         loader: {

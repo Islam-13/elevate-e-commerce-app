@@ -11,27 +11,22 @@
 <hr class="text-zinc-400 mb-6 mt-4" />
 
 @if(errorMsg()) {
-<app-err-msg [text]="errorMsg()" />
+<p-message severity="error" icon="pi pi-times-circle" styleClass="mb-4">{{
+  errorMsg()
+}}</p-message>
 }
 
 <form [formGroup]="verifyCodeForm" (ngSubmit)="onSubmit()">
-  <div
-    class="flex items-center justify-center gap-2.5"
-    formArrayName="resetCode"
-  >
-    @for (item of otpDigits; track $index) {
-    <div
-      class="w-[45px] aspect-square rounded-rd-sm border border-zinc-400 flex items-center justify-center"
-    >
-      <input
-        type="text"
-        maxlength="1"
-        class="block w-full h-full text-center"
-        [formControlName]="$index"
-        (input)="onOtpInput($event, $index)"
-        (keydown)="onKeyDown($event, $index)"
-      />
-    </div>
+  <div class="card flex flex-col gap-2 justify-center items-center">
+    @let verifyCtrl = verifyCodeForm.get("resetCode");
+
+    <p-inputotp [integerOnly]="true" formControlName="resetCode" [length]="6" />
+
+    @if (verifyCtrl?.errors && verifyCtrl?.touched) {
+    <p-message severity="error" variant="simple">
+      @if (verifyCtrl?.getError("required")) { Code is required!! } @else if
+      (verifyCtrl?.getError("pattern")) { Code must be 6 digits long!! }
+    </p-message>
     }
   </div>
 

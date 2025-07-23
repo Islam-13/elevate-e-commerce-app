@@ -8,14 +8,12 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { env } from '@env/env';
 import { TranslateModule } from '@ngx-translate/core';
-import { ToastService } from '@shared/services/toast/toast.service';
 import { BaseInputComponent } from '@shared/ui/base-input/base-input.component';
 import { equalValues } from '@shared/utils/validateRePassword';
 import { AuthApiService } from 'auth-apis';
-import { timer } from 'rxjs';
-import { CtrlErrorComponent } from '../../components/ctrl-error/ctrl-error.component';
 import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.component';
-import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
+import { Message } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -24,9 +22,8 @@ import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
     RouterLink,
     TranslateModule,
     ReactiveFormsModule,
-    CtrlErrorComponent,
     SubmitBtnComponent,
-    ErrMsgComponent,
+    Message,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -40,7 +37,7 @@ export class RegisterComponent implements OnInit {
   private _authApi = inject(AuthApiService);
   private _destroyRef = inject(DestroyRef);
   private _router = inject(Router);
-  private _toast = inject(ToastService);
+  private _toast = inject(MessageService);
 
   ngOnInit() {
     this.initForm();
@@ -79,6 +76,15 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  showToast() {
+    this._toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Account registered successfully',
+      life: 4000,
+    });
+  }
+
   register() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -91,9 +97,7 @@ export class RegisterComponent implements OnInit {
         .register(this.registerForm.value)
         .subscribe({
           next: () => {
-            timer(4000).subscribe(() => this._toast.message.set(''));
-            this._toast.type.set('success');
-            this._toast.message.set('Account registered successfully!');
+            this.showToast();
 
             this._router.navigate(['/auth/login']);
           },

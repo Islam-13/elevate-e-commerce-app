@@ -6,7 +6,9 @@
   <hr class="text-zinc-400 mb-6 mt-4" />
 
   @if(errorMsg()) {
-  <app-err-msg [text]="errorMsg()" />
+  <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-4">{{
+    errorMsg()
+  }}</p-message>
   }
 
   <form [formGroup]="registerForm" (ngSubmit)="register()">
@@ -22,13 +24,14 @@
             formControlName="firstName"
           />
 
-          @if (fNameCtrl?.errors && fNameCtrl?.touched) { @if
-          (fNameCtrl?.getError("required")) {
-          <app-ctrl-error text="First Name is required!" />
-          } @else if (fNameCtrl?.getError("minlength") ||
-          fNameCtrl?.getError("maxlength")) {
-          <app-ctrl-error text="At least 3 chars and up to 15 chars long." />
-          } }
+          @if (fNameCtrl?.errors && fNameCtrl?.touched) {
+          <p-message severity="error" variant="simple">
+            @if (fNameCtrl?.getError("required")) { First name is required!! }
+            @else if (fNameCtrl?.getError("minlength") ||
+            fNameCtrl?.getError("maxlength")) { At least 3 chars and up to 15
+            chars long. }
+          </p-message>
+          }
         </div>
 
         <div>
@@ -41,13 +44,14 @@
             formControlName="lastName"
           />
 
-          @if (lNameCtrl?.errors && lNameCtrl?.touched) { @if
-          (lNameCtrl?.getError("required")) {
-          <app-ctrl-error text="Last Name is required!" />
-          } @else if (lNameCtrl?.getError("minlength") ||
-          lNameCtrl?.getError("maxlength")) {
-          <app-ctrl-error text="At least 3 chars and up to 15 chars long." />
-          } }
+          @if (lNameCtrl?.errors && lNameCtrl?.touched) {
+          <p-message severity="error" variant="simple">
+            @if (lNameCtrl?.getError("required")) { Last name is required!! }
+            @else if (lNameCtrl?.getError("minlength") ||
+            lNameCtrl?.getError("maxlength")) { At least 3 chars and up to 15
+            chars long. }
+          </p-message>
+          }
         </div>
       </div>
 
@@ -61,12 +65,12 @@
           formControlName="email"
         />
 
-        @if (emailCtrl?.errors && emailCtrl?.touched) { @if
-        (emailCtrl?.getError("required")) {
-        <app-ctrl-error text="Email is required!" />
-        } @else if (emailCtrl?.getError("email")) {
-        <app-ctrl-error text="Email is invalid!" />
-        } }
+        @if (emailCtrl?.errors && emailCtrl?.touched) {
+        <p-message severity="error" variant="simple">
+          @if (emailCtrl?.getError("required")) { Email is required!! } @else if
+          (emailCtrl?.getError("email")) { Email is invalid! }
+        </p-message>
+        }
       </div>
 
       <div>
@@ -75,16 +79,16 @@
         <app-base-input
           [label]="'auth.input.phone' | translate"
           type="tel"
-          placeholder="01012345678"
+          placeholder="+201012345678"
           formControlName="phone"
         />
 
-        @if (phoneCtrl?.errors && phoneCtrl?.touched) { @if
-        (phoneCtrl?.getError("required")) {
-        <app-ctrl-error text="Phone is required!" />
-        } @else if (phoneCtrl?.getError("pattern")) {
-        <app-ctrl-error text="Invalid phone number." />
-        } }
+        @if (phoneCtrl?.errors && phoneCtrl?.touched) {
+        <p-message severity="error" variant="simple">
+          @if (phoneCtrl?.getError("required")) { Phone is required!! } @else if
+          (phoneCtrl?.getError("pattern")) { Phone number must start with +20 }
+        </p-message>
+        }
       </div>
 
       <div>
@@ -104,7 +108,9 @@
 
         @if (genderdCtrl?.errors && genderdCtrl?.touched) { @if
         (genderdCtrl?.getError("required")) {
-        <app-ctrl-error text="Gender is required!" />
+        <p-message severity="error" variant="simple">
+          Gender is required!!
+        </p-message>
         } }
       </div>
 
@@ -118,12 +124,13 @@
           formControlName="password"
         />
 
-        @if (passwordCtrl?.errors && passwordCtrl?.touched) { @if
-        (passwordCtrl?.getError("required")) {
-        <app-ctrl-error text="Password is required!" />
-        } @else if (passwordCtrl?.getError("pattern")) {
-        <app-ctrl-error text="Password is required! bla bla" />
-        } }
+        @if (passwordCtrl?.errors && passwordCtrl?.touched) {
+        <p-message severity="error" variant="simple">
+          @if (passwordCtrl?.getError("required")) { Password is required!! }
+          @else if (passwordCtrl?.getError("pattern")) { Password must have
+          atleast one uppercase, lowercase, number and special char!! }
+        </p-message>
+        }
       </div>
 
       <div>
@@ -137,11 +144,13 @@
         />
 
         @if ((registerForm.errors?.['misMatch'] || rePasswordCtrl?.errors) &&
-        rePasswordCtrl?.touched) { @if (rePasswordCtrl?.getError("required")) {
-        <app-ctrl-error text="Confirm Password is required!" />
-        } @else if (registerForm.errors?.['misMatch']) {
-        <app-ctrl-error text="Password and Confirm Password are not matched!" />
-        } }
+        rePasswordCtrl?.touched) {
+        <p-message severity="error" variant="simple">
+          @if (rePasswordCtrl?.getError("required")) { Confirm Password is
+          required!! } @else if (registerForm.errors?.['misMatch']) { Password
+          and Confirm Password are not matched!! }
+        </p-message>
+        }
       </div>
     </div>
 

@@ -7,7 +7,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  FormArray,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -17,10 +16,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.component';
 import { env } from '@env/env';
 import { AuthApiService } from 'auth-apis';
-import { ToastService } from '@shared/services/toast/toast.service';
-import { Router } from '@angular/router';
-import { timer } from 'rxjs';
-import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
+import { Message } from 'primeng/message';
+import { MessageService } from 'primeng/api';
+
+import { InputOtpModule } from 'primeng/inputotp';
 
 @Component({
   selector: 'app-verify-code',
@@ -28,7 +27,8 @@ import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
     TranslateModule,
     ReactiveFormsModule,
     SubmitBtnComponent,
-    ErrMsgComponent,
+    Message,
+    InputOtpModule,
   ],
   templateUrl: './verifyCode.component.html',
   styleUrl: './verifyCode.component.css',
@@ -44,8 +44,7 @@ export class VerifyCodeComponent implements OnInit {
   steps = output();
 
   private readonly _authApi = inject(AuthApiService);
-  private readonly _toast = inject(ToastService);
-  private readonly _router = inject(Router);
+  private readonly _toast = inject(MessageService);
   private readonly _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
@@ -54,74 +53,23 @@ export class VerifyCodeComponent implements OnInit {
 
   initForm() {
     this.verifyCodeForm = new FormGroup({
-      resetCode: new FormArray([
-        new FormControl('', [
-          Validators.maxLength(1),
-          Validators.pattern(env.otpRG),
-        ]),
-        new FormControl('', [
-          Validators.maxLength(1),
-          Validators.pattern(env.otpRG),
-        ]),
-        new FormControl('', [
-          Validators.maxLength(1),
-          Validators.pattern(env.otpRG),
-        ]),
-        new FormControl('', [
-          Validators.maxLength(1),
-          Validators.pattern(env.otpRG),
-        ]),
-        new FormControl('', [
-          Validators.maxLength(1),
-          Validators.pattern(env.otpRG),
-        ]),
-        new FormControl('', [
-          Validators.maxLength(1),
-          Validators.pattern(env.otpRG),
-        ]),
+      resetCode: new FormControl('', [
+        Validators.required,
+        Validators.pattern(env.otpRG),
       ]),
     });
   }
 
-  onOtpInput(e: any, i: number) {
-    const value = e.target.value;
-
-    if (!env.otpRG.test(value) && value !== '') {
-      e.target.value = '';
-      return;
-    }
-
-    if (value && i < 5) {
-      const nextInput = e.target.parentElement.nextElementSibling.children[0];
-
-      nextInput?.focus();
-    }
-  }
-
-  onKeyDown(e: any, i: number) {
-    if (e.key === 'Backspace' && !e.target.value && i > 0) {
-      const prevInput =
-        e.target.parentElement.previousElementSibling.children[0];
-
-      prevInput?.focus();
-    }
-
-    if (e.key === 'ArrowLeft' && i > 0) {
-      const prevInput =
-        e.target.parentElement.previousElementSibling.children[0];
-      prevInput?.focus();
-    }
-
-    if (e.key === 'ArrowRight' && i < 5) {
-      const nextInput = e.target.parentElement.nextElementSibling.children[0];
-      nextInput?.focus();
-    }
+  showToast() {
+    this._toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Code verified successfully',
+      life: 4000,
+    });
   }
 
   onSubmit() {
-    const payload = { resetCode: this.verifyCodeForm.value.resetCode.join('') };
-    console.log(payload);
-
     if (this.verifyCodeForm.invalid) {
       this.verifyCodeForm.markAllAsTouched();
       return;
@@ -129,23 +77,23 @@ export class VerifyCodeComponent implements OnInit {
       this.isSubmitting.set(true);
       this.errorMsg.set('');
 
-      const subscription = this._authApi.verifyCode(payload).subscribe({
-        next: () => {
-          timer(4000).subscribe(() => this._toast.message.set(''));
-          this._toast.type.set('success');
-          this._toast.message.set('Code verified successfully!');
+      const subscription = this._authApi
+        .verifyCode(this.verifyCodeForm.value)
+        .subscribe({
+          next: () => {
+            this.showToast();
 
-          this.steps.emit();
-        },
-        error: (err) => {
-          this.isSubmitting.set(false);
-          this.errorMsg.set(err.message);
-        },
-        complete: () => {
-          this.verifyCodeForm.reset();
-          this.isSubmitting.set(false);
-        },
-      });
+            this.steps.emit();
+          },
+          error: (err) => {
+            this.isSubmitting.set(false);
+            this.errorMsg.set(err.message);
+          },
+          complete: () => {
+            this.verifyCodeForm.reset();
+            this.isSubmitting.set(false);
+          },
+        });
 
       this._destroyRef.onDestroy(() => subscription.unsubscribe());
     }
