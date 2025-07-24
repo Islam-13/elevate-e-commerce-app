@@ -1,0 +1,16 @@
+  bugFix/ngrx-files       [m c043ae2 finshed all edits
+  feature/categories      [m fc688fd [ahead 1, behind 3] finish categories
+  feature/categories-c    [m 71323f6 [behind 3] Merge branch 'feature/categories-c' of https://github.com/Islam-13/elevate-e-commerce-app into feature/categories-c
+  feature/filtration      [m 1a83674 [ahead 2] new update in ngrx
+  feature/finish-category [m 24d2403 finish popular-items and categories
+  feature/gallery         [m 56a7822 Add heading class to h1 for Drk Mode
+  feature/ngrx            [m ba6465f NGRX files have been modified
+  feature/ngrx-files      [m c043ae2 finshed all edits
+  feature/ngrx-filtering  [m 8f3523a [ahead 8] related-products
+  feature/ngrx-filtration [m e3148d1 feat(filter): implement product filtering using NgRx store
+  feature/popular-items   [m 0c65be3 [ahead 1] finished gallary
+* [32mfeature/related-products[m a7bf068 Merge pull request #36 from Islam-13/featuers/auth-functionality
+  featurs/categories-b    [m e4ce3fb [behind 24] finsh categories
+  fix/gallery             [m 62034e8 createated the ngrx files
+  fix/galll]              [m 68d1d80 finished gallery
+  main                    [m a7bf068 Merge pull request #36 from Islam-13/featuers/auth-functionality

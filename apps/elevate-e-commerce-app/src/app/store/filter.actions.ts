@@ -36,3 +36,4 @@ export const loadSelectedRating= createAction(
 export const ApplyFilters = createAction("[FILTER] Apply Filters");
 
 export const clearAllFilters = createAction("[FILTER] Clear All Filters");
+

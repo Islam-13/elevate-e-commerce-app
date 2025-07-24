@@ -87,6 +87,6 @@ export class AllproductsComponent implements OnInit {
   });
 
   sortProducts(option: string): void {
-    this.selectedSortOption.set(option); 
+    this.selectedSortOption.set(option);
   }
 }

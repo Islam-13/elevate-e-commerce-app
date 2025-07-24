@@ -1,0 +1,30 @@
+h1 {
+  position: relative;
+  z-index: 3;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 22%;
+  height: 2px;
+  background-color: var(--color-main);
+  display: block;
+  z-index: 2;
+}
+
+h1::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px ;
+  bottom: 0;
+  width: 55%;
+  height: 20px;
+  background-color: rgba(254, 237, 247, 01);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  z-index: -1;
+}

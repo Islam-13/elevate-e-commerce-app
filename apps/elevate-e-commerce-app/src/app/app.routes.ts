@@ -1,8 +1,8 @@
 import { Route } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
+import { HomeComponent } from './pages/home/home.component';
 import { loggedUserGuard } from './auth/guards/loggedin.guard';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 export const appRoutes: Route[] = [
   {
@@ -45,7 +45,13 @@ export const appRoutes: Route[] = [
             (c) => c.CategoryComponent
           ),
       },
+      {
+        path: 'product-details/:id',
+        loadComponent: () =>
+          import('./pages/product-details/product-details.component').then(
+            (c) => c.ProductDetailsComponent
+          ),
+      },
     ],
   },
-  {path:"product-details/:id",loadComponent:()=>import("./pages/product-details/product-details.component").then(c=>c.ProductDetailsComponent)},
 ];
