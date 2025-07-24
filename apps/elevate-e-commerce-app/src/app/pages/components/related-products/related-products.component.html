@@ -25,9 +25,9 @@
       } @else {
         <ng-container>
           @if (relatedProducts().length === 0) {
-            <div class="text-2xl text-gray-800 col-span-full">
-          No Data Available 🙃
-        </div>
+            <h2 class="text-2xl text-gray-800 col-span-full">
+        {{ 'home.RelatedProducts.h2' | translate }}
+        </h2>
           }
           @for (p of relatedProducts(); track $index) {
             <app-card
