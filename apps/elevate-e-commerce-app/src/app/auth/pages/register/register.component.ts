@@ -14,6 +14,7 @@ import { AuthApiService } from 'auth-apis';
 import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.component';
 import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +25,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     SubmitBtnComponent,
     Message,
+    CtrlErrComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',

@@ -20,6 +20,7 @@ import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 
 import { InputOtpModule } from 'primeng/inputotp';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-verify-code',
@@ -29,6 +30,7 @@ import { InputOtpModule } from 'primeng/inputotp';
     SubmitBtnComponent,
     Message,
     InputOtpModule,
+    CtrlErrComponent,
   ],
   templateUrl: './verifyCode.component.html',
   styleUrl: './verifyCode.component.css',

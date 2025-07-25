@@ -19,6 +19,7 @@ import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.compo
 import { AuthApiService } from 'auth-apis';
 import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-forget-password',
@@ -29,6 +30,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     SubmitBtnComponent,
     Message,
+    CtrlErrComponent,
   ],
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.css',

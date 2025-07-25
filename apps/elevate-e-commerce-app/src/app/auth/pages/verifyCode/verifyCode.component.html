@@ -22,12 +22,12 @@
 
     <p-inputotp [integerOnly]="true" formControlName="resetCode" [length]="6" />
 
-    @if (verifyCtrl?.errors && verifyCtrl?.touched) {
-    <p-message severity="error" variant="simple">
-      @if (verifyCtrl?.getError("required")) { Code is required!! } @else if
-      (verifyCtrl?.getError("pattern")) { Code must be 6 digits long!! }
-    </p-message>
-    }
+    <app-ctrl-err
+      [inputCtrl]="verifyCtrl"
+      validation="pattern"
+      msg1="Code"
+      msg2="Code must be 6 digits long!!"
+    />
   </div>
 
   <div class="text-end px-5 py-3.5">

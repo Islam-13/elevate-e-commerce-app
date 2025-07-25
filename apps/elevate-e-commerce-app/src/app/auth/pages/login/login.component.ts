@@ -17,6 +17,7 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 
 import { PasswordModule } from 'primeng/password';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ import { PasswordModule } from 'primeng/password';
     SubmitBtnComponent,
     MessageModule,
     PasswordModule,
+    CtrlErrComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

@@ -24,14 +24,12 @@
             formControlName="firstName"
           />
 
-          @if (fNameCtrl?.errors && fNameCtrl?.touched) {
-          <p-message severity="error" variant="simple">
-            @if (fNameCtrl?.getError("required")) { First name is required!! }
-            @else if (fNameCtrl?.getError("minlength") ||
-            fNameCtrl?.getError("maxlength")) { At least 3 chars and up to 15
-            chars long. }
-          </p-message>
-          }
+          <app-ctrl-err
+            [inputCtrl]="fNameCtrl"
+            msg1="First name"
+            validation="minlength"
+            msg2="At least 3 chars and up to 15 chars long!!"
+          />
         </div>
 
         <div>
@@ -44,14 +42,12 @@
             formControlName="lastName"
           />
 
-          @if (lNameCtrl?.errors && lNameCtrl?.touched) {
-          <p-message severity="error" variant="simple">
-            @if (lNameCtrl?.getError("required")) { Last name is required!! }
-            @else if (lNameCtrl?.getError("minlength") ||
-            lNameCtrl?.getError("maxlength")) { At least 3 chars and up to 15
-            chars long. }
-          </p-message>
-          }
+          <app-ctrl-err
+            [inputCtrl]="lNameCtrl"
+            msg1="Last name"
+            validation="minlength"
+            msg2="At least 3 chars and up to 15 chars long!!"
+          />
         </div>
       </div>
 
@@ -65,12 +61,12 @@
           formControlName="email"
         />
 
-        @if (emailCtrl?.errors && emailCtrl?.touched) {
-        <p-message severity="error" variant="simple">
-          @if (emailCtrl?.getError("required")) { Email is required!! } @else if
-          (emailCtrl?.getError("email")) { Email is invalid! }
-        </p-message>
-        }
+        <app-ctrl-err
+          [inputCtrl]="emailCtrl"
+          msg1="Email"
+          validation="email"
+          msg2="Email is invalid!!"
+        />
       </div>
 
       <div>
@@ -83,12 +79,12 @@
           formControlName="phone"
         />
 
-        @if (phoneCtrl?.errors && phoneCtrl?.touched) {
-        <p-message severity="error" variant="simple">
-          @if (phoneCtrl?.getError("required")) { Phone is required!! } @else if
-          (phoneCtrl?.getError("pattern")) { Phone number must start with +20 }
-        </p-message>
-        }
+        <app-ctrl-err
+          [inputCtrl]="phoneCtrl"
+          msg1="Phone"
+          validation="pattern"
+          msg2="Phone number must start with +20 !!"
+        />
       </div>
 
       <div>
@@ -106,12 +102,12 @@
           <option value="female">Female</option>
         </select>
 
-        @if (genderdCtrl?.errors && genderdCtrl?.touched) { @if
-        (genderdCtrl?.getError("required")) {
-        <p-message severity="error" variant="simple">
-          Gender is required!!
-        </p-message>
-        } }
+        <app-ctrl-err
+          [inputCtrl]="genderdCtrl"
+          validation="pattern"
+          msg1="Gender"
+          msg2="Invalid option!!"
+        />
       </div>
 
       <div>
@@ -124,13 +120,12 @@
           formControlName="password"
         />
 
-        @if (passwordCtrl?.errors && passwordCtrl?.touched) {
-        <p-message severity="error" variant="simple">
-          @if (passwordCtrl?.getError("required")) { Password is required!! }
-          @else if (passwordCtrl?.getError("pattern")) { Password must have
-          atleast one uppercase, lowercase, number and special char!! }
-        </p-message>
-        }
+        <app-ctrl-err
+          [inputCtrl]="passwordCtrl"
+          validation="pattern"
+          msg1="Password"
+          msg2="Password must have atleast one uppercase, lowercase, number and special char!!"
+        />
       </div>
 
       <div>
@@ -143,14 +138,12 @@
           formControlName="rePassword"
         />
 
-        @if ((registerForm.errors?.['misMatch'] || rePasswordCtrl?.errors) &&
-        rePasswordCtrl?.touched) {
-        <p-message severity="error" variant="simple">
-          @if (rePasswordCtrl?.getError("required")) { Confirm Password is
-          required!! } @else if (registerForm.errors?.['misMatch']) { Password
-          and Confirm Password are not matched!! }
-        </p-message>
-        }
+        <app-ctrl-err
+          [inputCtrl]="rePasswordCtrl"
+          validation="misMatch"
+          msg1="Confirm password"
+          msg2="Password and Confirm Password are not matched!!"
+        />
       </div>
     </div>
 

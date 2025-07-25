@@ -15,6 +15,7 @@ import { LocalStorageService } from '@shared/services/localStorage/local-storage
 import { equalValues } from '@shared/utils/validateRePassword';
 import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-update-password',
@@ -25,6 +26,7 @@ import { MessageService } from 'primeng/api';
     SubmitBtnComponent,
     RouterLink,
     Message,
+    CtrlErrComponent,
   ],
   templateUrl: './updatePassword.component.html',
   styleUrl: './updatePassword.component.css',
