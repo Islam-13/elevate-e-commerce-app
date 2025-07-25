@@ -6,7 +6,9 @@
   <hr class="text-zinc-400 mb-6 mt-4" />
 
   @if(errorMsg()) {
-  <app-err-msg [text]="errorMsg()" />
+  <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-4">{{
+    errorMsg()
+  }}</p-message>
   }
 
   <form [formGroup]="registerForm" (ngSubmit)="register()">
@@ -22,13 +24,12 @@
             formControlName="firstName"
           />
 
-          @if (fNameCtrl?.errors && fNameCtrl?.touched) { @if
-          (fNameCtrl?.getError("required")) {
-          <app-ctrl-error text="First Name is required!" />
-          } @else if (fNameCtrl?.getError("minlength") ||
-          fNameCtrl?.getError("maxlength")) {
-          <app-ctrl-error text="At least 3 chars and up to 15 chars long." />
-          } }
+          <app-ctrl-err
+            [inputCtrl]="fNameCtrl"
+            msg1="First name"
+            validation="minlength"
+            msg2="At least 3 chars and up to 15 chars long!!"
+          />
         </div>
 
         <div>
@@ -41,13 +42,12 @@
             formControlName="lastName"
           />
 
-          @if (lNameCtrl?.errors && lNameCtrl?.touched) { @if
-          (lNameCtrl?.getError("required")) {
-          <app-ctrl-error text="Last Name is required!" />
-          } @else if (lNameCtrl?.getError("minlength") ||
-          lNameCtrl?.getError("maxlength")) {
-          <app-ctrl-error text="At least 3 chars and up to 15 chars long." />
-          } }
+          <app-ctrl-err
+            [inputCtrl]="lNameCtrl"
+            msg1="Last name"
+            validation="minlength"
+            msg2="At least 3 chars and up to 15 chars long!!"
+          />
         </div>
       </div>
 
@@ -61,12 +61,12 @@
           formControlName="email"
         />
 
-        @if (emailCtrl?.errors && emailCtrl?.touched) { @if
-        (emailCtrl?.getError("required")) {
-        <app-ctrl-error text="Email is required!" />
-        } @else if (emailCtrl?.getError("email")) {
-        <app-ctrl-error text="Email is invalid!" />
-        } }
+        <app-ctrl-err
+          [inputCtrl]="emailCtrl"
+          msg1="Email"
+          validation="email"
+          msg2="Email is invalid!!"
+        />
       </div>
 
       <div>
@@ -75,16 +75,16 @@
         <app-base-input
           [label]="'auth.input.phone' | translate"
           type="tel"
-          placeholder="01012345678"
+          placeholder="+201012345678"
           formControlName="phone"
         />
 
-        @if (phoneCtrl?.errors && phoneCtrl?.touched) { @if
-        (phoneCtrl?.getError("required")) {
-        <app-ctrl-error text="Phone is required!" />
-        } @else if (phoneCtrl?.getError("pattern")) {
-        <app-ctrl-error text="Invalid phone number." />
-        } }
+        <app-ctrl-err
+          [inputCtrl]="phoneCtrl"
+          msg1="Phone"
+          validation="pattern"
+          msg2="Phone number must start with +20 !!"
+        />
       </div>
 
       <div>
@@ -102,10 +102,12 @@
           <option value="female">Female</option>
         </select>
 
-        @if (genderdCtrl?.errors && genderdCtrl?.touched) { @if
-        (genderdCtrl?.getError("required")) {
-        <app-ctrl-error text="Gender is required!" />
-        } }
+        <app-ctrl-err
+          [inputCtrl]="genderdCtrl"
+          validation="pattern"
+          msg1="Gender"
+          msg2="Invalid option!!"
+        />
       </div>
 
       <div>
@@ -118,12 +120,12 @@
           formControlName="password"
         />
 
-        @if (passwordCtrl?.errors && passwordCtrl?.touched) { @if
-        (passwordCtrl?.getError("required")) {
-        <app-ctrl-error text="Password is required!" />
-        } @else if (passwordCtrl?.getError("pattern")) {
-        <app-ctrl-error text="Password is required! bla bla" />
-        } }
+        <app-ctrl-err
+          [inputCtrl]="passwordCtrl"
+          validation="pattern"
+          msg1="Password"
+          msg2="Password must have atleast one uppercase, lowercase, number and special char!!"
+        />
       </div>
 
       <div>
@@ -136,12 +138,12 @@
           formControlName="rePassword"
         />
 
-        @if ((registerForm.errors?.['misMatch'] || rePasswordCtrl?.errors) &&
-        rePasswordCtrl?.touched) { @if (rePasswordCtrl?.getError("required")) {
-        <app-ctrl-error text="Confirm Password is required!" />
-        } @else if (registerForm.errors?.['misMatch']) {
-        <app-ctrl-error text="Password and Confirm Password are not matched!" />
-        } }
+        <app-ctrl-err
+          [inputCtrl]="rePasswordCtrl"
+          validation="misMatch"
+          msg1="Confirm password"
+          msg2="Password and Confirm Password are not matched!!"
+        />
       </div>
     </div>
 

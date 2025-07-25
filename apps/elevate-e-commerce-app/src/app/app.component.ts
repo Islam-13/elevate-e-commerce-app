@@ -1,16 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ToastService } from '@shared/services/toast/toast.service';
-import { ToastComponent } from '@shared/ui/toast/toast.component';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  imports: [RouterOutlet, ToastComponent],
+  imports: [RouterOutlet, ToastModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Rose | e-commerce';
-
-  _toast = inject(ToastService);
 }

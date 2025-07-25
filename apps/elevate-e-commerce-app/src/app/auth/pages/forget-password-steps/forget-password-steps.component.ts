@@ -23,7 +23,7 @@ export class ForgetPasswordStepsComponent implements OnInit {
   currentStep!: TemplateRef<any>;
 
   ngOnInit() {
-    this.currentStep = this.otpStep();
+    this.currentStep = this.emailStep();
   }
 
   onEmail() {

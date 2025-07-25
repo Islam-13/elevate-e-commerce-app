@@ -9,13 +9,15 @@ import { Router, RouterLink } from '@angular/router';
 import { env } from '@env/env';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseInputComponent } from '@shared/ui/base-input/base-input.component';
-import { CtrlErrorComponent } from '../../components/ctrl-error/ctrl-error.component';
 import { AuthApiService } from 'auth-apis';
 import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.component';
-import { timer } from 'rxjs';
-import { ToastService } from '@shared/services/toast/toast.service';
-import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
 import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
+
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
+
+import { PasswordModule } from 'primeng/password';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +26,10 @@ import { LocalStorageService } from '@shared/services/localStorage/local-storage
     RouterLink,
     TranslateModule,
     ReactiveFormsModule,
-    CtrlErrorComponent,
     SubmitBtnComponent,
-    ErrMsgComponent,
+    MessageModule,
+    PasswordModule,
+    CtrlErrComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -38,10 +41,10 @@ export class LoginComponent implements OnInit {
   errorMsg = signal<string>('');
 
   private readonly _authApi = inject(AuthApiService);
-  private readonly _toast = inject(ToastService);
   private readonly _router = inject(Router);
   private readonly _localStorage = inject(LocalStorageService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _toast = inject(MessageService);
 
   ngOnInit() {
     this.initForm();
@@ -57,6 +60,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  showToast() {
+    this._toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Logged in successfully',
+      life: 4000,
+    });
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -67,9 +79,7 @@ export class LoginComponent implements OnInit {
 
       const subscription = this._authApi.login(this.loginForm.value).subscribe({
         next: (res) => {
-          timer(4000).subscribe(() => this._toast.message.set(''));
-          this._toast.type.set('success');
-          this._toast.message.set('Logged in successfully!');
+          this.showToast();
 
           this._localStorage.set('userToken', res.token);
 

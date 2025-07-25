@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
+@import 'primeicons/primeicons.css';
 
 @font-face {
   font-family: 'Inter';
@@ -98,7 +99,7 @@ button {
 }
 
 .auth-btn {
-  @apply w-full bg-main rounded-rd-sm py-2.5 text-zinc-700 my-9 disabled:cursor-not-allowed disabled:opacity-65;
+  @apply w-full bg-main rounded-rd-sm py-2.5 text-white my-9 disabled:cursor-not-allowed disabled:opacity-65;
 }
 
 .icon {

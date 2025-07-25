@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ErrMsgComponent } from './err-msg.component';
+import { CtrlErrComponent } from './ctrl-err.component';
 
-describe('ErrMsgComponent', () => {
-  let component: ErrMsgComponent;
-  let fixture: ComponentFixture<ErrMsgComponent>;
+describe('CtrlErrComponent', () => {
+  let component: CtrlErrComponent;
+  let fixture: ComponentFixture<CtrlErrComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ErrMsgComponent],
+      imports: [CtrlErrComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ErrMsgComponent);
+    fixture = TestBed.createComponent(CtrlErrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

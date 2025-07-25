@@ -8,19 +8,18 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { BaseInputComponent } from '@shared/ui/base-input/base-input.component';
-import { CtrlErrorComponent } from '../../components/ctrl-error/ctrl-error.component';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { BaseInputComponent } from '@shared/ui/base-input/base-input.component';
 import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.component';
 import { AuthApiService } from 'auth-apis';
-import { timer } from 'rxjs';
-import { ToastService } from '@shared/services/toast/toast.service';
-import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
+import { Message } from 'primeng/message';
+import { MessageService } from 'primeng/api';
+import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 
 @Component({
   selector: 'app-forget-password',
@@ -28,10 +27,10 @@ import { ErrMsgComponent } from '../../components/err-msg/err-msg.component';
     BaseInputComponent,
     RouterLink,
     TranslateModule,
-    CtrlErrorComponent,
     ReactiveFormsModule,
     SubmitBtnComponent,
-    ErrMsgComponent,
+    Message,
+    CtrlErrComponent,
   ],
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.css',
@@ -45,7 +44,7 @@ export class ForgetPasswordComponent implements OnInit {
   steps = output();
 
   private readonly _authApi = inject(AuthApiService);
-  private readonly _toast = inject(ToastService);
+  private readonly _toast = inject(MessageService);
   private readonly _destroyRef = inject(DestroyRef);
 
   ngOnInit() {
@@ -55,6 +54,15 @@ export class ForgetPasswordComponent implements OnInit {
   initForm() {
     this.forgetPasswordForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
+    });
+  }
+
+  showToast() {
+    this._toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Code sent successfully',
+      life: 4000,
     });
   }
 
@@ -70,9 +78,7 @@ export class ForgetPasswordComponent implements OnInit {
         .forgetPassword(this.forgetPasswordForm.value)
         .subscribe({
           next: () => {
-            timer(4000).subscribe(() => this._toast.message.set(''));
-            this._toast.type.set('success');
-            this._toast.message.set('Code sent successfully!');
+            this.showToast();
 
             this.steps.emit();
 

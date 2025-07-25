@@ -1,0 +1,7 @@
+@if (inputCtrl()?.errors && inputCtrl()?.touched) {
+<p-message severity="error" variant="simple">
+  @if (inputCtrl()?.getError("required")) {
+  {{ msg1() }} is required!! } @else if (inputCtrl()?.getError(validation())) {
+  {{ msg2() }} }
+</p-message>
+}

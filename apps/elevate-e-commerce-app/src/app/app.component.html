@@ -1,5 +1,8 @@
-@if (_toast.message()) {
-<app-toast [message]="_toast.message()" [type]="_toast.type()" />
-}
+<p-toast
+  [showTransitionOptions]="'250ms'"
+  [showTransformOptions]="'translateX(100%)'"
+  [hideTransitionOptions]="'150ms'"
+  [hideTransformOptions]="'translateX(100%)'"
+/>
 
 <router-outlet />

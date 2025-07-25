@@ -5,5 +5,5 @@ export const env = {
 
   PhoneRG: /^\+201[0125][0-9]{8}$/,
 
-  otpRG: /^\d+$/,
+  otpRG: /^\d{6}/,
 };
