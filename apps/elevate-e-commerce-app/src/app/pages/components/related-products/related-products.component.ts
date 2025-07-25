@@ -34,7 +34,6 @@ export class RelatedProductsComponent implements OnInit {
   allShown = false;
   noData: WritableSignal<boolean> = signal(false);
 
-
   relatedProducts = signal<RelatedProduct[]>([]);
   isLoading = signal<boolean>(false);
   error = signal<string>('');
@@ -43,53 +42,36 @@ export class RelatedProductsComponent implements OnInit {
   private readonly _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.getRelatedProducts();
+    this.loadRelatedProducts();
   }
 
-getRelatedProducts() {
-  this.isLoading.set(true);
-  this.error.set('');
-  if (!this.productId) {
-    this.error.set('No product ID provided!');
-    this.isLoading.set(false);
-    return;
-  }
-  const subscription = this._relatedProductsService.getRelatedProducts(this.productId).subscribe({
-    next: (res) => this.relatedProducts.set(res.slice(0, 4)),
-    error: (err) => {
+  loadRelatedProducts(showAll = false) {
+    this.isLoading.set(true);
+    this.error.set('');
+
+    if (!this.productId) {
+      this.error.set('No product ID provided!');
       this.isLoading.set(false);
-      this.error.set(err);
-    },
-    complete: () => this.isLoading.set(false),
-  });
-  this._destroyRef.onDestroy(() => subscription.unsubscribe());
-}
+      return;
+    }
 
-getAllRelatedProducts() {
-  this.isLoading.set(true);
-  this.error.set('');
-  if (!this.productId) {
-    this.error.set('No product ID provided!');
-    this.isLoading.set(false);
-    return;
+    const subscription = this._relatedProductsService.getRelatedProducts(this.productId).subscribe({
+      next: (res) => {
+        const products = showAll ? res : res.slice(0, 4);
+        this.relatedProducts.set(products);
+        this.allShown = showAll;
+      },
+      error: (err) => {
+        this.isLoading.set(false);
+        this.error.set(err);
+      },
+      complete: () => this.isLoading.set(false),
+    });
+
+    this._destroyRef.onDestroy(() => subscription.unsubscribe());
   }
-  const subscription = this._relatedProductsService.getRelatedProducts(this.productId).subscribe({
-    next: (res) => this.relatedProducts.set(res),
-    error: (err) => {
-      this.isLoading.set(false);
-      this.error.set(err);
-    },
-    complete: () => this.isLoading.set(false),
-  });
 
-  this._destroyRef.onDestroy(() => subscription.unsubscribe());
-}
   products() {
     return this.relatedProducts();
   }
 }
-
-
-
-
-
