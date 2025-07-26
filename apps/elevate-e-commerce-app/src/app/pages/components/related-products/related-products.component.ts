@@ -3,7 +3,6 @@ import {
   DestroyRef,
   Input,
   OnInit,
-  WritableSignal,
   inject,
   signal
 } from '@angular/core';
@@ -32,7 +31,6 @@ export class RelatedProductsComponent implements OnInit {
 
   @Input() productId!: string;
   allShown = false;
-  noData: WritableSignal<boolean> = signal(false);
 
   relatedProducts = signal<RelatedProduct[]>([]);
   isLoading = signal<boolean>(false);
@@ -61,9 +59,9 @@ export class RelatedProductsComponent implements OnInit {
         this.relatedProducts.set(products);
         this.allShown = showAll;
       },
-      error: (err) => {
+      error: (err: any) => {
         this.isLoading.set(false);
-        this.error.set(err);
+        this.error.set(err?.message || 'An error occurred');
       },
       complete: () => this.isLoading.set(false),
     });
