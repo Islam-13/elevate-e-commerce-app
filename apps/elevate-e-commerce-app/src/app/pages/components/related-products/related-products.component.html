@@ -1,0 +1,47 @@
+<section class="my-6 lg:my-8 mx-4 lg:mx-20">
+  <div class="wrapper">
+    <div class="title flex flex-row items-center justify-between mr-3 mb-6">
+      <h1 class="heading ml-28 sm:ml-3 mb-0">
+        {{ 'home.RelatedProducts.h1' | translate }}
+      </h1>
+      @if (relatedProducts().length !== 0 && !allShown) {
+        <button
+          (click)="loadRelatedProducts(true)"
+          aria-label="View all products"
+          class="font-medium text-primary-200 me-24 sm:me-3">
+          View More
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      }
+    </div>
+
+    <div
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center">
+
+      @defer (when !isLoading() && !error() && !noData()) {
+        <ng-container>
+          @if (relatedProducts().length === 0) {
+            <h2 class="text-2xl text-gray-800 col-span-full">
+              {{ 'home.RelatedProducts.h2' | translate }}
+            </h2>
+          }
+          @for (p of relatedProducts(); track $index) {
+            <app-card
+              [productId]="p._id"
+              [title]="p.title"
+              [imgCover]="p.imgCover"
+              [price]="p.price"
+              [priceAfterDiscount]="p.priceAfterDiscount"
+              [rateAvg]="p.rateAvg"
+            />
+          }
+        </ng-container>
+      } @loading {
+        <app-loader />
+      } @error {
+        <app-err-msg [message]="error()" />
+      }
+
+    </div>
+  </div>
+</section>

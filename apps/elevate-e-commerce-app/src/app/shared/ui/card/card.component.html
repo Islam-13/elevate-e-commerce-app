@@ -7,8 +7,7 @@
     />
     <div
       class="absolute inset-0 bg-main/70 flex items-center justify-center gap-10 translate-y-1/1 group-hover:translate-y-0 duration-500 ease-in-out"
-      aria-label="overlay"
-    >
+      aria-label="overlay">
       <a [routerLink]="['/product-details',productId()]">
         <i class="fa-regular fa-eye icon bg-main"></i>
       </a>
@@ -26,7 +25,6 @@
       </h5>
 
       <app-star-rating [rate]="rateAvg()" />
-
       <p>
         <span class="text-price">
           {{ priceAfterDiscount() | currency }}
@@ -36,9 +34,8 @@
         </span>
       </p>
     </div>
-
     <button>
-      <i class="fa-solid fa-bag-shopping icon bg-icon"></i>
-    </button>
+<i class="fa-solid fa-cart-shopping bg-icon icon"></i>
+  </button>
   </div>
 </div>

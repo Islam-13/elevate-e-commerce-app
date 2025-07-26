@@ -1,11 +1,11 @@
-<section class="my-6 lg:my-8 mx-4 lg:mx-20">
+<section class="my-6 lg:my-8 mx-4 ">
   <div class="wrapper flex flex-col gap-6 w-[90%] mx-auto">
     <div class="main-gifts">
       <div class="grid grid-cols-12 gap-4">
         <div class="left-side col-span-12 md:col-span-3 min-h-[440px]">
           <div class="image-container">
             <div class="left-image">
-              <div class="left-details flex flex-col justify-between">
+              <div class="left-details flex flex-col justify-between ">
                 <p class="title">
                   {{ 'home.special.leftSide.title' | translate }}
                 </p>
@@ -21,12 +21,11 @@
         </div>
 
         <div
-          class="rigth-side relative col-span-12 md:col-span-9 sm:w-full [direction:ltr]"
-        >
+          class="rigth-side relative col-span-12 md:col-span-9 sm:w-full [direction:ltr]">
           <owl-carousel-o class=" " [options]="mainSliderOptions">
             @for (image of imageSlides; track image.id) {
             <ng-template carouselSlide class="absolute">
-              <div class="image-container max-w-[956px] max-h-[440px]">
+              <div class="image-container max-w-[100%] max-h-[440px]">
                 <div
                   class="right-image"
                   [ngStyle]="{ 'background-image': 'url(' + image.src + ')' }"
@@ -63,10 +62,11 @@
       </div>
     </div>
 
-    <div class="secondary-gifts">
+
+
+    <div class="secondary-gifts 2xl:-mx-[4rem]">
       <div
-        class="grid grid-cols-12 gap-3.5 text-center md:text-right place-items-center"
-      >
+  class="grid grid-cols-12 gap-3.5 text-center md:text-right  place-items-center ">
         @for (gift of gifts; track gift.id) {
         <div
           class="gifts-box flex flex-col items-center md:items-end justify-center col-span-12 md:col-span-4 w-[min(410px,100%)] min-h-[272px]"
