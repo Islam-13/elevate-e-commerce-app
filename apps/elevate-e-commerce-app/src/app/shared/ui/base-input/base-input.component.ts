@@ -1,5 +1,4 @@
 import { Component, forwardRef, input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -8,7 +7,7 @@ import {
 
 @Component({
   selector: 'app-base-input',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './base-input.component.html',
   styleUrl: './base-input.component.css',
   providers: [

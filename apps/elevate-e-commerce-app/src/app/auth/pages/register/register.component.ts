@@ -15,6 +15,7 @@ import { SubmitBtnComponent } from '../../components/submit-btn/submit-btn.compo
 import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
+import { ConfirmPasswordErrComponent } from '../../components/confirm-password-err/confirm-password-err.component';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
     SubmitBtnComponent,
     Message,
     CtrlErrComponent,
+    ConfirmPasswordErrComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',

@@ -9,7 +9,7 @@ import { MessageModule } from 'primeng/message';
   styleUrl: './ctrl-err.component.css',
 })
 export class CtrlErrComponent {
-  inputCtrl = input.required<AbstractControl<any, any> | null>();
+  inputCtrl = input.required<AbstractControl | null>();
   validation = input.required<string>();
   msg1 = input.required<string>();
   msg2 = input.required<string>();

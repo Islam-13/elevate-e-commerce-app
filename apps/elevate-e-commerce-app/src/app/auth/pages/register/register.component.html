@@ -138,11 +138,9 @@
           formControlName="rePassword"
         />
 
-        <app-ctrl-err
-          [inputCtrl]="rePasswordCtrl"
-          validation="misMatch"
-          msg1="Confirm password"
-          msg2="Password and Confirm Password are not matched!!"
+        <app-confirm-password-err
+          [form]="registerForm"
+          [rePasswordCtrl]="rePasswordCtrl"
         />
       </div>
     </div>
