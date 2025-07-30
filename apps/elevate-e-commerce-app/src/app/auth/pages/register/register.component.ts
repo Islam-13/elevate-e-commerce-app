@@ -16,6 +16,7 @@ import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
 import { ConfirmPasswordErrComponent } from '../../components/confirm-password-err/confirm-password-err.component';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +29,7 @@ import { ConfirmPasswordErrComponent } from '../../components/confirm-password-e
     Message,
     CtrlErrComponent,
     ConfirmPasswordErrComponent,
+    Select,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -37,6 +39,8 @@ export class RegisterComponent implements OnInit {
 
   isSubmitting = signal<boolean>(false);
   errorMsg = signal<string>('');
+
+  options = [{ name: 'male' }, { name: 'female' }];
 
   private _authApi = inject(AuthApiService);
   private _destroyRef = inject(DestroyRef);
@@ -61,7 +65,15 @@ export class RegisterComponent implements OnInit {
           Validators.maxLength(15),
         ]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        gender: new FormControl<'male' | 'female'>('male', Validators.required),
+        gender: new FormControl('', [
+          Validators.required,
+          (control) => {
+            if (control.value.name != 'male' || control.value.name != 'female')
+              return null;
+
+            return { errors: 'not match' };
+          },
+        ]),
         password: new FormControl('', [
           Validators.required,
           Validators.pattern(env.passwordRG),
@@ -94,27 +106,28 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     } else {
+      const payload = {
+        ...this.registerForm.value,
+        gender: this.registerForm.get('gender')?.value.name,
+      };
+
       this.isSubmitting.set(true);
       this.errorMsg = signal<string>('');
 
-      const subscription = this._authApi
-        .register(this.registerForm.value)
-        .subscribe({
-          next: () => {
-            this.showToast();
-
-            this._router.navigate(['/auth/login']);
-          },
-          error: (err) => {
-            this.isSubmitting.set(false);
-            this.errorMsg.set(err.message);
-          },
-          complete: () => {
-            this.registerForm.reset();
-            this.isSubmitting.set(false);
-          },
-        });
-
+      const subscription = this._authApi.register(payload).subscribe({
+        next: () => {
+          this.showToast();
+          this._router.navigate(['/auth/login']);
+        },
+        error: (err) => {
+          this.isSubmitting.set(false);
+          this.errorMsg.set(err.message);
+        },
+        complete: () => {
+          this.registerForm.reset();
+          this.isSubmitting.set(false);
+        },
+      });
       this._destroyRef.onDestroy(() => subscription.unsubscribe());
     }
   }
