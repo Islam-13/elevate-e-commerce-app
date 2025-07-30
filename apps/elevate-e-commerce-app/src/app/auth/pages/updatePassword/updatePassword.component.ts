@@ -16,6 +16,7 @@ import { equalValues } from '@shared/utils/validateRePassword';
 import { Message } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
+import { ConfirmPasswordErrComponent } from '../../components/confirm-password-err/confirm-password-err.component';
 
 @Component({
   selector: 'app-update-password',
@@ -27,6 +28,7 @@ import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
     RouterLink,
     Message,
     CtrlErrComponent,
+    ConfirmPasswordErrComponent,
   ],
   templateUrl: './updatePassword.component.html',
   styleUrl: './updatePassword.component.css',

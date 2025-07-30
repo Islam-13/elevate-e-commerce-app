@@ -93,14 +93,13 @@
         <label class="block capitalize text-sm font-medium" for="">{{
           'auth.input.gender' | translate
         }}</label>
-        <select
-          class="w-full p-4 rounded-rd-sm border-2 border-zinc-300 placeholder:text-zinc-400 cursor-pointer"
+        <p-select
           formControlName="gender"
-        >
-          <option aria-readonly="true">Select gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+          [options]="options"
+          optionLabel="name"
+          placeholder="Select your gender"
+          class="w-full p-2 !rounded-rd-sm"
+        />
 
         <app-ctrl-err
           [inputCtrl]="genderdCtrl"
@@ -138,11 +137,9 @@
           formControlName="rePassword"
         />
 
-        <app-ctrl-err
-          [inputCtrl]="rePasswordCtrl"
-          validation="misMatch"
-          msg1="Confirm password"
-          msg2="Password and Confirm Password are not matched!!"
+        <app-confirm-password-err
+          [form]="registerForm"
+          [rePasswordCtrl]="rePasswordCtrl"
         />
       </div>
     </div>
