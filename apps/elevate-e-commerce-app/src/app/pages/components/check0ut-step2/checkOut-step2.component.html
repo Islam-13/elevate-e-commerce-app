@@ -1,0 +1,78 @@
+<div class="flex flex-col gap-6">
+  <div class="flex items-center gap-4">
+    <button class="bg-[#F4F4F5] p-2.5 rounded-rd-sm" (click)="onBack()">
+      <span><i class="fa-solid fa-arrow-left mx-1"></i></span>
+      <span>Back</span>
+    </button>
+    <h3 class="font-semibold text-3xl">Payment Method</h3>
+  </div>
+
+  <div class="grid sm:grid-cols-2 text-center gap-4">
+    <div
+      class="has-checked:bg-[#fafafa] flex flex-col items-center gap-2.5 border border-[#E4E4E7] rounded-rd-sm p-4"
+    >
+      <label for="cash">
+        <div class="w-48 aspect-square">
+          <img src="/images/cash.svg" alt="" />
+        </div>
+
+        <input
+          type="radio"
+          id="cash"
+          class="peer hidden"
+          name="payment"
+          [(ngModel)]="selectedMethod"
+          value="cash"
+        />
+        <h3 class="font-semibold text-2xl peer-checked:text-main">
+          Cash on Delivery
+        </h3>
+
+        <p class="text-mini-paragraph text-sm font-semibold">
+          You will pay in cash when your order is delivered.
+        </p>
+      </label>
+    </div>
+
+    <div
+      class="has-checked:bg-[#fafafa] flex flex-col items-center gap-2.5 border border-[#E4E4E7] rounded-rd-sm p-4 group"
+    >
+      <label for="credit">
+        <div class="w-48 aspect-square">
+          <img src="/images/credit.svg" alt="" />
+        </div>
+
+        <input
+          type="radio"
+          id="credit"
+          class="peer hidden"
+          name="payment"
+          [(ngModel)]="selectedMethod"
+          value="credit"
+        />
+        <h3
+          class="font-semibold text-2xl peer-checked:text-main group-has-checked:text-main"
+        >
+          Credit Card
+        </h3>
+
+        <p class="text-mini-paragraph text-sm font-semibold">
+          You will be securely redirected to Stripe to complete your payment.
+        </p>
+
+        <input
+          type="radio"
+          id="credit"
+          class="hidden"
+          name="payment"
+          [(ngModel)]="selectedMethod"
+          value="credit"
+        />
+      </label>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <button class="btn-primary" [disabled]="!selectedMethod()">Checkout</button>
+  </div>
+</div>

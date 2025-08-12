@@ -1,0 +1,159 @@
+<h3 class="font-semibold text-3xl mb-6">Shipping Address</h3>
+
+<div class="flex flex-col gap-3">
+  @for (item of addresses(); track $index) {
+  <div
+    class="border border-[#D4D4D8] rounded-rd-sm py-3.5 px-4 has-checked:bg-main has-checked:text-white"
+  >
+    <label [for]="item._id">
+      <div class="flex items-center justify-between mb-1.5">
+        <p>{{ item.city }}</p>
+        <p class="flex items-center gap-1.5">
+          <span
+            class="flex justify-center items-center text-white w-8 aspect-square rounded-full bg-main border border-white"
+          >
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span>{{ item.phone }}</span>
+        </p>
+      </div>
+
+      <input
+        type="radio"
+        [id]="item._id"
+        class="peer hidden"
+        name="address"
+        [(ngModel)]="selectedAddress"
+        [value]="item._id"
+        [checked]="selectedAddress() === item._id"
+      />
+
+      <p
+        class="bg-zinc-200 w-fit text-sm py-1 px-2 rounded-rd-sm peer-checked:bg-black"
+      >
+        {{ item.street }}
+      </p>
+    </label>
+  </div>
+  } @if(addresses().length === 0){
+
+  <p-message severity="error">You have not added any addresses yet!!</p-message>
+  } @else {
+
+  <div class="py-2 relative">
+    <div
+      class="absolute z-[-1] w-full h-0.5 bg-[#d4d4d8] top-1/2 -translate-y-1/2"
+    ></div>
+
+    <p class="text-mini-paragraph font-semibold bg-bg-bg w-fit mx-auto p-1">
+      OR
+    </p>
+  </div>
+  }
+
+  <div class="flex flex-col gap-3">
+    <div>
+      <button
+        class="bg-[#FBEAEA] w-full rounded-rd-sm p-3.5 text-main font-medium"
+        (click)="showDialog()"
+      >
+        Add a New Address
+      </button>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <button
+      class="btn-primary"
+      [disabled]="!selectedAddress()"
+      (click)="onNext()"
+    >
+      Next ->
+    </button>
+  </div>
+</div>
+
+<div>
+  <p-dialog
+    header="My Addresses"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: 'min(850px,100%)' }"
+  >
+    <div class="flex flex-col gap-3.5 pt-2">
+      @if(addresses().length === 0){
+
+      <p-message severity="error">
+        You have not added any addresses yet!!
+      </p-message>
+      } @for (item of addresses(); track $index) {
+      <div class="relative border border-[#D4D4D8] rounded-rd-sm py-3.5 px-4">
+        <div class="flex items-center justify-between mb-1.5">
+          <p class="flex items-center gap-1.5">
+            <span
+              class="bg-[#00BC7D] rounded-full w-6 aspect-square flex items-center justify-center"
+            >
+              <i class="fa-solid fa-location-dot text-white text-sm"></i>
+            </span>
+            <span>{{ item.city }}</span>
+          </p>
+          <p class="flex items-center gap-1.5 pr-1">
+            <span
+              class="flex justify-center items-center text-white w-8 aspect-square rounded-full bg-main"
+            >
+              <i class="fa-solid fa-phone"></i>
+            </span>
+            <span>{{ item.phone }}</span>
+          </p>
+        </div>
+
+        <p class="bg-[#F4F4F5] w-fit text-sm py-1 px-2 rounded-rd-sm">
+          {{ item.street }}
+        </p>
+
+        <div
+          class="flex flex-col gap-1.5 absolute -right-4 top-1/2 -translate-y-1/2"
+        >
+          <button
+            class="bg-[#FAFAFA] border border-[#A1A1AA] rounded-full w-8 aspect-square"
+            (click)="showNewAddressDialog(item._id)"
+          >
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+
+          <p-confirmdialog />
+
+          <button
+            class="bg-main text-white rounded-full w-8 aspect-square"
+            (click)="confirm2($event, item._id)"
+          >
+            <i class="fa-solid fa-trash-can text-sm"></i>
+          </button>
+        </div>
+      </div>
+      }
+      <button
+        class="bg-[#FBEAEA] w-full rounded-rd-sm p-3.5 text-main font-medium"
+        (click)="showNewAddressDialog()"
+      >
+        Add a New Address
+      </button>
+    </div>
+  </p-dialog>
+</div>
+
+<!-- add a new addresse dialog -->
+
+<div>
+  <p-dialog
+    [header]="editFlag ? 'Update Address Info' : 'Add a New Address'"
+    [modal]="true"
+    [(visible)]="addressModal"
+    [style]="{ width: 'min(850px,100%)' }"
+  >
+    <app-add-new-address
+      (closeModal)="closeNewAddressDialog()"
+      [editId]="editFlag"
+    />
+  </p-dialog>
+</div>

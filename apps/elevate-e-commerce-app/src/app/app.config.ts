@@ -25,7 +25,9 @@ import { BASE_URL } from 'auth-apis';
 import { env } from '@env/env';
 
 import Aura from '@primeng/themes/aura';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { checkoutReducers } from './store/checkout/checkout.reducers';
+import { newAddressReducers } from './store/new-address/new-address.reducers';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -42,6 +44,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({ theme: { preset: Aura } }),
     MessageService,
+    ConfirmationService,
     importProvidersFrom([
       TranslateModule.forRoot({
         loader: {
@@ -51,7 +54,11 @@ export const appConfig: ApplicationConfig = {
         },
       }),
     ]),
-    provideStore({ filter: filterReduser }),
+    provideStore({
+      filter: filterReduser,
+      checkout: checkoutReducers,
+      newAddress: newAddressReducers,
+    }),
     provideEffects(FilterEffects),
   ],
 };

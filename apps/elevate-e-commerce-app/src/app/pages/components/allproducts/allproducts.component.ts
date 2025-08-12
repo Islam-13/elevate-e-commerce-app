@@ -1,6 +1,5 @@
 import { Component, inject, computed, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CardComponent } from '../../shared/ui/card/card.component';
+import { CardComponent } from '@shared/ui/card/card.component';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
@@ -9,16 +8,16 @@ import {
   selectSelectedCategories,
   selectSelectedOccasions,
   selectSelectedPrice,
-  selectSelectedRating
-} from '../../store/filter.selector';
+  selectSelectedRating,
+} from '../../../store/filter.selector';
 
-import { loadProductsToFilter } from '../../store/filter.actions';
+import { loadProductsToFilter } from '../../../store/filter.actions';
 import { PopularItemsService } from '@shared/services/popular-items/popular-items.service';
 
 @Component({
   selector: 'app-allproducts',
   standalone: true,
-  imports: [CommonModule, CardComponent, FormsModule],
+  imports: [CardComponent, FormsModule],
   templateUrl: './allproducts.component.html',
   styleUrl: './allproducts.component.css',
 })

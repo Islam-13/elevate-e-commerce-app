@@ -52,6 +52,13 @@ export const appRoutes: Route[] = [
             (c) => c.ProductDetailsComponent
           ),
       },
+      {
+        path: 'checkout',
+        loadComponent: () =>
+          import('./pages/check-out/check-out.component').then(
+            (c) => c.CheckOutComponent
+          ),
+      },
     ],
   },
 ];
