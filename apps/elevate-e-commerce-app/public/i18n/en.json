@@ -100,5 +100,10 @@
   "auth.input.gender": "Gender",
 
   "auth.needHelp": "Need Help?",
-  "auth.contact": " Contact us"
+  "auth.contact": " Contact us",
+  "cart.checkOutLabel" : "Checkout → ",
+  "cart.ClearCartLabel": "Clear Cart",
+  "cart.removeProduct": "Remove",
+  "cart.applyCoupon":"Apply Coupon",
+  "cart.continueShopping":"← Continue Shopping"
 }
