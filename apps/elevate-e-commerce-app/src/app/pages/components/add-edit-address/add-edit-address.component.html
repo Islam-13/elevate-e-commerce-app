@@ -1,9 +1,7 @@
 <div class="p-3">
-  <app-progress [currentStep]="currentStep()" />
+  <app-progress [currentStep]="address().currentStep" />
 
-  <div class="p-4">test id: {{ editId() }}</div>
-
-  @if (currentStep() === 1 ) {
+  @if (address().currentStep === 1 ) {
 
   <form
     class="py-4 flex flex-col gap-4"
@@ -16,6 +14,7 @@
       @let cityCtrl = form.get("city");
 
       <label for="" class="block">City</label>
+
       <input type="text" pInputText formControlName="city" fluid />
 
       <app-ctrl-err
@@ -81,7 +80,7 @@
     <app-submit-btn
       label="Add Address"
       [isSubmitting]="isSubmitting()"
-      (click)="submitAddress()"
+      (click)="onSubmitForm()"
     />
   </div>
 

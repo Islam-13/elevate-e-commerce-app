@@ -116,7 +116,7 @@
         >
           <button
             class="bg-[#FAFAFA] border border-[#A1A1AA] rounded-full w-8 aspect-square"
-            (click)="showNewAddressDialog(item._id)"
+            (click)="showNewAddressDialog(item)"
           >
             <i class="fa-solid fa-pencil"></i>
           </button>
@@ -143,7 +143,6 @@
 </div>
 
 <!-- add a new addresse dialog -->
-
 <div>
   <p-dialog
     [header]="editFlag ? 'Update Address Info' : 'Add a New Address'"
@@ -151,9 +150,6 @@
     [(visible)]="addressModal"
     [style]="{ width: 'min(850px,100%)' }"
   >
-    <app-add-new-address
-      (closeModal)="closeNewAddressDialog()"
-      [editId]="editFlag"
-    />
+    <app-add-edit-address (closeModal)="closeNewAddressDialog()" />
   </p-dialog>
 </div>

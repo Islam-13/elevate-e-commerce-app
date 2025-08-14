@@ -22,7 +22,12 @@ import { AddressesService } from '@shared/services/addresses/addresses.service';
 import { Message } from 'primeng/message';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
-import { AddNewAddressComponent } from '../add-new-address/add-new-address.component';
+import {
+  editAddress,
+  reset,
+} from '../../../store/new-address/new-address.actions';
+import { AddEditAddressComponent } from '../add-edit-address/add-edit-address.component';
+import { selectNewAddress } from '../../../store/new-address/new-address.selector';
 
 @Component({
   selector: 'app-check-out-step1',
@@ -33,7 +38,7 @@ import { AddNewAddressComponent } from '../add-new-address/add-new-address.compo
     Message,
     InputTextModule,
     TextareaModule,
-    AddNewAddressComponent,
+    AddEditAddressComponent,
   ],
   templateUrl: './checkOut-step1.component.html',
   styleUrl: './checkOut-step1.component.css',
@@ -41,7 +46,8 @@ import { AddNewAddressComponent } from '../add-new-address/add-new-address.compo
 export class CheckOutStep1Component implements OnInit {
   visible = false;
   addressModal = false;
-  editFlag = '';
+
+  editFlag = false;
 
   selectedAddress = signal<string>('');
   addresses = input.required<Addresses[]>();
@@ -62,15 +68,24 @@ export class CheckOutStep1Component implements OnInit {
       next: ({ selectedAddress }) => this.selectedAddress.set(selectedAddress),
     });
 
-    this._destroyRef.onDestroy(() => subscription.unsubscribe());
+    const subscription2 = this._store.select(selectNewAddress).subscribe({
+      next: ({ editSession }) => (this.editFlag = editSession),
+    });
+
+    this._destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+      subscription2.unsubscribe();
+    });
   }
 
   showDialog() {
     this.visible = true;
   }
 
-  showNewAddressDialog(edit?: string) {
-    if (edit) this.editFlag = edit;
+  showNewAddressDialog(edit?: Addresses) {
+    if (edit) {
+      this._store.dispatch(editAddress(edit));
+    } else this._store.dispatch(reset());
 
     this.visible = false;
     this.addressModal = true;

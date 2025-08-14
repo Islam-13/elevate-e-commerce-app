@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Position } from '@shared/interfaces/addresses';
+import { Addresses, Position } from '@shared/interfaces/addresses';
 
 interface FirstStepAddress {
   city: string;
@@ -7,9 +7,14 @@ interface FirstStepAddress {
   phone: string;
 }
 
-export const getAddresses = createAction(
-  '[newAddress] getAddresses',
+export const addAddress = createAction(
+  '[newAddress] addAddress',
   props<FirstStepAddress>()
+);
+
+export const editAddress = createAction(
+  '[newAddress] editAddress',
+  props<Addresses>()
 );
 
 export const getLocation = createAction(

@@ -40,4 +40,6 @@ export interface State {
   lat: number;
   long: number;
   username: string;
+  editSession: boolean;
+  editAddressId: string;
 }

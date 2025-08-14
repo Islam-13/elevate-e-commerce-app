@@ -10,6 +10,13 @@ import { Store } from '@ngrx/store';
 import { Position } from '@shared/interfaces/addresses';
 import * as L from 'leaflet';
 import { MessageService } from 'primeng/api';
+import { selectNewAddress } from '../../../store/new-address/new-address.selector';
+
+L.Marker.prototype.options.icon = L.icon({
+  iconUrl: '/media/marker-icon.png',
+  iconRetinaUrl: '/media/marker-icon-2x.png',
+  shadowUrl: '/media/marker-shadow.png',
+});
 
 @Component({
   selector: 'app-map',
@@ -30,21 +37,30 @@ export class MapComponent implements OnInit {
   private readonly _toast = inject(MessageService);
 
   ngOnInit(): void {
-    const subscription = this._store.select('newAddress').subscribe({
+    this.map = L.map('map').setView(this.view(), 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(this.map);
+
+    const subscription = this._store.select(selectNewAddress).subscribe({
       next: ({ lat, long }) => {
         if (long && lat) {
           this.view.set([lat, long]);
+
+          if (!this.marker) {
+            this.marker = L.marker([lat, long])
+              .addTo(this.map)
+              .bindPopup('📍 You are here')
+              .openPopup();
+          } else {
+            this.marker.setLatLng([lat, long]).openPopup();
+          }
         }
       },
     });
 
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
-
-    this.map = L.map('map').setView(this.view(), 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-    }).addTo(this.map);
 
     this.map.on('click', (e: L.LeafletMouseEvent) => {
       const position = { lat: e.latlng.lat, long: e.latlng.lng };

@@ -8,7 +8,6 @@ import {
   DeleteAddressesRes,
 } from '@shared/interfaces/addresses';
 import { catchError, map } from 'rxjs';
-import { LocalStorageService } from '../localStorage/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,32 +15,19 @@ import { LocalStorageService } from '../localStorage/local-storage.service';
 export class AddressesService {
   private readonly _http = inject(HttpClient);
   private readonly _baseURL = env.baseURL;
-  private readonly _localStorage = inject(LocalStorageService);
 
   getAddresses() {
-    return this._http
-      .get<AddressesRes>(`${this._baseURL}/addresses`, {
-        headers: {
-          Authorization: `Bearer ${this._localStorage.get('userToken')}`,
-          'Content-Type': 'application/json',
-        },
+    return this._http.get<AddressesRes>(`${this._baseURL}/addresses`).pipe(
+      map((res) => res.addresses),
+      catchError(() => {
+        throw 'Could not fetch addresses, Please try again later!!';
       })
-      .pipe(
-        map((res) => res.addresses),
-        catchError(() => {
-          throw 'Could not fetch addresses, Please try again later!!';
-        })
-      );
+    );
   }
 
   deleteAddress(id: string) {
     return this._http
-      .delete<DeleteAddressesRes>(`${this._baseURL}/addresses/${id}`, {
-        headers: {
-          Authorization: `Bearer ${this._localStorage.get('userToken')}`,
-          'Content-Type': 'application/json',
-        },
-      })
+      .delete<DeleteAddressesRes>(`${this._baseURL}/addresses/${id}`)
       .pipe(
         map((res) => res.address),
         catchError(() => {
@@ -51,18 +37,20 @@ export class AddressesService {
   }
 
   addAddress(payload: CreateAddresses) {
-    return this._http
-      .patch(`${this._baseURL}/addresses`, payload, {
-        headers: {
-          Authorization: `Bearer ${this._localStorage.get('userToken')}`,
-          'Content-Type': 'application/json',
-        },
+    return this._http.patch(`${this._baseURL}/addresses`, payload).pipe(
+      map((res) => res),
+      catchError(() => {
+        throw 'Could not add addresse, Please try again later!!';
       })
-      .pipe(
-        map((res) => res),
-        catchError(() => {
-          throw 'Could not add addresse, Please try again later!!';
-        })
-      );
+    );
+  }
+
+  updateAddress(payload: CreateAddresses, id: string) {
+    return this._http.patch(`${this._baseURL}/addresses/${id}`, payload).pipe(
+      map((res) => res),
+      catchError(() => {
+        throw 'Could not upadte addresse, Please try again later!!';
+      })
+    );
   }
 }

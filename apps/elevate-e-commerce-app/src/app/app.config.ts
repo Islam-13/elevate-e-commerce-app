@@ -15,7 +15,12 @@ import {
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { appInit } from '@shared/utils/app.utils';
 import { provideStore } from '@ngrx/store';
 import { filterReduser } from './store/filter.reducer';
@@ -28,6 +33,7 @@ import Aura from '@primeng/themes/aura';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { checkoutReducers } from './store/checkout/checkout.reducers';
 import { newAddressReducers } from './store/new-address/new-address.reducers';
+import { tokenInterceptor } from './interceptors/token.interceptor';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -36,7 +42,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAppInitializer(() => appInit()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     { provide: BASE_URL, useValue: env.baseURL },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
