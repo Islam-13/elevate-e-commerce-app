@@ -96,9 +96,22 @@
   "auth.input.email": "البريد الإلكتروني",
   "auth.input.password": "كلمة السر",
   "auth.input.confirmPassword": "أكد كلمة السر",
-  "auth.input.phone": "رقم الهاتف المحمول",
+  "auth.input.phone": "رقم الهاتف",
   "auth.input.gender": "الجنس",
 
   "auth.needHelp": "تحتاج مساعدة؟",
-  "auth.contact": " تواصل معنا"
+  "auth.contact": " تواصل معنا",
+
+  "setting.updateProfile": "تعديل الملف الشخصي",
+  "setting.myAccount": "حسابي",
+  "setting.ChangePassword": "تغيير كلمة السر",
+  "setting.logout": "تسجيل الخروج",
+  "setting.uploadPhoto": "رفع صورة",
+  "setting.uploadPhoto.p": "تقدر ترفع صورة .jpg أو .png أو .gif بحد أقصى ٥ ميجابايت",
+  "setting.saveChanges": "حفظ التعديلات",
+  "setting.deleteMyAccount": "حذف حسابي",
+  "setting.oldPassword": "كلمة المرور القديمة",
+  "setting.newPassword": "كلمة المرور الجديدة",
+  "setting.confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+  "setting.updatePassword": "تحديث كلمة المرور"
 }

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
 @import 'primeicons/primeicons.css';
+@custom-variant dark (:where([data-theme="dark"], [data-theme="dark"] *) &);
 
 @font-face {
   font-family: 'Inter';
@@ -117,3 +118,21 @@ button {
   }
 }
 
+.my-toast .p-toast-message {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  border-left: 4px solid transparent;
+}
+
+.my-toast .p-toast-message-success {
+  background: #0b8c61e6;         
+  color: #fff;
+  border-color: #008a5e;    
+}
+
+
+.my-toast .p-toast-message-error {
+  background: #ef4444;         
+  color: #fff;
+  border-color: #ba1d1d;     
+}

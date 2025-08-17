@@ -1,7 +1,5 @@
 <header #header class="mx-4 lg:mx-20">
-  <div
-    class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2"
-  >
+  <div class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2">
     <app-logo />
 
     <nav
@@ -20,7 +18,7 @@
         </button>
       </div>
 
-      <ul class="flex flex-col gap-6 font-medium text-title md:flex-row">
+      <ul class="flex flex-col gap-6 font-bold text-title md:flex-row">
         @for (link of navLinks; track $index) {
         <li>
           <a
@@ -76,7 +74,7 @@
           <i class="fa-solid fa-bag-shopping"></i>
         </button>
 
-        <button class="p-2" aria-label="account button">
+        <button class="p-2 " aria-label="account button" routerLink="/settings">
           <i class="fa-regular fa-user"></i>
         </button>
 
@@ -84,7 +82,6 @@
 
         <a class="btn-primary" routerLink="/auth/login">Login</a>
 
-        <!-- <button class="btn-primary">Login</button> -->
         }
 
         <button

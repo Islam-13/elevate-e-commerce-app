@@ -1,0 +1,81 @@
+<section>
+  <form class="md:space-y-4 space-y-3" [formGroup]="updateProfileForm" (ngSubmit)="updateProfileSubmit()">
+    <!-- Avatar  -->
+    <div class="flex items-center gap-6">
+      <div class="relative ">
+        <img [src]="userData()?.photo"
+          class="h-24 w-24 rounded-full  object-cover ring-0 ring-white shadow shrink-0"
+          alt="Avatar" />
+        <button type="button" (click)="fileInput.click()"
+            class="absolute dark:bg-pink-200 -bottom-2 -right-2 inline-flex items-center justify-center h-9 w-9 rounded-full bg-white border border-gray-200 shadow hover:bg-gray-50"
+            title="Upload">
+          <i class="fa-solid fa-upload dark:text-pink-800"></i>
+        </button>
+        <input #fileInput type="file"
+          accept="image/png,image/jpeg,image/gif"
+          class="hidden"
+          (change)="onAvatarSelected($event)"/>
+      </div>
+      <div class="text-sm text-gray-600">
+        <h4 class="font-bold text-base text-gray-900 dark:text-zinc-100">{{'setting.uploadPhoto' | translate}}</h4>
+        <p class="text-zinc-500 dark:text-zinc-400">{{'setting.uploadPhoto.p' | translate}}</p>
+      </div>
+    </div>
+
+    <!-- Names -->
+    <div class="grid grid-cols-1 md:grid-cols-2 md:gap-6 gap-3">
+        <app-base-input
+          [label]="'auth.input.firstName' | translate"
+          type="text"
+          formControlName="firstName"
+          
+        />
+        <app-base-input
+          [label]="'auth.input.lastName' | translate"
+          type="text"
+          formControlName="lastName"
+        />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <app-base-input
+        [label]="'auth.input.email' | translate"
+        type="email"
+        formControlName="email"
+      />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <app-base-input
+        [label]="'auth.input.phone' | translate"
+        type="tel"
+        inputmode="numeric"
+        formControlName="phone"
+      />
+      </div>
+
+    <!-- Gender (disabled like design) -->
+    <div>
+      <app-base-input
+        [label]="'auth.input.gender' | translate"
+        type="text"
+        formControlName="gender"
+        [disabled]="true"
+      />
+    </div>
+
+    <!-- Footer actions -->
+    <div class="md:mt-10 mt-8 flex items-center justify-between">
+      <button type="button" class="text-red-600 dark:text-red-500 transition-all dark:hover:text-red-600 hover:text-red-700 font-bold">
+      {{'setting.deleteMyAccount' | translate}}
+      </button>
+
+      <button type="submit"
+        class="inline-flex items-center md:px-8 md:py-3 sm:px-6 sm:py-2 px-6 py-2 rounded-xl bg-red-600 text-white font-medium hover:bg-red-700">
+        {{'setting.saveChanges' | translate}}
+      </button>
+    </div>
+  </form>
+</section>

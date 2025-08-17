@@ -1,12 +1,11 @@
 import { Component, input } from '@angular/core';
-
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-card',
-  imports: [StarRatingComponent, CurrencyPipe,RouterLink],
+  imports: [StarRatingComponent, CurrencyPipe, RouterLink],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })

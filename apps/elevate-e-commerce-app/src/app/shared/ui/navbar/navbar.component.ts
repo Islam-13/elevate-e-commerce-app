@@ -7,9 +7,8 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { NavLink } from '@shared/interfaces/navbar';
 import { ThemeService } from '@shared/services/theme/theme.service';
 import { LogoComponent } from '../logo/logo.component';
@@ -18,7 +17,7 @@ import { LocalStorageService } from '@shared/services/localStorage/local-storage
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, TranslateModule, LogoComponent],
+  imports: [RouterLink, RouterLinkActive, TranslateModule, LogoComponent, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -30,15 +29,15 @@ export class NavbarComponent implements OnInit {
     { name: 'navbar.navLink.contact', url: '/contact' },
   ];
 
+  private header = viewChild<ElementRef<HTMLElement>>('header');
   isOpen = signal<boolean>(false);
   token = signal<boolean>(false);
 
-  private header = viewChild<ElementRef<HTMLElement>>('header');
 
+  private readonly _localStorage = inject(LocalStorageService);
   _theme = inject(ThemeService);
   _lang = inject(TranslateMangerService);
 
-  private readonly _localStorage = inject(LocalStorageService);
 
   ngOnInit(): void {
     this.token.set(this._localStorage.get('userToken') ? true : false);

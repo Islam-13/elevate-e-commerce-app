@@ -1,31 +1,22 @@
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  provideAppInitializer,
-  provideZoneChangeDetection,
-} from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { appRoutes } from './app.routes';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
-
+import Aura from '@primeng/themes/aura';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { providePrimeNG } from 'primeng/config';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
-import { appInit } from '@shared/utils/app.utils';
+import { HttpClient, provideHttpClient, withFetch } from "@angular/common/http";
+import { ApplicationConfig, importProvidersFrom, provideAppInitializer, provideZoneChangeDetection } from "@angular/core";
+import { BrowserModule, provideClientHydration, withEventReplay } from "@angular/platform-browser";
+import { env } from "@env/env";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { appInit } from "@shared/utils/app.utils";
+import { BASE_URL } from "auth-apis";
+import { appRoutes } from './app.routes';
+import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { filterReduser } from './store/filter.reducer';
-import { provideEffects } from '@ngrx/effects';
 import { FilterEffects } from './store/filter.effect';
-import { BASE_URL } from 'auth-apis';
-import { env } from '@env/env';
-
-import Aura from '@primeng/themes/aura';
+import { provideEffects } from '@ngrx/effects';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
+
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -34,6 +25,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAppInitializer(() => appInit()),
+    importProvidersFrom(BrowserModule),
     provideHttpClient(withFetch()),
     { provide: BASE_URL, useValue: env.baseURL },
     provideClientHydration(withEventReplay()),

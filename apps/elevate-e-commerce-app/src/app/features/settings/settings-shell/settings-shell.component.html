@@ -1,0 +1,15 @@
+<div class="bg-white dark:bg-zinc-800">
+  <div class=" mx-auto px-3 sm:px-7 md:px-10 lg:px-16 xl:px-20 py-10">
+    <h1 class="md:text-4xl text-2xl font-bold mb-8">{{ 'setting.updateProfile' | translate}}</h1>
+
+    <div class="grid grid-cols-12 gap-8">
+      <div class="lg:col-span-3 md:col-span-4 col-span-5">
+        <app-settings-sidebar></app-settings-sidebar>
+      </div>
+
+      <section class="lg:col-span-9 md:col-span-8 col-span-7">
+        <router-outlet></router-outlet>
+      </section>
+    </div>
+  </div>
+</div>
