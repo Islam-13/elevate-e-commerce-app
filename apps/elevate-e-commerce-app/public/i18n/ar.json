@@ -60,7 +60,7 @@
   "home.aboutUs.list.2": "سعر تنافسي وسهولة التسوق",
   "home.aboutUs.list.3": "تصميم عصري بأسعار معقولة",
   "home.aboutUs.list.4": "نصنع لك منتجات رائعة",
-  "home.aboutUs.btn": "استكشف أكثر ←",
+  "home.aboutUs.btn": "←استكشف أكثر ",
 
   "home.trustedBy.h3.span1": "موثوقون في أكثر من",
   "home.trustedBy.h3.span2": "4.5k+",
@@ -100,5 +100,12 @@
   "auth.input.gender": "الجنس",
 
   "auth.needHelp": "تحتاج مساعدة؟",
-  "auth.contact": " تواصل معنا"
+  "auth.contact": " تواصل معنا",
+  "cart.checkOutLabel" : "← الدفع ",
+  "cart.ClearCartLabel": "مسح عربة التسوق",
+  "cart.removeProduct": "مسح",
+  "cart.applyCoupon":"ادخل الكوبون",
+  "cart.continueShopping":" متابعة التسوق → "
+
+
 }

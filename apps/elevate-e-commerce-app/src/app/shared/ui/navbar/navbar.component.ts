@@ -3,6 +3,9 @@ import {
   ElementRef,
   HostListener,
   inject,
+  input,
+  InputSignal,
+  OnDestroy,
   OnInit,
   signal,
   viewChild,
@@ -15,6 +18,8 @@ import { ThemeService } from '@shared/services/theme/theme.service';
 import { LogoComponent } from '../logo/logo.component';
 import { TranslateMangerService } from '@shared/services/translate/translate.service';
 import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
+import { CartService } from '@shared/services/cart/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +27,7 @@ import { LocalStorageService } from '@shared/services/localStorage/local-storage
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit,OnDestroy {
   navLinks: NavLink[] = [
     { name: 'navbar.navLink.home', url: '/' },
     { name: 'navbar.navLink.category', url: '/category' },
@@ -37,11 +42,17 @@ export class NavbarComponent implements OnInit {
 
   _theme = inject(ThemeService);
   _lang = inject(TranslateMangerService);
+  private readonly _CartService=inject(CartService)
 
   private readonly _localStorage = inject(LocalStorageService);
+    navbarCount!:number;
+  cancel!:Subscription;
+  check:InputSignal<boolean>=input(true)
+
 
   ngOnInit(): void {
     this.token.set(this._localStorage.get('userToken') ? true : false);
+    this.cartCount()
   }
 
   @HostListener('document:click', ['$event']) detectClick(e: Event) {
@@ -57,4 +68,26 @@ export class NavbarComponent implements OnInit {
   toggleMenu() {
     this.isOpen.update((cur) => !cur);
   }
+  cartCount(){
+  this._CartService.GetLoggedUserCart().subscribe({
+  next:(res)=>{
+    this.navbarCount =res.numOfCartItems;
+    
+    
+
+  }
+})
+
+    this.cancel=this._CartService.cartCount.subscribe({
+      next:(value)=>{
+        this.navbarCount=value;
+
+
+      }
+    })
 }
+  ngOnDestroy(): void {
+    this.cancel?.unsubscribe()
+  }
+}
+

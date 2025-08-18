@@ -27,6 +27,11 @@ import { env } from '@env/env';
 import Aura from '@primeng/themes/aura';
 import { MessageService } from 'primeng/api';
 
+
+import { CartEffects } from './store/cart-data/cart.effect';
+import { cartReducer } from './store/cart-data/cart.reducer';
+
+
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
 ) => new TranslateHttpLoader(http, './i18n/', '.json');
@@ -53,5 +58,11 @@ export const appConfig: ApplicationConfig = {
     ]),
     provideStore({ filter: filterReduser }),
     provideEffects(FilterEffects),
+     provideStore({
+      total:cartReducer // لازم يطابق الاسم في cart.selector.ts
+    }),
+
+    // تسجيل الـ Effects
+    provideEffects([CartEffects])
   ],
 };
