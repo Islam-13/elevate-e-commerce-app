@@ -4,7 +4,7 @@ import { env } from '@env/env';
 import { map, Observable } from 'rxjs';
 import { adaptUserProfile } from '../../adapters/adapt-profile/user-profile.adapter';
 import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
-import { ApiProfileResponse, UserProfile } from '../../interfaces/UserProfile/user-profile';
+import { ApiDeleteResponse, ApiProfileResponse, ChangePasswordRequest, ChangePasswordResponse, UserProfile } from '../../interfaces/UserProfile/user-profile';
 
 
 @Injectable({
@@ -36,15 +36,24 @@ export class UpdateProfileService {
   }
 
 
-  uploadAvatar(file: File) {
+  uploadAvatar(file: File): Observable<string> {
     const fd = new FormData(); 
-    fd.append('file', file);
-    return this._http.post<{ url: string }>(`${env.baseURL}/auth/upload-photo`, fd);
+    fd.append('photo', file);
+    return this._http.put<string >(`${env.baseURL}/auth/upload-photo`, fd,{
+      headers: {Authorization: `Bearer ${this._localStorageService.get('userToken')}`}
+    });
   }
 
-  changePassword(body: { currentPassword: string; newPassword: string }) {
-    return this._http.patch<void>('/auth/change-password', body);
+
+  changePassword(data: ChangePasswordRequest): Observable<ChangePasswordResponse> {
+    return this._http.patch<ChangePasswordResponse>(`${env.baseURL}/auth/change-password`, data, {
+      headers: {Authorization: `Bearer ${this._localStorageService.get('userToken')}`}
+    });
   }
 
-  deleteAccount() { return this._http.delete<void>(`${env.baseURL}/auth/deleteMe`); }
+  deleteAccount(): Observable<ApiDeleteResponse> {
+    return this._http.delete<ApiDeleteResponse>(`${env.baseURL}/auth/deleteMe`, {
+      headers: {Authorization: `Bearer ${this._localStorageService.get('userToken')}`}
+    }) 
+  }
 }

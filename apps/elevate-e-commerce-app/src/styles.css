@@ -25,6 +25,8 @@
 
     --bg-color: #fafafa;
     --normal-txt: #27272a;
+
+    --bg-dialog: #fff;
   }
 
   &[data-theme='dark'] {
@@ -40,6 +42,9 @@
 
     --bg-color: #27272a;
     --normal-txt: #fafafa;
+
+    --bg-dialog: #080101;
+
   }
 }
 
@@ -118,21 +123,36 @@ button {
   }
 }
 
+/*======= Start Toast Styles =======*/
 .my-toast .p-toast-message {
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,.12);
   border-left: 4px solid transparent;
 }
-
 .my-toast .p-toast-message-success {
   background: #0b8c61e6;         
   color: #fff;
   border-color: #008a5e;    
 }
-
-
 .my-toast .p-toast-message-error {
   background: #ef4444;         
   color: #fff;
   border-color: #ba1d1d;     
 }
+.my-toast .p-toast-message-info {
+  background:#3b82f6; 
+  color:#fff;
+  border-color:#2563eb; 
+}
+/*======= End Toast Styles =======*/
+
+/*======= Start Dialog Styles =======*/
+
+/* ::ng-deep .p-confirmdialog {
+  background: white !important;
+  border: none !important;
+} */
+
+
+
+/*======= End Dialog Styles =======*/

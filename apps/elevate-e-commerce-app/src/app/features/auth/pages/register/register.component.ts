@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -34,8 +34,7 @@ import { Select } from 'primeng/select';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent implements OnInit {
-  registerForm!: FormGroup;
+export class RegisterComponent  {
 
   isSubmitting = signal<boolean>(false);
   errorMsg = signal<string>('');
@@ -47,12 +46,8 @@ export class RegisterComponent implements OnInit {
   private _router = inject(Router);
   private _toast = inject(MessageService);
 
-  ngOnInit() {
-    this.initForm();
-  }
 
-  initForm() {
-    this.registerForm = new FormGroup(
+  registerForm: FormGroup = new FormGroup(
       {
         firstName: new FormControl('', [
           Validators.required,
@@ -70,7 +65,6 @@ export class RegisterComponent implements OnInit {
           (control) => {
             if (control.value.name != 'male' || control.value.name != 'female')
               return null;
-
             return { errors: 'not match' };
           },
         ]),
@@ -85,10 +79,10 @@ export class RegisterComponent implements OnInit {
         ]),
       },
       {
-        validators: equalValues('newPassword', 'rePassword'), 
+        validators: equalValues('password', 'rePassword'), 
       }
     );
-  }
+
 
   showToast() {
     this._toast.add({

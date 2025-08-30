@@ -64,24 +64,19 @@
           </button>
         </li>
 
-        @if (token()) {
-
-        <button class="p-2" aria-label="wishlist button">
-          <i class="fa-regular fa-heart"></i>
-        </button>
-
-        <button class="p-2" aria-label="wishlist button">
-          <i class="fa-solid fa-bag-shopping"></i>
-        </button>
-
-        <button class="p-2 " aria-label="account button" routerLink="/settings">
-          <i class="fa-regular fa-user"></i>
-        </button>
-
+        @if (token()) 
+        {
+          <button class="p-2" aria-label="wishlist button">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button class="p-2" aria-label="wishlist button">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </button>
+          <button class="p-2 " aria-label="account button" routerLink="/settings">
+            <i class="fa-regular fa-user"></i>
+          </button>
         } @else {
-
         <a class="btn-primary" routerLink="/auth/login">Login</a>
-
         }
 
         <button

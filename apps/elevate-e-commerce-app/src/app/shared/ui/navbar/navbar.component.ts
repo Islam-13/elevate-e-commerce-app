@@ -14,6 +14,7 @@ import { ThemeService } from '@shared/services/theme/theme.service';
 import { LogoComponent } from '../logo/logo.component';
 import { TranslateMangerService } from '@shared/services/translate/translate.service';
 import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
+import { UserSessionService } from '@shared/services/user-session/user-session.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,15 +30,16 @@ export class NavbarComponent implements OnInit {
     { name: 'navbar.navLink.contact', url: '/contact' },
   ];
 
-  private header = viewChild<ElementRef<HTMLElement>>('header');
-  isOpen = signal<boolean>(false);
-  token = signal<boolean>(false);
-
 
   private readonly _localStorage = inject(LocalStorageService);
+  private readonly _userSessionService = inject(UserSessionService);
   _theme = inject(ThemeService);
   _lang = inject(TranslateMangerService);
+  
 
+  private header = viewChild<ElementRef<HTMLElement>>('header');
+  isOpen = signal<boolean>(false);
+  token = this._userSessionService.token;
 
   ngOnInit(): void {
     this.token.set(this._localStorage.get('userToken') ? true : false);

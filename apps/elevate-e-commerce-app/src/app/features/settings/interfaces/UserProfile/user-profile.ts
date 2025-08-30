@@ -31,3 +31,17 @@ export interface UserProfile {
   phone: string;
   photo?: string;
 }
+
+export interface ApiDeleteResponse {
+  message: string;
+}
+
+export interface ChangePasswordRequest {
+  password: string;
+  newPassword: string;
+}
+
+export interface ChangePasswordResponse {
+  message: 'success' | string;
+  token: string;      
+}

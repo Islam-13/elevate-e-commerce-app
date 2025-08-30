@@ -23,6 +23,8 @@ export class BaseInputComponent implements ControlValueAccessor {
   label = input<string>('');
   type = input.required<'text' | 'email' | 'password' | 'tel'>();
   placeholder = input<string>(' ');
+  id = input<string>();
+
 
   /* ===== internal state (signals) ===== */
   value = signal<string>('');
