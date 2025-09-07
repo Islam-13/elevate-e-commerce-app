@@ -27,12 +27,12 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
-  gender: 'male' | 'female';
+  gender: Gender;
   phone: string;
   photo?: string;
 }
 
-export interface ApiDeleteResponse {
+export interface ApiSuccess {
   message: string;
 }
 
@@ -45,3 +45,5 @@ export interface ChangePasswordResponse {
   message: 'success' | string;
   token: string;      
 }
+
+export type Gender = 'male' | 'female';

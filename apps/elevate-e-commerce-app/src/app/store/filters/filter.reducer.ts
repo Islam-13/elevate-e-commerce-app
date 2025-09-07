@@ -1,15 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
+import { ApplyFilters, clearAllFilters, loadProductsToFilter, loadSelectedCategories, loadSelectedName, loadSelectedOccasions, loadSelectedPrice, loadSelectedRating } from "./filter.actions";
 import { FilterState } from "./filter.state";
-import {
-  ApplyFilters,
-  clearAllFilters,
-  loadProductsToFilter,
-  loadSelectedCategories,
-  loadSelectedName,
-  loadSelectedOccasions,
-  loadSelectedPrice,
-  loadSelectedRating,
-} from "./filter.actions";
+
 
 export const initialState: FilterState = {
   products: [],

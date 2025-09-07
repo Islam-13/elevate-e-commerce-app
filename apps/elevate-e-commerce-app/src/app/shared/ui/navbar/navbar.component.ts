@@ -3,7 +3,6 @@ import {
   ElementRef,
   HostListener,
   inject,
-  OnInit,
   signal,
   viewChild,
 } from '@angular/core';
@@ -13,8 +12,9 @@ import { NavLink } from '@shared/interfaces/navbar';
 import { ThemeService } from '@shared/services/theme/theme.service';
 import { LogoComponent } from '../logo/logo.component';
 import { TranslateMangerService } from '@shared/services/translate/translate.service';
-import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
-import { UserSessionService } from '@shared/services/user-session/user-session.service';
+import { Store } from '@ngrx/store';
+import { selectIsLoggedIn } from '../../../store/auth-session/session.selectors';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +22,7 @@ import { UserSessionService } from '@shared/services/user-session/user-session.s
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   navLinks: NavLink[] = [
     { name: 'navbar.navLink.home', url: '/' },
     { name: 'navbar.navLink.category', url: '/category' },
@@ -31,19 +31,18 @@ export class NavbarComponent implements OnInit {
   ];
 
 
-  private readonly _localStorage = inject(LocalStorageService);
-  private readonly _userSessionService = inject(UserSessionService);
   _theme = inject(ThemeService);
   _lang = inject(TranslateMangerService);
   
-
+  private readonly store = inject(Store)
   private header = viewChild<ElementRef<HTMLElement>>('header');
   isOpen = signal<boolean>(false);
-  token = this._userSessionService.token;
 
-  ngOnInit(): void {
-    this.token.set(this._localStorage.get('userToken') ? true : false);
-  }
+
+  isLoggedIn = toSignal(this.store.select(selectIsLoggedIn), {
+    initialValue: !!localStorage.getItem('userToken'),
+  });
+
 
   @HostListener('document:click', ['$event']) detectClick(e: Event) {
     if (!this.header()?.nativeElement.contains(e.target as HTMLElement)) {

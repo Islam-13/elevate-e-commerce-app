@@ -11,7 +11,9 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
 import { CtrlErrComponent } from '../../components/ctrl-err/ctrl-err.component';
-import { UserSessionService } from '@shared/services/user-session/user-session.service';
+import { Store } from '@ngrx/store';
+import { SessionActions } from '../../../../store/auth-session/session.actions';
+
 
 @Component({
   selector: 'app-login',
@@ -35,11 +37,11 @@ export class LoginComponent {
 
   private readonly _authApi = inject(AuthApiService);
   private readonly _router = inject(Router);
-  private readonly _userSessionService = inject(UserSessionService);
   private readonly fb = inject(FormBuilder);
   private readonly _localStorage = inject(LocalStorageService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _toast = inject(MessageService);
+  private readonly store = inject(Store);
 
 
   loginForm: FormGroup = this.fb.group({
@@ -69,8 +71,7 @@ export class LoginComponent {
       const subscription = this._authApi.login(this.loginForm.value).subscribe({
         next: (res) => {
           this.showToast();
-          this._userSessionService.activateSession();
-          this._localStorage.set('userToken', res.token);
+          this.store.dispatch(SessionActions.activate({ token: res.token}))
 
           this._router.navigate(['/']);
         },

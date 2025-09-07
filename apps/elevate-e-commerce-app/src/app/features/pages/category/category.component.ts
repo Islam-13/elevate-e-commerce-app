@@ -12,16 +12,9 @@ import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
 import { AllproductsComponent } from "../allproducts/allproducts.component";
-
 import { Store } from '@ngrx/store';
-import {
-  loadSelectedCategories,
-  loadSelectedOccasions,
-  loadSelectedPrice,
-  loadSelectedRating,
-  ApplyFilters,
-  clearAllFilters
-} from '../../../store/filter.actions';
+import { ApplyFilters, clearAllFilters, loadSelectedCategories, loadSelectedOccasions, loadSelectedPrice, loadSelectedRating } from '../../../store/filters/filter.actions';
+
 
 
   @Component({

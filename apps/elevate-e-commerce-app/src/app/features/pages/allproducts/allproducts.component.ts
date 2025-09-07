@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 import { PopularItemsService } from '@shared/services/popular-items/popular-items.service';
-import { selectFilterProducts, selectSelectedCategories, selectSelectedOccasions, selectSelectedPrice, selectSelectedRating } from '../../../store/filter.selector';
-import { loadProductsToFilter } from '../../../store/filter.actions';
 import { CardComponent } from "@shared/ui/card/card.component";
+import { loadProductsToFilter } from '../../../store/filters/filter.actions';
+import { selectFilterProducts, selectSelectedCategories, selectSelectedOccasions, selectSelectedPrice, selectSelectedRating } from '../../../store/filters/filter.selector';
 
 @Component({
   selector: 'app-allproducts',

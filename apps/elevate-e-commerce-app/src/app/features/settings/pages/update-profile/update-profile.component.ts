@@ -13,9 +13,9 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
-import { UserSessionService } from '@shared/services/user-session/user-session.service';
-import { catchError, concat, finalize, map, of, switchMap, throwError } from 'rxjs';
+import { catchError, concat, finalize, map, of, throwError } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { SessionActions } from 'apps/elevate-e-commerce-app/src/app/store/auth-session/session.actions';
 
 
 @Component({
@@ -36,11 +36,10 @@ export class UpdateProfileComponent implements OnInit {
   // Call Services
   private readonly _updateProfileService = inject(UpdateProfileService);
   private readonly _confirmationService = inject(ConfirmationService);
-  private readonly _localStorageService = inject(LocalStorageService);
-  private readonly _userSessionService = inject(UserSessionService);
   private readonly _notfiy = inject(NotificationService);
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _router = inject(Router);
+  private readonly store = inject(Store);
   private readonly _destroyRef = inject(DestroyRef);
   
 
@@ -223,8 +222,7 @@ export class UpdateProfileComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this._notfiy.success('Your account has been deleted successfully')
-        this._localStorageService.remove('userToken')
-        this._userSessionService.clearSession()
+        this.store.dispatch(SessionActions.clear())
         this._router.navigate(['/'])
         
       },
