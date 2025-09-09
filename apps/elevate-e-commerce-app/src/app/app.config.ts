@@ -32,13 +32,11 @@ import { env } from '@env/env';
 import Aura from '@primeng/themes/aura';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { checkoutReducers } from './store/checkout/checkout.reducers';
-import { newAddressReducers } from './store/new-address/new-address.reducers';
+import { newAddressReducers } from './store/address/address.reducers';
 import { tokenInterceptor } from './interceptors/token.interceptor';
-
 
 import { CartEffects } from './store/cart-data/cart.effect';
 import { cartReducer } from './store/cart-data/cart.reducer';
-
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -69,13 +67,8 @@ export const appConfig: ApplicationConfig = {
       filter: filterReduser,
       checkout: checkoutReducers,
       newAddress: newAddressReducers,
+      total: cartReducer,
     }),
-    provideEffects(FilterEffects),
-     provideStore({
-      total:cartReducer // لازم يطابق الاسم في cart.selector.ts
-    }),
-
-    // تسجيل الـ Effects
-    provideEffects([CartEffects])
+    provideEffects([CartEffects, FilterEffects]),
   ],
 };

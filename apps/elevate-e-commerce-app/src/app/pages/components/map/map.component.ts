@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Position } from '@shared/interfaces/addresses';
 import * as L from 'leaflet';
 import { MessageService } from 'primeng/api';
-import { selectNewAddress } from '../../../store/new-address/new-address.selector';
+import { selectNewAddress } from '../../../store/address/address.selector';
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: '/media/marker-icon.png',

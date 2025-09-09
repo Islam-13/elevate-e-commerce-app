@@ -22,12 +22,9 @@ import { AddressesService } from '@shared/services/addresses/addresses.service';
 import { Message } from 'primeng/message';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
-import {
-  editAddress,
-  reset,
-} from '../../../store/new-address/new-address.actions';
+import { editAddress, reset } from '../../../store/address/address.actions';
 import { AddEditAddressComponent } from '../add-edit-address/add-edit-address.component';
-import { selectNewAddress } from '../../../store/new-address/new-address.selector';
+import { selectNewAddress } from '../../../store/address/address.selector';
 
 @Component({
   selector: 'app-check-out-step1',

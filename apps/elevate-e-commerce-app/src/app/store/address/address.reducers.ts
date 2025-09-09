@@ -1,8 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import * as actions from './new-address.actions';
+import * as actions from './address.actions';
 import { State } from '@shared/interfaces/addresses';
 
 const initialState: State = {
+  addresses: [],
   currentStep: 1,
   city: '',
   street: '',
@@ -16,6 +17,12 @@ const initialState: State = {
 
 export const newAddressReducers = createReducer(
   initialState,
+
+  on(actions.getAddresses, (state, { value }) => ({
+    ...state,
+    addresses: value,
+  })),
+
   on(actions.addAddress, (state, value) => ({ ...state, ...value })),
 
   on(actions.editAddress, (state, value) => ({

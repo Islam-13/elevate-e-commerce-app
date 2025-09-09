@@ -7,18 +7,23 @@ interface FirstStepAddress {
   phone: string;
 }
 
+export const getAddresses = createAction(
+  '[address] getAddresses',
+  props<{ value: Addresses[] }>()
+);
+
 export const addAddress = createAction(
-  '[newAddress] addAddress',
+  '[address] addAddress',
   props<FirstStepAddress>()
 );
 
 export const editAddress = createAction(
-  '[newAddress] editAddress',
+  '[address] editAddress',
   props<Addresses>()
 );
 
 export const getLocation = createAction(
-  '[newAddress] getLocation',
+  '[address] getLocation',
   props<Position>()
 );
 

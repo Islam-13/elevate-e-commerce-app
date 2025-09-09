@@ -33,6 +33,7 @@ export interface Position {
 }
 
 export interface State {
+  addresses: Addresses[];
   currentStep: number;
   city: string;
   street: string;

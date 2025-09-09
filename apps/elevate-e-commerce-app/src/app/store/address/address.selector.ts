@@ -7,3 +7,8 @@ export const selectNewAddress = createSelector(
   selectNewAddressState,
   (state) => state
 );
+
+export const selectAddress = createSelector(
+  selectNewAddressState,
+  (state) => state.addresses
+);

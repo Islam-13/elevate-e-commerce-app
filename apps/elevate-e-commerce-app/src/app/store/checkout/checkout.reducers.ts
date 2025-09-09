@@ -1,17 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
-import { Addresses } from '@shared/interfaces/addresses';
 
 import * as actions from './checkout.actions';
 
 export interface CheckoutState {
-  addresses: Addresses[];
   currentStep: number;
   selectedAddress: string;
   selectedMethod: string;
 }
 
 const initialState: CheckoutState = {
-  addresses: [],
   currentStep: 1,
   selectedAddress: '',
   selectedMethod: '',
@@ -19,10 +16,6 @@ const initialState: CheckoutState = {
 
 export const checkoutReducers = createReducer(
   initialState,
-  on(actions.getAddresses, (state, { value }) => ({
-    ...state,
-    addresses: value,
-  })),
 
   on(actions.selectAddress, (state, { value }) => ({
     ...state,

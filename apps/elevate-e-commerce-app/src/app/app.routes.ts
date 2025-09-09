@@ -45,27 +45,18 @@ export const appRoutes: Route[] = [
             (c) => c.CategoryComponent
           ),
       },
-       {path: 'cart',
-        loadComponent: ()=>
+      {
+        path: 'cart',
+        loadComponent: () =>
           import('./layouts/cart-layout/cart-layout.component').then(
             (c) => c.CartLayoutComponent
-          )
-
-
-
+          ),
       },
       {
         path: 'product-details/:id',
         loadComponent: () =>
           import('./pages/product-details/product-details.component').then(
             (c) => c.ProductDetailsComponent
-          ),
-      },
-      {
-        path: 'checkout',
-        loadComponent: () =>
-          import('./pages/check-out/check-out.component').then(
-            (c) => c.CheckOutComponent
           ),
       },
     ],

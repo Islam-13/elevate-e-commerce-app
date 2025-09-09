@@ -18,7 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 
 import { Store } from '@ngrx/store';
-import * as Actions from '../../../store/new-address/new-address.actions';
+import * as Actions from '../../../store/address/address.actions';
 
 import { env } from '@env/env';
 import { AddressesService } from '@shared/services/addresses/addresses.service';
@@ -27,7 +27,7 @@ import { CreateAddresses, Position, State } from '@shared/interfaces/addresses';
 import { MapComponent } from '../map/map.component';
 import { CtrlErrComponent } from '../../../auth/components/ctrl-err/ctrl-err.component';
 import { SubmitBtnComponent } from '../../../auth/components/submit-btn/submit-btn.component';
-import { selectNewAddress } from '../../../store/new-address/new-address.selector';
+import { selectNewAddress } from '../../../store/address/address.selector';
 
 @Component({
   selector: 'app-add-edit-address',
@@ -45,6 +45,7 @@ import { selectNewAddress } from '../../../store/new-address/new-address.selecto
 })
 export class AddEditAddressComponent implements OnInit {
   address = signal<State>({
+    addresses: [],
     city: '',
     currentStep: 1,
     editSession: false,

@@ -1,10 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Addresses } from '@shared/interfaces/addresses';
 
-export const getAddresses = createAction(
-  '[checkout] getAddresses',
-  props<{ value: Addresses[] }>()
-);
+type PaymentMethod = 'cash' | 'credit';
 
 export const selectAddress = createAction(
   '[checkout] selectAddress',
@@ -13,7 +9,7 @@ export const selectAddress = createAction(
 
 export const selectMethod = createAction(
   '[checkout] selectMethod',
-  props<{ value: string }>()
+  props<{ value: PaymentMethod }>()
 );
 
 export const nextStep = createAction('[checkout] nextStep');
