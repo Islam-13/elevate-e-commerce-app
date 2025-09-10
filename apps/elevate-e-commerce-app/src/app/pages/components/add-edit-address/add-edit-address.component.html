@@ -1,0 +1,88 @@
+<div class="p-3">
+  <app-progress [currentStep]="address().currentStep" />
+
+  @if (address().currentStep === 1 ) {
+
+  <form
+    class="py-4 flex flex-col gap-4"
+    [formGroup]="form"
+    (ngSubmit)="onNextStep()"
+  >
+    <h3 class="font-medium text-main">Enter address details</h3>
+
+    <div>
+      @let cityCtrl = form.get("city");
+
+      <label for="" class="block">City</label>
+
+      <input type="text" pInputText formControlName="city" fluid />
+
+      <app-ctrl-err
+        [inputCtrl]="cityCtrl"
+        validation="minlength"
+        msg1="City"
+        msg2="City must be 3 chars atleast"
+      />
+    </div>
+
+    <div>
+      @let streetCtrl = form.get("street");
+
+      <label for="" class="block">Address</label>
+      <textarea
+        rows="3"
+        cols="30"
+        pTextarea
+        formControlName="street"
+        fluid
+        placeholder="Enter your full address"
+      ></textarea>
+
+      <app-ctrl-err
+        [inputCtrl]="streetCtrl"
+        validation="minlength"
+        msg1="Street"
+        msg2="Street must be 3 chars atleast"
+      />
+    </div>
+
+    <div>
+      @let phoneCtrl = form.get("phone");
+
+      <label for="" class="block">Phone</label>
+      <input type="tel" pInputText formControlName="phone" fluid />
+
+      <app-ctrl-err
+        [inputCtrl]="phoneCtrl"
+        validation="pattern"
+        msg1="Phone"
+        msg2="Phone number must start with +20 !!"
+      />
+    </div>
+
+    <button class="btn-primary justify-center mt-10">Next</button>
+  </form>
+  } @else {
+
+  <div class="py-4 flex flex-col gap-4">
+    <div class="flex items-center gap-2">
+      <button
+        class="w-9 aspect-square bg-main text-white rounded-full"
+        (click)="onPrevStep()"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <h3 class="font-medium text-main text-2xl">Find Your Location</h3>
+    </div>
+
+    <app-map (location)="getLocation($event)" />
+
+    <app-submit-btn
+      label="Add Address"
+      [isSubmitting]="isSubmitting()"
+      (click)="onSubmitForm()"
+    />
+  </div>
+
+  }
+</div>

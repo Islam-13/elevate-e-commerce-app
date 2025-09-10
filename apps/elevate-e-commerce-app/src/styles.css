@@ -43,6 +43,7 @@
 }
 
 @theme {
+  --color-bg-bg: var(--bg-color);
   --color-bg-main: var(--color-bg-main);
   --color-main: var(--color-main);
   --color-title: var(--color-title);
@@ -95,7 +96,7 @@ button {
 }
 
 .btn-primary {
-  @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2;
+  @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
 }
 
 .auth-btn {
@@ -116,4 +117,3 @@ button {
     transform: translateX(calc(-100cqw - 100%));
   }
 }
-

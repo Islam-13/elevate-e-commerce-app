@@ -26,9 +26,10 @@
           "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
           "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
           "node_modules/animate.css/animate.min.css",
+          "node_modules/leaflet/dist/leaflet.css",
           "apps/elevate-e-commerce-app/src/styles.css"
         ],
-        "scripts": [],
+        "scripts": ["node_modules/leaflet/dist/leaflet.js"],
         "server": "apps/elevate-e-commerce-app/src/main.server.ts",
         "ssr": {
           "entry": "apps/elevate-e-commerce-app/src/server.ts"

@@ -45,14 +45,12 @@ export const appRoutes: Route[] = [
             (c) => c.CategoryComponent
           ),
       },
-       {path: 'cart',
-        loadComponent: ()=>
+      {
+        path: 'cart',
+        loadComponent: () =>
           import('./layouts/cart-layout/cart-layout.component').then(
             (c) => c.CartLayoutComponent
-          )
-
-
-
+          ),
       },
       {
         path: 'product-details/:id',

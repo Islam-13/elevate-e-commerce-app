@@ -15,7 +15,12 @@ import {
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { appInit } from '@shared/utils/app.utils';
 import { provideStore } from '@ngrx/store';
 import { filterReduser } from './store/filter.reducer';
@@ -25,12 +30,13 @@ import { BASE_URL } from 'auth-apis';
 import { env } from '@env/env';
 
 import Aura from '@primeng/themes/aura';
-import { MessageService } from 'primeng/api';
-
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { checkoutReducers } from './store/checkout/checkout.reducers';
+import { newAddressReducers } from './store/address/address.reducers';
+import { tokenInterceptor } from './interceptors/token.interceptor';
 
 import { CartEffects } from './store/cart-data/cart.effect';
 import { cartReducer } from './store/cart-data/cart.reducer';
-
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -39,7 +45,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAppInitializer(() => appInit()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     { provide: BASE_URL, useValue: env.baseURL },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -47,6 +53,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({ theme: { preset: Aura } }),
     MessageService,
+    ConfirmationService,
     importProvidersFrom([
       TranslateModule.forRoot({
         loader: {
@@ -56,13 +63,12 @@ export const appConfig: ApplicationConfig = {
         },
       }),
     ]),
-    provideStore({ filter: filterReduser }),
-    provideEffects(FilterEffects),
-     provideStore({
-      total:cartReducer // لازم يطابق الاسم في cart.selector.ts
+    provideStore({
+      filter: filterReduser,
+      checkout: checkoutReducers,
+      newAddress: newAddressReducers,
+      total: cartReducer,
     }),
-
-    // تسجيل الـ Effects
-    provideEffects([CartEffects])
+    provideEffects([CartEffects, FilterEffects]),
   ],
 };

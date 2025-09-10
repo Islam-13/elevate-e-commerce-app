@@ -11,7 +11,7 @@ import { Category } from '@shared/interfaces/categories-interfaces/categories-in
 import { Occasion } from '@shared/interfaces/occasions';
 import { CategoriesService } from '@shared/services/categories/categories.service';
 import { OccasionsService } from '@shared/services/occasions/occasions.service';
-import { AllproductsComponent } from "../allproducts/allproducts.component";
+import { AllproductsComponent } from '../components/allproducts/allproducts.component';
 
 import { Store } from '@ngrx/store';
 import {
@@ -20,11 +20,10 @@ import {
   loadSelectedPrice,
   loadSelectedRating,
   ApplyFilters,
-  clearAllFilters
+  clearAllFilters,
 } from '../../store/filter.actions';
 
-
-  @Component({
+@Component({
   selector: 'app-category',
   imports: [FormsModule, AllproductsComponent],
   templateUrl: './category.component.html',
@@ -88,17 +87,19 @@ export class CategoryComponent implements OnInit {
     });
 
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
-}
+  }
   onCategoryChange(event: Event, category: Category) {
     const checked = (event.target as HTMLInputElement)?.checked ?? false;
     if (checked) {
       this.selectedCategories.push(category);
     } else {
-      this.selectedCategories = this.selectedCategories.filter(c => c._id !== category._id);
+      this.selectedCategories = this.selectedCategories.filter(
+        (c) => c._id !== category._id
+      );
     }
     const selectedCategories = this.selectedCategories.map((cat) => ({
       _id: cat._id,
-      type: 'category'
+      type: 'category',
     }));
     this.store.dispatch(loadSelectedCategories({ selectedCategories }));
   }
@@ -108,11 +109,13 @@ export class CategoryComponent implements OnInit {
     if (checked) {
       this.selectedOccasions.push(occasion);
     } else {
-      this.selectedOccasions = this.selectedOccasions.filter(o => o._id !== occasion._id);
+      this.selectedOccasions = this.selectedOccasions.filter(
+        (o) => o._id !== occasion._id
+      );
     }
     const selectedOccasions = this.selectedOccasions.map((occ) => ({
       _id: occ._id,
-      type: 'occasion'
+      type: 'occasion',
     }));
     this.store.dispatch(loadSelectedOccasions({ selectedOccasions }));
   }
@@ -122,18 +125,20 @@ export class CategoryComponent implements OnInit {
     if (checked) {
       this.selectedRatings.push(rating);
     } else {
-      this.selectedRatings = this.selectedRatings.filter(r => r !== rating);
+      this.selectedRatings = this.selectedRatings.filter((r) => r !== rating);
     }
     const selectedRating = this.selectedRatings.map((r) => ({
       _id: r.toString(),
       rating: r,
-      type: 'rating'
+      type: 'rating',
     }));
     this.store.dispatch(loadSelectedRating({ selectedRating }));
   }
 
   onPriceChange() {
-    this.store.dispatch(loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal }));
+    this.store.dispatch(
+      loadSelectedPrice({ minPrice: this.minVal, maxPrice: this.maxVal })
+    );
   }
 
   clearFilters() {
@@ -146,60 +151,59 @@ export class CategoryComponent implements OnInit {
     this.store.dispatch(clearAllFilters());
   }
 
-onSearchChange() {
-  const term = this.searchTerm.trim().toLowerCase();
+  onSearchChange() {
+    const term = this.searchTerm.trim().toLowerCase();
 
-  if (term !== '') {
-    this.selectedCategories = this.categories().filter(c =>
-      c.name.toLowerCase().includes(term)
-    );
+    if (term !== '') {
+      this.selectedCategories = this.categories().filter((c) =>
+        c.name.toLowerCase().includes(term)
+      );
 
-    const selectedCategories = this.selectedCategories.map((cat) => ({
-      _id: cat._id,
-      type: 'category'
-    }));
-    this.store.dispatch(loadSelectedCategories({ selectedCategories }));
+      const selectedCategories = this.selectedCategories.map((cat) => ({
+        _id: cat._id,
+        type: 'category',
+      }));
+      this.store.dispatch(loadSelectedCategories({ selectedCategories }));
 
-    this.selectedOccasions = this.occasions().filter(o =>
-      o.name.toLowerCase().includes(term)
-    );
+      this.selectedOccasions = this.occasions().filter((o) =>
+        o.name.toLowerCase().includes(term)
+      );
 
-    const selectedOccasions = this.selectedOccasions.map((occ) => ({
-      _id: occ._id,
-      type: 'occasion'
-    }));
-    this.store.dispatch(loadSelectedOccasions({ selectedOccasions }));
-    this.selectedRatings = [1, 2, 3, 4, 5].filter((r) => {
-      const label = 'rating ' + r + ' star' + (r > 1 ? 's' : '');
-      return label.toLowerCase().includes(term);
-    });
+      const selectedOccasions = this.selectedOccasions.map((occ) => ({
+        _id: occ._id,
+        type: 'occasion',
+      }));
+      this.store.dispatch(loadSelectedOccasions({ selectedOccasions }));
+      this.selectedRatings = [1, 2, 3, 4, 5].filter((r) => {
+        const label = 'rating ' + r + ' star' + (r > 1 ? 's' : '');
+        return label.toLowerCase().includes(term);
+      });
 
-    const selectedRating = this.selectedRatings.map((r) => ({
-      _id: r.toString(),
-      rating: r,
-      type: 'rating'
-    }));
-    this.store.dispatch(loadSelectedRating({ selectedRating }));
-    this.store.dispatch(ApplyFilters());
+      const selectedRating = this.selectedRatings.map((r) => ({
+        _id: r.toString(),
+        rating: r,
+        type: 'rating',
+      }));
+      this.store.dispatch(loadSelectedRating({ selectedRating }));
+      this.store.dispatch(ApplyFilters());
+    } else {
+      this.selectedCategories = [];
+      this.selectedOccasions = [];
+      this.selectedRatings = [];
 
-  } else {
-    this.selectedCategories = [];
-    this.selectedOccasions = [];
-    this.selectedRatings = [];
-
-    this.store.dispatch(loadSelectedCategories({ selectedCategories: [] }));
-    this.store.dispatch(loadSelectedOccasions({ selectedOccasions: [] }));
-    this.store.dispatch(loadSelectedRating({ selectedRating: [] }));
-    this.store.dispatch(ApplyFilters());
+      this.store.dispatch(loadSelectedCategories({ selectedCategories: [] }));
+      this.store.dispatch(loadSelectedOccasions({ selectedOccasions: [] }));
+      this.store.dispatch(loadSelectedRating({ selectedRating: [] }));
+      this.store.dispatch(ApplyFilters());
+    }
   }
-}
 
   isCategorySelected(id: string): boolean {
-    return this.selectedCategories.some(c => c._id === id);
+    return this.selectedCategories.some((c) => c._id === id);
   }
 
   isOccasionSelected(id: string): boolean {
-    return this.selectedOccasions.some(o => o._id === id);
+    return this.selectedOccasions.some((o) => o._id === id);
   }
 
   isRatingSelected(rating: number): boolean {
