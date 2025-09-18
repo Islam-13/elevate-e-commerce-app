@@ -1,0 +1,15 @@
+<button
+  class="w-full bg-main rounded-rd-sm py-2.5 text-white my-9 disabled:cursor-not-allowed disabled:opacity-65 font-inter"
+  [disabled]="isSubmitting()"
+>
+  @if(isSubmitting()) {
+
+  <i class="fa-solid fa-spinner animate-spin" aria-label="is submitting"></i>
+  } @else {
+  <div class="flex items-center justify-center gap-2">
+    <ng-content></ng-content>
+    {{ label() }}
+  </div>
+
+  }
+</button>
