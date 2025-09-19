@@ -1,7 +1,5 @@
 <header #header class="mx-4 lg:mx-20">
-  <div
-    class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2"
-  >
+  <div class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2">
     <app-logo />
 
     <nav
@@ -20,7 +18,7 @@
         </button>
       </div>
 
-      <ul class="flex flex-col gap-6 font-medium text-title md:flex-row">
+      <ul class="flex flex-col gap-6 font-bold text-title md:flex-row">
         @for (link of navLinks; track $index) {
         <li>
           <a
@@ -66,29 +64,19 @@
           </button>
         </li>
 
-        @if (token()) {
-
-        <button class="p-2" aria-label="wishlist button">
-          <i class="fa-regular fa-heart"></i>
-        </button>
-        @if(check()){
-           <button class="py-2 px-5 relative" aria-label="wishlist button" routerLink="/cart">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span class=" bg-bg-main absolute top-0 left-0 text-sm text-main text-center font-bold w-6 h-6 rounded-full p-1 ">{{navbarCount}}</span>
-
-        </button>
-        }
-        
-
-        <button class="p-2" aria-label="account button">
-          <i class="fa-regular fa-user"></i>
-        </button>
-
+        @if (isLoggedIn()) 
+        {
+          <button class="p-2" aria-label="wishlist button">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button class="p-2" aria-label="wishlist button">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </button>
+          <button class="p-2 " aria-label="account button" routerLink="/settings">
+            <i class="fa-regular fa-user"></i>
+          </button>
         } @else {
-
         <a class="btn-primary" routerLink="/auth/login">Login</a>
-
-        <!-- <button class="btn-primary">Login</button> -->
         }
 
         <button

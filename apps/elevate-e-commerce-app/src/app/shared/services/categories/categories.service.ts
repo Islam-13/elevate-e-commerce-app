@@ -9,11 +9,11 @@ import { env } from '@env/env';
   providedIn: 'root',
 })
 export class CategoriesService {
-  private readonly _httpClient = inject(HttpClient);
+  private readonly _http = inject(HttpClient);
 
   getAllCategories() {
-    return this._httpClient
-      .get<CategoriesInterfaces>(env.baseURL + '/categories')
+    return this._http
+      .get<CategoriesInterfaces>(`${env.baseURL}/categories`)
       .pipe(
         map((res) => res.categories),
         catchError(() => {

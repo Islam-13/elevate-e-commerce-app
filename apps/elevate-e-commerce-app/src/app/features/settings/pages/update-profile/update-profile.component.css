@@ -1,0 +1,13 @@
+::ng-deep .p-confirmdialog {
+  background: var(--bg-dialog) !important;
+  border: none !important;
+}
+
+::ng-deep .p-dialog-footer {
+    justify-content: center !important;
+
+}
+
+/* ::ng-deep .p-dialog-header {
+  padding: 2.1rem ;
+} */

@@ -30,6 +30,7 @@ export class ThemeService {
       })
     );
   }
+  
 
   private setTheme(theme: string) {
     this.root.documentElement.setAttribute('data-theme', theme);

@@ -8,12 +8,11 @@ import { catchError, map } from 'rxjs';
   providedIn: 'root'
 })
 export class RelatedProductsService {
-  private readonly _httpClient = inject(HttpClient);
-  private readonly _baseURL = env.baseURL;
+  private readonly _http = inject(HttpClient);
+
 
   getRelatedProducts(productId: string) {
-    return this._httpClient.get<RelatedProductsInterface>(`${this._baseURL}/related/category/${productId}
-`).pipe(
+    return this._http.get<RelatedProductsInterface>(`${env.baseURL}/related/category/${productId}`).pipe(
       map((res) => res.relatedProducts),
       catchError(() => {
         throw 'Could not fetch related products, Please try again later!!';

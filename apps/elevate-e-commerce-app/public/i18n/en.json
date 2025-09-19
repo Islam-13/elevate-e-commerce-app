@@ -16,6 +16,7 @@
   "gifts.gift03Button": "Discover Now",
   "gifts.gift03Details": "Combo Sets Gift Box Up To 50% Off",
   "gifts.gift03Title": "Occasion Gifts",
+
   "home.feature01": "Free Delivery",
   "home.feature01Alt": "Free Delivery",
   "home.feature01Details": "Orders Over $120",
@@ -48,8 +49,6 @@
   "home.popularItems.h1": "Popular Items",
   "home.RelatedProducts.h1": "Related Products",
   "home.RelatedProducts.h2": "No Data Available 🙃",
-
-
 
   "home.aboutUs.h6": "about us",
   "home.aboutUs.h2.span1": "We Provide Best And Quality",
@@ -101,9 +100,23 @@
 
   "auth.needHelp": "Need Help?",
   "auth.contact": " Contact us",
+
+  "setting.updateProfile": "Update Profile",
+  "setting.myAccount": "My Account",
+  "setting.ChangePassword": "Change Password",
+  "setting.logout": "Logout",
+  "setting.uploadPhoto": "Upload Photo",
+  "setting.uploadPhoto.p": "You can upload a jpg, png, or gif photo with max size of 5MB.",
+  "setting.saveChanges": "Save Changes",
+  "setting.deleteMyAccount": "Delete My Account",
+  "setting.oldPassword": "Old Password",
+  "setting.newPassword": "New Password",
+  "setting.confirmNewPassword": "Confirm New Password",
+  "setting.updatePassword": "Update Password",
   "cart.checkOutLabel" : "Checkout → ",
   "cart.ClearCartLabel": "Clear Cart",
   "cart.removeProduct": "Remove",
   "cart.applyCoupon":"Apply Coupon",
   "cart.continueShopping":"← Continue Shopping"
+
 }

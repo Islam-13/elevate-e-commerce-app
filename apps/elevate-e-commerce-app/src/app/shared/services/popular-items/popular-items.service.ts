@@ -8,7 +8,7 @@ import { env } from '@env/env';
   providedIn: 'root',
 })
 export class PopularItemsService {
-  private readonly _httpClient = inject(HttpClient);
+  private readonly _http = inject(HttpClient);
 
   getAllProducts(filters?: {
     keyword?: string;
@@ -30,12 +30,12 @@ export class PopularItemsService {
         }
       });
     }
-    return this._httpClient.get<PopularItemsInterface>(
-      env.baseURL + '/products',
+    return this._http.get<PopularItemsInterface>(`${env.baseURL}/products`,
       { params }
     );
   }
-   getProductById(id:string):Observable<any>{
-   return this._httpClient.get(`${env.baseURL}/products/${id}`)
+
+  getProductById(id:string):Observable<any>{
+    return this._http.get(`${env.baseURL}/products/${id}`)
   }
 }

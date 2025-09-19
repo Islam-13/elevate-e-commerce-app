@@ -1,0 +1,107 @@
+<section>
+  <form class="md:space-y-4 space-y-3" [formGroup]="updateProfileForm" (ngSubmit)="updateProfileSubmit()">
+    <!-- Avatar  -->
+    <div class="flex items-center gap-6">
+      <div class="relative ">
+        <img [src]="accountInfo()?.photo"
+          class="h-24 w-24 rounded-full  object-cover ring-0 ring-white shadow shrink-0"
+          alt="Avatar" />
+        <button type="button" (click)="fileInput.click()"
+            class="absolute dark:bg-pink-200 -bottom-2 -right-2 inline-flex items-center justify-center h-9 w-9 rounded-full bg-white border border-gray-200 shadow hover:bg-gray-50"
+            title="Upload">
+          <i class="fa-solid fa-upload dark:text-pink-800"></i>
+        </button>
+        <input #fileInput type="file"
+          accept="image/png,image/jpeg,image/gif"
+          class="hidden"
+          (change)="onAvatarSelected($event)"/>
+      </div>
+      <div class="text-sm text-gray-600">
+        <h4 class="font-bold text-base text-gray-900 dark:text-zinc-100">{{'setting.uploadPhoto' | translate}}</h4>
+        <p class="text-zinc-500 dark:text-zinc-400">{{'setting.uploadPhoto.p' | translate}}</p>
+      </div>
+    </div>
+
+    <!-- Names -->
+    <div class="grid grid-cols-1 md:grid-cols-2 md:gap-6 gap-3">
+        <app-base-input
+          id="input-frist"
+          [label]="'auth.input.firstName' | translate"
+          type="text"
+          formControlName="firstName"
+        />
+        <app-base-input
+          id="input-last"
+          [label]="'auth.input.lastName' | translate"
+          type="text"
+          formControlName="lastName"
+        />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <app-base-input
+        id="input-email"
+        [label]="'auth.input.email' | translate"
+        type="email"
+        formControlName="email"
+      />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <app-base-input
+        id="input-phone"
+        [label]="'auth.input.phone' | translate"
+        type="tel"
+        inputmode="numeric"
+        formControlName="phone"
+      />
+      </div>
+
+    <!-- Gender (disabled like design) -->
+    <div>
+      <app-base-input
+        id="input-gender"
+        [label]="'auth.input.gender' | translate"
+        type="text"
+        formControlName="gender"
+      />
+    </div>
+
+    <!-- Footer actions -->
+    <div class="md:mt-10 mt-8 flex items-center justify-between">
+      <button type="button" (click)="confirmDialog()" class="text-red-600 dark:text-red-500 transition-all dark:hover:text-red-600 hover:text-red-700 font-bold">
+      {{'setting.deleteMyAccount' | translate}}
+      </button>
+
+      <button type="submit" [disabled]="isSubmitting()"
+        class="inline-flex items-center md:px-8 md:py-3 disabled:bg-zinc-600 disabled:cursor-not-allowed sm:px-6 sm:py-2 px-6 py-2 rounded-xl bg-red-600 text-white font-medium hover:bg-red-700">
+        @if (!isSubmitting()) {
+          {{'setting.saveChanges' | translate}}
+        }
+        @else {
+          <i class="fa-solid fa-circle-notch fa-spin fa-lg text-white me-1"></i> {{'setting.saveChanges' | translate}}
+        }
+      </button>
+    </div>
+  </form>
+
+  <!-- Dialog -->
+  <div class="card flex justify-center">
+      <p-toast />
+      <p-confirmdialog>
+          <ng-template #message let-message>
+              <div class="flex flex-col items-center w-full">
+                <i [ngClass]="message.icon" class="text-3xl mb-12"></i>
+                <p class="text-base text-black text-center dark:text-white fw-semibold mb-2.5">
+                  {{ message.message.split('?')[0] }}?
+                </p>
+                <p class="text-red-500 text-base fw-normal mb-10">
+                  {{ message.message.split('?')[1] }}
+                </p>
+              </div>
+          </ng-template>
+      </p-confirmdialog>
+  </div>
+</section>

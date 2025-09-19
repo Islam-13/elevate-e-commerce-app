@@ -1,1 +1,162 @@
-<p>register works!</p>
+
+<section>
+  <h3 class="text-center text-title text-3xl">
+    {{ 'auth.register.h' | translate }}
+  </h3>
+
+  <hr class="text-zinc-400 mb-6 mt-4" />
+
+  @if(errorMsg()) {
+  <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-4">{{
+    errorMsg()
+  }}</p-message>
+  }
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-5">
+        <div>
+          @let fNameCtrl = registerForm.get("firstName");
+
+          <app-base-input
+            [label]="'auth.input.firstName' | translate"
+            type="text"
+            placeholder="Jonathan"
+            formControlName="firstName"
+          />
+
+          <app-ctrl-err
+            [inputCtrl]="fNameCtrl"
+            msg1="First name"
+            validation="minlength"
+            msg2="At least 3 chars and up to 15 chars long!!"
+          />
+        </div>
+
+        <div>
+          @let lNameCtrl = registerForm.get("lastName");
+
+          <app-base-input
+            [label]="'auth.input.lastName' | translate"
+            type="text"
+            placeholder="Adrian"
+            formControlName="lastName"
+          />
+
+          <app-ctrl-err
+            [inputCtrl]="lNameCtrl"
+            msg1="Last name"
+            validation="minlength"
+            msg2="At least 3 chars and up to 15 chars long!!"
+          />
+        </div>
+      </div>
+
+      <div>
+        @let emailCtrl = registerForm.get("email");
+
+        <app-base-input
+          [label]="'auth.input.email' | translate"
+          type="email"
+          placeholder="user@example.com"
+          formControlName="email"
+        />
+
+        <app-ctrl-err
+          [inputCtrl]="emailCtrl"
+          msg1="Email"
+          validation="email"
+          msg2="Email is invalid!!"
+        />
+      </div>
+
+      <div>
+        @let phoneCtrl = registerForm.get('phone');
+
+        <app-base-input
+          [label]="'auth.input.phone' | translate"
+          type="tel"
+          placeholder="+201012345678"
+          formControlName="phone"
+        />
+
+        <app-ctrl-err
+          [inputCtrl]="phoneCtrl"
+          msg1="Phone"
+          validation="pattern"
+          msg2="Phone number must start with +20 !!"
+        />
+      </div>
+
+      <div>
+        @let genderdCtrl = registerForm.get("gender");
+
+        <label class="block capitalize text-sm font-medium" for="">{{
+          'auth.input.gender' | translate
+        }}</label>
+        <p-select
+          formControlName="gender"
+          [options]="options"
+          optionLabel="name"
+          placeholder="Select your gender"
+          class="w-full p-2 !rounded-rd-sm"
+        />
+
+        <app-ctrl-err
+          [inputCtrl]="genderdCtrl"
+          validation="pattern"
+          msg1="Gender"
+          msg2="Invalid option!!"
+        />
+      </div>
+
+      <div>
+        @let passwordCtrl = registerForm.get("password");
+
+        <app-base-input
+          [label]="'auth.input.password' | translate"
+          type="password"
+          placeholder="********"
+          formControlName="password"
+        />
+
+        <app-ctrl-err
+          [inputCtrl]="passwordCtrl"
+          validation="pattern"
+          msg1="Password"
+          msg2="Password must have atleast one uppercase, lowercase, number and special char!!"
+        />
+      </div>
+
+      <div>
+        @let rePasswordCtrl = registerForm.get('rePassword');
+
+        <app-base-input
+          [label]="'auth.input.confirmPassword' | translate"
+          type="password"
+          placeholder="********"
+          formControlName="rePassword"
+        />
+
+        <app-confirm-password-err
+          [form]="registerForm"
+          [rePasswordCtrl]="rePasswordCtrl"
+        />
+      </div>
+    </div>
+
+    <app-submit-btn
+      [isSubmitting]="isSubmitting()"
+      [label]="'auth.register.create' | translate"
+    />
+
+    <hr class="text-zinc-400 my-5" />
+
+    <p class="text-center">
+      <span>{{ 'auth.register.alreadyHaveAccount' | translate }}</span>
+      <a class="text-main" routerLink="/auth/login">
+        {{ 'auth.register.loginLink' | translate }}</a
+      >
+    </p>
+  </form>
+</section>

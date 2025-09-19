@@ -1,8 +1,9 @@
 import { Route } from '@angular/router';
-import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
-import { HomeComponent } from './pages/home/home.component';
-import { loggedUserGuard } from './auth/guards/loggedin.guard';
+import { loggedUserGuard } from './features/auth/guards/loggedin.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
+import { HomeComponent } from './features/pages/home/home.component';
+
 
 export const appRoutes: Route[] = [
   {
@@ -11,16 +12,19 @@ export const appRoutes: Route[] = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: '',
+        path: '', redirectTo:'login', pathMatch:'full'
+      },
+      {
+        path: 'register',
         loadComponent: () =>
-          import('./auth/pages/register/register.component').then(
+          import('./features/auth/pages/register/register.component').then(
             (c) => c.RegisterComponent
           ),
       },
       {
         path: 'login',
         loadComponent: () =>
-          import('./auth/pages/login/login.component').then(
+          import('./features/auth/pages/login/login.component').then(
             (c) => c.LoginComponent
           ),
       },
@@ -28,7 +32,7 @@ export const appRoutes: Route[] = [
         path: 'forget-password',
         loadComponent: () =>
           import(
-            './auth/pages/forget-password-steps/forget-password-steps.component'
+            './features/auth/pages/forget-password-steps/forget-password-steps.component'
           ).then((c) => c.ForgetPasswordStepsComponent),
       },
     ],
@@ -41,7 +45,7 @@ export const appRoutes: Route[] = [
       {
         path: 'category',
         loadComponent: () =>
-          import('./pages/category/category.component').then(
+          import('./features/pages/category/category.component').then(
             (c) => c.CategoryComponent
           ),
       },
@@ -55,9 +59,34 @@ export const appRoutes: Route[] = [
       {
         path: 'product-details/:id',
         loadComponent: () =>
-          import('./pages/product-details/product-details.component').then(
+          import('./features/pages/product-details/product-details.component').then(
             (c) => c.ProductDetailsComponent
           ),
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings-shell/settings-shell.component').then(
+            (c) => c.SettingsShellComponent, 
+          ),
+          children:[
+            { path: '',
+              redirectTo:'profile',
+              pathMatch:'full'
+            },
+            {path: 'profile',
+              loadComponent: () =>
+                import('./features/settings/pages/update-profile/update-profile.component').then(
+                  (c) => c.UpdateProfileComponent,
+                )
+            },
+            {path: 'password',
+              loadComponent: () =>
+                import('./features/settings/pages/update-password/update-password.component').then(
+                  (c) => c.UpdatePasswordComponent,
+                )
+          },
+        ]
       },
     ],
   },
