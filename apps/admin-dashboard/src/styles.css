@@ -1,1 +1,154 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('/fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf')
+    format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mulish';
+  src: url('/fonts/Mulish-VariableFont_wght.ttf')
+    format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  &,
+  &[data-theme='light'] {
+    --color-bg-main: #fbeaea;
+    --color-main: #a6252a;
+    --color-title: #741c21;
+    --color-mini-paragraph: #71717a;
+
+    --color-span: #ff668b;
+
+    --color-price: #741c21;
+    --color-icon: #a6252a;
+
+    --bg-color: #fafafa;
+    --normal-txt: #27272a;
+  }
+
+  &[data-theme='dark'] {
+    --color-bg-main: #3f3f46;
+    --color-main: #ffc2d0;
+    --color-title: #ffc2d0;
+    --color-mini-paragraph: #a1a1aa;
+
+    --color-span: #d75458;
+
+    --color-price: #ffc2d0;
+    --color-icon: #cd2e33;
+
+    --bg-color: #27272a;
+    --normal-txt: #fafafa;
+  }
+}
+
+@theme {
+  --color-bg-bg: var(--bg-color);
+  --color-bg-main: var(--color-bg-main);
+  --color-main: var(--color-main);
+  --color-title: var(--color-title);
+  --color-mini-paragraph: var(--color-mini-paragraph);
+  --color-normal-txt: var(--normal-txt);
+
+  --color-span: var(--color-span);
+
+  --color-price: var(--color-price);
+  --color-icon: var(--color-icon);
+
+  --color-star: #fba707;
+  --radius-rd-sm: 10px;
+  --radius-rd-md: 20px;
+  --radius-rd-full: 100px;
+  --font-nunito: 'Nunito Sans';
+  --font-mulish: 'Mulish';
+  --font-inter: 'Inter';
+  --color-light-gray: #2e2e3080;
+  --color-border: #00000014;
+  --color-red: #dc2626;
+  --color-gray-500:#667085;
+
+}
+
+body {
+  /* font-family: 'Inter'; */
+  background: var(--bg-color);
+  color: var(--normal-txt);
+}
+@layer components {
+  .text-nav {
+    @apply font-nunito text-sm font-bold p-[.5em] flex-1 rounded-xl flex flex-col  gap-2 items-center md:flex-row  md:text-lg md:mx-[20px] ;
+  }
+}
+button {
+  cursor: pointer;
+}
+
+ .p-menu {
+  background: white !important;
+  box-shadow: 0px 4px 9px 0px #00000026  ;
+  /* color: var(--p-menu-color);
+    border: 1px solid var(--p-menu-border-color);
+    border-radius: var(--p-menu-border-radius); */
+  min-width: 12.5rem;
+  padding-top:2em;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  margin-bottom: 10px;
+}
+
+  .p-menu-item-label {
+  padding: 10px;
+}
+
+/* .wrapper {
+  @apply max-w-[1440px] m-auto;
+} */
+
+/* .heading {
+  @apply text-xl text-title font-bold capitalize lg:text-3xl;
+}
+
+.underline {
+  @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1;
+}
+
+.btn-primary {
+  @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
+}
+
+.auth-btn {
+  @apply w-full bg-main rounded-rd-sm py-2.5 text-white my-9 disabled:cursor-not-allowed disabled:opacity-65;
+}
+
+.icon {
+  @apply min-w-10 min-h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
+}
+
+.marquee-item {
+  animation: marquee-move var(--speed) linear infinite;
+  animation-delay: calc(var(--single-slide-speed) * var(--position) * -1);
+}
+
+@keyframes marquee-move {
+  to {
+    transform: translateX(calc(-100cqw - 100%));
+  }
+} */

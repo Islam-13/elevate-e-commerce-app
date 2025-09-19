@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UserImageComponent } from '../ui/user-image.component';
+
+describe('UserImageComponent', () => {
+  let component: UserImageComponent;
+  let fixture: ComponentFixture<UserImageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [UserImageComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(UserImageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
