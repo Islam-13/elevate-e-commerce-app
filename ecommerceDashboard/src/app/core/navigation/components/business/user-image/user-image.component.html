@@ -1,0 +1,99 @@
+<!-- Profile image -->
+<div
+  class="flex-row justify-around items-center gap-2 mx-3 border-t border-border py-4"
+  [class]="isLargeScreen() ? 'hidden md:flex' : 'flex md:hidden'"
+>
+  <div
+    class="rounded-full bg-main h-[54px] w-[54px] flex items-center justify-center"
+  >
+    <!-- If Image exist -->
+    <img src="/images/Avatar.png" alt="Profile" class="rounded-full" />
+    <!-- if no image for user  -->
+    <!-- <span>A</span> -->
+  </div>
+  <!-- user Info name and password -->
+  <div class="flex-1 font-nunito hidden md:block">
+    <h3 class="text-sm font-bold">Firstname Lastname</h3>
+    <p class="text-light-gray font-semibold text-xs">user-emailple.com</p>
+  </div>
+
+  <!-- Menu -->
+  <div class="cursor-pointer">
+    <p-menu
+      #menu
+      [model]="items"
+      [popup]="true"
+      appendTo="body"
+      styleClass="origin-top-right right-0"
+    />
+    <div (click)="menu.toggle($event)">
+      @if(isLargeScreen()){
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9 9.75C9.41421 9.75 9.75 9.41421 9.75 9C9.75 8.58579 9.41421 8.25 9 8.25C8.58579 8.25 8.25 8.58579 8.25 9C8.25 9.41421 8.58579 9.75 9 9.75Z"
+          fill="#2E2E30"
+          fill-opacity="0.5"
+        />
+        <path
+          d="M9 4.5C9.41421 4.5 9.75 4.16421 9.75 3.75C9.75 3.33579 9.41421 3 9 3C8.58579 3 8.25 3.33579 8.25 3.75C8.25 4.16421 8.58579 4.5 9 4.5Z"
+          fill="#2E2E30"
+          fill-opacity="0.5"
+        />
+        <path
+          d="M9 15C9.41421 15 9.75 14.6642 9.75 14.25C9.75 13.8358 9.41421 13.5 9 13.5C8.58579 13.5 8.25 13.8358 8.25 14.25C8.25 14.6642 8.58579 15 9 15Z"
+          fill="#2E2E30"
+          fill-opacity="0.5"
+        />
+        <path
+          d="M9 9.75C9.41421 9.75 9.75 9.41421 9.75 9C9.75 8.58579 9.41421 8.25 9 8.25C8.58579 8.25 8.25 8.58579 8.25 9C8.25 9.41421 8.58579 9.75 9 9.75Z"
+          stroke="#2E2E30"
+          stroke-opacity="0.5"
+          stroke-width="0.9375"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M9 4.5C9.41421 4.5 9.75 4.16421 9.75 3.75C9.75 3.33579 9.41421 3 9 3C8.58579 3 8.25 3.33579 8.25 3.75C8.25 4.16421 8.58579 4.5 9 4.5Z"
+          stroke="#2E2E30"
+          stroke-opacity="0.5"
+          stroke-width="0.9375"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M9 15C9.41421 15 9.75 14.6642 9.75 14.25C9.75 13.8358 9.41421 13.5 9 13.5C8.58579 13.5 8.25 13.8358 8.25 14.25C8.25 14.6642 8.58579 15 9 15Z"
+          stroke="#2E2E30"
+          stroke-opacity="0.5"
+          stroke-width="0.9375"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      }@else{
+
+      <svg
+        width="26"
+        height="26"
+        viewBox="0 0 26 26"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.66675 13H21.3334M4.66675 19.25H21.3334M4.66675 6.75H21.3334"
+          stroke="#27272A"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+      }
+    </div>
+  </div>
+</div>

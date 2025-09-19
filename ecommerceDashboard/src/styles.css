@@ -91,7 +91,7 @@ body {
 }
 @layer components {
   .text-nav {
-    @apply font-nunito text-sm font-bold p-[.5em] flex-1 rounded-xl flex flex-col  gap-2 items-center md:flex-row  md:text-lg ;
+    @apply font-nunito text-sm font-bold p-[.5em] flex-1 rounded-xl flex flex-col  gap-2 items-center md:flex-row  md:text-lg md:mx-[20px] ;
   }
 }
 button {
