@@ -15,7 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@elevate-e-commerce-app/ui-button": ["ui-button/src/index.ts"]
+      "@elevate-e-commerce-app/assets": ["shared/src/index.ts"],
+      "@elevate-e-commerce-app/not-found": ["libs/not-found/src/index.ts"],
+      "@elevate-e-commerce-app/shared-assets": ["shared-assets/src/index.ts"],
+      "@elevate-e-commerce-app/ui-button": ["ui-button/src/index.ts"],
+      "@elevate-e-commerce-app/unauthorized-page": [
+        "libs/unauthorized-page/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

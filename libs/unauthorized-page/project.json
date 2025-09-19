@@ -1,0 +1,27 @@
+{
+  "name": "unauthorized-page",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/unauthorized-page/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/unauthorized-page/jest.config.ts",
+        "assets": [
+          {
+            "input": "libs/unauthorized-page/src/assets/images",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
