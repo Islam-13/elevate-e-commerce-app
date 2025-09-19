@@ -113,5 +113,10 @@
   "setting.oldPassword": "كلمة المرور القديمة",
   "setting.newPassword": "كلمة المرور الجديدة",
   "setting.confirmNewPassword": "تأكيد كلمة المرور الجديدة",
-  "setting.updatePassword": "تحديث كلمة المرور"
+  "setting.updatePassword": "تحديث كلمة المرور",
+  "cart.checkOutLabel" : "← الدفع ",
+  "cart.ClearCartLabel": "مسح عربة التسوق",
+  "cart.removeProduct": "مسح",
+  "cart.applyCoupon":"ادخل الكوبون",
+  "cart.continueShopping":" متابعة التسوق → "
 }

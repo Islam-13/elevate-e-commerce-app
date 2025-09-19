@@ -1,20 +1,16 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { NavLink } from '@shared/interfaces/navbar';
-import { ThemeService } from '@shared/services/theme/theme.service';
-import { LogoComponent } from '../logo/logo.component';
-import { TranslateMangerService } from '@shared/services/translate/translate.service';
-import { Store } from '@ngrx/store';
-import { selectIsLoggedIn } from '../../../store/auth-session/session.selectors';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, viewChild } from "@angular/core";
+import { RouterLink, RouterLinkActive, RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { LogoComponent } from "../logo/logo.component";
+import { NavLink } from "@shared/interfaces/navbar";
+import { CartService } from "@shared/services/cart/cart.service";
+import { LocalStorageService } from "@shared/services/localStorage/local-storage.service";
+import { Store } from "@ngrx/store";
+import { TranslateMangerService } from "@shared/services/translate/translate.service";
+import { Subscription } from "rxjs";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { selectIsLoggedIn } from "../../../store/auth-session/session.selectors";
+import { ThemeService } from "@shared/services/theme/theme.service";
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +18,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+
+export class NavbarComponent implements OnInit, OnDestroy {
   navLinks: NavLink[] = [
     { name: 'navbar.navLink.home', url: '/' },
     { name: 'navbar.navLink.category', url: '/category' },
@@ -31,17 +28,28 @@ export class NavbarComponent {
   ];
 
 
+  private readonly _CartService = inject(CartService)
+  private readonly _localStorage = inject(LocalStorageService);
+  private readonly store = inject(Store)
   _theme = inject(ThemeService);
   _lang = inject(TranslateMangerService);
   
-  private readonly store = inject(Store)
+
   private header = viewChild<ElementRef<HTMLElement>>('header');
   isOpen = signal<boolean>(false);
+  navbarCount!:number;
+  cancel!:Subscription;
 
 
   isLoggedIn = toSignal(this.store.select(selectIsLoggedIn), {
     initialValue: !!localStorage.getItem('userToken'),
   });
+
+
+  ngOnInit(): void {
+    // this.token.set(this._localStorage.get('userToken') ? true : false);
+    this.cartCount()
+  }
 
 
   @HostListener('document:click', ['$event']) detectClick(e: Event) {
@@ -57,4 +65,17 @@ export class NavbarComponent {
   toggleMenu() {
     this.isOpen.update((cur) => !cur);
   }
+
+  cartCount(){
+    this.cancel =  this._CartService.GetLoggedUserCart().subscribe({
+    next:(res)=>{
+      this.navbarCount =res.numOfCartItems;
+    }
+  })
 }
+
+  ngOnDestroy(): void {
+    this.cancel?.unsubscribe()
+  }
+}
+

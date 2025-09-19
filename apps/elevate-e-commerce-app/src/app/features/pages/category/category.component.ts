@@ -16,7 +16,6 @@ import { Store } from '@ngrx/store';
 import { ApplyFilters, clearAllFilters, loadSelectedCategories, loadSelectedOccasions, loadSelectedPrice, loadSelectedRating } from '../../../store/filters/filter.actions';
 
 
-
 @Component({
   selector: 'app-category',
   imports: [FormsModule, AllproductsComponent],

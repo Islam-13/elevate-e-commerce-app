@@ -112,6 +112,11 @@
   "setting.oldPassword": "Old Password",
   "setting.newPassword": "New Password",
   "setting.confirmNewPassword": "Confirm New Password",
-  "setting.updatePassword": "Update Password"
+  "setting.updatePassword": "Update Password",
+  "cart.checkOutLabel" : "Checkout → ",
+  "cart.ClearCartLabel": "Clear Cart",
+  "cart.removeProduct": "Remove",
+  "cart.applyCoupon":"Apply Coupon",
+  "cart.continueShopping":"← Continue Shopping"
 
 }
