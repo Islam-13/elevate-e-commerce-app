@@ -1,26 +1,42 @@
-import Aura from '@primeng/themes/aura';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClient, provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
-import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from "@angular/core";
-import { BrowserModule, provideClientHydration, withEventReplay } from "@angular/platform-browser";
-import { env } from "@env/env";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { appInit } from "@shared/utils/app.utils";
-import { BASE_URL } from "auth-apis";
-import { appRoutes } from './app.routes';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { filterReduser } from './store/filters/filter.reducer';
-import { provideEffects } from '@ngrx/effects';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { MessageService } from 'primeng/api';
-import { providePrimeNG } from 'primeng/config';
-import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
-import { provideState, provideStore, Store } from '@ngrx/store';
-import { FilterEffects } from './store/filters/filter.effect';
-import { SessionEffects } from './store/auth-session/session.effects';
-import { sessionFeatureKey, sessionReducer } from './store/auth-session/session.reducer';
-import { SessionActions } from './store/auth-session/session.actions';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { appRoutes } from './app.routes';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import {
+  HttpClient,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { appInit } from '@shared/utils/app.utils';
+import { provideStore } from '@ngrx/store';
+import { filterReduser } from './store/filter.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { FilterEffects } from './store/filter.effect';
+import { BASE_URL } from 'auth-apis';
+import { env } from '@env/env';
+
+import Aura from '@primeng/themes/aura';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { checkoutReducers } from './store/checkout/checkout.reducers';
+import { newAddressReducers } from './store/address/address.reducers';
+import { tokenInterceptor } from './interceptors/token.interceptor';
+
+import { CartEffects } from './store/cart-data/cart.effect';
+import { cartReducer } from './store/cart-data/cart.reducer';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -35,6 +51,7 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => appInit()),
     importProvidersFrom(BrowserModule),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     { provide: BASE_URL, useValue: env.baseURL },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -42,6 +59,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({ theme: { preset: Aura } }),
     MessageService,
+    ConfirmationService,
     importProvidersFrom([
       TranslateModule.forRoot({
         loader: {
@@ -51,13 +69,12 @@ export const appConfig: ApplicationConfig = {
         },
       }),
     ]),
-    provideStore({ filter: filterReduser }),
-    provideState( sessionFeatureKey, sessionReducer),
-    provideEffects(FilterEffects),
-    provideEffects([SessionEffects]), 
-    provideAppInitializer(() => {
-    const store = inject(Store);
-    store.dispatch(SessionActions.restoreFromStorage());
-  }),
+    provideStore({
+      filter: filterReduser,
+      checkout: checkoutReducers,
+      newAddress: newAddressReducers,
+      total: cartReducer,
+    }),
+    provideEffects([CartEffects, FilterEffects]),
   ],
 };

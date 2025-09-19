@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -9,7 +8,7 @@ import { RelatedProductsComponent } from '../../components/related-products/rela
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, RelatedProductsComponent],
+  imports: [RelatedProductsComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })
@@ -34,8 +33,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProductDetails(id: string) {
-    this._ProductService.getProductById(id)
-      .pipe(takeUntilDestroyed(this._destroyRef)) 
+    this._ProductService
+      .getProductById(id)
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
           this.productDetails.set(res.product);

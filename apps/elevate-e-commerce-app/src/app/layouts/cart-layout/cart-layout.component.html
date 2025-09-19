@@ -1,0 +1,58 @@
+<div class="containter">
+  <div class="grid grid-cols-1 lg:grid-cols-6 gap-4 mt-3 items-start">
+    <div
+      class="lg:order-1 lg:col-span-2 flex flex-col justify-center rounded-2xl p-4"
+    >
+      <h1 class="text-[30px] font-semibold normal-txt mb-3">Summary</h1>
+
+      <div class="flex justify-between">
+        <input pInputText type="text" placeholder="Coupon Code" />
+        <div class="coupon text-sm font-semibold">
+          <app-primary-btn [label]="'cart.applyCoupon' | translate">
+            <svg
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 9.5H9.01M15 9.5L9 15.5M15 15.5H15.01M2 9.5C2.79565 9.5 3.55871 9.81607 4.12132 10.3787C4.68393 10.9413 5 11.7043 5 12.5C5 13.2956 4.68393 14.0587 4.12132 14.6213C3.55871 15.1839 2.79565 15.5 2 15.5V17.5C2 18.0304 2.21071 18.5391 2.58579 18.9142C2.96086 19.2893 3.46957 19.5 4 19.5H20C20.5304 19.5 21.0391 19.2893 21.4142 18.9142C21.7893 18.5391 22 18.0304 22 17.5V15.5C21.2044 15.5 20.4413 15.1839 19.8787 14.6213C19.3161 14.0587 19 13.2956 19 12.5C19 11.7043 19.3161 10.9413 19.8787 10.3787C20.4413 9.81607 21.2044 9.5 22 9.5V7.5C22 6.96957 21.7893 6.46086 21.4142 6.08579C21.0391 5.71071 20.5304 5.5 20 5.5H4C3.46957 5.5 2.96086 5.71071 2.58579 6.08579C2.21071 6.46086 2 6.96957 2 7.5V9.5Z"
+                stroke="white"
+                stroke-width="1.45833"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </app-primary-btn>
+        </div>
+      </div>
+
+      <div
+        class="min-w-[425px] min-h-[256px] mt-2.5 p-2.5 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 border border-gray-300 opacity-60 cursor-not-allowed"
+      >
+        <span class="text-normal-txt">No coupons applied</span>
+      </div>
+
+      <div class="lg:order-1 bg-color">
+        <div
+          class="justify-between text-2xl mb-10 font-bold items-center text-normal-txt hidden lg:flex"
+        >
+          <span>Total</span>
+          <span>{{ totalPrice$ | async | currency : 'EGP' }}</span>
+        </div>
+        <button class="btn-checkout bg-main text-white" (click)="onCkeckout()">
+          {{ 'cart.checkOutLabel' | translate }}
+        </button>
+      </div>
+
+      <div
+        class="bordre-b mb-3 pb-3 hidden lg:flex justify-between items-center"
+      ></div>
+    </div>
+
+    <app-cart class="lg:col-span-4" />
+  </div>
+</div>
+
+<app-best-seller />

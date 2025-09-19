@@ -50,6 +50,13 @@ export const appRoutes: Route[] = [
           ),
       },
       {
+        path: 'cart',
+        loadComponent: () =>
+          import('./layouts/cart-layout/cart-layout.component').then(
+            (c) => c.CartLayoutComponent
+          ),
+      },
+      {
         path: 'product-details/:id',
         loadComponent: () =>
           import('./features/pages/product-details/product-details.component').then(
