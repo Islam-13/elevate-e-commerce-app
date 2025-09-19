@@ -91,7 +91,7 @@ body {
 }
 @layer components {
   .text-nav {
-    @apply font-nunito text-lg font-bold p-[10px]   w-full rounded-xl flex flex-col items-center md:flex-row gap-2;
+    @apply font-nunito text-sm font-bold p-[.5em] flex-1 rounded-xl flex flex-col  gap-2 items-center md:flex-row  md:text-lg ;
   }
 }
 button {
@@ -105,9 +105,7 @@ button {
     border: 1px solid var(--p-menu-border-color);
     border-radius: var(--p-menu-border-radius); */
   min-width: 12.5rem;
-  width: 430;
-  height: 176;
-  padding-top: 50px;
+  padding-top:2em;
   padding-right: 16px;
   padding-bottom: 16px;
   padding-left: 16px;
