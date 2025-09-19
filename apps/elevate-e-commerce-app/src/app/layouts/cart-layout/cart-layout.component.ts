@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { PrimaryBtnComponent } from '@shared/ui/primary-btn/primary-btn.component';
-import { BestSellerComponent } from '../../pages/components/best-seller/best-seller.component';
 import { CartComponent } from '../../pages/cart/cart.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { CartService } from '@shared/services/cart/cart.service';
@@ -19,6 +18,7 @@ import {
   selectTotalPrice,
 } from '../../store/cart-data/cart.selector';
 import { getTotal, updateCount } from '../../store/cart-data/cart.actions';
+import { BestSellerComponent } from '../../features/components/best-seller/best-seller.component';
 
 @Component({
   selector: 'app-cart-layout',

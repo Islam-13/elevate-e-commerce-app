@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { Component, input } from '@angular/core';
-=======
 import { Component, inject, input } from '@angular/core';
 
->>>>>>> 0c907520dee24ed2829998e0829d9057e9dcd075
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -16,11 +12,7 @@ import { LocalStorageService } from '@shared/services/localStorage/local-storage
 
 @Component({
   selector: 'app-card',
-<<<<<<< HEAD
-  imports: [StarRatingComponent, CurrencyPipe, RouterLink],
-=======
   imports: [StarRatingComponent, CurrencyPipe,RouterLink,MessageModule],
->>>>>>> 0c907520dee24ed2829998e0829d9057e9dcd075
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
