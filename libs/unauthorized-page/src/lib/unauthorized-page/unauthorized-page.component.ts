@@ -7,4 +7,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './unauthorized-page.component.html',
   styleUrl: './unauthorized-page.component.css',
 })
-export class UnauthorizedPageComponent {}
+export class UnauthorizedPageComponent {
+  goToHomePage() {}
+}

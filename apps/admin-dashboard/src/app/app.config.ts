@@ -6,12 +6,21 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-
+import { BASEURL } from 'libs/auth-api/src/lib/auth-api/base-url-injection';
+import { environment } from './../../../../libs/shared-env/src/lib/environment';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: BASEURL, useValue: environment.baseUrl },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
   ],
 };
