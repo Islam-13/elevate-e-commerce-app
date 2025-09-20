@@ -5,13 +5,13 @@ import {
   getLoggedUserDataDTO,
   User,
 } from '../types/getLoggedUserData.interface';
-import { BASEURL } from './../../../../../../libs/auth-api/src/lib/auth-api/base-url-injection';
+import { BASE_URL } from 'auth-apis';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserDataService {
-  private readonly baseUrl = inject(BASEURL);
+  private readonly baseUrl = inject(BASE_URL);
   private readonly _http = inject(HttpClient);
 
   getLoggedUserData(): Observable<User> {

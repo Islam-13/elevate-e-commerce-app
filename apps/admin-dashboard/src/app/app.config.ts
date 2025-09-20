@@ -1,3 +1,4 @@
+import { BASE_URL } from 'auth-apis';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -6,8 +7,7 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { BASEURL } from 'libs/auth-api/src/lib/auth-api/base-url-injection';
-import { environment } from './../../../../libs/shared-env/src/lib/environment';
+ import { environment } from './../../../../libs/shared-env/src/lib/environment';
 import {
   provideHttpClient,
   withFetch,
@@ -16,7 +16,7 @@ import {
 import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: BASEURL, useValue: environment.baseUrl },
+    { provide: BASE_URL, useValue: environment.baseUrl },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
