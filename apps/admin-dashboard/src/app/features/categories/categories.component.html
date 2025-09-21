@@ -1,0 +1,31 @@
+<main class="m-4 p-6 flex flex-col gap-5">
+  <app-feature-heading headText="All Categories" btnText="Add a new category" />
+
+  <app-feature-search />
+
+  <table class="w-full">
+    <thead>
+      <tr class="bg-zinc-50">
+        <th>Name</th>
+        <th>Products</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (category of categories(); track $index) {
+      <tr>
+        <td class="font-semibold">{{ category.name }}</td>
+        <td>{{ category.productsCount }} products</td>
+        <td class="flex justify-end">
+          <app-action-btns
+            [categoryId]="category._id"
+            [openId]="openId()"
+            (setOpenId)="changeId($event)"
+          />
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</main>

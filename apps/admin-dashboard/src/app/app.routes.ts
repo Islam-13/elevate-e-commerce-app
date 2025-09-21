@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
-      {
+  {
     path: '',
     loadComponent: () =>
       import(
@@ -16,6 +16,13 @@ export const appRoutes: Route[] = [
           import(
             './features/overView/components/overview/overview.component'
           ).then((c) => c.OverviewComponent),
+      },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('./features/categories/categories.component').then(
+            (c) => c.CategoriesComponent
+          ),
       },
     ],
   },

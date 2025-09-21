@@ -19,7 +19,8 @@
           [label]="'Preview website'"
           [isSubmitting]="false"
           class="text-nav p-0 hidden md:inline-flex"
-          ><svg
+        >
+          <svg
             width="26"
             height="26"
             viewBox="0 0 26 26"
@@ -98,7 +99,11 @@
           </svg>
           Overview
         </a>
-        <a [routerLink]="['/dd']" routerLinkActive="active" class="text-nav">
+        <a
+          [routerLink]="['/categories']"
+          routerLinkActive="active"
+          class="text-nav"
+        >
           <svg
             width="25"
             height="25"
