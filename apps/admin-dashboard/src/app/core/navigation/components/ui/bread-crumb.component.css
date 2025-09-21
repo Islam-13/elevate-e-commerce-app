@@ -1,0 +1,20 @@
+::ng-deep .p-breadcrumb-list {
+  flex-wrap: wrap;
+}
+::ng-deep .p-breadcrumb-item-link {
+  color: var(--color-gray-500);
+  font-family: 'Mulish';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  padding: 0px 10px;
+  text-transform: capitalize;
+}
+::ng-deep .p-icon {
+  color: var(--color-gray-500);
+}
+
+::ng-deep .p-breadcrumb-list li:last-child {
+  color: var(--color-main);
+}
