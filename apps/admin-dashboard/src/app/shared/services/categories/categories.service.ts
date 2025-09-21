@@ -22,6 +22,28 @@ export class CategoriesService {
       );
   }
 
+  addCategory(id: string, value: string) {
+    return this._httpClient
+      .put(`${env.baseUrl}/api/v1/categories/${id}`, value)
+      .pipe(
+        map((res) => res),
+        catchError(() => {
+          throw 'Could not update category, Please try again later!!';
+        })
+      );
+  }
+
+  updateCategory(id: string, value: string) {
+    return this._httpClient
+      .put(`${env.baseUrl}/api/v1/categories/${id}`, value)
+      .pipe(
+        map((res) => res),
+        catchError(() => {
+          throw 'Could not update category, Please try again later!!';
+        })
+      );
+  }
+
   deleteCategory(id: string) {
     return this._httpClient
       .delete(`${env.baseUrl}/api/v1/categories/${id}`)

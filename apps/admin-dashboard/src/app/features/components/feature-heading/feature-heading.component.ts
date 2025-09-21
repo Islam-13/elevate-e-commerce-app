@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-feature-heading',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './feature-heading.component.html',
   styleUrl: './feature-heading.component.css',
 })

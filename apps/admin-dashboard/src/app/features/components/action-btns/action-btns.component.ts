@@ -9,10 +9,11 @@ import {
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CategoriesService } from '../../../shared/services/categories/categories.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-action-btns',
-  imports: [ConfirmDialogModule],
+  imports: [ConfirmDialogModule, RouterLink],
   templateUrl: './action-btns.component.html',
   styleUrl: './action-btns.component.css',
 })

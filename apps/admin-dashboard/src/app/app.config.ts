@@ -1,7 +1,7 @@
 import { BASE_URL } from 'auth-apis';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { appRoutes } from './app.routes';
 import {
   provideClientHydration,
@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     { provide: BASE_URL, useValue: environment.baseUrl },
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    provideRouter(appRoutes, withComponentInputBinding()),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     providePrimeNG({ theme: { preset: Aura } }),

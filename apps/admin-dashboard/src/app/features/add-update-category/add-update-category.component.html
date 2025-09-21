@@ -1,0 +1,32 @@
+<section class="p-7">
+  <h3>@if (id()) { Update Category: Flowers } @else {Add a New Category}</h3>
+
+  <div class="p-5">
+    {{ id() }}
+  </div>
+
+  <form
+    class="p-6 bg-white rounded-2xl"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div>
+      <div>
+        <label for="">Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          id=""
+          placeholder="Enter category name"
+        />
+      </div>
+
+      <div>
+        <label for="">Category image</label>
+        <input type="file" formControlName="image" id="" />
+      </div>
+    </div>
+
+    <button>add</button>
+  </form>
+</section>
