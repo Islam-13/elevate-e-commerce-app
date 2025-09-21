@@ -21,9 +21,11 @@
               type="text"
               placeholder="Search..."
               class="p-4 ps-11 border border-zinc-300 rounded-rd-sm"
-              (input)="dt2.filterGlobal($event.target.value, 'contains')"
+              [(ngModel)]="globalFilter"
+              (ngModelChange)="dt2.filterGlobal(globalFilter, 'contains')"
             />
-
+            <!--   (input)="dt2.filterGlobal(($event.target as HTMLInputElement).value, 'contains')"
+ -->
             <span class="absolute top-1/2 left-4 -translate-y-1/2">
               <i class="pi pi-search"></i>
             </span>

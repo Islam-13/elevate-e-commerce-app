@@ -5,10 +5,11 @@ import { FeatureHeadingComponent } from '../components/feature-heading/feature-h
 import { Category } from '../../shared/types/categories';
 import { CategoriesService } from '../../shared/services/categories/categories.service';
 import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
-  imports: [FeatureHeadingComponent, ActionBtnsComponent, TableModule],
+  imports: [FeatureHeadingComponent, ActionBtnsComponent, TableModule,FormsModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
@@ -16,7 +17,7 @@ export class CategoriesComponent implements OnInit {
   categories = signal<Category[]>([]);
   openId = signal<string>('');
   loading = signal<boolean>(false);
-
+  globalFilter = '';
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _destroyRef = inject(DestroyRef);
 
