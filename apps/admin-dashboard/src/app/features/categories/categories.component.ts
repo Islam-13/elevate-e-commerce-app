@@ -5,17 +5,24 @@ import { FeatureHeadingComponent } from '../components/feature-heading/feature-h
 import { Category } from '../../shared/types/categories';
 import { CategoriesService } from '../../shared/services/categories/categories.service';
 import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
-  imports: [FeatureHeadingComponent, ActionBtnsComponent, TableModule],
+  imports: [
+    FeatureHeadingComponent,
+    ActionBtnsComponent,
+    TableModule,
+    FormsModule,
+  ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
 export class CategoriesComponent implements OnInit {
   categories = signal<Category[]>([]);
   openId = signal<string>('');
-  loading = signal<boolean>(false);
+  searchValue = signal<string>('');
+  isLoading = signal<boolean>(false);
 
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -25,6 +32,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getAllCategories() {
+    this.isLoading.set(true);
     const subscription = this._categoriesService.getAllCategories().subscribe({
       next: (data) => {
         this.categories.set(data);
@@ -32,6 +40,7 @@ export class CategoriesComponent implements OnInit {
       error: () => {
         console.log('test');
       },
+      complete: () => this.isLoading.set(false),
     });
 
     this._destroyRef.onDestroy(() => subscription.unsubscribe());

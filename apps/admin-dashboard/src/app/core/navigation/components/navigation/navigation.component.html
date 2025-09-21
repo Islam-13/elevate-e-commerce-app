@@ -186,6 +186,9 @@
       <!-- Profile image -->
       <app-user-image [isLargeScreen]="false"></app-user-image>
     </nav>
-    <router-outlet></router-outlet>
+
+    <main class="overflow-auto h-[calc(100dvh-70px)]">
+      <router-outlet></router-outlet>
+    </main>
   </div>
 </div>
