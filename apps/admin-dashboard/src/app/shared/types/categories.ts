@@ -20,3 +20,8 @@ export interface Metadata {
   totalPages: number;
   totalItems: number;
 }
+
+export interface AddCategoryData {
+  name: string;
+  image: File;
+}

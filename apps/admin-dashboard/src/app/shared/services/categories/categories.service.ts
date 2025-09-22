@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs';
 
-import { CategoriesRes } from '../../types/categories';
+import { AddCategoryData, CategoriesRes } from '../../types/categories';
 import { environment as env } from '@elevate-e-commerce-app/shared-env';
 
 @Injectable({
@@ -22,15 +22,13 @@ export class CategoriesService {
       );
   }
 
-  addCategory(id: string, value: string) {
-    return this._httpClient
-      .put(`${env.baseUrl}/api/v1/categories/${id}`, value)
-      .pipe(
-        map((res) => res),
-        catchError(() => {
-          throw 'Could not update category, Please try again later!!';
-        })
-      );
+  addCategory(data: AddCategoryData) {
+    return this._httpClient.post(`${env.baseUrl}/api/v1/categories`, data).pipe(
+      map((res) => res),
+      catchError(() => {
+        throw 'Could not add category, Please try again later!!';
+      })
+    );
   }
 
   updateCategory(id: string, value: string) {
