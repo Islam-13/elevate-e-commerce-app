@@ -16,6 +16,26 @@ export const appRoutes: Route[] = [
           import(
             './features/overView/components/overview/overview.component'
           ).then((c) => c.OverviewComponent),
+        data: { breadcrumb: 'Dashboard' },
+
+        children: [
+          {
+            path: 'users',
+            loadComponent: () =>
+              import(
+                './core/navigation/components/business/user-image/user-image.component'
+              ).then((c) => c.UserImageComponent),
+            data: { breadcrumb: 'users' },
+          },
+          {
+            path: 'category',
+            loadComponent: () =>
+              import(
+                './core/navigation/components/business/user-image/user-image.component'
+              ).then((c) => c.UserImageComponent),
+            data: { breadcrumb: 'category' },
+          },
+        ],
       },
       {
         path: 'categories',
