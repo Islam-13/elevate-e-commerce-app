@@ -1,0 +1,223 @@
+<div class="mx-7 flex flex-col gap-3 mb-5">
+  <h1 class="text-2xl font-bold mt-5 mb-4">Orders</h1>
+
+  <ng-container>
+    @if(loading){
+    <app-loader></app-loader>
+
+    } @else if (orders.length > 0) { @for (order of orders; track order._id) {
+    <div
+      class="relative border-border rounded-xl bg-card-bg flex flex-col gap-2 transition-all"
+    >
+      <!-- toggle btn -->
+      <div
+        class="absolute bottom-0 w-full flex flex-col items-center justify-end cursor-pointer h-[9rem] background-blur"
+        (click)="toggleOrder(order._id)"
+        [class]="{
+          hidden: order.orderItems.length < 3,
+          flex: order.orderItems.length >= 3,
+          'background-blur': !expandedOrders.has(order._id)
+        }"
+      >
+        <div class="flex flex-col items-center">
+          <button class="text-main text-sm font-semibold mt-2 bg-transparent">
+            {{ expandedOrders.has(order._id) ? 'Show Min' : 'Show All' }}
+          </button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 9L12 15L18 9"
+              stroke="#A6252A"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+      <!-- header of Order -->
+      <div
+        class="bg-main px-3 text-white py-4 flex justify-between flex-wrap items-center text-sm font-medium"
+      >
+        <span class=" ">Order # {{ order._id }}</span>
+        <span class=" "
+          >Created in : {{ order.createdAt | date : 'd MMMM, y' }}
+          <span>at {{ order.createdAt | date : 'hh:mm a' }}</span></span
+        >
+      </div>
+
+      <!-- <div class="p-3 bg-gray-100 flex flex-column gap-3"> -->
+      <div
+        class="flex justify-between items-center pb-2 border-b border-[#E4E4E7]"
+      >
+        <div class="flex gap-3 items-center">
+          <span class="font-semibold text-2xl">Total Price:</span>
+          <span class="font-semibold text-2xl">{{ order.totalPrice }} EGP</span>
+
+          @if (order.isPaid ) {
+          <span
+            class="bg-[#00BC7D] text-base text-white px-2 py-1 rounded-[1000px]"
+          >
+            <i class="pi pi-check" style="font-size: 0.8rem"></i>
+            Paid
+          </span>
+          }
+        </div>
+        <div class="flex items-center gap-2 mt-2">
+          <span class="text-sm font-semibold text-black">Status :</span>
+
+          <span
+            class="bg-[#2B7FFF] text-white rounded-[1000px] px-2"
+            [class]="{
+              'bg-[#2B7FFF] text-white rounded-[1000px]':
+                order.state.toLowerCase() === 'pending',
+              'bg-[#00BC7D] text-white rounded-[1000px]':
+                order.state.toLowerCase() === 'done',
+              'bg-[#DC2626] text-white rounded-[1000px]':
+                order.state.toLowerCase() === 'canceled'
+            }"
+          >
+            {{ order.state }}
+          </span>
+        </div>
+      </div>
+      <!-- Payment method -->
+      <div class="text-sm text-[#27272A]">
+        <div class="mb-1 flex gap-1">
+          <span class="font-semibold text-[#27272A]">Payment Method:</span>
+          @if(order.paymentType==='cash'){
+
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.99935 10H5.00768M14.9993 10H15.0077M3.33268 5H16.666C17.5865 5 18.3327 5.74619 18.3327 6.66667V13.3333C18.3327 14.2538 17.5865 15 16.666 15H3.33268C2.41221 15 1.66602 14.2538 1.66602 13.3333V6.66667C1.66602 5.74619 2.41221 5 3.33268 5ZM11.666 10C11.666 10.9205 10.9198 11.6667 9.99935 11.6667C9.07887 11.6667 8.33268 10.9205 8.33268 10C8.33268 9.07952 9.07887 8.33333 9.99935 8.33333C10.9198 8.33333 11.666 9.07952 11.666 10Z"
+              stroke="#71717A"
+              stroke-width="1.45833"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="text-[#71717A]">Cash</span> }@else {
+
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.66602 8.33366H18.3327M3.33268 4.16699H16.666C17.5865 4.16699 18.3327 4.91318 18.3327 5.83366V14.167C18.3327 15.0875 17.5865 15.8337 16.666 15.8337H3.33268C2.41221 15.8337 1.66602 15.0875 1.66602 14.167V5.83366C1.66602 4.91318 2.41221 4.16699 3.33268 4.16699Z"
+              stroke="#71717A"
+              stroke-width="1.45833"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="text-[#71717A]">Credit Card</span>
+          }
+        </div>
+
+        <div class="flex gap-2">
+          <span class="font-semibold text-[#27272A]">Delivery Status:</span>
+
+          @if(order.isDelivered){
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14.9993 5L5.83268 14.1667L1.66602 10M18.3327 8.33333L12.0827 14.5833L10.8327 13.3333"
+              stroke="#009966"
+              stroke-width="1.45833"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="text-[#009966]">Delivered</span>
+          }@else {
+
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.666 14.9997V4.99967C11.666 4.55765 11.4904 4.13372 11.1779 3.82116C10.8653 3.5086 10.4414 3.33301 9.99935 3.33301H3.33268C2.89065 3.33301 2.46673 3.5086 2.15417 3.82116C1.84161 4.13372 1.66602 4.55765 1.66602 4.99967V14.1663C1.66602 14.3874 1.75381 14.5993 1.91009 14.7556C2.06637 14.9119 2.27834 14.9997 2.49935 14.9997H4.16602M4.16602 14.9997C4.16602 15.9201 4.91221 16.6663 5.83268 16.6663C6.75316 16.6663 7.49935 15.9201 7.49935 14.9997M4.16602 14.9997C4.16602 14.0792 4.91221 13.333 5.83268 13.333C6.75316 13.333 7.49935 14.0792 7.49935 14.9997M12.4993 14.9997H7.49935M12.4993 14.9997C12.4993 15.9201 13.2455 16.6663 14.166 16.6663C15.0865 16.6663 15.8327 15.9201 15.8327 14.9997M12.4993 14.9997C12.4993 14.0792 13.2455 13.333 14.166 13.333C15.0865 13.333 15.8327 14.0792 15.8327 14.9997M15.8327 14.9997H17.4993C17.7204 14.9997 17.9323 14.9119 18.0886 14.7556C18.2449 14.5993 18.3327 14.3874 18.3327 14.1663V11.1247C18.3323 10.9356 18.2677 10.7522 18.1493 10.6047L15.2493 6.97968C15.1714 6.88207 15.0725 6.80324 14.96 6.74901C14.8475 6.69477 14.7242 6.66652 14.5993 6.66634H11.666"
+              stroke="#CA8A04"
+              stroke-width="1.45833"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="text-[#CA8A04]">Pending</span>
+
+          }
+        </div>
+      </div>
+      <!-- Order Items: -->
+      <span class="font-semibold text-[#27272A]">Order Items:</span>
+      <div
+        class="p-4 border border-[#E4E4E7] bg-white rounded-xl grid grid-cols-1 gap-4 md:grid-cols-2"
+        [class.h-[300px]]="!expandedOrders.has(order._id)"
+        [class.h-auto]="
+          expandedOrders.has(order._id) || order.orderItems.length <= 3
+        "
+        [class.overflow-hidden]="!expandedOrders.has(order._id)"
+        [class.overflow-y-scroll]="expandedOrders.has(order._id)"
+      >
+        @for (item of order.orderItems; track item._id) {
+
+        <div class="flex flex-row gap-4">
+          <img
+            [src]="item.product.imgCover"
+            alt="Product"
+            class="w-[9rem] h-[9rem] rounded-s-xl object-cover"
+          />
+          <div class="flex flex-col justify-between gap-3 h-[9rem]">
+            <div class="flex flex-col">
+              <span class="font-medium text-sm">{{ item.product.title }}</span>
+              <span class="text-xs text-500">
+                <i
+                  class="pi pi-star-fill text-yellow-600"
+                  style="font-size: 1rem"
+                ></i>
+                {{ item.product.rateAvg }}/5 ({{ item.product.rateCount }}
+                ratings)
+              </span>
+            </div>
+
+            <span class="font-bold gap-4 text-sm">
+              (× {{ item.quantity }})
+
+              {{ item.price }} EGP
+            </span>
+          </div>
+        </div>
+
+        }
+      </div>
+
+      <!-- </div> -->
+    </div>
+    } } @else {
+    <div class="text-center text-4xl text-600 p-6">No orders found.</div>
+
+    }
+  </ng-container>
+</div>

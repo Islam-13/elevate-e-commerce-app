@@ -4,7 +4,6 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { HomeComponent } from './features/pages/home/home.component';
 
-
 export const appRoutes: Route[] = [
   {
     path: 'auth',
@@ -12,7 +11,9 @@ export const appRoutes: Route[] = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: '', redirectTo:'login', pathMatch:'full'
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
       },
       {
         path: 'register',
@@ -59,34 +60,40 @@ export const appRoutes: Route[] = [
       {
         path: 'product-details/:id',
         loadComponent: () =>
-          import('./features/pages/product-details/product-details.component').then(
-            (c) => c.ProductDetailsComponent
+          import(
+            './features/pages/product-details/product-details.component'
+          ).then((c) => c.ProductDetailsComponent),
+      },
+      {
+        path: 'allOrders',
+        loadComponent: () =>
+          import('./features/pages/orders/orders.component').then(
+            (c) => c.OrdersComponent
           ),
       },
       {
         path: 'settings',
         loadComponent: () =>
-          import('./features/settings/settings-shell/settings-shell.component').then(
-            (c) => c.SettingsShellComponent, 
-          ),
-          children:[
-            { path: '',
-              redirectTo:'profile',
-              pathMatch:'full'
-            },
-            {path: 'profile',
-              loadComponent: () =>
-                import('./features/settings/pages/update-profile/update-profile.component').then(
-                  (c) => c.UpdateProfileComponent,
-                )
-            },
-            {path: 'password',
-              loadComponent: () =>
-                import('./features/settings/pages/update-password/update-password.component').then(
-                  (c) => c.UpdatePasswordComponent,
-                )
+          import(
+            './features/settings/settings-shell/settings-shell.component'
+          ).then((c) => c.SettingsShellComponent),
+        children: [
+          { path: '', redirectTo: 'profile', pathMatch: 'full' },
+          {
+            path: 'profile',
+            loadComponent: () =>
+              import(
+                './features/settings/pages/update-profile/update-profile.component'
+              ).then((c) => c.UpdateProfileComponent),
           },
-        ]
+          {
+            path: 'password',
+            loadComponent: () =>
+              import(
+                './features/settings/pages/update-password/update-password.component'
+              ).then((c) => c.UpdatePasswordComponent),
+          },
+        ],
       },
     ],
   },

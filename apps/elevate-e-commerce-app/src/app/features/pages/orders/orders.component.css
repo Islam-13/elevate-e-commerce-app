@@ -1,0 +1,21 @@
+ 
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+.background-blur {
+  /* // backdrop-filter: blur(1px);
+  //-webkit-backdrop-filter: blur(5px); /* iOS Safari */
+  /* add a translucent fill so the blur is visible */
+ /* background-color: transparent; */ 
+  background: linear-gradient(
+    191.75deg,
+    rgba(255, 255, 255, 0) 1%,
+    #ffffff 91.39%
+  );
+}
+/* Order */
+/* Paid Status */
+
+/* Auto layout */
+ 
+ 
