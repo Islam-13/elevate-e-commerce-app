@@ -37,6 +37,27 @@ export const appRoutes: Route[] = [
           },
         ],
       },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('./features/categories/categories.component').then(
+            (c) => c.CategoriesComponent
+          ),
+      },
+      {
+        path: 'categories/add-category',
+        loadComponent: () =>
+          import(
+            './features/add-update-category/add-update-category.component'
+          ).then((c) => c.AddUpdateCategoryComponent),
+      },
+      {
+        path: 'categories/update-category/:id',
+        loadComponent: () =>
+          import(
+            './features/add-update-category/add-update-category.component'
+          ).then((c) => c.AddUpdateCategoryComponent),
+      },
     ],
   },
 ];

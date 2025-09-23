@@ -1,0 +1,10 @@
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 1rem;
+}
+
+thead tr,
+tr:not(:last-child) {
+  border-bottom: 1px solid #00000014;
+}

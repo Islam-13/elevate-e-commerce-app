@@ -1,0 +1,101 @@
+<div class="relative">
+  <!-- menu button -->
+
+  <button class="md:hidden" (click)="toggleMenu($event)">
+    <svg
+      width="26"
+      height="26"
+      viewBox="0 0 26 26"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect x="0.5" y="0.5" width="25" height="25" rx="5.5" stroke="#D4D4D8" />
+      <path
+        d="M13 13.75C13.4142 13.75 13.75 13.4142 13.75 13C13.75 12.5858 13.4142 12.25 13 12.25C12.5858 12.25 12.25 12.5858 12.25 13C12.25 13.4142 12.5858 13.75 13 13.75Z"
+        fill="#A1A1AA"
+      />
+      <path
+        d="M13 8.5C13.4142 8.5 13.75 8.16421 13.75 7.75C13.75 7.33579 13.4142 7 13 7C12.5858 7 12.25 7.33579 12.25 7.75C12.25 8.16421 12.5858 8.5 13 8.5Z"
+        fill="#A1A1AA"
+      />
+      <path
+        d="M13 19C13.4142 19 13.75 18.6642 13.75 18.25C13.75 17.8358 13.4142 17.5 13 17.5C12.5858 17.5 12.25 17.8358 12.25 18.25C12.25 18.6642 12.5858 19 13 19Z"
+        fill="#A1A1AA"
+      />
+      <path
+        d="M13 13.75C13.4142 13.75 13.75 13.4142 13.75 13C13.75 12.5858 13.4142 12.25 13 12.25C12.5858 12.25 12.25 12.5858 12.25 13C12.25 13.4142 12.5858 13.75 13 13.75Z"
+        stroke="#A1A1AA"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M13 8.5C13.4142 8.5 13.75 8.16421 13.75 7.75C13.75 7.33579 13.4142 7 13 7C12.5858 7 12.25 7.33579 12.25 7.75C12.25 8.16421 12.5858 8.5 13 8.5Z"
+        stroke="#A1A1AA"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M13 19C13.4142 19 13.75 18.6642 13.75 18.25C13.75 17.8358 13.4142 17.5 13 17.5C12.5858 17.5 12.25 17.8358 12.25 18.25C12.25 18.6642 12.5858 19 13 19Z"
+        stroke="#A1A1AA"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+  <div
+    class="md:flex gap-2 absolute top-0 right-8 md:relative"
+    [class]="`${isOpen() ? 'block border rounded-md bg-white' : 'hidden'}`"
+  >
+    <a
+      role="button"
+      [routerLink]="`update-category/${categoryId()}`"
+      class="text-blue-600 md:bg-[#0063D01A] py-1 px-2 rounded-md flex items-center gap-1.5"
+    >
+      <span>
+        <svg
+          width="15"
+          height="14"
+          viewBox="0 0 15 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.25004 2.91671L11.5834 5.25004M12.8515 3.97371C13.16 3.66537 13.3333 3.24715 13.3333 2.81104C13.3334 2.37493 13.1602 1.95667 12.8518 1.64825C12.5435 1.33984 12.1253 1.16654 11.6892 1.16649C11.2531 1.16643 10.8348 1.33962 10.5264 1.64796L2.74121 9.43488C2.60577 9.56992 2.50561 9.73619 2.44954 9.91904L1.67896 12.4577C1.66388 12.5082 1.66275 12.5617 1.67566 12.6128C1.68858 12.6638 1.71508 12.7104 1.75234 12.7476C1.7896 12.7848 1.83624 12.8113 1.8873 12.8241C1.93837 12.8369 1.99195 12.8357 2.04238 12.8205L4.58163 12.0505C4.76431 11.995 4.93056 11.8954 5.06579 11.7606L12.8515 3.97371Z"
+            stroke="#155DFC"
+            stroke-width="1.252"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <span>Edit</span>
+    </a>
+
+    <p-confirmdialog />
+
+    <button
+      class="text-red-600 md:bg-[#FF00001A] py-1 px-2 rounded-md flex items-center gap-1.5"
+      (click)="confirm2($event)"
+    >
+      <span>
+        <svg
+          width="17"
+          height="16"
+          viewBox="0 0 17 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.5 3.99999H14.5M13.1667 3.99999V13.3333C13.1667 14 12.5 14.6667 11.8333 14.6667H5.16667C4.5 14.6667 3.83333 14 3.83333 13.3333V3.99999M5.83333 3.99999V2.66666C5.83333 1.99999 6.5 1.33333 7.16667 1.33333H9.83333C10.5 1.33333 11.1667 1.99999 11.1667 2.66666V3.99999M7.16667 7.33333V11.3333M9.83333 7.33333V11.3333"
+            stroke="#DC2626"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <span>Delete</span>
+    </button>
+  </div>
+</div>

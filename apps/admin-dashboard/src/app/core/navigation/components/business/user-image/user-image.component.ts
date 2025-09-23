@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, inject, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { UserDataService } from 'apps/admin-dashboard/src/app/shared/services/user-data.service';
@@ -8,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-image',
-  imports: [CommonModule, MenuModule],
+  imports: [MenuModule],
   templateUrl: './user-image.component.html',
   styleUrl: './user-image.component.css',
 })
@@ -16,7 +15,7 @@ export class UserImageComponent implements OnInit, OnDestroy {
   isLargeScreen = input.required<boolean>();
   items: MenuItem[] | undefined;
   private readonly _userData = inject(UserDataService);
-  userData?: User ;
+  userData?: User;
   private destroy$ = new Subject<void>();
   ngOnInit(): void {
     this.items = [
@@ -57,7 +56,7 @@ export class UserImageComponent implements OnInit, OnDestroy {
           },
           error: (err) => {
             //console.log(err.error.error);
-          //  this._toastService.showError(err.error.error);
+            //  this._toastService.showError(err.error.error);
           },
         });
     }

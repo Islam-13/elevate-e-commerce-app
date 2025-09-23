@@ -1,0 +1,24 @@
+<div class="flex items-center justify-between">
+  <h3 class="text-2xl font-semibold">{{ headText() }}</h3>
+
+  <a role="button" class="btn-primary" routerLink="add-category">
+    <span>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.58325 11H17.4166M10.9999 4.58334V17.4167"
+          stroke="white"
+          stroke-width="2.08333"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+    <span class="hidden md:block">{{ btnText() }}</span>
+  </a>
+</div>
