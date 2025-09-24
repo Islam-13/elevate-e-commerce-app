@@ -5,9 +5,9 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () =>
-      import(
-        './core/navigation/components/layout/adminLayout.component'
-      ).then((c) => c.AdminLayoutComponent),
+      import('./core/navigation/components/layout/adminLayout.component').then(
+        (c) => c.AdminLayoutComponent
+      ),
     data: { breadcrumb: 'dashboard' },
     children: [
       {
@@ -21,25 +21,6 @@ export const appRoutes: Route[] = [
           import(
             './features/overView/components/overview/overview.component'
           ).then((c) => c.OverviewComponent),
-
-        children: [
-          {
-            path: 'users',
-            loadComponent: () =>
-              import(
-                './core/navigation/components/business/user-image/user-image.component'
-              ).then((c) => c.UserImageComponent),
-            data: { breadcrumb: 'users' },
-          },
-          {
-            path: 'category',
-            loadComponent: () =>
-              import(
-                './core/navigation/components/business/user-image/user-image.component'
-              ).then((c) => c.UserImageComponent),
-            data: { breadcrumb: 'category' },
-          },
-        ],
       },
       {
         path: 'categories',
