@@ -16,13 +16,13 @@
     <div class="w-[min(100%,700px)] flex flex-col gap-4">
       <div class="grid">
         @let nameCtrl = form.get('name');
-        <label for="">Name</label>
+        <label for="name">Name</label>
         <input
           class="border border-zinc-200 rounded-rd-sm p-4"
           type="text"
           name="name"
           formControlName="name"
-          id=""
+          id="name"
           placeholder="Enter category name"
         />
 
@@ -37,12 +37,13 @@
 
       <div class="grid">
         @let imageCtrl = form.get('image');
-        <label for="">Category image</label>
+        <label for="image">Category image</label>
         <input
           class="border border-zinc-200 rounded-rd-sm p-4"
           type="file"
-          id=""
+          id="image"
           name="image"
+          (change)="onFileChange($event)"
         />
         @if (imageCtrl?.touched && imageCtrl?.getError("required")) {
         <span class="mt-2">

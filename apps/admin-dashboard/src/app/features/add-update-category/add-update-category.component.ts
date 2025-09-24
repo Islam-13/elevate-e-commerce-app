@@ -44,16 +44,18 @@ export class AddUpdateCategoryComponent implements OnInit {
   initForm() {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      image: new FormControl('', [Validators.required]),
+      image: new FormControl(null, [Validators.required]),
     });
   }
 
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      this.form.get('image')?.setValue(input.files[0]);
+    }
+  }
+
   onSubmit() {
-    const formData = new FormData(this.formImage()?.nativeElement);
-    const image = formData.get('image');
-
-    this.form.get('image')?.setValue(image);
-
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -72,7 +74,6 @@ export class AddUpdateCategoryComponent implements OnInit {
           },
           error: (err) => {
             this.isSubmitting.set(false);
-
             this._toast.add({
               severity: 'error',
               summary: 'Error',
@@ -84,7 +85,6 @@ export class AddUpdateCategoryComponent implements OnInit {
             this.isSubmitting.set(false);
           },
         });
-
       this._destroyRef.onDestroy(() => subscription.unsubscribe());
     }
   }
