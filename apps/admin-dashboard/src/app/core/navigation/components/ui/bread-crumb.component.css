@@ -16,5 +16,6 @@
 }
 
 ::ng-deep .p-breadcrumb-list li:last-child {
-  color: var(--color-main);
+  /* color: var(--color-main); */
+ color:red;
 }

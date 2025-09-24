@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { CategoryResolver } from './shared/services/categories/category.resolver';
 
 export const appRoutes: Route[] = [
   {
@@ -8,8 +9,6 @@ export const appRoutes: Route[] = [
         './core/navigation/components/navigation/navigation.component'
       ).then((c) => c.NavigationComponent),
     children: [
-      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' }, // default route
-
       {
         path: 'Dashboard',
         loadComponent: () =>
@@ -43,21 +42,38 @@ export const appRoutes: Route[] = [
           import('./features/categories/categories.component').then(
             (c) => c.CategoriesComponent
           ),
+        data: { breadcrumb: 'categories' },
+
+        children: [
+          {
+            path: 'add-category',
+            loadComponent: () =>
+              import(
+                './features/add-update-category/add-update-category.component'
+              ).then((c) => c.AddUpdateCategoryComponent),
+            data: { breadcrumb: 'Add Category' },
+          },
+          {
+            path: 'update-category/:id',
+            loadComponent: () =>
+              import(
+                './features/add-update-category/add-update-category.component'
+              ).then((c) => c.AddUpdateCategoryComponent),
+            resolve: { categoryName: CategoryResolver },
+            data: { breadcrumb: 'Update Category: :categoryName ' },
+          },
+        ],
       },
       {
-        path: 'categories/add-category',
+        path: '**',
         loadComponent: () =>
           import(
-            './features/add-update-category/add-update-category.component'
-          ).then((c) => c.AddUpdateCategoryComponent),
-      },
-      {
-        path: 'categories/update-category/:id',
-        loadComponent: () =>
-          import(
-            './features/add-update-category/add-update-category.component'
-          ).then((c) => c.AddUpdateCategoryComponent),
+            '../../../../libs/not-found/src/lib/not-found/not-found.component'
+          ).then((c) => c.NotFoundComponent),
+        data: { breadcrumb: 'Not Found' },
       },
     ],
   },
+
+  { path: '', redirectTo: 'Dashboard', pathMatch: 'full' }, // default route
 ];
