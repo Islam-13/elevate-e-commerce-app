@@ -6,17 +6,17 @@ export const appRoutes: Route[] = [
     path: '',
     loadComponent: () =>
       import(
-        './core/navigation/components/navigation/navigation.component'
-      ).then((c) => c.NavigationComponent),
-    data: { breadcrumb: 'Dashboard' },
+        './core/navigation/components/layout/adminLayout.component'
+      ).then((c) => c.AdminLayoutComponent),
+    data: { breadcrumb: 'dashboard' },
     children: [
       {
         path: '',
-        redirectTo: 'Dashboard',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
       }, // default route
       {
-        path: 'Dashboard',
+        path: 'dashboard',
         loadComponent: () =>
           import(
             './features/overView/components/overview/overview.component'
