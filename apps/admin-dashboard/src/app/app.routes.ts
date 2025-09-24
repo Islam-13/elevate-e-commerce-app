@@ -8,14 +8,19 @@ export const appRoutes: Route[] = [
       import(
         './core/navigation/components/navigation/navigation.component'
       ).then((c) => c.NavigationComponent),
+    data: { breadcrumb: 'Dashboard' },
     children: [
+      {
+        path: '',
+        redirectTo: 'Dashboard',
+        pathMatch: 'full',
+      }, // default route
       {
         path: 'Dashboard',
         loadComponent: () =>
           import(
             './features/overView/components/overview/overview.component'
           ).then((c) => c.OverviewComponent),
-        data: { breadcrumb: 'Dashboard' },
 
         children: [
           {
@@ -74,6 +79,4 @@ export const appRoutes: Route[] = [
       },
     ],
   },
-
-  { path: '', redirectTo: 'Dashboard', pathMatch: 'full' }, // default route
 ];

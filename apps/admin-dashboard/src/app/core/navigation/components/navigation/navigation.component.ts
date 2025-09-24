@@ -2,12 +2,16 @@ import { UiButtonComponent } from './../../../../../../../../libs/ui-button/src/
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserImageComponent } from '../business/user-image/user-image.component';
-import { BreadCrumbComponent } from "../ui/bread-crumb.component";
-import { DashboardComponent } from "../ui/dashboard/dashboard.component";
+import { BreadCrumbComponent } from '../ui/bread-crumb.component';
 
 @Component({
   selector: 'app-navigation',
-  imports: [RouterModule, UiButtonComponent, UserImageComponent, BreadCrumbComponent, DashboardComponent],
+  imports: [
+    RouterModule,
+    UiButtonComponent,
+    UserImageComponent,
+    BreadCrumbComponent,
+  ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css',
 })
