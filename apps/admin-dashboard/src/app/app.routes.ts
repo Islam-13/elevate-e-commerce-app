@@ -58,6 +58,13 @@ export const appRoutes: Route[] = [
             './features/add-update-category/add-update-category.component'
           ).then((c) => c.AddUpdateCategoryComponent),
       },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./features/products/products.component').then(
+            (c) => c.ProductsComponent
+          ),
+      },
     ],
   },
 ];

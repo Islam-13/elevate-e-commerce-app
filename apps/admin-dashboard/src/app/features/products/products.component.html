@@ -1,8 +1,8 @@
 <main class="m-4 p-6 flex flex-col gap-5 bg-white rounded-2xl">
   <app-feature-heading
-    headText="All Categories"
-    btnText="Add a new category"
-    addBtnNavigate="add-category"
+    headText="All Products"
+    btnText="Add a new product"
+    addBtnNavigate="add-product"
   />
 
   <div class="grid relative">
@@ -24,39 +24,48 @@
     <div class="card">
       <p-table
         #dt2
-        [value]="categories()"
+        [value]="products()"
         dataKey="id"
         [rows]="5"
         [rowsPerPageOptions]="[5, 15, 25]"
         [loading]="isLoading()"
         [paginator]="true"
-        [globalFilterFields]="['name', 'productsCount']"
+        [globalFilterFields]="['title', 'price', 'quantity']"
         [tableStyle]="{ width: '100%' }"
       >
         <ng-template #header>
           <tr>
             <th style="width: 22%">Name</th>
-            <th style="width: 22%">Products</th>
+            <th style="width: 22%">Price</th>
+            <th style="width: 22%">Stock</th>
+            <th style="width: 22%">Sales</th>
+            <th style="width: 22%">Ratings</th>
             <th style="width: 22%"></th>
           </tr>
         </ng-template>
 
-        <ng-template #body let-category>
+        <ng-template #body let-product>
           <tr>
             <td class="font-semibold">
-              {{ category.name }}
+              {{ product.title }}
             </td>
 
-            <td>{{ category.productsCount }} products</td>
+            <td>{{ product.price }}</td>
+
+            <td>{{ product.quantity }}</td>
+
+            <td>{{ product.sold }}</td>
+
+            <td>{{ product.rateAvg }}</td>
 
             <td class="flex justify-end">
               <app-action-btns
-                (deleteItem)="deleteCategory(category._id)"
-                [categoryId]="category._id"
+                (deleteItem)="deleteProduct(product._id)"
+                [categoryId]="product._id"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
-                [editNavigate]="`update-category/${category._id}`"
-                message="category"
+                [editNavigate]="`update-product/${product._id}`"
+                message="product"
               />
             </td>
           </tr>
