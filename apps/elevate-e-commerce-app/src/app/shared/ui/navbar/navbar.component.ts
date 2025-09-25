@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, viewChild } from "@angular/core";
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, HostListener, Inject, inject, OnDestroy, OnInit, PLATFORM_ID, signal, viewChild } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { LogoComponent } from "../logo/logo.component";
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     { name: 'navbar.navLink.about', url: '/about' },
     { name: 'navbar.navLink.contact', url: '/contact' },
   ];
-
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   private readonly _CartService = inject(CartService)
   private readonly _localStorage = inject(LocalStorageService);
@@ -42,7 +43,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 
   isLoggedIn = toSignal(this.store.select(selectIsLoggedIn), {
-    initialValue: !!localStorage.getItem('userToken'),
+    initialValue: !!this._localStorage.get('userToken'),
   });
 
 

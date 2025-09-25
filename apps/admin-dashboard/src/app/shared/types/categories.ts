@@ -3,6 +3,10 @@ export interface CategoriesRes {
   metadata: Metadata;
   categories: Category[];
 }
+export interface CategoryRes {
+  message: string;
+  category: Category;
+}
 
 export interface Category {
   _id: string;

@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs';
 
-import { AddCategoryData, CategoriesRes } from '../../types/categories';
+import {
+  AddCategoryData,
+  CategoriesRes,
+  CategoryRes,
+} from '../../types/categories';
+
 import { environment as env } from '@elevate-e-commerce-app/shared-env';
 
 @Injectable({
@@ -33,6 +38,17 @@ export class CategoriesService {
         throw 'Could not add category, Please try again later!!';
       })
     );
+  }
+
+  getCategoryById(id: string) {
+    return this._httpClient
+      .get<CategoryRes>(`${env.baseUrl}/api/v1/categories/${id}`)
+      .pipe(
+        map((res) => res.category),
+        catchError(() => {
+          throw 'Could not fetch category, Please try again later!!';
+        })
+      );
   }
 
   updateCategory(id: string, value: string) {
