@@ -10,4 +10,5 @@ import { RouterLink } from '@angular/router';
 export class FeatureHeadingComponent {
   headText = input.required<string>();
   btnText = input.required<string>();
+  addBtnNavigate = input.required<string>();
 }

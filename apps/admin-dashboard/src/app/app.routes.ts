@@ -58,6 +58,13 @@ export const appRoutes: Route[] = [
           ).then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
       },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./features/products/products.component').then(
+            (c) => c.ProductsComponent
+          ),
+      },
     ],
   },
 ];
