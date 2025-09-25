@@ -190,6 +190,8 @@ increaseQuantity(item: CartItem) {
 
         this._store.dispatch(getTotal({ cartData: res.cart }));
         this._store.dispatch(updateCount({ qun: updatedItems }));
+          this.loadCart()
+
       }
        if (res.message === "success") {
           this.cartData = res;
@@ -225,6 +227,8 @@ increaseQuantity(item: CartItem) {
 
             this._store.dispatch(getTotal({ cartData: res.cart }));
             this._store.dispatch(updateCount({ qun: updatedItems }));
+          this.loadCart()
+
           }
            if (res.message === "success") {
           this.cartData = res;
