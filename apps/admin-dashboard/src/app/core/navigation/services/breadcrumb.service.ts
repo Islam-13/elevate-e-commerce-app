@@ -1,10 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  NavigationEnd,
-  Router,
-} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
 import { BehaviorSubject, filter } from 'rxjs';
@@ -17,7 +12,7 @@ export class BreadcrumbService {
   breadcrumbs$ = this._breadcrumbs$.asObservable();
 
   constructor(private router: Router) {
-    console.log('BreadcrumbService created');
+   // console.log('BreadcrumbService created');
     this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
       .subscribe((e) => {
@@ -42,7 +37,6 @@ export class BreadcrumbService {
     const nextUrl = path ? `${url}/${path}` : url;
 
     if (label) {
-      // optionally replace placeholders in label with params, e.g. 'Update :id' -> 'Update 5'
       // merge params and resolved data into one object
       const values = { ...route.params, ...route.data };
       const labelWithParams = this.replaceLabelParams(label, values);
@@ -50,13 +44,12 @@ export class BreadcrumbService {
       // const labelWithParams = this.replaceLabelParams(label, route.params);
       // breadcrumbs.push({ label: labelWithParams, routerLink: nextUrl || '/' });
     }
-
     if (route.firstChild) {
       return this.buildBreadCrumb(route.firstChild, nextUrl, breadcrumbs);
     }
     return breadcrumbs;
   }
-
+  // optionally replace placeholders in label with params, e.g. 'Update :id' -> 'Update 5'
   private replaceLabelParams(
     label: string,
     params: { [k: string]: any }
