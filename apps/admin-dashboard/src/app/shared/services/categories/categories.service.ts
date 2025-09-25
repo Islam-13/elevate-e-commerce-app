@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs';
 
-import { CategoriesRes, CategoryRes } from '../../types/categories';
+import {
+  AddCategoryData,
+  CategoriesRes,
+  CategoryRes,
+} from '../../types/categories';
+
 import { environment as env } from '@elevate-e-commerce-app/shared-env';
 
 @Injectable({
@@ -21,6 +26,20 @@ export class CategoriesService {
         })
       );
   }
+
+  addCategory(data: AddCategoryData) {
+    const fd = new FormData();
+    fd.append('name', data.name);
+    fd.append('image', data.image);
+
+    return this._httpClient.post(`${env.baseUrl}/api/v1/categories`, fd).pipe(
+      map((res) => res),
+      catchError(() => {
+        throw 'Could not add category, Please try again later!!';
+      })
+    );
+  }
+
   getCategoryById(id: string) {
     return this._httpClient
       .get<CategoryRes>(`${env.baseUrl}/api/v1/categories/${id}`)
@@ -28,16 +47,6 @@ export class CategoriesService {
         map((res) => res.category),
         catchError(() => {
           throw 'Could not fetch category, Please try again later!!';
-        })
-      );
-  }
-  addCategory(id: string, value: string) {
-    return this._httpClient
-      .put(`${env.baseUrl}/api/v1/categories/${id}`, value)
-      .pipe(
-        map((res) => res),
-        catchError(() => {
-          throw 'Could not update category, Please try again later!!';
         })
       );
   }
