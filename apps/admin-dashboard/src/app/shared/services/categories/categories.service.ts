@@ -23,7 +23,11 @@ export class CategoriesService {
   }
 
   addCategory(data: AddCategoryData) {
-    return this._httpClient.post(`${env.baseUrl}/api/v1/categories`, data).pipe(
+    const fd = new FormData();
+    fd.append('name', data.name);
+    fd.append('image', data.image);
+
+    return this._httpClient.post(`${env.baseUrl}/api/v1/categories`, fd).pipe(
       map((res) => res),
       catchError(() => {
         throw 'Could not add category, Please try again later!!';
