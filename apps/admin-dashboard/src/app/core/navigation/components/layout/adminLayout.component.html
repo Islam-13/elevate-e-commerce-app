@@ -57,7 +57,7 @@
           </svg>
         </div>
         <a
-          [routerLink]="['/Dashboard']"
+          [routerLink]="['/dashboard']"
           routerLinkActive="active"
           class="text-nav"
         >
@@ -122,7 +122,11 @@
 
           Categories
         </a>
-        <a [routerLink]="['/x']" routerLinkActive="active" class="text-nav">
+        <a
+          [routerLink]="['/occasions']"
+          routerLinkActive="active"
+          class="text-nav"
+        >
           <svg
             width="25"
             height="25"
@@ -141,7 +145,11 @@
 
           Occasions
         </a>
-        <a [routerLink]="['/w']" routerLinkActive="active" class="text-nav">
+        <a
+          [routerLink]="['/products']"
+          routerLinkActive="active"
+          class="text-nav"
+        >
           <svg
             width="25"
             height="25"
@@ -191,6 +199,7 @@
 
     <main class="overflow-auto h-[calc(100dvh-70px)]">
       <router-outlet></router-outlet>
+      <!-- <app-dashboard></app-dashboard> -->
     </main>
   </div>
 </div>

@@ -1,5 +1,7 @@
 <header #header class="mx-4 lg:mx-20">
-  <div class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2">
+  <div
+    class="wrapper relative flex justify-between items-center mx-4 lg:mx-20 py-2"
+  >
     <app-logo />
 
     <nav
@@ -64,6 +66,7 @@
           </button>
         </li>
 
+
         @if (isLoggedIn()) 
         {
           <button class="p-2" aria-label="wishlist button">
@@ -77,6 +80,7 @@
           <button class="p-2 " aria-label="account button" routerLink="/settings">
             <i class="fa-regular fa-user"></i>
           </button>
+
         } @else {
         <a class="btn-primary" routerLink="/auth/login">Login</a>
         }

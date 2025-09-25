@@ -1,43 +1,43 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { TableModule } from 'primeng/table';
 import { FeatureHeadingComponent } from '../components/feature-heading/feature-heading.component';
-import { Category } from '../../shared/types/categories';
-import { CategoriesService } from '../../shared/services/categories/categories.service';
-import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
 import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
+import { Product } from '../../shared/types/products';
+import { ProductsService } from '../../shared/services/products/products.service';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-products',
   imports: [
     FeatureHeadingComponent,
-    ActionBtnsComponent,
     TableModule,
     FormsModule,
+    ActionBtnsComponent,
   ],
-  templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css',
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.css',
 })
-export class CategoriesComponent implements OnInit {
-  categories = signal<Category[]>([]);
-  openId = signal<string>('');
+export class ProductsComponent implements OnInit {
+  products = signal<Product[]>([]);
   searchValue = signal<string>('');
+  openId = signal<string>('');
   isLoading = signal<boolean>(false);
 
-  private readonly _categoriesService = inject(CategoriesService);
+  private readonly _productsService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _toast = inject(MessageService);
 
   ngOnInit(): void {
-    this.getAllCategories();
+    this.getAllProducts();
   }
 
-  getAllCategories() {
+  getAllProducts() {
     this.isLoading.set(true);
 
-    const subscription = this._categoriesService.getAllCategories().subscribe({
+    const subscription = this._productsService.getAllProducts().subscribe({
       next: (data) => {
-        this.categories.set(data);
+        this.products.set(data);
       },
       error: (err) => {
         this._toast.add({
@@ -52,16 +52,16 @@ export class CategoriesComponent implements OnInit {
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  deleteCategory(id: string) {
+  deleteProduct(id: string) {
     this.isLoading.set(true);
 
-    const subscription = this._categoriesService.deleteCategory(id).subscribe({
+    const subscription = this._productsService.deleteProduct(id).subscribe({
       next: (res) => {
         console.log(res);
         this._toast.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'Category delated successfully',
+          detail: 'Product deleted successfully',
         });
       },
       error: (err) => {

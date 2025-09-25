@@ -23,7 +23,10 @@ export class ActionBtnsComponent {
 
   categoryId = input.required<string>();
   openId = input.required<string>();
+  message = input.required<string>();
+  editNavigate = input.required<string>();
   setOpenId = output<string>();
+  deleteItem = output();
 
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _confirm = inject(ConfirmationService);
@@ -51,7 +54,7 @@ export class ActionBtnsComponent {
   confirm2(event: Event) {
     this._confirm.confirm({
       target: event.target as EventTarget,
-      message: 'Do you want to delete this category?',
+      message: `Do you want to delete this ${this.message()}?`,
       header: 'Danger Zone',
       icon: 'pi pi-info-circle',
       rejectLabel: 'Cancel',
@@ -68,7 +71,7 @@ export class ActionBtnsComponent {
       accept: () => {
         this._confirm.close();
 
-        this.deleteCategory();
+        this.deleteItem.emit();
       },
       reject: () => {
         this._confirm.close();
@@ -79,34 +82,5 @@ export class ActionBtnsComponent {
         });
       },
     });
-  }
-
-  deleteCategory() {
-    this.isDeleting.set(true);
-
-    const subscription = this._categoriesService
-      .deleteCategory(this.categoryId())
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this._toast.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Category delated successfully',
-          });
-        },
-        error: (err) => {
-          this._toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err,
-          });
-        },
-        complete: () => {
-          this.isDeleting.set(false);
-        },
-      });
-
-    this._destroyRef.onDestroy(() => subscription.unsubscribe);
   }
 }

@@ -26,7 +26,15 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes, withComponentInputBinding()),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
-    providePrimeNG({ theme: { preset: Aura } }),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: false,
+          darkTheme: false,
+        },
+      },
+    }),
     MessageService,
     ConfirmationService,
   ],
