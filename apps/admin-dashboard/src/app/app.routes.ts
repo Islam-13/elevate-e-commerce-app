@@ -65,6 +65,13 @@ export const appRoutes: Route[] = [
             (c) => c.ProductsComponent
           ),
       },
+      {
+        path: 'occasions',
+        loadComponent: () =>
+          import('./features/occasions/occasions.component').then(
+            (c) => c.OccasionsComponent
+          ),
+      },
     ],
   },
 ];
