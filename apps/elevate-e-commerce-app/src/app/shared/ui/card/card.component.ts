@@ -9,6 +9,10 @@ import { MessageService } from 'primeng/api';
 
 
 import { LocalStorageService } from '@shared/services/localStorage/local-storage.service';
+import { getTotal, updateCount } from '../../../store/cart-data/cart.actions';
+import { Store } from '@ngrx/store';
+import { CartState } from '../../../store/cart-data/cart.state';
+import { Cart, CartItem } from '@shared/interfaces/cart-interface/cart-interface';
 
 @Component({
   selector: 'app-card',
@@ -21,7 +25,7 @@ export class CardComponent {
 private readonly _LocalStorageService=inject(LocalStorageService);
   private readonly _toast = inject(MessageService);
 
-
+constructor( private _store: Store<{ total: CartState }>){}
 
   productId = input.required<string>();
   title = input.required<string>();
@@ -42,6 +46,8 @@ private readonly _LocalStorageService=inject(LocalStorageService);
           console.log(res);
           //next() to set value in behaviour subject
           this._CartService.cartCount.next(res.numOfCartItems);
+          this.loadCart()
+          
           this._toast.add({
       severity: 'success',
       summary: 'Success',
@@ -64,4 +70,37 @@ private readonly _LocalStorageService=inject(LocalStorageService);
 
       })
     }
+
+    loadCart() {
+        this._CartService.GetLoggedUserCart().subscribe((response) => {
+          console.log('response:' , response);
+          
+          
+          if (response?.cart && response.cart.cartItems.length > 0) {
+             const cartData: Cart = {
+              ...response.cart,
+              numOfCartItems: response.numOfCartItems
+            };
+    
+            const items: CartItem[] = response.cart.cartItems.map((ci: any) => ({
+              id:ci._id,
+              idProduct: ci.product._id,
+      name: ci.product.title,
+      image: ci.product.imgCover, 
+      category: ci.product.category,
+      priceOfProduct: ci.product.price,
+      count: ci.quantity,
+      rateAvg: ci.product.rateAvg,
+      rateCount: ci.product.rateCount,
+      price:ci.product.price
+            }));
+    
+           this._store.dispatch(getTotal({ cartData }));
+          this._store.dispatch(updateCount({ qun: items }));
+          } else {
+            // cart empty
+            // this.clearCart();
+          }
+        });
+      }
 }

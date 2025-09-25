@@ -78,10 +78,10 @@
           <div class="" *ngFor="let product of quantity$ | async">
             <div class="p-4">
               <div class="flex border-b border-b-zinc-200 mt-3">
-                <div class="flex p-5 justify-between gap-4">
-                  <div class="w-full">
+                <div class="flex justify-between gap-[10px]">
+                  <div class=" w-[117px] ">
                     <img
-                      class="rounded-lg"
+                      class="rounded-lg min-h-[140px] "
                       [src]="product.image"
                       alt="{{ product.name }}"
                     />
@@ -89,7 +89,7 @@
 
                   <div class="flex-col">
                     <div class="cart-details min-w-[742px] min-h-[81px]">
-                      <div class="above-details flex justify-between">
+                      <div class="above-details flex justify-between p-2.5">
                         <div class="left-details">
                           <div class="cart-title">
                             <a
@@ -151,7 +151,7 @@
                     </div>
 
                     <div
-                      class="flex items-center justify-between min-w-[742px] min-h-[81px]"
+                      class="flex items-center justify-between min-w-[742px] min-h-[81px] p-2.5"
                     >
                       <div class="below-details">
                         <div class="item-cost">
@@ -203,8 +203,9 @@
             </div>
           </div>
           } @if(cartItems.length === 0){
-          <div class="flex-col content-center min-w-[802px] min-h-[556px] p-5">
-            <div class="image">
+            <div class="flex items-center justify-center min-h-screen">
+              <div class="flex flex-col items-center justify-center min-w-[802px] min-h-[556px] p-5">
+            <div class="image ">
               <svg
                 class=""
                 width="250"
@@ -246,6 +247,8 @@
               Your cart is empty, wanna try shopping?
             </p>
           </div>
+            </div>
+          
           }
         </div>
       </div>
