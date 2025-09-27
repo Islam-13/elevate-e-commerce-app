@@ -57,6 +57,21 @@ export const appRoutes: Route[] = [
       },
 
       {
+        path: 'occasions',
+        data: { breadcrumb: 'occasions' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/occasions/occasions.component').then(
+                (c) => c.OccasionsComponent
+              ),
+            data: { breadcrumb: '' },
+          },
+        ],
+      },
+
+      {
         path: 'products',
         data: { breadcrumb: 'products' },
         children: [
