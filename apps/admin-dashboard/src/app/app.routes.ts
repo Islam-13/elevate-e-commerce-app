@@ -57,6 +57,21 @@ export const appRoutes: Route[] = [
       },
 
       {
+        path: 'occasions',
+        data: { breadcrumb: 'occasions' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/occasions/occasions.component').then(
+                (c) => c.OccasionsComponent
+              ),
+            data: { breadcrumb: '' },
+          },
+        ],
+      },
+
+      {
         path: 'products',
         data: { breadcrumb: 'products' },
         children: [
@@ -78,13 +93,6 @@ export const appRoutes: Route[] = [
             '../../../../libs/not-found/src/lib/not-found/not-found.component'
           ).then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
-      },
-      {
-        path: 'occasions',
-        loadComponent: () =>
-          import('./features/occasions/occasions.component').then(
-            (c) => c.OccasionsComponent
-          ),
       },
     ],
   },
