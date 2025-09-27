@@ -14,8 +14,8 @@ export const appRoutes: Route[] = [
         path: 'Dashboard',
         loadComponent: () =>
           import(
-            './features/overView/components/overview/overview.component'
-          ).then((c) => c.OverviewComponent),
+            './features/pages/overviews/overviews.component'
+          ).then((c) => c.OverviewsComponent),
         data: { breadcrumb: 'Dashboard' },
 
         children: [

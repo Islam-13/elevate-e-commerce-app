@@ -7,3 +7,6 @@ export const env = {
 
   otpRG: /^\d{6}/,
 };
+
+
+
