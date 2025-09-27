@@ -24,13 +24,16 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'categories',
-        loadComponent: () =>
-          import('./features/categories/categories.component').then(
-            (c) => c.CategoriesComponent
-          ),
-        data: { breadcrumb: 'categories' },
-
+        data: { breadcrumb: 'Categories' },
         children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/categories/categories.component').then(
+                (c) => c.CategoriesComponent
+              ),
+            data: { breadcrumb: '' },
+          },
           {
             path: 'add-category',
             loadComponent: () =>
@@ -46,10 +49,28 @@ export const appRoutes: Route[] = [
                 './features/add-update-category/add-update-category.component'
               ).then((c) => c.AddUpdateCategoryComponent),
             resolve: { categoryName: CategoryResolver },
-            data: { breadcrumb: 'Update Category: :categoryName ' },
+            data: {
+              breadcrumb: 'Update Category: :categoryName',
+            },
           },
         ],
       },
+
+      {
+        path: 'products',
+        data: { breadcrumb: 'products' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/products/products.component').then(
+                (c) => c.ProductsComponent
+              ),
+            data: { breadcrumb: '' },
+          },
+        ],
+      },
+
       {
         path: '**',
         loadComponent: () =>
@@ -57,13 +78,6 @@ export const appRoutes: Route[] = [
             '../../../../libs/not-found/src/lib/not-found/not-found.component'
           ).then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
-      },
-      {
-        path: 'products',
-        loadComponent: () =>
-          import('./features/products/products.component').then(
-            (c) => c.ProductsComponent
-          ),
       },
     ],
   },

@@ -1,11 +1,8 @@
 <section class="p-7">
-  <h3 class="text-2xl font-semibold">
-    @if (id()) { Update Category: Flowers } @else {Add a New Category}
+  <h3 class="text-2xl font-semibold mb-6">
+    @if (id()) { Update Category: {{ categoryToEdit().name }} } @else {Add a New
+    Category}
   </h3>
-
-  <div class="p-5">
-    {{ id() }}
-  </div>
 
   <form
     class="p-6 bg-white rounded-2xl"
@@ -55,7 +52,10 @@
       </div>
 
       <div class="mt-12">
-        <lib-ui-button label="Add Category" [isSubmitting]="isSubmitting()" />
+        <lib-ui-button
+          [label]="id() ? 'Update Category' : 'Add Category'"
+          [isSubmitting]="isSubmitting()"
+        />
       </div>
     </div>
   </form>
