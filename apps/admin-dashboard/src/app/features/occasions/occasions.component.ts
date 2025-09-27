@@ -4,42 +4,42 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
 
-import { Category } from '../../shared/types/categories';
-import { CategoriesService } from '../../shared/services/categories/categories.service';
-import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
 import { FeatureHeadingComponent } from '../components/feature-heading/feature-heading.component';
+import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
+import { OccasionsService } from '../../shared/services/occasions/occasions.service';
+import { Occasion } from '../../shared/types/occasions';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-occasions',
   imports: [
     FeatureHeadingComponent,
-    ActionBtnsComponent,
-    TableModule,
     FormsModule,
+    TableModule,
+    ActionBtnsComponent,
   ],
-  templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css',
+  templateUrl: './occasions.component.html',
+  styleUrl: './occasions.component.css',
 })
-export class CategoriesComponent implements OnInit {
-  categories = signal<Category[]>([]);
+export class OccasionsComponent implements OnInit {
+  occasions = signal<Occasion[]>([]);
   openId = signal<string>('');
   searchValue = signal<string>('');
   isLoading = signal<boolean>(false);
 
-  private readonly _categoriesService = inject(CategoriesService);
+  private readonly _occasionsService = inject(OccasionsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _toast = inject(MessageService);
 
   ngOnInit(): void {
-    this.getAllCategories();
+    this.getAllOccasions();
   }
 
-  getAllCategories() {
+  getAllOccasions() {
     this.isLoading.set(true);
 
-    const subscription = this._categoriesService.getAllCategories().subscribe({
+    const subscription = this._occasionsService.getAllOccasions().subscribe({
       next: (data) => {
-        this.categories.set(data);
+        this.occasions.set(data);
       },
       error: (err) => {
         this._toast.add({
@@ -54,10 +54,10 @@ export class CategoriesComponent implements OnInit {
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  deleteCategory(id: string) {
+  deleteOccasion(id: string) {
     this.isLoading.set(true);
 
-    const subscription = this._categoriesService.deleteCategory(id).subscribe({
+    const subscription = this._occasionsService.deleteOccasion(id).subscribe({
       next: (res) => {
         console.log(res);
         this._toast.add({
