@@ -19,8 +19,29 @@ export const appRoutes: Route[] = [
         path: 'dashboard',
         loadComponent: () =>
           import(
-            './features/overView/components/overview/overview.component'
-          ).then((c) => c.OverviewComponent),
+
+            './features/pages/overviews/overviews.component'
+          ).then((c) => c.OverviewsComponent),
+        data: { breadcrumb: 'Dashboard' },
+
+        children: [
+          {
+            path: 'users',
+            loadComponent: () =>
+              import(
+                './core/navigation/components/business/user-image/user-image.component'
+              ).then((c) => c.UserImageComponent),
+            data: { breadcrumb: 'users' },
+          },
+          {
+            path: 'category',
+            loadComponent: () =>
+              import(
+                './core/navigation/components/business/user-image/user-image.component'
+              ).then((c) => c.UserImageComponent),
+            data: { breadcrumb: 'category' },
+          },
+        ],
       },
       {
         path: 'categories',

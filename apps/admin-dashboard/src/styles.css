@@ -151,3 +151,17 @@ button {
     transform: translateX(calc(-100cqw - 100%));
   }
 } */
+
+
+
+@theme{
+  --color-bg-icon1:#A6252A ;
+  --color-bg-icon2:#0063D0 ;
+  --color-bg-icon3:#753CBF ;
+  --color-bg-icon4:#008961 ;
+  --color-bg-s1: #FBEAEA;
+  --color-bg-s2:#0063D00D ;
+  --color-bg-s3:#753CBF0D ;
+  --color-bg-s4: #0089610D;
+  --none :red;
+}
