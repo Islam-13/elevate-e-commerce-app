@@ -22,6 +22,7 @@ export const appRoutes: Route[] = [
             './features/overView/components/overview/overview.component'
           ).then((c) => c.OverviewComponent),
       },
+
       {
         path: 'categories',
         data: { breadcrumb: 'Categories' },
@@ -63,8 +64,8 @@ export const appRoutes: Route[] = [
           {
             path: '',
             loadComponent: () =>
-              import('./features/categories/categories.component').then(
-                (c) => c.CategoriesComponent
+              import('./features/occasions/occasions.component').then(
+                (c) => c.OccasionsComponent
               ),
             data: { breadcrumb: '' },
           },
