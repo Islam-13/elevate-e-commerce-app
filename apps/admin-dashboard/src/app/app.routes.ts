@@ -57,6 +57,21 @@ export const appRoutes: Route[] = [
       },
 
       {
+        path: 'occasions',
+        data: { breadcrumb: 'Occasions' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/categories/categories.component').then(
+                (c) => c.CategoriesComponent
+              ),
+            data: { breadcrumb: '' },
+          },
+        ],
+      },
+
+      {
         path: 'products',
         data: { breadcrumb: 'products' },
         children: [
@@ -74,6 +89,7 @@ export const appRoutes: Route[] = [
       {
         path: '**',
         loadComponent: () =>
+          // eslint-disable-next-line @nx/enforce-module-boundaries
           import(
             '../../../../libs/not-found/src/lib/not-found/not-found.component'
           ).then((c) => c.NotFoundComponent),
