@@ -14,16 +14,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { Message } from 'primeng/message';
+import { Dialog } from 'primeng/dialog';
+
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { UiButtonComponent } from 'libs/ui-button/src/lib/ui-button/ui-button.component';
 import { CategoriesService } from '../../shared/services/categories/categories.service';
-import { MessageService } from 'primeng/api';
-import { Message } from 'primeng/message';
 import { Category } from '../../shared/types/categories';
 
 @Component({
   selector: 'app-add-update-category',
-  imports: [ReactiveFormsModule, UiButtonComponent, Message],
+  imports: [ReactiveFormsModule, UiButtonComponent, Message, Dialog],
   templateUrl: './add-update-category.component.html',
   styleUrl: './add-update-category.component.css',
 })
@@ -40,6 +42,8 @@ export class AddUpdateCategoryComponent implements OnInit {
     productsCount: 0,
   });
 
+  visible = signal<boolean>(false);
+
   form!: FormGroup;
   formImage = viewChild<ElementRef>('formImage');
 
@@ -53,6 +57,10 @@ export class AddUpdateCategoryComponent implements OnInit {
     if (this.id()) {
       this.getCategory(this.id()!);
     }
+  }
+
+  showDialog() {
+    this.visible.set(true);
   }
 
   initForm() {
