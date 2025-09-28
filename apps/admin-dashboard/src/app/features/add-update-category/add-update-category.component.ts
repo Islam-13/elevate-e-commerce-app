@@ -29,6 +29,8 @@ import { Message } from 'primeng/message';
 export class AddUpdateCategoryComponent implements OnInit {
   id = input<string>();
   isSubmitting = signal<boolean>(false);
+selectedCoverName = '';
+
 
   form!: FormGroup;
   formImage = viewChild<ElementRef>('formImage');
@@ -54,6 +56,7 @@ export class AddUpdateCategoryComponent implements OnInit {
       this.form.get('image')?.setValue(input.files[0]);
     }
   }
+
 
   onSubmit() {
     if (this.form.invalid) {

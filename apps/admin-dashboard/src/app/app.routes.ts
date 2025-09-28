@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { CategoryResolver } from './shared/services/categories/category.resolver';
+import { ProductResolver } from './shared/services/products/product.resolver';
 
 export const appRoutes: Route[] = [
   {
@@ -68,6 +69,25 @@ export const appRoutes: Route[] = [
               ),
             data: { breadcrumb: '' },
           },
+           {
+            path: 'add-product',
+            loadComponent: () =>
+              import(
+                './features/add-update-product/add-update-product.component'
+              ).then((c) => c.AddUpdateProductComponent),
+            data: { breadcrumb: 'Add Product' },
+          },
+          {
+            path: 'update-product/:id',
+            loadComponent: () =>
+              import(
+                './features/add-update-product/add-update-product.component'
+              ).then((c) => c.AddUpdateProductComponent),
+            // resolve: { productTitle: ProductResolver },
+            data: {
+              breadcrumb: 'Update Product: :productTitle',
+            },
+          },
         ],
       },
 
@@ -75,6 +95,7 @@ export const appRoutes: Route[] = [
         path: '**',
         loadComponent: () =>
           import(
+           
             '../../../../libs/not-found/src/lib/not-found/not-found.component'
           ).then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
