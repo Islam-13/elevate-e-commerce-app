@@ -43,6 +43,7 @@ export const appRoutes: Route[] = [
           },
         ],
       },
+
       {
         path: 'categories',
         data: { breadcrumb: 'Categories' },
@@ -78,6 +79,21 @@ export const appRoutes: Route[] = [
       },
 
       {
+        path: 'occasions',
+        data: { breadcrumb: 'Occasions' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/occasions/occasions.component').then(
+                (c) => c.OccasionsComponent
+              ),
+            data: { breadcrumb: '' },
+          },
+        ],
+      },
+
+      {
         path: 'products',
         data: { breadcrumb: 'products' },
         children: [
@@ -95,17 +111,11 @@ export const appRoutes: Route[] = [
       {
         path: '**',
         loadComponent: () =>
+          // eslint-disable-next-line @nx/enforce-module-boundaries
           import(
             '../../../../libs/not-found/src/lib/not-found/not-found.component'
           ).then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
-      },
-      {
-        path: 'occasions',
-        loadComponent: () =>
-          import('./features/occasions/occasions.component').then(
-            (c) => c.OccasionsComponent
-          ),
       },
     ],
   },
