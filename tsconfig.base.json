@@ -19,7 +19,7 @@
       "@elevate-e-commerce-app/something-wrong": [
         "libs/something-wrong/src/index.ts"
       ],
-     
+
     }
   },
   "exclude": ["node_modules", "tmp"]

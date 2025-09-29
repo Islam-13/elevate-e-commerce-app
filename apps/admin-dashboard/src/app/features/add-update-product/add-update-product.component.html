@@ -6,244 +6,304 @@
     
 
     <form class="p-6 bg-white rounded-2xl" (ngSubmit)="onSubmit()" #formImage [formGroup]="form">
-        <div class="w-[min(100%,700px)] flex flex-col gap-4">
-            <!-- Title -->
-            <div class="grid">
-                @let titleCtrl = form.get('title');
-                <label for="title">Title <span class="text-red">*</span></label>
-                <input class="border border-zinc-200 rounded-rd-sm p-4" type="text" name="title" formControlName="title"
-                    id="title" placeholder="Enter product title" />
-
-                @if (titleCtrl?.touched && titleCtrl?.getError("required")) {
-                <span class="mt-2">
-                    <p-message severity="error" size="small">
-                        Product title is required
-                    </p-message>
-                </span>
-                }
-            </div>
-            <!-- Description -->
-            <div class="grid">
-                @let descriptionCtrl = form.get('description');
-                <label for="title">Description <span class="text-red">*</span></label>
-                <!-- <input class="border border-zinc-200 rounded-rd-sm p-4" type="text" name="description" formControlName="description"
-                    id="description" placeholder="Enter product description" /> -->
-                <textarea class="border border-zinc-200 rounded-rd-sm p-4" rows="5" cols="30" pTextarea type="text"
-                    name="description" formControlName="description" id="description"
-                    placeholder="Enter product description"></textarea>
-
-                @if (descriptionCtrl?.touched && descriptionCtrl?.getError("required"))
-                {
-                <span class="mt-2">
-                    <p-message severity="error" size="small">
-                        Product description is required
-                    </p-message>
-                </span>
-                }
-            </div>
-            <!-- Price Discount After-Discount -->
-            <div class="price-details flex gap-2">
-                <!-- Price -->
-                <div class="grid w-1/3">
-                    @let PriceCtrl = form.get('price');
-                    <label for="title">Price <span class="text-red">*</span></label>
-                    <input class="border border-zinc-200 rounded-rd-sm p-4" type="number" name="price"
-                        formControlName="price" id="price" placeholder="Example: 5000" />
-
-                    @if (PriceCtrl?.touched && PriceCtrl?.getError("required")) {
-                    <span class="mt-2">
-                        <p-message severity="error" size="small">
-                            Product price is required
-                        </p-message>
-                    </span>
-                    } @if(PriceCtrl?.getError("min") ){
-                    <span class="mt-2">
-                        <p-message severity="error" size="small">
-                            Please enter a valid price
-                        </p-message>
-                    </span>
-                    }
-                </div>
-
-                <!-- Discount -->
-                <div class="grid w-1/3">
-                    @let discountCtrl = form.get('discount');
-                    <label for="title">Discount </label>
-                    <input class="border border-zinc-200 rounded-rd-sm p-4" type="number" name="discount"
-                        formControlName="discount" id="discount" placeholder="Example: 5" />
-
-                    @if (discountCtrl?.touched && discountCtrl?.getError("max")
-                    ||discountCtrl?.getError("min") ) {
-                    <span class="mt-2">
-                        <p-message severity="error" size="small">
-                            Please enter a valid number (Discount number should be from 1 to
-                            100)
-                        </p-message>
-                    </span>
-                    }
-                </div>
-
-                <!-- After-Discount -->
-                <div class="grid  w-1/3">
-                    @let afterDiscountCtrl = form.get('priceAfterDiscount');
-                    <label for="title">Price after discount</label>
-                    <input class="border border-zinc-100 bg-zinc-100 rounded-rd-sm p-4" type="number"
-                        name="priceAfterDiscount" formControlName="priceAfterDiscount" id="priceAfterDiscount"
-                        placeholder="Example: 5" readonly />
-                </div>
-            </div>
-
-            <!-- Quantity -->
-
-            <div class="grid">
-                @let quantityCtrl = form.get('quantity');
-                <label for="quantity">Quantity <span class="text-red">*</span></label>
-                <input class="border border-zinc-200 rounded-rd-sm p-4" type="number" name="quantity"
-                    formControlName="quantity" id="quantity" placeholder="Example: 200" />
-
-                @if (quantityCtrl?.touched && quantityCtrl?.getError("required")) {
-                <span class="mt-2">
-                    <p-message severity="error" size="small">
-                        Product quantity is required
-                    </p-message>
-                </span>
-                } @if (quantityCtrl?.getError("min")) {
-                <span class="mt-2">
-                    <p-message severity="error" size="small">
-                        Please enter a valid quantity
-                    </p-message>
-                </span>
-                }
-            </div>
-
-            <div class="flex justify-between">
-                <!-- Product cover -->
-
-                <div class="grid">
-                    @let imageCtrl = form.get('imgCover');
-                    <label for="image">Product cover <span class="text-red">*</span></label>
-                    <div class="relative w-full">
-                        <!-- Input -->
-                        <input type="text" [value]="selectedCoverName" readonly
-                            class="w-full w-lg-1/2 border border-zinc-200  rounded-rd-sm p-4 py-3 pr-32 pl-4 outline-none cursor-pointer "
-                            name="image" formControlName="image" id="image" (click)="coverInput.click()" />
-
-                        <!-- Upload Icon -->
-                        <div class="absolute inset-y-0 right-4 flex items-center gap-2 cursor-pointer text-red-500"
-                            tabindex="0" role="button" (click)="coverInput.click()" (keyup.enter)="coverInput.click()">
-                            <i class="pi pi-upload text-red-500 text-lg"></i>
-                            <span class="text-red-500 font-medium text-sm">Upload File</span>
-                        </div>
-
-                        <!-- Real input-->
-                        <input type="file" #coverInput class="hidden" (change)="onCoverChange($event)" />
-                    </div>
-
-                    @if (imageCtrl?.touched && imageCtrl?.getError("required")) {
-                    <span class="mt-2">
-                        <p-message severity="error" size="small">
-                            Product cover is required
-                        </p-message>
-                    </span>
-                    }
-                </div>
-
-                <!-- Product gallery  -->
-
-                <div class="grid">
-                    @let productGalleryCtrl = form.get('productGallery');
-                    <label for="productGallery">Product gallery <span class="text-red">*</span></label>
-                    <div class="relative w-full">
-                        <!-- Input -->
-                        <input type="text" [value]="selectedGalleryNames" readonly
-                            class="w-full w-lg-1/2 border border-zinc-200  rounded-rd-sm p-4 py-3 pr-32 pl-4 outline-none cursor-pointer "
-                            name="productGallery" formControlName="productGallery" id="productGallery"
-                            (click)="galleryInput.click()" />
-
-                        <!-- Upload Icon -->
-                        <div class="absolute inset-y-0 right-4 flex items-center gap-2 cursor-pointer text-red-500"
-                            tabindex="0" role="button" (click)="galleryInput.click()"
-                            (keyup.enter)="galleryInput.click()">
-                            <i class="pi pi-upload text-red-500 text-lg"></i>
-                            <span class="text-red-500 font-medium text-sm">Upload File</span>
-                        </div>
-
-                        <!-- Real input-->
-                        <input type="file" #galleryInput multiple class="hidden" (change)="onGalleryChange($event)" />
-                    </div>
-
-
-                    <!-- <input class="border border-zinc-200 rounded-rd-sm p-4" type="file" id="image" name="image"
-                    (change)="onFileChange($event)" /> -->
-                    @if (productGalleryCtrl?.touched && productGalleryCtrl?.getError("required")) {
-                    <span class="mt-2">
-                        <p-message severity="error" size="small">
-                            Product Gallery is required
-                        </p-message>
-                    </span>
-                    }
-                </div>
-            </div>
-
-            <!-- select Category -->
-            <div class="grid">
-                @let CategoryCtrl = form.get('category');
-                <label for="title">Category <span class="text-red">*</span></label>
-                <p-dropdown
-                 type="text" name="category"
-                 formControlName="category" id="category"
-                 [options]="categories()"
-                 formControlName="category"
-                 optionLabel="name" 
-                 placeholder="Select an option"
-                 (onChange)="onCategoryChange($event) "
-                styleClass=" border border-zinc-200 rounded-rd-sm h-[48px] flex items-center"
-                 >
-                    
-                </p-dropdown>
-
-                @if (CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty)) {
-                <span class="mt-2">
-                    <p-message severity="error" size="small">
-                        Please select a category for the product
-                    </p-message>
-                </span>
-                }
-            </div>
-          
-  <!-- select Occasion  -->
-            <div class="grid">
-                @let occasionCtrl = form.get('occasion');
-                <label for="title">Occasion <span class="text-red">*</span></label>
-                <p-dropdown
-                 type="text" name="occasion"
-                 formControlName="occasion" id="occasion"
-                 [options]="categories()" 
-                 formControlName="occasion"
-                 optionLabel="name" 
-                 placeholder="Select an option"
-                 (onChange)="onOccasionChange($event) "
-                styleClass=" border border-zinc-200 rounded-rd-sm h-[48px] flex items-center"
-                 >
-                    
-                </p-dropdown>
-
-                @if (occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty)) {
-                <span class="mt-2">
-                    <p-message severity="error" size="small">
-                        Please select a occasion for the product
-                    </p-message>
-                </span>
-                }
-            </div>
-
-
-            <div class="mt-12 text-white">
-                 <lib-ui-button
-          [label]="id() ? 'Update Product' : 'Add Product'"
-          [isSubmitting]="isSubmitting()"
+    <div class="w-[min(100%,700px)] flex flex-col gap-4">
+      <!-- Title -->
+      <div class="grid">
+        @let titleCtrl = form.get('title');
+        <label
+          for="title"
+          [ngClass]="{ 'text-red-500': titleCtrl?.invalid && (titleCtrl?.touched || titleCtrl?.dirty) }"
+        >
+          Title <span class="text-red">*</span>
+        </label>
+        <input
+          class="border rounded-rd-sm p-4"
+          [ngClass]="{ 'border-red-500': titleCtrl?.invalid && (titleCtrl?.touched || titleCtrl?.dirty), 'border-zinc-200': !(titleCtrl?.invalid && (titleCtrl?.touched || titleCtrl?.dirty)) }"
+          type="text"
+          name="title"
+          formControlName="title"
+          id="title"
+          placeholder="Enter product title"
         />
-            </div>
+
+        @if (titleCtrl?.touched && titleCtrl?.getError('required')) {
+          <app-form-error [control]="titleCtrl" fieldName="Product title" />
+        }
+      </div>
+
+      <!-- Description -->
+      <div class="grid">
+        @let descriptionCtrl = form.get('description');
+        <label
+          for="description"
+          [ngClass]="{ 'text-red-500': descriptionCtrl?.invalid && (descriptionCtrl?.touched || descriptionCtrl?.dirty) }"
+        >
+          Description <span class="text-red">*</span>
+        </label>
+
+        <textarea
+          class="border rounded-rd-sm p-4"
+          [ngClass]="{ 'border-red-500': descriptionCtrl?.invalid && (descriptionCtrl?.touched || descriptionCtrl?.dirty), 'border-zinc-200': !(descriptionCtrl?.invalid && (descriptionCtrl?.touched || descriptionCtrl?.dirty)) }"
+          rows="5"
+          cols="30"
+          pTextarea
+          name="description"
+          formControlName="description"
+          id="description"
+          placeholder="Enter product description"
+        ></textarea>
+
+        @if (descriptionCtrl?.touched && descriptionCtrl?.getError('required')) {
+          <app-form-error [control]="descriptionCtrl" fieldName="Product description" />
+        }
+      </div>
+
+      <!-- Price Discount After-Discount -->
+      <div class="price-details flex gap-2">
+        <!-- Price -->
+        <div class="grid w-1/3">
+          @let PriceCtrl = form.get('price');
+          <label
+            for="price"
+            [ngClass]="{ 'text-red-500': PriceCtrl?.invalid && (PriceCtrl?.touched || PriceCtrl?.dirty) }"
+          >
+            Price <span class="text-red">*</span>
+          </label>
+          <input
+            class="border rounded-rd-sm p-4"
+            [ngClass]="{ 'border-red-500': PriceCtrl?.invalid && (PriceCtrl?.touched || PriceCtrl?.dirty), 'border-zinc-200': !(PriceCtrl?.invalid && (PriceCtrl?.touched || PriceCtrl?.dirty)) }"
+            type="number"
+            name="price"
+            formControlName="price"
+            id="price"
+            placeholder="Example: 5000"
+          />
+
+          @if (PriceCtrl?.touched && PriceCtrl?.getError('required')) {
+            <app-form-error [control]="PriceCtrl" fieldName="Product price" />
+          }
+          @if (PriceCtrl?.getError('min')) {
+            <app-form-error [control]="PriceCtrl" fieldName="Product price" />
+          }
         </div>
-    </form>
+
+        <!-- Discount -->
+        <div class="grid w-1/3">
+          @let discountCtrl = form.get('discount');
+          <label
+            for="discount"
+            [ngClass]="{ 'text-red-500': discountCtrl?.invalid && (discountCtrl?.touched || discountCtrl?.dirty) }"
+          >
+            Discount
+          </label>
+          <input
+            class="border rounded-rd-sm p-4"
+            [ngClass]="{ 'border-red-500': discountCtrl?.invalid && (discountCtrl?.touched || discountCtrl?.dirty), 'border-zinc-200': !(discountCtrl?.invalid && (discountCtrl?.touched || discountCtrl?.dirty)) }"
+            type="number"
+            name="discount"
+            formControlName="discount"
+            id="discount"
+            placeholder="Example: 5"
+          />
+
+          @if ((discountCtrl?.touched || discountCtrl?.dirty) && (discountCtrl?.getError('max') || discountCtrl?.getError('min'))) {
+            <app-form-error [control]="discountCtrl" fieldName="Discount" />
+          }
+        </div>
+
+        <!-- After-Discount -->
+        <div class="grid w-1/3">
+          @let afterDiscountCtrl = form.get('priceAfterDiscount');
+          <label for="priceAfterDiscount">Price after discount</label>
+          <input
+            class="border border-zinc-100 bg-zinc-100 rounded-rd-sm p-4"
+            type="number"
+            name="priceAfterDiscount"
+            formControlName="priceAfterDiscount"
+            id="priceAfterDiscount"
+            placeholder="Example: 5"
+            readonly
+          />
+        </div>
+      </div>
+
+      <!-- Quantity -->
+      <div class="grid">
+        @let quantityCtrl = form.get('quantity');
+        <label
+          for="quantity"
+          [ngClass]="{ 'text-red-500': quantityCtrl?.invalid && (quantityCtrl?.touched || quantityCtrl?.dirty) }"
+        >
+          Quantity <span class="text-red">*</span>
+        </label>
+        <input
+          class="border rounded-rd-sm p-4"
+          [ngClass]="{ 'border-red-500': quantityCtrl?.invalid && (quantityCtrl?.touched || quantityCtrl?.dirty), 'border-zinc-200': !(quantityCtrl?.invalid && (quantityCtrl?.touched || quantityCtrl?.dirty)) }"
+          type="number"
+          name="quantity"
+          formControlName="quantity"
+          id="quantity"
+          placeholder="Example: 200"
+        />
+
+        @if (quantityCtrl?.touched && quantityCtrl?.getError('required')) {
+          <app-form-error [control]="quantityCtrl" fieldName="Product quantity" />
+        }
+        @if (quantityCtrl?.getError('min')) {
+          <app-form-error [control]="quantityCtrl" fieldName="Product quantity" />
+        }
+      </div>
+
+      <div class="flex justify-between">
+        <!-- Product cover -->
+        <div class="grid">
+          @let imageCtrl = form.get('imgCover');
+          <label
+            for="image"
+            [ngClass]="{ 'text-red-500': imageCtrl?.invalid && (imageCtrl?.touched || imageCtrl?.dirty) }"
+          >
+            Product cover <span class="text-red">*</span>
+          </label>
+          <div class="relative w-full">
+            <input
+              type="text"
+              [value]="selectedCoverName"
+              readonly
+              class="w-full border rounded-rd-sm p-4 py-3 pr-32 pl-4 outline-none cursor-pointer"
+              [ngClass]="{ 'border-red-500': imageCtrl?.invalid && (imageCtrl?.touched || imageCtrl?.dirty), 'border-zinc-200': !(imageCtrl?.invalid && (imageCtrl?.touched || imageCtrl?.dirty)) }"
+              name="image"
+              formControlName="image"
+              id="image"
+              (click)="coverInput.click()"
+            />
+
+            <div
+              class="absolute inset-y-0 right-4 flex items-center gap-2 cursor-pointer text-red-500"
+              tabindex="0"
+              role="button"
+              (click)="coverInput.click()"
+              (keyup.enter)="coverInput.click()"
+            >
+              <i class="pi pi-upload text-red-500 text-lg"></i>
+              <span class="text-red-500 font-medium text-sm">Upload File</span>
+            </div>
+
+            <input type="file" #coverInput class="hidden" (change)="onCoverChange($event)" />
+          </div>
+
+          @if (imageCtrl?.touched && imageCtrl?.getError('required')) {
+            <app-form-error [control]="imageCtrl" fieldName="Product cover" />
+          }
+        </div>
+
+        <!-- Product gallery -->
+        <div class="grid">
+          @let productGalleryCtrl = form.get('productGallery');
+          <label
+            for="productGallery"
+            [ngClass]="{ 'text-red-500': productGalleryCtrl?.invalid && (productGalleryCtrl?.touched || productGalleryCtrl?.dirty) }"
+          >
+            Product gallery <span class="text-red">*</span>
+          </label>
+          <div class="relative w-full">
+            <input
+              type="text"
+              [value]="selectedGalleryNames"
+              readonly
+              class="w-full border rounded-rd-sm p-4 py-3 pr-32 pl-4 outline-none cursor-pointer"
+              [ngClass]="{ 'border-red-500': productGalleryCtrl?.invalid && (productGalleryCtrl?.touched || productGalleryCtrl?.dirty), 'border-zinc-200': !(productGalleryCtrl?.invalid && (productGalleryCtrl?.touched || productGalleryCtrl?.dirty)) }"
+              name="productGallery"
+              formControlName="productGallery"
+              id="productGallery"
+              (click)="galleryInput.click()"
+            />
+
+            <div
+              class="absolute inset-y-0 right-4 flex items-center gap-2 cursor-pointer text-red-500"
+              tabindex="0"
+              role="button"
+              (click)="galleryInput.click()"
+              (keyup.enter)="galleryInput.click()"
+            >
+              <i class="pi pi-upload text-red-500 text-lg"></i>
+              <span class="text-red-500 font-medium text-sm">Upload File</span>
+            </div>
+
+            <input type="file" #galleryInput multiple class="hidden" (change)="onGalleryChange($event)" />
+          </div>
+
+          @if (productGalleryCtrl?.touched && productGalleryCtrl?.getError('required')) {
+            
+            <app-form-error [control]="productGalleryCtrl" fieldName=" Product Gallery" />
+          }
+        </div>
+      </div>
+
+      <!-- select Category -->
+      <div class="grid">
+        @let CategoryCtrl = form.get('category');
+        <label
+          for="category"
+          [ngClass]="{ 'text-red-500': CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty) }"
+        >
+          Category <span class="text-red">*</span>
+        </label>
+        <p-dropdown
+          type="text"
+          name="category"
+          formControlName="category"
+          id="category"
+          [options]="categories()"
+          optionLabel="name"
+          placeholder="Select an option"
+          (onChange)="onCategoryChange($event)"
+          [ngClass]="{ 'border-red-500': CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty), 'border-zinc-200': !(CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty)) }"
+          styleClass="border rounded-rd-sm h-[48px] flex items-center"
+        ></p-dropdown>
+
+        @if (CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty)) {
+          <span class="mt-2">
+            <p-message severity="error" size="small">
+              Please select a category for the product
+            </p-message>
+          </span>
+        }
+      </div>
+
+      <!-- select Occasion -->
+      <div class="grid">
+        @let occasionCtrl = form.get('occasion');
+        <label
+          for="occasion"
+          [ngClass]="{ 'text-red-500': occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty) }"
+        >
+          Occasion <span class="text-red">*</span>
+        </label>
+        <p-dropdown
+          type="text"
+          name="occasion"
+          formControlName="occasion"
+          id="occasion"
+          [options]="categories()"
+          optionLabel="name"
+          placeholder="Select an option"
+          (onChange)="onOccasionChange($event)"
+          [ngClass]="{ 'border-red-500': occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty), 'border-zinc-200': !(occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty)) }"
+          styleClass="border rounded-rd-sm h-[48px] flex items-center"
+        ></p-dropdown>
+
+        @if (occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty)) {
+          <span class="mt-2">
+            <p-message severity="error" size="small">
+              Please select a occasion for the product
+            </p-message>
+          </span>
+        }
+      </div>
+
+      <div class="mt-12 text-white">
+        <lib-ui-button [label]="id() ? 'Update Product' : 'Add Product'" [isSubmitting]="isSubmitting()" />
+      </div>
+    </div>
+  </form>
 </section>

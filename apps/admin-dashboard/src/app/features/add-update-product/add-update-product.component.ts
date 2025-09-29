@@ -13,12 +13,14 @@ import { CategoriesService } from '../../shared/services/categories/categories.s
 import { Category } from '../../shared/types/categories';
 import { DropdownModule } from 'primeng/dropdown';
 import { ActivatedRoute } from '@angular/router';
+import { FormErrorComponent } from "../../shared/components/form-error/form-error.component";
+import { NgClass } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-add-update-product',
-  imports: [ReactiveFormsModule, UiButtonComponent, Message, FileUploadModule, Toast, Button,DropdownModule],
+  imports: [ReactiveFormsModule, UiButtonComponent, Message, FileUploadModule, Toast, Button, DropdownModule, FormErrorComponent, NgClass],
   templateUrl: './add-update-product.component.html',
   styleUrl: './add-update-product.component.css',
    
@@ -31,7 +33,7 @@ export class AddUpdateProductComponent {
   
   isSubmitting = signal<boolean>(false);
 form!: FormGroup;
-// formImage = viewChild<ElementRef>('formImage');
+formImage = viewChild<ElementRef>('formImage');
 product!:Product
 selectedCoverName = '';
 selectedGalleryNames = '';
@@ -86,6 +88,7 @@ ngOnInit(): void {
     this.productId = id;
     this.loadProductData(id);
   }
+  
 });
  
   }
@@ -98,9 +101,11 @@ ngOnInit(): void {
       priceAfterDiscount: new FormControl([{ value: null, disabled: true }]),
       quantity: new FormControl('', [Validators.required, Validators.min(1)]),
       imgCover: new FormControl(null, [Validators.required]),
-      productGallery: new FormControl(null, [Validators.required]),
+      productGallery: new FormControl([null], [Validators.required]),
       category: new FormControl(null, [Validators.required]),
       occasion: new FormControl(null, [Validators.required]),
+      
+      
    
     });
 
@@ -134,44 +139,16 @@ ngOnInit(): void {
   }
 
 onSubmit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) 
+      this.form.markAllAsTouched();
+      return;
 
-    const productData = this.form.value;
 
     if (this.isEditMode) {
-      this._ProductsService.updateProduct(this.productId, productData).subscribe({
-        next: () => {
-          this._toast.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Product updated successfully',
-          });
-        },
-        error: () => {
-          this._toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Failed to update product',
-          });
-        }
-      });
+     this.updateProduct()
     } else {
-      this._ProductsService.addProduct(productData).subscribe({
-        next: () => {
-          this._toast.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Product added successfully',
-          });
-        },
-        error: () => {
-          this._toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Failed to add product',
-          });
-        }
-      });
+    
+    this.addProduct()
     }
   }
 
@@ -335,7 +312,9 @@ onOccasionChange(event: any) {
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-
+// get titleCtrl() {
+//   return this.form.get('title');
+// }
 
 }
 

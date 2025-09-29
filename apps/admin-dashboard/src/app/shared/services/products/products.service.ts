@@ -34,18 +34,28 @@ export class ProductsService {
     }
 
   addProduct(data: AddProductData) {
-    const fd = new FormData();
-    fd.append('title', data.title);
+    
+      const fd = new FormData();
+   fd.append('title', data.title);
     fd.append('description', data.description);
     fd.append('price', data.price.toString());
     fd.append('discount', data.discount.toString());
     fd.append('priceAfterDiscount', data.priceAfterDiscount.toString());
     fd.append('quantity', data.quantity.toString());
     fd.append('imgCover', data.imgCover);
-    fd.append('product gallery ', data.images);
+    // fd.append('product gallery ', data.images);
+    // data.images.forEach((img: File) => { fd.append('productGallery', img); }); 
     fd.append('category ', data.category);
     fd.append('occasion ', data.occasion);
 
+    // This condition use when i do not know the user uplode file or more
+if (Array.isArray(data.images)) {
+  data.images.forEach((img: File) => fd.append('productGallery', img));
+} else if (data.images instanceof FileList) {
+  Array.from(data.images).forEach((img: File) => fd.append('productGallery', img));
+} else if (data.images instanceof File) {
+  fd.append('productGallery', data.images);
+}
     return this._httpClient.post(`${env.baseUrl}/api/v1/products`, fd).pipe(
       map((res) => res),
       catchError(() => {
@@ -56,7 +66,7 @@ export class ProductsService {
 
 
 
- updateProduct(id: string, data: any) {
+ updateProduct(id: string, data: Product) {
     const fd = new FormData();
    fd.append('title', data.title);
     fd.append('description', data.description);
@@ -65,7 +75,8 @@ export class ProductsService {
     fd.append('priceAfterDiscount', data.priceAfterDiscount.toString());
     fd.append('quantity', data.quantity.toString());
     fd.append('imgCover', data.imgCover);
-    fd.append('product gallery ', data.images);
+    // fd.append('product gallery ', data.images);
+    data.images.forEach((img: File) => { fd.append('productGallery', img); }); 
     fd.append('category ', data.category);
     fd.append('occasion ', data.occasion);
 
