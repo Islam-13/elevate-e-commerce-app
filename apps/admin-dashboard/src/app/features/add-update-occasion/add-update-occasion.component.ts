@@ -106,7 +106,7 @@ export class AddUpdateOccasionComponent implements OnInit {
           this._toast.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'Category created successfully',
+            detail: 'Occasion created successfully',
           });
         },
         error: (err) => {
@@ -135,7 +135,7 @@ export class AddUpdateOccasionComponent implements OnInit {
           this._toast.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'Category updated successfully',
+            detail: 'Occasion updated successfully',
           });
         },
         error: (err) => {
