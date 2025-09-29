@@ -65,7 +65,6 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
     const labels = dataArray.map((o) => (o._id ?? 'Unknown').toString());
     const counts = dataArray.map((o) => Number(o.count ?? 0));
     const backgroundColor = this.generateColors(counts.length);
-
     this.chartColors.set(backgroundColor);
 
     if (this.chart) {
@@ -89,6 +88,7 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
           responsive: true,
           maintainAspectRatio: false,
           cutout: '50%',
+          events: [],
           plugins: {
             tooltip: { enabled: false },
             legend: { display: false },
@@ -96,22 +96,18 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
               color: '#000',
               backgroundColor: '#fff',
               borderRadius: 999,
-              padding: {
-                top: 7,
-                bottom: 7,
-                left: 7,
-                right: 7,
-              },
-              align: 'end',
-              anchor: 'end',
-              offset: -25,
+              padding: 10,
+              align: 'center',
+              anchor: 'center',
+              offset: -10,
+              clip: false,
+              font: { weight: 'bold', size: 15 },
               formatter: (value: number, context) => {
                 const dataset = context.chart.data.datasets[0].data as number[];
                 const total = dataset.reduce((sum, val) => sum + Number(val), 0);
                 const percentage = total ? Math.round((Number(value) / total) * 100) : 0;
-                return `${percentage}%`;
+                return`${percentage}%`;
               },
-              font: { weight: 'bold', size: 14 },
             },
           },
         },
@@ -129,7 +125,7 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   private generateColors(n: number): string[] {
-    const palette = ['#00BC7D', '#2B7FFF', '#DC2626', '#00BCD4'];
+    const palette = ['#00BC7D', '#2B7FFF', '#DC2626',];
     return Array.from({ length: n }, (_, i) => palette[i % palette.length]);
   }
 
