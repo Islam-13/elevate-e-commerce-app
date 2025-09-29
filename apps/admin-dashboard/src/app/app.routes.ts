@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { CategoryResolver } from './shared/services/categories/category.resolver';
+import { OccasionResolver } from './shared/services/occasions/occasion.resolver';
 
 export const appRoutes: Route[] = [
   {
@@ -18,10 +19,9 @@ export const appRoutes: Route[] = [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import(
-
-            './features/pages/overviews/overviews.component'
-          ).then((c) => c.OverviewsComponent),
+          import('./features/pages/overviews/overviews.component').then(
+            (c) => c.OverviewsComponent
+          ),
         data: { breadcrumb: 'Dashboard' },
 
         children: [
@@ -89,6 +89,27 @@ export const appRoutes: Route[] = [
                 (c) => c.OccasionsComponent
               ),
             data: { breadcrumb: '' },
+          },
+
+          {
+            path: 'add-occasion',
+            loadComponent: () =>
+              import(
+                './features/add-update-occasion/add-update-occasion.component'
+              ).then((c) => c.AddUpdateOccasionComponent),
+            data: { breadcrumb: 'Add Occasion' },
+          },
+
+          {
+            path: 'update-occasion/:id',
+            loadComponent: () =>
+              import(
+                './features/add-update-occasion/add-update-occasion.component'
+              ).then((c) => c.AddUpdateOccasionComponent),
+            resolve: { occasionName: OccasionResolver },
+            data: {
+              breadcrumb: 'Update Occasion: :occasionName',
+            },
           },
         ],
       },
