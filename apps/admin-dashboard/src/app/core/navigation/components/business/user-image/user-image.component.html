@@ -44,8 +44,8 @@
         </a>
       </ng-template>
     </p-menu>
-    // eslint-disable-next-line @angular-eslint/template/click-events-have-key-events
-    <div (click)="menu.toggle($event)">
+
+    <button (click)="menu.toggle($event)">
       @if(isLargeScreen()){
 
       <div class="border px-2 py-2 border-[#00000040] rounded-md">
@@ -115,7 +115,7 @@
       </svg>
 
       }
-    </div>
+    </button>
   </div>
 </div>
 }

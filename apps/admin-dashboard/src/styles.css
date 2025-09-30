@@ -110,7 +110,14 @@ button {
   border-top-right-radius: 20px !important;
   margin-bottom: 10px;
 }
-
+/* tr hover */
+.p-datatable-tbody > tr:hover {
+  background-color: var(--color-bg-main);
+}
+.p-paginator-page.p-paginator-page-selected {
+  color: white !important;
+  background : var(--color-main) !important;
+}
 /* .p-menu-item-label {
   padding: 10px;
 } */
@@ -152,16 +159,14 @@ button {
   }
 } */
 
-
-
-@theme{
-  --color-bg-icon1:#A6252A ;
-  --color-bg-icon2:#0063D0 ;
-  --color-bg-icon3:#753CBF ;
-  --color-bg-icon4:#008961 ;
-  --color-bg-s1: #FBEAEA;
-  --color-bg-s2:#0063D00D ;
-  --color-bg-s3:#753CBF0D ;
-  --color-bg-s4: #0089610D;
-  --none :red;
+@theme {
+  --color-bg-icon1: #a6252a;
+  --color-bg-icon2: #0063d0;
+  --color-bg-icon3: #753cbf;
+  --color-bg-icon4: #008961;
+  --color-bg-s1: #fbeaea;
+  --color-bg-s2: #0063d00d;
+  --color-bg-s3: #753cbf0d;
+  --color-bg-s4: #0089610d;
+  --none: red;
 }
