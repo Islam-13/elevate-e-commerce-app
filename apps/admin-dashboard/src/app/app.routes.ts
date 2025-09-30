@@ -132,8 +132,6 @@ export const appRoutes: Route[] = [
         path: '**',
         loadComponent: () =>
 
-          // eslint-disable-next-line @nx/enforce-module-boundaries
-
           import(
            
             '../../../../libs/not-found/src/lib/not-found/not-found.component'
