@@ -1,6 +1,7 @@
 ::ng-deep .p-breadcrumb-list {
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
 }
+ 
 ::ng-deep .p-breadcrumb-item-link {
   color: var(--color-gray-500);
   font-family: 'Mulish';
