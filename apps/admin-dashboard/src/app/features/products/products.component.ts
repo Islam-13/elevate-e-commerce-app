@@ -6,6 +6,8 @@ import { ActionBtnsComponent } from '../components/action-btns/action-btns.compo
 import { Product } from '../../shared/types/products';
 import { ProductsService } from '../../shared/services/products/products.service';
 import { MessageService } from 'primeng/api';
+import { AddUpdateProductComponent } from '../add-update-product/add-update-product.component';
+
 
 @Component({
   selector: 'app-products',
@@ -14,6 +16,7 @@ import { MessageService } from 'primeng/api';
     TableModule,
     FormsModule,
     ActionBtnsComponent,
+    AddUpdateProductComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -24,12 +27,38 @@ export class ProductsComponent implements OnInit {
   openId = signal<string>('');
   isLoading = signal<boolean>(false);
 
+
+    selectedProduct = signal<Product | null>(null);
+  isEditMode = signal<boolean>(false);
+
+
+
   private readonly _productsService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _toast = inject(MessageService);
 
   ngOnInit(): void {
     this.getAllProducts();
+ 
+
+  
+  }
+  // existing code...
+
+  onEdit(product: Product) {
+    this.selectedProduct.set(product);
+    this.isEditMode.set(true);
+  }
+
+  onCloseForm() {
+    this.selectedProduct.set(null);
+    this.isEditMode.set(false);
+  }
+
+  // called after saved from child
+  onSaved() {
+    this.onCloseForm();
+    this.getAllProducts(); // reload list
   }
 
   getAllProducts() {
