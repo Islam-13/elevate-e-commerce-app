@@ -37,6 +37,7 @@
 
     --bg-color: #fafafa;
     --normal-txt: #27272a;
+    --p-breadcrumb-background:transparent !important;
   }
 
   &[data-theme='dark'] {
