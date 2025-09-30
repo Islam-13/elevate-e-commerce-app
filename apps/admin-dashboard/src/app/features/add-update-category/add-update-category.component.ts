@@ -32,6 +32,7 @@ import { Category } from '../../shared/types/categories';
 export class AddUpdateCategoryComponent implements OnInit {
   id = input<string>();
   isSubmitting = signal<boolean>(false);
+
   categoryToEdit = signal<Category>({
     _id: '',
     name: '',
@@ -43,6 +44,7 @@ export class AddUpdateCategoryComponent implements OnInit {
   });
 
   visible = signal<boolean>(false);
+
 
   form!: FormGroup;
   formImage = viewChild<ElementRef>('formImage');
@@ -76,6 +78,7 @@ export class AddUpdateCategoryComponent implements OnInit {
       this.form.get('image')?.setValue(input.files[0]);
     }
   }
+
 
   getCategory(id: string) {
     const subscription = this._categoriesService.getCategoryById(id).subscribe({
@@ -151,6 +154,7 @@ export class AddUpdateCategoryComponent implements OnInit {
       });
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
   }
+
 
   onSubmit() {
     if (this.form.invalid) {

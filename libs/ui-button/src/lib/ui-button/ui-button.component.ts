@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input,output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 export class UiButtonComponent {
   isSubmitting = input.required<boolean>();
   label = input.required<string>();
+ 
 }

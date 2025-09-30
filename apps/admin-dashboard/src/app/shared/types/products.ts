@@ -3,6 +3,10 @@ export interface ProductsRes {
   metadata: Metadata;
   products: Product[];
 }
+export interface ProductRes {
+  message: string;
+  product: Product;
+}
 
 export interface Product {
   rateAvg: number;
@@ -24,6 +28,7 @@ export interface Product {
   isSuperAdmin: boolean;
   sold: number;
   id: string;
+  discount:number;
 }
 
 export interface Metadata {
@@ -31,4 +36,17 @@ export interface Metadata {
   totalPages: number;
   limit: number;
   totalItems: number;
+}
+
+export interface AddProductData{
+ title: string;
+description: string;
+imgCover: File;
+ price: number;
+  priceAfterDiscount: number;
+  quantity: number;
+  category: string;
+  occasion: string;
+  images: File;
+discount:number;
 }

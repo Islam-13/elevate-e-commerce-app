@@ -1,4 +1,5 @@
-import { UiButtonComponent } from '../../../../../../../../libs/ui-button/src/lib/ui-button/ui-button.component';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { UiButtonComponent } from 'libs/ui-button/src/lib/ui-button/ui-button.component';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserImageComponent } from '../business/user-image/user-image.component';
