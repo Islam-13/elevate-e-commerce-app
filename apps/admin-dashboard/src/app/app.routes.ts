@@ -110,11 +110,7 @@ export const appRoutes: Route[] = [
       {
         path: '**',
         loadComponent: () =>
-          // eslint-disable-next-line @nx/enforce-module-boundaries
-
-          import(
-            '../../../../libs/not-found/src/lib/not-found/not-found.component'
-          ).then((c) => c.NotFoundComponent),
+          import('@myorg/not-found').then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
       },
     ],
