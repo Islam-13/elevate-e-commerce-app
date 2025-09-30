@@ -111,9 +111,9 @@ button {
   margin-bottom: 10px;
 }
 
-.p-menu-item-label {
+/* .p-menu-item-label {
   padding: 10px;
-}
+} */
 
 .btn-primary {
   @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;

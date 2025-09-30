@@ -31,7 +31,20 @@
       [popup]="true"
       appendTo="body"
       styleClass="origin-top-right  "
-    />
+    >
+      <ng-template pTemplate="item" let-item>
+        <a
+          [routerLink]="item.routerLink"
+          (click)="item.command?.()"
+          class="p-menuitem-link flex items-center gap-2"
+          [class]="item.styleClass"
+        >
+          <span [class]="item.icon"></span>
+          <span class="p-menuitem-text p-3">{{ item.label }}</span>
+        </a>
+      </ng-template>
+    </p-menu>
+    // eslint-disable-next-line @angular-eslint/template/click-events-have-key-events
     <div (click)="menu.toggle($event)">
       @if(isLargeScreen()){
 
