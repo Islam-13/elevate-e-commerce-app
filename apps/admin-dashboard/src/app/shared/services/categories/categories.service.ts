@@ -51,9 +51,13 @@ export class CategoriesService {
       );
   }
 
-  updateCategory(id: string, value: string) {
+  updateCategory(id: string, data: AddCategoryData) {
+    const fd = new FormData();
+    fd.append('name', data.name);
+    fd.append('image', data.image);
+
     return this._httpClient
-      .put(`${env.baseUrl}/api/v1/categories/${id}`, value)
+      .put(`${env.baseUrl}/api/v1/categories/${id}`, fd)
       .pipe(
         map((res) => res),
         catchError(() => {
