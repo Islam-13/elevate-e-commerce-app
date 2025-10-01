@@ -15,12 +15,15 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ActivatedRoute } from '@angular/router';
 import { FormErrorComponent } from "../../shared/components/form-error/form-error.component";
 import { NgClass } from '@angular/common';
+import { OccasionsService } from '../../shared/services/occasions/occasions.service';
+import { Occasion } from '../../shared/types/occasions';
+import { Dialog } from "primeng/dialog";
 
 
 
 @Component({
   selector: 'app-add-update-product',
-  imports: [ReactiveFormsModule, UiButtonComponent, Message, FileUploadModule, Toast, Button, DropdownModule, FormErrorComponent, NgClass],
+  imports: [ReactiveFormsModule, UiButtonComponent, Message, FileUploadModule, Toast, Button, DropdownModule, FormErrorComponent, NgClass, Dialog],
   templateUrl: './add-update-product.component.html',
   styleUrl: './add-update-product.component.css',
    
@@ -39,7 +42,11 @@ selectedCoverName = '';
 selectedGalleryNames = '';
 isLoading = signal<boolean>(false);
 categories = signal<Category[]>([]);
-// occasions = signal<Category[]>([]);
+occasions = signal<Occasion[]>([]);
+
+visibleCover = signal<boolean>(false);;
+visibleGallery = signal<boolean>(false);;
+
 
 productToEdit = signal<Product>({
 rateAvg: 0,
@@ -65,7 +72,7 @@ rateCount: 0,
   });
 
   private readonly _categoriesService = inject(CategoriesService);
-  // private readonly _occasionsService = inject(OccasionsService);
+  private readonly _occasionsService = inject(OccasionsService);
   private readonly _ProductsService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _toast = inject(MessageService);
@@ -78,6 +85,7 @@ ngOnInit(): void {
     this.form.get('price')?.valueChanges.subscribe(() => this.updateAfterDiscount());
   this.form.get('discount')?.valueChanges.subscribe(() => this.updateAfterDiscount());
   this.getAllCategories();
+  this.getAllOccasions();
      if (this.id()) {
       this.getProduct(this.id()!);
     }
@@ -139,16 +147,17 @@ ngOnInit(): void {
   }
 
 onSubmit() {
-    if (this.form.invalid) 
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
-
+    }
 
     if (this.isEditMode) {
      this.updateProduct()
     } else {
-    
-    this.addProduct()
+      if (this.id()) {
+        this.updateProduct();
+      } else this.addProduct();
     }
   }
 
@@ -205,25 +214,25 @@ onCategoryChange(event: any) {
   console.log('selected category id =', value);
 }
 
-// getAllOccasions() {
-//     this.isLoading.set(true);
+getAllOccasions() {
+    this.isLoading.set(true);
 
-//     const subscription = this._occasionsService.getAllOccasions().subscribe({
-//       next: (data) => {
-//         this.occasions.set(data);
-//       },
-//       error: (err) => {
-//         this._toast.add({
-//           severity: 'error',
-//           summary: 'Error',
-//           detail: err,
-//         });
-//       },
-//       complete: () => this.isLoading.set(false),
-//     });
+    const subscription = this._occasionsService.getAllOccasions().subscribe({
+      next: (data) => {
+        this.occasions.set(data);
+      },
+      error: (err) => {
+        this._toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err,
+        });
+      },
+      complete: () => this.isLoading.set(false),
+    });
 
-//     this._destroyRef.onDestroy(() => subscription.unsubscribe());
-//   }
+    this._destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
 
 onOccasionChange(event: any) {
    const value: string = event.value; 
@@ -312,9 +321,15 @@ onOccasionChange(event: any) {
     this._destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-// get titleCtrl() {
-//   return this.form.get('title');
-// }
+  showCoverDialog() {
+  this.visibleCover.set(true);
+}
+
+showGalleryDialog() {
+    this.visibleCover.set(true);
+
+}
+
 
 }
 
