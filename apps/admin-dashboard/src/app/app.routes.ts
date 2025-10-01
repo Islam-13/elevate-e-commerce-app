@@ -23,26 +23,6 @@ export const appRoutes: Route[] = [
           import('./features/pages/overviews/overviews.component').then(
             (c) => c.OverviewsComponent
           ),
-        data: { breadcrumb: 'Dashboard' },
-
-        children: [
-          {
-            path: 'users',
-            loadComponent: () =>
-              import(
-                './core/navigation/components/business/user-image/user-image.component'
-              ).then((c) => c.UserImageComponent),
-            data: { breadcrumb: 'users' },
-          },
-          {
-            path: 'category',
-            loadComponent: () =>
-              import(
-                './core/navigation/components/business/user-image/user-image.component'
-              ).then((c) => c.UserImageComponent),
-            data: { breadcrumb: 'category' },
-          },
-        ],
       },
 
       {
@@ -127,7 +107,7 @@ export const appRoutes: Route[] = [
               ),
             data: { breadcrumb: '' },
           },
-           {
+          {
             path: 'add-product',
             loadComponent: () =>
               import(
@@ -141,7 +121,7 @@ export const appRoutes: Route[] = [
               import(
                 './features/add-update-product/add-update-product.component'
               ).then((c) => c.AddUpdateProductComponent),
-            // resolve: { productTitle: ProductResolver },
+            resolve: { productTitle: ProductResolver },
             data: {
               breadcrumb: 'Update Product: :productTitle',
             },
@@ -152,10 +132,7 @@ export const appRoutes: Route[] = [
       {
         path: '**',
         loadComponent: () =>
-        // eslint-disable-next-line @nx/enforce-module-boundaries
-          import(
-            '../../../../libs/not-found/src/lib/not-found/not-found.component'
-          ).then((c) => c.NotFoundComponent),
+          import('@myorg/not-found').then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
       },
     ],
