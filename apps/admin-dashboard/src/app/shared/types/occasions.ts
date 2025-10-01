@@ -21,3 +21,13 @@ interface Metadata {
   totalPages: number;
   totalItems: number;
 }
+
+export interface GetOccasionRes {
+  message: string;
+  occasion: Occasion;
+}
+
+export interface AddOccasionData {
+  name: string;
+  image: File;
+}
