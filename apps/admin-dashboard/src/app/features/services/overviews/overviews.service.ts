@@ -5,7 +5,6 @@ import { map, catchError } from 'rxjs/operators';
 import { Getallstatistics, Statistics } from '../../interfaces/getallstatistics/getallstatistics';
 import { Getcategorystatistics, Statistic } from '../../interfaces/getcategorystatistics/getcategorystatistics';
 import { environment } from '@elevate-e-commerce-app/shared-env';
-import { Ordersandrevenue } from '../../interfaces/ordersandrevenue/ordersandrevenue';
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +29,4 @@ export class OverviewsService {
       })
     );
   }
-
-
-getOrdersAndRevenue(): Observable<Ordersandrevenue> {
-  return this._http.get<Ordersandrevenue>(`${environment.baseUrl}/api/v1/statistics/orders`).pipe(
-    catchError(() => {
-      throw 'Could not fetch orders and revenue, Please try again later!!';
-    })
-  );
 }
-}
-
