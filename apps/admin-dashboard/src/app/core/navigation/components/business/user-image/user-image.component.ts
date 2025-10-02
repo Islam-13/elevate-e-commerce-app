@@ -1,13 +1,15 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Component, OnDestroy, OnInit, inject, input } from '@angular/core';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { UserDataService } from 'apps/admin-dashboard/src/app/shared/services/user-data.service';
 import { User } from 'apps/admin-dashboard/src/app/shared/types/getLoggedUserData.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-image',
-  imports: [MenuModule],
+  imports: [MenuModule, RouterLink],
   templateUrl: './user-image.component.html',
   styleUrl: './user-image.component.css',
 })
@@ -25,12 +27,12 @@ export class UserImageComponent implements OnInit, OnDestroy {
             label: 'Profile',
             icon: 'pi pi-refresh',
             routerLink: '/profile',
-            styleClass: 'text-black  ',
+            styleClass: 'text-black',
           },
           {
             label: 'Logout',
             icon: 'pi pi-upload',
-            styleClass: 'text-red  ',
+            styleClass: 'text-red',
 
             command: () => {
               this.logout();
@@ -42,7 +44,9 @@ export class UserImageComponent implements OnInit, OnDestroy {
 
     this.getUserData();
   }
-  logout() {}
+  logout() {
+    //
+  }
 
   getUserData() {
     {

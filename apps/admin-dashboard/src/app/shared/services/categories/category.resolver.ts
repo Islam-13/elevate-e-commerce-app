@@ -9,7 +9,6 @@ export class CategoryResolver implements Resolve<string> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<string> {
     const id = route.paramMap.get('id')!;
-
     return this._categoriesService.getCategoryById(id).pipe(
       map((category) => category.name) // return just the name
     );

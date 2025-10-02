@@ -1,8 +1,8 @@
-<div class="flex pb-[100px] md:pb-0">
+<div class="flex pb-[5rem] md:pb-0">
   <aside
     class="md:w-[300px] md:h-screen flex flex-col justify-between border-e border-border"
   >
-    <div class="">
+    <div class="z-40">
       <img
         src="/images/logo.png"
         alt="logo"
@@ -13,7 +13,7 @@
 
       <!-- Nav Items -->
       <div
-        class="flex my-3 flex-nowrap flex-row fixed bottom-0 left-0 gap-2 md:flex-col md:relative w-screen md:w-full md:m-0 px-2"
+        class="flex py-3 flex-nowrap flex-row fixed bottom-0 left-0 gap-2 md:flex-col md:relative w-screen md:w-full md:m-0 px-2 bg-white"
       >
         <lib-ui-button
           [label]="'Preview website'"
@@ -128,8 +128,8 @@
           class="text-nav"
         >
           <svg
-            width="25"
-            height="25"
+            width="20"
+            height="20"
             viewBox="0 0 25 25"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -176,13 +176,13 @@
   <!-- c Navigation -->
   <div class="flex-1">
     <nav
-      class="flex flex-row justify-between gap-2 items-center border-b border-border h-[70px]"
+      class="flex flex-row justify-between gap-1 items-center border-b border-border h-[70px] bg-white"
     >
       <div class="flex items-center justify-center">
         <img
           src="/images/logo.png"
           alt="logo"
-          class="mt-5 md:hidden flex w-[60px] h-[57px]"
+          class="md:hidden flex w-[50px] h-[47px]"
         />
 
         <!-- <p
@@ -199,7 +199,6 @@
 
     <main class=" h-[calc(100dvh-70px)]">
       <router-outlet></router-outlet>
-      <!-- <app-dashboard></app-dashboard> -->
     </main>
   </div>
 </div>
