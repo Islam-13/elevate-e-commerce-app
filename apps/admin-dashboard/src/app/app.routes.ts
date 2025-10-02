@@ -141,7 +141,7 @@ export const appRoutes: Route[] = [
               import(
                 './features/add-update-product/add-update-product.component'
               ).then((c) => c.AddUpdateProductComponent),
-            // resolve: { productTitle: ProductResolver },
+            resolve: { productTitle: ProductResolver },
             data: {
               breadcrumb: 'Update Product: :productTitle',
             },
