@@ -3,7 +3,11 @@ import { inject, Injectable } from '@angular/core';
 
 import { environment as env } from '@elevate-e-commerce-app/shared-env';
 import { catchError, map } from 'rxjs';
-import { OccasionsRes } from '../../types/occasions';
+import {
+  AddOccasionData,
+  GetOccasionRes,
+  OccasionsRes,
+} from '../../types/occasions';
 
 @Injectable({
   providedIn: 'root',
@@ -22,18 +26,37 @@ export class OccasionsService {
       );
   }
 
-  // addOccasion(data: AddCategoryData) {
-  //   return this._httpClient.post(`${env.baseUrl}/api/v1/occasions`, data).pipe(
-  //     map((res) => res),
-  //     catchError(() => {
-  //       throw 'Could not add a new occasion, Please try again later!!';
-  //     })
-  //   );
-  // }
-
-  updateOccasion(id: string, value: string) {
+  getOccasionById(id: string) {
     return this._httpClient
-      .put(`${env.baseUrl}/api/v1/occasions/${id}`, value)
+      .get<GetOccasionRes>(`${env.baseUrl}/api/v1/occasions/${id}`)
+      .pipe(
+        map((res) => res.occasion),
+        catchError(() => {
+          throw 'Could not fetch occasion, Please try again later!!';
+        })
+      );
+  }
+
+  addOccasion(data: AddOccasionData) {
+    const fd = new FormData();
+    fd.append('name', data.name);
+    fd.append('image', data.image);
+
+    return this._httpClient.post(`${env.baseUrl}/api/v1/occasions`, fd).pipe(
+      map((res) => res),
+      catchError(() => {
+        throw 'Could not add a new occasion, Please try again later!!';
+      })
+    );
+  }
+
+  updateOccasion(id: string, data: AddOccasionData) {
+    const fd = new FormData();
+    fd.append('name', data.name);
+    fd.append('image', data.image);
+
+    return this._httpClient
+      .put(`${env.baseUrl}/api/v1/occasions/${id}`, fd)
       .pipe(
         map((res) => res),
         catchError(() => {
