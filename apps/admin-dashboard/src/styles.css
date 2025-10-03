@@ -37,6 +37,7 @@
 
     --bg-color: #fafafa;
     --normal-txt: #27272a;
+    --p-breadcrumb-background: transparent !important;
   }
 
   &[data-theme='dark'] {
@@ -94,7 +95,15 @@ body {
 button {
   cursor: pointer;
 }
-
+/* tr hover */
+.p-datatable-tbody > tr:hover {
+  background-color: var(--color-bg-main);
+  cursor: pointer;
+}
+.p-paginator-page.p-paginator-page-selected {
+  color: white !important;
+  background: var(--color-main) !important;
+}
 .p-menu {
   background: white !important;
   box-shadow: 0px 4px 9px 0px #00000026;
@@ -111,9 +120,9 @@ button {
   margin-bottom: 10px;
 }
 
-.p-menu-item-label {
+/* .p-menu-item-label {
   padding: 10px;
-}
+} */
 
 .btn-primary {
   @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
@@ -152,16 +161,14 @@ button {
   }
 } */
 
-
-
-@theme{
-  --color-bg-icon1:#A6252A ;
-  --color-bg-icon2:#0063D0 ;
-  --color-bg-icon3:#753CBF ;
-  --color-bg-icon4:#008961 ;
-  --color-bg-s1: #FBEAEA;
-  --color-bg-s2:#0063D00D ;
-  --color-bg-s3:#753CBF0D ;
-  --color-bg-s4: #0089610D;
-  --none :red;
+@theme {
+  --color-bg-icon1: #a6252a;
+  --color-bg-icon2: #0063d0;
+  --color-bg-icon3: #753cbf;
+  --color-bg-icon4: #008961;
+  --color-bg-s1: #fbeaea;
+  --color-bg-s2: #0063d00d;
+  --color-bg-s3: #753cbf0d;
+  --color-bg-s4: #0089610d;
+  --none: red;
 }
