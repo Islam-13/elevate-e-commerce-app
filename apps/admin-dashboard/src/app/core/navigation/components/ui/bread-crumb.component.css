@@ -1,7 +1,6 @@
 ::ng-deep .p-breadcrumb-list {
-  flex-wrap: wrap !important;
+  flex-wrap: wrap;
 }
- 
 ::ng-deep .p-breadcrumb-item-link {
   color: var(--color-gray-500);
   font-family: 'Mulish';
@@ -16,10 +15,7 @@
   color: var(--color-gray-500);
 }
 
-::ng-deep .p-breadcrumb-item:last-child .p-breadcrumb-item-label {
-  color: var(--color-main);
-}
-
-::ng-deep .p-breadcrumb-item-link:hover .p-breadcrumb-item-label {
-  color: var(--color-main);
+::ng-deep .p-breadcrumb-list li:last-child {
+  /* color: var(--color-main); */
+ color:red;
 }

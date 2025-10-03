@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { CategoryResolver } from './shared/services/categories/category.resolver';
+import { OccasionResolver } from './shared/services/occasions/occasion.resolver';
 import { ProductResolver } from './shared/services/products/product.resolver';
 
 export const appRoutes: Route[] = [
@@ -22,6 +23,26 @@ export const appRoutes: Route[] = [
           import('./features/pages/overviews/overviews.component').then(
             (c) => c.OverviewsComponent
           ),
+        data: { breadcrumb: 'Dashboard' },
+
+        children: [
+          {
+            path: 'users',
+            loadComponent: () =>
+              import(
+                './core/navigation/components/business/user-image/user-image.component'
+              ).then((c) => c.UserImageComponent),
+            data: { breadcrumb: 'users' },
+          },
+          {
+            path: 'category',
+            loadComponent: () =>
+              import(
+                './core/navigation/components/business/user-image/user-image.component'
+              ).then((c) => c.UserImageComponent),
+            data: { breadcrumb: 'category' },
+          },
+        ],
       },
 
       {
@@ -70,6 +91,27 @@ export const appRoutes: Route[] = [
               ),
             data: { breadcrumb: '' },
           },
+
+          {
+            path: 'add-occasion',
+            loadComponent: () =>
+              import(
+                './features/add-update-occasion/add-update-occasion.component'
+              ).then((c) => c.AddUpdateOccasionComponent),
+            data: { breadcrumb: 'Add Occasion' },
+          },
+
+          {
+            path: 'update-occasion/:id',
+            loadComponent: () =>
+              import(
+                './features/add-update-occasion/add-update-occasion.component'
+              ).then((c) => c.AddUpdateOccasionComponent),
+            resolve: { occasionName: OccasionResolver },
+            data: {
+              breadcrumb: 'Update Occasion: :occasionName',
+            },
+          },
         ],
       },
 
@@ -85,7 +127,7 @@ export const appRoutes: Route[] = [
               ),
             data: { breadcrumb: '' },
           },
-          {
+           {
             path: 'add-product',
             loadComponent: () =>
               import(
@@ -110,7 +152,10 @@ export const appRoutes: Route[] = [
       {
         path: '**',
         loadComponent: () =>
-          import('@myorg/not-found').then((c) => c.NotFoundComponent),
+        // eslint-disable-next-line @nx/enforce-module-boundaries
+          import(
+            '../../../../libs/not-found/src/lib/not-found/not-found.component'
+          ).then((c) => c.NotFoundComponent),
         data: { breadcrumb: 'Not Found' },
       },
     ],
