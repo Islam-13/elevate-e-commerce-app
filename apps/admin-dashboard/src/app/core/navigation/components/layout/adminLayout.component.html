@@ -1,4 +1,4 @@
-<div class="flex pb-[5rem] md:pb-0">
+<div class="flex">
   <aside
     class="md:w-[300px] md:h-screen flex flex-col justify-between border-e border-border"
   >
@@ -197,7 +197,7 @@
       <app-user-image [isLargeScreen]="false"></app-user-image>
     </nav>
 
-    <main class="overflow-y-auto h-[calc(100dvh-70px)]">
+    <main class="overflow-y-auto pb-[5rem] md:pb-0 h-[calc(100dvh-70px)]">
       <router-outlet></router-outlet>
     </main>
   </div>
