@@ -119,11 +119,106 @@ button {
   @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
 }
 
-/* .wrapper {
-  @apply max-w-[1440px] m-auto;
-} */
 
-/* .heading {
+
+
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+@custom-variant dark (:where([data-theme="dark"], [data-theme="dark"] *) &);
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  &,
+  &[data-theme='light'] {
+    --color-bg-main: #fbeaea;
+    --color-main: #a6252a;
+    --color-title: #741c21;
+    --color-mini-paragraph: #71717a;
+    --color-card-bg:#E4E4E7;
+    --color-zink-100:#F4F4F5;
+    --color-span: #ff668b;
+
+    --color-price: #741c21;
+    --color-icon: #a6252a;
+
+    --bg-color: #fafafa;
+    --normal-txt: #27272a;
+
+    --bg-dialog: #fff;
+  }
+
+  &[data-theme='dark'] {
+    --color-bg-main: #3f3f46;
+    --color-main: #ffc2d0;
+    --color-title: #ffc2d0;
+    --color-mini-paragraph: #a1a1aa;
+
+    --color-span: #d75458;
+
+    --color-price: #ffc2d0;
+    --color-icon: #cd2e33;
+
+    --bg-color: #27272a;
+    --normal-txt: #fafafa;
+
+    --bg-dialog: #080101;
+
+  }
+}
+
+@theme {
+  --color-bg-bg: var(--bg-color);
+  --color-bg-main: var(--color-bg-main);
+  --color-main: var(--color-main);
+  --color-title: var(--color-title);
+  --color-mini-paragraph: var(--color-mini-paragraph);
+  --color-normal-txt: var(--normal-txt);
+
+  --color-span: var(--color-span);
+
+  --color-price: var(--color-price);
+  --color-icon: var(--color-icon);
+
+  --color-star: #fba707;
+  --radius-rd-sm: 10px;
+  --radius-rd-md: 20px;
+  --radius-rd-full: 100px;
+}
+
+/* carousel ...> Categories */
+.p-carousel-indicator-active .p-carousel-indicator-button {
+  background: #f82ba9 !important;
+}
+
+.p-carousel-indicator-button:hover {
+  background: #f82ba9 !important;
+}
+.p-carousel-indicator-list {
+  display: none !important;
+}
+
+body {
+  font-family: 'Inter';
+  background: var(--bg-color);
+  color: var(--normal-txt);
+}
+
+button {
+  cursor: pointer;
+}
+
+.wrapper {
+  @apply max-w-[1440px] m-auto;
+}
+
+.heading {
   @apply text-xl text-title font-bold capitalize lg:text-3xl;
 }
 
@@ -131,7 +226,9 @@ button {
   @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1;
 }
 
-
+.btn-primary {
+  @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
+}
 
 .auth-btn {
   @apply w-full bg-main rounded-rd-sm py-2.5 text-white my-9 disabled:cursor-not-allowed disabled:opacity-65;
@@ -150,4 +247,28 @@ button {
   to {
     transform: translateX(calc(-100cqw - 100%));
   }
-} */
+}
+
+/*======= Start Toast Styles =======*/
+.my-toast .p-toast-message {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  border-left: 4px solid transparent;
+}
+.my-toast .p-toast-message-success {
+  background: #0b8c61e6;         
+  color: #fff;
+  border-color: #008a5e;    
+}
+.my-toast .p-toast-message-error {
+  background: #ef4444;         
+  color: #fff;
+  border-color: #ba1d1d;     
+}
+.my-toast .p-toast-message-info {
+  background:#3b82f6; 
+  color:#fff;
+  border-color:#2563eb; 
+}
+/*======= End Toast Styles =======*/
+

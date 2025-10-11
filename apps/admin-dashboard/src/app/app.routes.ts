@@ -8,17 +8,16 @@ export const appRoutes: Route[] = [
         './core/navigation/components/navigation/navigation.component'
       ).then((c) => c.NavigationComponent),
     children: [
-      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' }, // default route
+      { path: '', redirectTo: 'overviews', pathMatch: 'full' }, 
 
-      {
-        path: 'Dashboard',
-        loadComponent: () =>
-          import(
-            './features/overView/components/overview/overview.component'
-          ).then((c) => c.OverviewComponent),
-        data: { breadcrumb: 'Dashboard' },
-
-        children: [
+        {
+          path: 'overviews',
+          loadComponent: () =>
+            import(
+              './features/pages/overviews/overviews.component'
+            ).then((c) => c.OverviewsComponent),
+          data: { breadcrumb: 'overviews' },
+          },
           {
             path: 'users',
             loadComponent: () =>
@@ -28,36 +27,51 @@ export const appRoutes: Route[] = [
             data: { breadcrumb: 'users' },
           },
           {
-            path: 'category',
+            path: 'settings',
             loadComponent: () =>
               import(
-                './core/navigation/components/business/user-image/user-image.component'
-              ).then((c) => c.UserImageComponent),
-            data: { breadcrumb: 'category' },
+                './features/settings/pages/settings-shell/settings-shell.component'
+              ).then((c) => c.SettingsShellComponent),
+              children: [
+                {path: '', redirectTo:'profile', pathMatch: 'full'},
+                {
+                  path:'profile',
+                  loadComponent: () => 
+                    import('./features/settings/pages/update-profile/update-profile.component').then(
+                      (c) => c.UpdateProfileComponent
+                    )
+                },
+                {
+                  path:'password',
+                  loadComponent: () => 
+                    import('./features/settings/pages/update-password/update-password.component').then(
+                      (c) => c.UpdatePasswordComponent
+                    )
+                },
+              ]
           },
+          {
+            path: 'categories',
+            loadComponent: () =>
+              import('./features/pages/categories/categories.component').then(
+                (c) => c.CategoriesComponent
+              ),
+          },
+          {
+            path: 'categories/add-category',
+            loadComponent: () =>
+              import(
+                './features/components/add-update-category/add-update-category.component'
+              ).then((c) => c.AddUpdateCategoryComponent),
+          },
+          {
+            path: 'categories/update-category/:id',
+            loadComponent: () =>
+              import(
+                './features/components/add-update-category/add-update-category.component'
+              ).then((c) => c.AddUpdateCategoryComponent),
+          }
         ],
-      },
-      {
-        path: 'categories',
-        loadComponent: () =>
-          import('./features/categories/categories.component').then(
-            (c) => c.CategoriesComponent
-          ),
-      },
-      {
-        path: 'categories/add-category',
-        loadComponent: () =>
-          import(
-            './features/add-update-category/add-update-category.component'
-          ).then((c) => c.AddUpdateCategoryComponent),
-      },
-      {
-        path: 'categories/update-category/:id',
-        loadComponent: () =>
-          import(
-            './features/add-update-category/add-update-category.component'
-          ).then((c) => c.AddUpdateCategoryComponent),
-      },
-    ],
+
   },
 ];

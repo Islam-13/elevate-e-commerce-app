@@ -4,34 +4,36 @@ import { MenuItem } from 'primeng/api';
 import { UserDataService } from 'apps/admin-dashboard/src/app/shared/services/user-data.service';
 import { User } from 'apps/admin-dashboard/src/app/shared/types/getLoggedUserData.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-image',
-  imports: [MenuModule],
+  imports: [MenuModule, RouterModule],
   templateUrl: './user-image.component.html',
   styleUrl: './user-image.component.css',
 })
 export class UserImageComponent implements OnInit, OnDestroy {
   isLargeScreen = input.required<boolean>();
   items: MenuItem[] | undefined;
-  private readonly _userData = inject(UserDataService);
   userData?: User;
   private destroy$ = new Subject<void>();
+  
+  private readonly _userData = inject(UserDataService);
+
   ngOnInit(): void {
     this.items = [
       {
         items: [
           {
-            label: 'Profile',
+            label: 'Account',
             icon: 'pi pi-refresh',
-            routerLink: '/profile',
-            styleClass: 'text-black  ',
+            routerLink: ['/settings'],
+            styleClass: 'text-black ',
           },
           {
             label: 'Logout',
             icon: 'pi pi-upload',
             styleClass: 'text-red  ',
-
             command: () => {
               this.logout();
             },
@@ -53,10 +55,6 @@ export class UserImageComponent implements OnInit, OnDestroy {
           next: (res) => {
             this.userData = res;
             this.userData = res;
-          },
-          error: (err) => {
-            //console.log(err.error.error);
-            //  this._toastService.showError(err.error.error);
           },
         });
     }
