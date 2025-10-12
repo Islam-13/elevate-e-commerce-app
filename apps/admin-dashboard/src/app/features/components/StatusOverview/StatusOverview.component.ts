@@ -7,6 +7,7 @@ import { Statistic } from '../../interfaces/getcategorystatistics/getcategorysta
 
 @Component({
   selector: 'app-status-overview',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './StatusOverview.component.html',
   styleUrls: ['./StatusOverview.component.css'],
@@ -43,10 +44,20 @@ export class StatusOverviewComponent implements OnInit, OnDestroy {
     this.subscription.add(sub);
   }
 
+  formatNumber(num: number | undefined | null): string {
+    if (num == null) return '0';
+    if (num >= 1_000_000) {
+      return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + ' EGP';
+    }
+    if (num >= 1_000) {
+      return (num / 1_000).toFixed(1).replace(/\.0$/, '') + ' EGP';
+    }
+    return num.toString();
+  }
+
   ngOnInit(): void {
     this.getAllStatistics();
     this.getCategoryStatistics();
-
   }
 
   ngOnDestroy(): void {

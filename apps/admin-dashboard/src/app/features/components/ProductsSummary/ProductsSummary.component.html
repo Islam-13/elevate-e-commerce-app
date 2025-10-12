@@ -1,1 +1,36 @@
-<h1>saad</h1>
+<section class="flex gap-8 mb-8 mt-6">
+
+<div class="w-full  rounded-lg mr-7 p-6 min-w-[100px] overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 w-full gap-6 items-start">
+    <div class="w-full  p-4 rounded-2xl">
+        <h1 class="text-2xl m-4">Top Selling Products</h1>
+            <div class="bg-white shadow-lg rounded-lg p-6 pb-18 gap-6">
+        <ul class="space-y-2">
+            @for (p of topSelling; track p.id; let i = $index) {
+                <li class="flex justify-between items-center rounded p-2"
+                [ngClass]="i < 3 ? rowClasses[i] : 'bg-zinc-100'">
+                <span>
+                    {{ p.title }}
+                    <span class="text-gray-500 text-sm">({{ p.price }} EGP)</span>
+                </span>
+                <span class="font-semibold text-gray-800">{{ p.sold }} Sales</span>
+                </li>
+            }
+        </ul>
+        </div>
+    </div>
+    <div class=" p-4 w-full rounded-2xl">
+        <h1 class="text-2xl m-4">Low Stock Products</h1>
+        <div class="bg-white shadow-lg p-6 rounded-lg gap-6">
+        <ul class="space-y-2">
+            @for (p of lowStock; track $index) {
+                <li class="flex justify-between items-center bg-zinc-100 rounded p-[13px]">
+                    <span> {{ p.title }} <span class="text-zinc-500 text-sm">({{ p.price }} EGP)</span></span>
+                    <span class="font-semibold text-gray-800">{{ p.quantity }} Quantity</span>
+                </li>
+            }
+          </ul>
+          </div>
+    </div>
+</div>
+</div>

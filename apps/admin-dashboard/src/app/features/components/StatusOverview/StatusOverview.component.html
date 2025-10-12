@@ -1,4 +1,4 @@
-<section class="pl-12 flex gap-8 mb-8 mt-6">
+ <section class="pl-12 flex gap-8 mb-8 mt-6">
   <div class="w-1/2">
     <div class="bg-white shadow-lg rounded-lg p-6 gap-6">
       <div class="grid grid-cols-2 gap-8">
@@ -44,7 +44,7 @@
           <img src="icons/circle-dollar-sign.png" alt="revenue" class="icon w-8 h-8" />
         </div>
         <div class="text-2xl font-bold mt-4 text-bg-icon4">
-          {{ overall()?.totalRevenue }}
+      {{ formatNumber(overall()?.totalRevenue) }}
         </div>
         <div class=" text-xl font-medium mt-2">
           {{ 'Total revenue' }}
@@ -73,4 +73,3 @@
   </div>
 </div>
 </section>
-
