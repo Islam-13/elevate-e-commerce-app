@@ -1,7 +1,3 @@
 [build]
-  base = ""
-  command = "npx nx build admin-dashboard"
-  publish = "dist/apps/admin-dashboard/browser"
-
-[build.environment]
-  NX_CLOUD = "false"
+  command = "NX_NO_CLOUD=true npx nx build admin-dashboard"
+  publish = "/opt/build/repo/dist/apps/admin-dashboard/browser"
