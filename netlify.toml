@@ -1,0 +1,7 @@
+[build]
+  base = ""
+  command = "npx nx build admin-dashboard"
+  publish = "dist/apps/admin-dashboard/browser"
+
+[build.environment]
+  NX_CLOUD = "false"
