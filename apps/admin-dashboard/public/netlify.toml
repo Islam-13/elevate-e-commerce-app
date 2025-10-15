@@ -1,0 +1,3 @@
+[build]
+  command = "NX_NO_CLOUD=true npx nx build admin-dashboard"
+  publish = "/opt/build/repo/dist/apps/admin-dashboard/browser"
