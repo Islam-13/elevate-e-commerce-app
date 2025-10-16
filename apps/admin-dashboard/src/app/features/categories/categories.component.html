@@ -53,6 +53,8 @@
               <app-action-btns
                 (deleteItem)="deleteCategory(category._id)"
                 [categoryId]="category._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
                 [editNavigate]="`update-category/${category._id}`"

@@ -53,6 +53,8 @@
               <app-action-btns
                 (deleteItem)="deleteOccasion(occasion._id)"
                 [categoryId]="occasion._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
                 [editNavigate]="`update-occasion/${occasion._id}`"
