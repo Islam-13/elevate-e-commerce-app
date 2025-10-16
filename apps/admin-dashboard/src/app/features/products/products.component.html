@@ -62,6 +62,8 @@
               <app-action-btns
                 (deleteItem)="deleteProduct(product._id)"
                 [categoryId]="product._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
                 [editNavigate]="`update-product/${product._id}`"

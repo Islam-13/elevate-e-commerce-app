@@ -43,7 +43,7 @@
 
         <ng-template #body let-category>
           <tr>
-            <td class="font-semibold">
+            <td class="font-semibold capitalize">
               {{ category.name }}
             </td>
 
@@ -53,6 +53,8 @@
               <app-action-btns
                 (deleteItem)="deleteCategory(category._id)"
                 [categoryId]="category._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
                 [editNavigate]="`update-category/${category._id}`"
