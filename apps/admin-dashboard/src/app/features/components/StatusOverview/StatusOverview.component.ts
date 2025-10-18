@@ -43,17 +43,19 @@ export class StatusOverviewComponent implements OnInit, OnDestroy {
     });
     this.subscription.add(sub);
   }
+formatNumber(num: number | undefined | null): string {
+  if (num == null) return '0';
 
-  formatNumber(num: number | undefined | null): string {
-    if (num == null) return '0';
-    if (num >= 1_000_000) {
-      return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + ' EGP';
-    }
-    if (num >= 1_000) {
-      return (num / 1_000).toFixed(1).replace(/\.0$/, '') + ' EGP';
-    }
-    return num.toString();
+  if (num >= 1_000_000) {
+    return Math.round(num / 1_000).toLocaleString() + ' EGP';
   }
+
+  if (num >= 1_000) {
+    return Math.round(num / 1_000).toLocaleString() + ' EGP';
+  }
+
+  return num.toLocaleString() + ' EGP';
+}
 
   ngOnInit(): void {
     this.getAllStatistics();

@@ -72,7 +72,6 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
   private updateChart(): void {
     const canvas = document.getElementById('ordersChart') as HTMLCanvasElement | null;
     if (!canvas) return;
-
     const rawStatuses = this.statuses();
 
     if (!rawStatuses || rawStatuses.length === 0) {
@@ -86,9 +85,7 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
 
     const allColors = this.generateColors(rawStatuses.length);
     this.chartColors.set(allColors);
-
     const chartItems = rawStatuses.filter(s => s.count != null && Number(s.count) > 0);
-
     const labels = chartItems.map(s => (s._id ?? 'Unknown').toString());
     const counts = chartItems.map(s => Number(s.count ?? 0));
     const sliceColors = this.generateColors(chartItems.length);
@@ -122,27 +119,29 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
           responsive: true,
           maintainAspectRatio: false,
           cutout: '50%',
-          plugins: {
-            tooltip: { enabled: false },
-            legend: { display: false },
-            datalabels: {
-              color: '#000',
-              backgroundColor: '#fff',
-              borderRadius: 999,
-              padding: 8,
-              align: 'center',
-              anchor: 'center',
-              offset: -10,
-              clip: false,
-              font: { weight: 'bold', size: 12 },
-              formatter: (value: number, context) => {
-                const dataset = context.chart.data.datasets[0].data as number[];
-                const total = dataset.reduce((sum, val) => sum + Number(val), 0);
-                const percent = total ? (Number(value) / total) * 100 : 0;
-                return `${percent.toFixed(1)}%`;
-              },
-            },
-          },
+        plugins: {
+  tooltip: { enabled: false },
+  legend: { display: false },
+  datalabels: {
+    color: '#000',
+    backgroundColor: '#fff',
+    borderRadius: 999,
+    padding: 8,
+    align: 'center',
+    anchor: 'center',
+    offset: -10,
+    clip: false,
+    font: { weight: 'bold', size: 12 },
+    formatter: (value: number, context) => {
+  const dataset = context.chart.data.datasets[0].data as number[];
+  const total = dataset.reduce((sum, val) => sum + Number(val), 0);
+  const percent = total ? (Number(value) / total) * 100 : 0;
+
+  if (percent === 0) return '';
+  return percent < 1 ? `${percent.toFixed(2)}%` : `${percent.toFixed(1)}%`;
+},
+  },
+},
         },
       };
       this.chart = new Chart(canvas, config);
@@ -179,7 +178,6 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
 
   showMonthly() { this.applyMode('monthly'); }
   showDaily() { this.applyMode('daily'); }
-
   applyMode(mode: RevenueMode) {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -220,7 +218,7 @@ export class OrdersAndRevenueComponent implements OnInit, AfterViewInit, OnDestr
             label: (ctx: any) => `${ctx.parsed.y} EGP`,
           },
         },
-        datalabels: { display: false }, 
+        datalabels: { display: false },
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.06)' } },
