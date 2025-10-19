@@ -298,6 +298,7 @@
           optionLabel="name"
           placeholder="Select an option"
           (onChange)="onCategoryChange($event)"
+          optionValue="_id"
           [ngClass]="{
             'border-red-500': CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty),
             'border-zinc-200': !(CategoryCtrl?.invalid && (CategoryCtrl?.touched || CategoryCtrl?.dirty))
@@ -333,6 +334,7 @@
           optionLabel="name"
           placeholder="Select an option"
           (onChange)="onOccasionChange($event)"
+          optionValue="_id"
           [ngClass]="{
             'border-red-500': occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty),
             'border-zinc-200': !(occasionCtrl?.invalid && (occasionCtrl?.touched || occasionCtrl?.dirty))
@@ -377,8 +379,8 @@
         <span>View product cover</span>
       </button>
 
-      <p-dialog [(visible)]="visibleCover" [modal]="true">
-        <img [src]="productToEdit().imgCover" alt="View imgCover" />
+      <p-dialog [(visible)]="visibleCover" [modal]="true" [style]="{ width: '993px', height: '690px' }">
+        <img class=" max-h-[380px] items-center m-auto" [src]="productToEdit().imgCover" alt="View imgCover" />
       </p-dialog>
     </div>
   }
@@ -411,9 +413,94 @@
         <span>View product gallery</span>
       </button>
 
-      <p-dialog [(visible)]="visibleGallery" [modal]="true">
-        <img [src]="productToEdit().images" alt="View product gallery" />
-      </p-dialog>
+     <!-- <p-dialog [(visible)]="visibleGallery" [modal]="true" [style]="{ width: '993px', height: '690px' }" >
+            <p-carousel
+              [value]="productToEdit().images"
+              [numVisible]="3"
+              [numScroll]="1"
+              [responsiveOptions]="responsiveOptions"
+              [showIndicators]="false"
+            >
+              <ng-template let-product #item>
+                <div class="m-2">
+                  <div class="rounded-rd-sm overflow-hidden max-h-[380px] ">
+                    <img class=" max-h-[380px] items-center m-auto"  [src]="product" alt="View product gallery" />
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </p-dialog> -->
+<p-dialog [(visible)]="visibleGallery" [modal]="true" [style]="{ width: '993px', height: '690px' }" >
+  <div class="custom-gallery">
+    <p-carousel
+      #galleryCarousel
+      [value]="productToEdit().images"
+      [numVisible]="3"
+      [numScroll]="1"
+      [responsiveOptions]="responsiveOptions"
+      [showIndicators]="false"
+      [showNavigators]="false" 
+
+      [page]="currentCarouselPage"
+ (onPage)="currentCarouselPage = $event.page ?? 0"
+    >
+      <ng-template let-product #item>
+        <div class="m-2">
+          <div class="rounded-rd-sm overflow-hidden max-h-[380px]">
+            <img class="max-h-[380px] items-center m-auto" [src]="product" alt="View product gallery" />
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+    <!-- footer: dots on left, arrows on right -->
+    <div class="carousel-footer">
+      <!-- dots (left) -->
+      <div class="footer-dots" role="tablist" aria-label="Image thumbnails">
+        <ng-container *ngIf="productToEdit() && productToEdit().images?.length">
+          <button
+            *ngFor="let img of productToEdit().images; let i = index; trackBy: trackByIndex"
+            type="button"
+            class="dot"
+            [class.active]="i === currentImageIndex"
+            (click)="goToIndex(i)"
+            (keydown.enter)="goToIndex(i)"
+            (keydown.space)="$event.preventDefault(); goToIndex(i)"
+            [attr.aria-label]="(i + 1)"
+          ></button>
+        </ng-container>
+      </div>
+
+      <!-- arrows (right) -->
+      <div class="footer-arrows">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-chevron-left"
+          class="p-button-rounded p-button-text arrow-btn  "
+          (click)="prevImage()"
+          (keydown.enter)="prevImage()"
+          (keydown.space)="$event.preventDefault(); prevImage()"
+          aria-label="pervious"
+        ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-chevron-right"
+          class="p-button-rounded p-button-text arrow-btn"
+          (click)="nextImage()"
+          (keydown.enter)="nextImage()"
+          (keydown.space)="$event.preventDefault(); nextImage()"
+          aria-label="next"
+        ></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+
+    
+    
     </div>
   }
 
