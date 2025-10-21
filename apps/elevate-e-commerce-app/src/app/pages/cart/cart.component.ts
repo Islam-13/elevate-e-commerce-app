@@ -75,9 +75,12 @@ ngOnInit(): void {
 
        this._store.dispatch(getTotal({ cartData }));
       this._store.dispatch(updateCount({ qun: items }));
+      this._CartService.cartCount.next(response.numOfCartItems ?? items.length);
+
       } else {
         // cart empty
         this.clearCart();
+        
       }
     });
   }
@@ -150,24 +153,29 @@ updateCount(p_id:string, count:number){
 clearCart() {
   this._CartService.ClearUserCart().subscribe({
     next: () => {
-     const emptyCart: Cart = {
-  _id: '',
-  user: '',
-  cartItems: [],
-  appliedCoupons: [],
-  totalPrice: 0,
-  createdAt: '',
-  updatedAt: '',
-  numOfCartItems: 0, 
-  __v: 0 
-};
+      const emptyCart: Cart = {
+        _id: '',
+        user: '',
+        cartItems: [],
+        appliedCoupons: [],
+        totalPrice: 0,
+        createdAt: '',
+        updatedAt: '',
+        numOfCartItems: 0,
+        __v: 0
+      };
 
       this._store.dispatch(getTotal({ cartData: emptyCart }));
       this._store.dispatch(updateCount({ qun: [] }));
+
+      // <-- هنا حدثت الـ cart count علطول عشان يظهر في الهيدر
+      // لو الـ API بيرجع عدد العناصر في الاستجابة، ممكن تغيّر الرقم لـ res.numOfCartItems
+      this._CartService.cartCount.next(0);
     },
     error: (err) => console.error('❌ خطأ في مسح الكارت', err)
   });
 }
+
 
 
 increaseQuantity(item: CartItem) {
