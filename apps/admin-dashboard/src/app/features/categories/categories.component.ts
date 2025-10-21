@@ -22,6 +22,7 @@ import { FeatureHeadingComponent } from '../components/feature-heading/feature-h
 })
 export class CategoriesComponent implements OnInit {
   categories = signal<Category[]>([]);
+  isOpen = signal<boolean>(false);
   openId = signal<string>('');
   searchValue = signal<string>('');
   isLoading = signal<boolean>(false);
@@ -80,6 +81,10 @@ export class CategoriesComponent implements OnInit {
     });
 
     this._destroyRef.onDestroy(() => subscription.unsubscribe);
+  }
+
+  toggleIsOpen(event: boolean) {
+    this.isOpen.set(event);
   }
 
   changeId(val: string) {

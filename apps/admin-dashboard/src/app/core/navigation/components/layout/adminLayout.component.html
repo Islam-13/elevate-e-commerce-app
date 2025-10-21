@@ -1,4 +1,4 @@
-<div class="flex pb-[5rem] md:pb-0">
+<div class="flex">
   <aside
     class="md:w-[300px] md:h-screen flex flex-col justify-between border-e border-border"
   >
@@ -13,7 +13,7 @@
 
       <!-- Nav Items -->
       <div
-        class="flex py-3 flex-nowrap flex-row fixed bottom-0 left-0 gap-2 md:flex-col md:relative w-screen md:w-full md:m-0 px-2 bg-white"
+        class="bg-white md:bg-transparent flex py-3 flex-nowrap flex-row fixed bottom-0 left-0 gap-2 md:flex-col md:relative w-screen md:w-full md:m-0 px-2"
       >
         <lib-ui-button
           [label]="'Preview website'"
@@ -174,9 +174,9 @@
     <app-user-image [isLargeScreen]="true"></app-user-image>
   </aside>
   <!-- c Navigation -->
-  <div class="flex-1">
+  <div class="flex-1 w-full">
     <nav
-      class="flex flex-row justify-between gap-1 items-center border-b border-border h-[70px] bg-white"
+      class="flex flex-row justify-between gap-1 items-center border-b border-border h-auto md:h-[70px] bg-white"
     >
       <div class="flex items-center justify-center">
         <img
@@ -197,7 +197,7 @@
       <app-user-image [isLargeScreen]="false"></app-user-image>
     </nav>
 
-    <main class=" h-[calc(100dvh-70px)]">
+    <main class="overflow-y-auto pb-[5rem] md:pb-0 h-[calc(100dvh-70px)]">
       <router-outlet></router-outlet>
     </main>
   </div>

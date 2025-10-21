@@ -1,7 +1,7 @@
 <section class="p-7">
   <h3 class="text-2xl font-semibold mb-6">
-    @if (id()) { Update Category: {{ categoryToEdit().name }} } @else {Add a New
-    Category}
+    @if (id()) { Update Occasion: {{ occasionToEdit().name }} } @else {Add a New
+    Occasion}
   </h3>
 
   <form
@@ -20,7 +20,7 @@
           name="name"
           formControlName="name"
           id="name"
-          placeholder="Enter category name"
+          placeholder="Enter occasion name"
         />
 
         @if (nameCtrl?.touched && nameCtrl?.getError("required")) {
@@ -34,7 +34,7 @@
 
       <div class="grid">
         @let imageCtrl = form.get('image');
-        <label for="image">Category image</label>
+        <label for="image">Occasion image</label>
         <input
           class="border border-zinc-200 rounded-rd-sm p-4 w-full"
           type="file"
@@ -80,7 +80,7 @@
         </button>
 
         <p-dialog [(visible)]="visible" [modal]="true">
-          <img [src]="categoryToEdit().image" alt="category image" />
+          <img [src]="occasionToEdit().image" alt="occasion image" />
         </p-dialog>
       </div>
 
@@ -88,7 +88,7 @@
 
       <div class="mt-12">
         <lib-ui-button
-          [label]="id() ? 'Update Category' : 'Add Category'"
+          [label]="id() ? 'Update Occasion' : 'Add Occasion'"
           [isSubmitting]="isSubmitting()"
         />
       </div>
