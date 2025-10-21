@@ -10,14 +10,6 @@ export const appRoutes: Route[] = [
     children: [
       { path: '', redirectTo: 'overviews', pathMatch: 'full' }, 
 
-        {
-          path: 'overviews',
-          loadComponent: () =>
-            import(
-              './features/pages/overviews/overviews.component'
-            ).then((c) => c.OverviewsComponent),
-          data: { breadcrumb: 'overviews' },
-          },
           {
             path: 'users',
             loadComponent: () =>
