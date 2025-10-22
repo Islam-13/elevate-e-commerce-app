@@ -38,8 +38,8 @@
             <th style="width: 22%">Name</th>
             <th style="width: 22%">Price</th>
             <th style="width: 22%">Stock</th>
-            <th style="width: 22%">Sales</th>
-            <th style="width: 22%">Ratings</th>
+            <th style="width: 22%" class="hidden md:table-cell">Sales</th>
+            <th style="width: 22%" class="hidden md:table-cell">Ratings</th>
             <th style="width: 22%"></th>
           </tr>
         </ng-template>
@@ -54,14 +54,16 @@
 
             <td>{{ product.quantity }}</td>
 
-            <td>{{ product.sold }}</td>
+            <td class="hidden md:table-cell">{{ product.sold }}</td>
 
-            <td>{{ product.rateAvg }}</td>
+            <td class="hidden md:table-cell">{{ product.rateAvg }}</td>
 
             <td>
               <app-action-btns
                 (deleteItem)="deleteProduct(product._id)"
                 [categoryId]="product._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
                 [editNavigate]="`update-product/${product._id}`"

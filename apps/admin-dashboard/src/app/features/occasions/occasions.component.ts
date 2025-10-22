@@ -22,6 +22,7 @@ import { Occasion } from '../../shared/types/occasions';
 })
 export class OccasionsComponent implements OnInit {
   occasions = signal<Occasion[]>([]);
+  isOpen = signal<boolean>(false);
   openId = signal<string>('');
   searchValue = signal<string>('');
   isLoading = signal<boolean>(false);
@@ -84,5 +85,9 @@ export class OccasionsComponent implements OnInit {
 
   changeId(val: string) {
     this.openId.set(val);
+  }
+
+  toggleIsOpen(event: boolean) {
+    this.isOpen.set(event);
   }
 }

@@ -6,8 +6,6 @@ import { ActionBtnsComponent } from '../components/action-btns/action-btns.compo
 import { Product } from '../../shared/types/products';
 import { ProductsService } from '../../shared/services/products/products.service';
 import { MessageService } from 'primeng/api';
-import { AddUpdateProductComponent } from '../add-update-product/add-update-product.component';
-
 
 @Component({
   selector: 'app-products',
@@ -16,7 +14,6 @@ import { AddUpdateProductComponent } from '../add-update-product/add-update-prod
     TableModule,
     FormsModule,
     ActionBtnsComponent,
-    AddUpdateProductComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -24,14 +21,12 @@ import { AddUpdateProductComponent } from '../add-update-product/add-update-prod
 export class ProductsComponent implements OnInit {
   products = signal<Product[]>([]);
   searchValue = signal<string>('');
+  isOpen = signal<boolean>(false);
   openId = signal<string>('');
   isLoading = signal<boolean>(false);
 
-
-    selectedProduct = signal<Product | null>(null);
+  selectedProduct = signal<Product | null>(null);
   isEditMode = signal<boolean>(false);
-
-
 
   private readonly _productsService = inject(ProductsService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -39,9 +34,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
- 
-
-  
   }
   // existing code...
 
@@ -111,5 +103,9 @@ export class ProductsComponent implements OnInit {
 
   changeId(val: string) {
     this.openId.set(val);
+  }
+
+  toggleIsOpen(event: boolean) {
+    this.isOpen.set(event);
   }
 }

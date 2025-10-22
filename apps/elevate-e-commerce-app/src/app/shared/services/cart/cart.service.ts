@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { env } from '@env/env';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from '../localStorage/local-storage.service';

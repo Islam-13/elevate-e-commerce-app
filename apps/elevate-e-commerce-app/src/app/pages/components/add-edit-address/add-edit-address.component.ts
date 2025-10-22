@@ -25,9 +25,9 @@ import { AddressesService } from '@shared/services/addresses/addresses.service';
 import { ProgressComponent } from '@shared/ui/progress/progress.component';
 import { CreateAddresses, Position, State } from '@shared/interfaces/addresses';
 import { MapComponent } from '../map/map.component';
-import { CtrlErrComponent } from '../../../auth/components/ctrl-err/ctrl-err.component';
-import { SubmitBtnComponent } from '../../../auth/components/submit-btn/submit-btn.component';
 import { selectNewAddress } from '../../../store/address/address.selector';
+import { CtrlErrComponent } from '../../../features/auth/components/ctrl-err/ctrl-err.component';
+import { SubmitBtnComponent } from '@shared/ui/submit-btn/submit-btn.component';
 
 @Component({
   selector: 'app-add-edit-address',
