@@ -35,24 +35,26 @@
       >
         <ng-template #header>
           <tr>
-            <th style="width: 33%">Name</th>
-            <th style="width: 33%">Products</th>
-            <th style="width: 34%"></th>
+            <th style="width: 22%">Name</th>
+            <th style="width: 22%">Products</th>
+            <th style="width: 22%"></th>
           </tr>
         </ng-template>
 
         <ng-template #body let-category>
           <tr>
-            <td class="font-semibold">
+            <td class="font-semibold capitalize">
               {{ category.name }}
             </td>
 
             <td>{{ category.productsCount }} products</td>
 
-            <td >
+            <td>
               <app-action-btns
                 (deleteItem)="deleteCategory(category._id)"
                 [categoryId]="category._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
                 [editNavigate]="`update-category/${category._id}`"

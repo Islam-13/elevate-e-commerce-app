@@ -1,1 +1,75 @@
-<p>OrdersAndRevenue works!</p>
+<section class="flex flex-col md:flex-row gap-3 mt-6 overflow-x-hidden">
+  <div class="md:w-1/3 w-full">
+    <div class="bg-white shadow-lg rounded-lg p-6 gap-6">
+      <h2 class="text-2xl font-bold mb-4 md:text-center text-start">
+        Orders Status
+      </h2>
+      <div class="flex flex-col md:flex-col">
+        <div class="flex justify-center mb-4">
+          <div class="w-[170px] h-[170px]">
+            <canvas id="ordersChart" class="w-full h-full"></canvas>
+          </div>
+        </div>
+
+        <div>
+          @for (item of orders()?.statistics?.ordersByStatus; track item._id;
+          let i = $index) { @if (item._id && item.count !== null) {
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xl font-normal">
+              <span
+                class="w-4 h-4 rounded-full inline-block"
+                [style.background-color]="chartColors()[i]"
+              >
+              </span>
+
+              @if (item.count > 0) {
+              {{ item._id | titlecase}}
+              }
+            </div>
+            @if (item.count > 0) {
+            <div class="text-right">
+              <span class="text-xl font-bold">
+                {{ item.count }} ({{ getPercentage(item.count) }})
+              </span>
+            </div>
+            }
+          </div>
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="w-full bg-white shadow rounded-lg p-6 min-w-[100px] overflow-y-auto"
+  >
+    <div class="bg-white rounded-2xl p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-2xl font-bold">Revenue</h2>
+
+        <div class="flex gap-4">
+          <button
+            class="font-semibold"
+            [class.text-red-700]="mode === 'monthly'"
+            [class.text-gray-400]="mode !== 'monthly'"
+            (click)="showMonthly()"
+          >
+            Monthly
+          </button>
+          <button
+            class="font-semibold"
+            [class.text-red-700]="mode === 'daily'"
+            [class.text-gray-400]="mode !== 'daily'"
+            (click)="showDaily()"
+          >
+            Daily
+          </button>
+        </div>
+      </div>
+
+      <div style="height: 10rem">
+        <p-chart  type="line" [data]="data" [options]="options"> </p-chart>
+      </div>
+    </div>
+  </div>
+</section>

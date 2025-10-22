@@ -1,4 +1,3 @@
-/* eslint-disable @nx/enforce-module-boundaries */
 import { Component, OnDestroy, OnInit, inject, input } from '@angular/core';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
@@ -44,9 +43,7 @@ export class UserImageComponent implements OnInit, OnDestroy {
 
     this.getUserData();
   }
-  logout() {
-    //
-  }
+  logout() {}
 
   getUserData() {
     {

@@ -6,7 +6,7 @@ import { ProductsSummaryComponent } from "../../components/ProductsSummary/Produ
 
 @Component({
   selector: 'app-overviews',
-  imports: [CommonModule,OrdersAndRevenueComponent, ProductsSummaryComponent, StatusOverviewComponent],
+  imports: [CommonModule, OrdersAndRevenueComponent, ProductsSummaryComponent, StatusOverviewComponent],
   templateUrl: './overviews.component.html',
   styleUrl: './overviews.component.css',
 })
