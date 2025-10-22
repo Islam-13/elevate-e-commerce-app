@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, inject, Input, input, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, Input, input, signal, ViewChild, viewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Message } from 'primeng/message';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -8,7 +8,7 @@ import { ProductsService } from '../../shared/services/products/products.service
 import { Product } from '../../shared/types/products';
 import { FileUploadModule } from 'primeng/fileupload';
 import { Toast } from "primeng/toast";
-import { Button } from "primeng/button";
+import { Button, ButtonDirective, ButtonModule } from "primeng/button";
 import { CategoriesService } from '../../shared/services/categories/categories.service';
 import { Category } from '../../shared/types/categories';
 import { DropdownModule } from 'primeng/dropdown';
@@ -17,13 +17,14 @@ import { FormErrorComponent } from "../../shared/components/form-error/form-erro
 import { NgClass } from '@angular/common';
 import { OccasionsService } from '../../shared/services/occasions/occasions.service';
 import { Occasion } from '../../shared/types/occasions';
-import { Dialog } from "primeng/dialog";
+import { Dialog, DialogModule } from "primeng/dialog";
+import { Carousel } from 'primeng/carousel';
 
 
 
 @Component({
   selector: 'app-add-update-product',
-  imports: [ReactiveFormsModule, UiButtonComponent, Message, FileUploadModule, Toast, Button, DropdownModule, FormErrorComponent, NgClass, Dialog],
+  imports: [ReactiveFormsModule, UiButtonComponent, Message, FileUploadModule, Toast, Button, DropdownModule, FormErrorComponent, NgClass, Dialog, Carousel, ButtonDirective,DialogModule, ButtonModule],
   templateUrl: './add-update-product.component.html',
   styleUrl: './add-update-product.component.css',
    
@@ -46,7 +47,7 @@ occasions = signal<Occasion[]>([]);
 
 visibleCover = signal<boolean>(false);;
 visibleGallery = signal<boolean>(false);;
-
+responsiveOptions: any[] | undefined;
 
 productToEdit = signal<Product>({
 rateAvg: 0,
@@ -89,6 +90,7 @@ ngOnInit(): void {
      if (this.id()) {
       this.getProduct(this.id()!);
     }
+
    this._route.paramMap.subscribe(params => {
   const id = params.get('id');
   if (id) {
@@ -96,6 +98,28 @@ ngOnInit(): void {
     this.productId = id;
     this.loadProductData(id);
   }
+  this.responsiveOptions = [
+      {
+        breakpoint: '1400px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '575px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
   
 });
  
@@ -326,10 +350,57 @@ onOccasionChange(event: any) {
 }
 
 showGalleryDialog() {
-    this.visibleCover.set(true);
+    this.visibleGallery.set(true);
 
 }
 
+
+  // ViewChild للـ carousel
+  @ViewChild('galleryCarousel', { static: false }) galleryCarousel?: Carousel;
+
+  // صفحة/مؤشر الكاروسيل الحالي (نفس الاسم اللي ربطناه في [(page)])
+  currentCarouselPage = 0;
+
+  // trackBy لتحسين أداء ngFor
+  trackByIndex(index: number, item: any) {
+    return index;
+  }
+
+  // Getter لمؤشر الصورة الفعلية (تستطيع تعديلها لو تحب أن الدوت يمثل صفحة بدل صورة)
+  get currentImageIndex(): number {
+    return this.currentCarouselPage ?? 0;
+  }
+
+  // التنقل لدوت محدد
+  goToIndex(i: number) {
+    this.currentCarouselPage = i;
+    // لو حابب تزحف فعليًا في الكاروسيل (إذا كان p-carousel يحتاج استدعاء method)، يمكنك استخدام:
+    // this.galleryCarousel?.scrollTo(i);
+  }
+
+  // next / prev (لا تغيرت منطق البيانات، مجرد تحكم عرضي)
+  nextImage() {
+    const images = (this.productToEdit && this.productToEdit().images) || [];
+    if (!images.length) return;
+    const max = images.length - 1;
+    this.currentCarouselPage = this.currentCarouselPage >= max ? 0 : this.currentCarouselPage + 1;
+  }
+
+  prevImage() {
+    const images = (this.productToEdit && this.productToEdit().images) || [];
+    if (!images.length) return;
+    const max = images.length - 1;
+    this.currentCarouselPage = this.currentCarouselPage <= 0 ? max : this.currentCarouselPage - 1;
+  }
+  // مؤشر الصفحة (page index) الذي نربطه بخاصية [page]
+
+
+// (اختياري) دالة مقصودة لمعالجة حدث onPage إن أردت عمل شيء إضافي
+onCarouselPage(event: { page: number }) {
+  // لو حبيت تعمل تحكم إضافي أو تسجيل
+  this.currentCarouselPage = event.page;
+  // console.log('carousel page changed to', event.page);
+}
 
 }
 

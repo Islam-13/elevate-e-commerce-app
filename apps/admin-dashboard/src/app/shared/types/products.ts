@@ -39,6 +39,7 @@ export interface Metadata {
 }
 
 export interface AddProductData{
+
  title: string;
 description: string;
 imgCover: File;

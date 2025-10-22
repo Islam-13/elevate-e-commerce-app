@@ -1,0 +1,122 @@
+
+::ng-deep .custom-gallery {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+::ng-deep .custom-gallery >>> .p-carousel {
+  flex: 1 1 auto;
+  overflow: visible !important;
+}
+
+/* تحجيم الصور داخل الـ carousel */
+::ng-deep .custom-gallery .rounded-rd-sm img {
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+::ng-deep .carousel-footer {
+  position: relative !important;
+  z-index: 1200 !important;         
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 10px 16px !important;
+  background: rgba(255,255,255,0.0) !important; 
+  margin-top: 8px !important;
+}
+
+::ng-deep .carousel-footer.diagnostic {
+  background: rgba(255,0,0,0.06) !important;
+  border: 1px dashed rgba(255,0,0,0.15) !important;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  overflow: visible !important;
+}
+
+
+::ng-deep .footer-dots {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding-left: 6px !important;
+}
+::ng-deep .dot {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  border-radius: 50% !important;
+  background: #ff6b6b !important;    
+  border: 2px solid #ff6b6b !important;
+  box-shadow: 0 0 0 4px rgba(255,107,107,0.08) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 6px !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+::ng-deep .footer-arrows {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+::ng-deep .dot:hover {
+  transform: scale(1.15);
+}
+::ng-deep .dot:focus {
+  outline: 2px solid rgba(78, 79, 79, 0.25) !important;
+  outline-offset: 2px !important;
+}
+
+
+::ng-deep .footer-dots, ::ng-deep .dot {
+  visibility: visible !important;
+  display: flex !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+::ng-deep .dot.active {
+  background: #A6252A; 
+  box-shadow: 0 0 0 4px rgba(14,165,233,0.08);
+}
+
+
+::ng-deep .footer-arrows {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+::ng-deep .arrow-btn {
+  min-width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+   border: 2px solid #A6252A; 
+  color: #A6252A !important; 
+  transition: all 0.2s ease;
+  
+}
+::ng-deep .arrow-btn:hover {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important; 
+  border-color: #1e1e1e;
+}
+
+
+::ng-deep .p-dialog .p-dialog-content {
+  overflow: hidden;
+}
+
+
