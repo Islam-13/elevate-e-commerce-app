@@ -12,6 +12,7 @@ import { Subscription } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { selectIsLoggedIn } from "../../../store/auth-session/session.selectors";
 import { ThemeService } from "@shared/services/theme/theme.service";
+import { Cart } from '@shared/interfaces/cart-interface/cart-interface';
 
 @Component({
   selector: 'app-navbar',
@@ -40,7 +41,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isOpen = signal<boolean>(false);
   navbarCount!:number;
   cancel!:Subscription;
-
+cart!:Cart
 
   isLoggedIn = toSignal(this.store.select(selectIsLoggedIn), {
     initialValue: !!this._localStorage.get('userToken'),
@@ -67,14 +68,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isOpen.update((cur) => !cur);
   }
 
-  cartCount(){
-    this.cancel =  this._CartService.GetLoggedUserCart().subscribe({
-    next:(res)=>{
-      this.navbarCount =res.numOfCartItems;
-    }
-  })
-}
+cartCount(){
+  this._CartService.GetLoggedUserCart().subscribe({
+  next:(res)=>{
+    this.navbarCount =res.numOfCartItems;
+  }
+})
 
+    this._CartService.cartCount.subscribe({
+      next:(value)=>{
+        this.navbarCount=value;
+
+
+      }
+    })
+}
   ngOnDestroy(): void {
     this.cancel?.unsubscribe()
   }
