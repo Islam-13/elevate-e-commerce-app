@@ -20,8 +20,9 @@ import { Dialog } from 'primeng/dialog';
 
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { UiButtonComponent } from 'libs/ui-button/src/lib/ui-button/ui-button.component';
-import { CategoriesService } from '../../shared/services/categories/categories.service';
-import { Category } from '../../shared/types/categories';
+import { Category } from '../../../shared/types/categories';
+import { CategoriesService } from '../../../shared/services/categories/categories.service';
+
 
 @Component({
   selector: 'app-add-update-category',
