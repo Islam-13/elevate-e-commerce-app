@@ -18,7 +18,8 @@
       "@elevate-e-commerce-app/shared-env": ["libs/shared-env/src/index.ts"],
       "@elevate-e-commerce-app/something-wrong": [
         "libs/something-wrong/src/index.ts"
-      ]
+      ],
+      "@myorg/not-found": ["libs/not-found/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

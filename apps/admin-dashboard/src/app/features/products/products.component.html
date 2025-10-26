@@ -1,0 +1,83 @@
+<main class="m-4 p-6 flex flex-col gap-5 bg-white rounded-2xl">
+  <app-feature-heading
+    headText="All Products"
+    btnText="Add a new product"
+    addBtnNavigate="add-product"
+  />
+
+  <div class="grid relative">
+    <input
+      pInputText
+      type="text"
+      placeholder="Search..."
+      class="p-4 ps-11 border border-zinc-300 rounded-rd-sm"
+      [(ngModel)]="searchValue"
+      (input)="dt2.filterGlobal(searchValue(), 'contains')"
+    />
+
+    <span class="absolute top-1/2 left-4 -translate-y-1/2">
+      <i class="pi pi-search"></i>
+    </span>
+  </div>
+
+  <div>
+    <div class="card">
+      <p-table
+        #dt2
+        [value]="products()"
+        dataKey="id"
+        [rows]="5"
+        [rowsPerPageOptions]="[5, 15, 25]"
+        [loading]="isLoading()"
+        [paginator]="true"
+        [globalFilterFields]="['title', 'price', 'quantity']"
+        [tableStyle]="{ width: '100%' }"
+      >
+        <ng-template #header>
+          <tr>
+            <th style="width: 22%">Name</th>
+            <th style="width: 22%">Price</th>
+            <th style="width: 22%">Stock</th>
+            <th style="width: 22%" class="hidden md:table-cell">Sales</th>
+            <th style="width: 22%" class="hidden md:table-cell">Ratings</th>
+            <th style="width: 22%"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template #body let-product>
+          <tr>
+            <td class="font-semibold">
+              {{ product.title }}
+            </td>
+
+            <td>{{ product.price }}</td>
+
+            <td>{{ product.quantity }}</td>
+
+            <td class="hidden md:table-cell">{{ product.sold }}</td>
+
+            <td class="hidden md:table-cell">{{ product.rateAvg }}</td>
+
+            <td>
+              <app-action-btns
+                (deleteItem)="deleteProduct(product._id)"
+                [categoryId]="product._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
+                [openId]="openId()"
+                (setOpenId)="changeId($event)"
+                [editNavigate]="`update-product/${product._id}`"
+                message="product"
+              />
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+          <tr>
+            <td colspan="3">No products found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</main>

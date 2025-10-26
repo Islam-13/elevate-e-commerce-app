@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartState } from '../../store/cart-data/cart.state';
 import { selectCart, selectNumOfCartItems, selectQuantity, selectTotalPrice } from '../../store/cart-data/cart.selector';
-import { ApplyData, changeItemQuantity, ClearCart, getTotal, removeItem, updateCount } from '../../store/cart-data/cart.actions';
+import { ApplyData, changeItemQuantity, getTotal, updateCount } from '../../store/cart-data/cart.actions';
 
 
 @Component({
@@ -36,8 +36,8 @@ private readonly _CartService=inject(CartService);
     cartItems = signal<Product[]>([]);
      totalPrice$!: Observable<number>;
      numOfCartItems$!: Observable<number>;
-     
-  
+
+
 
 constructor( private _store: Store<{ total: CartState }>){}
 
@@ -52,8 +52,8 @@ ngOnInit(): void {
    loadCart() {
     this._CartService.GetLoggedUserCart().subscribe((response) => {
       console.log('response:' , response);
-      
-      
+
+
       if (response?.cart && response.cart.cartItems.length > 0) {
          const cartData: Cart = {
           ...response.cart,
@@ -64,7 +64,7 @@ ngOnInit(): void {
           id:ci._id,
           idProduct: ci.product._id,
   name: ci.product.title,
-  image: ci.product.imgCover, 
+  image: ci.product.imgCover,
   category: ci.product.category,
   priceOfProduct: ci.product.price,
   count: ci.quantity,
@@ -75,13 +75,16 @@ ngOnInit(): void {
 
        this._store.dispatch(getTotal({ cartData }));
       this._store.dispatch(updateCount({ qun: items }));
+      this._CartService.cartCount.next(response.numOfCartItems ?? items.length);
+
       } else {
         // cart empty
         this.clearCart();
+        
       }
     });
   }
- 
+
 
 
 
@@ -150,29 +153,34 @@ updateCount(p_id:string, count:number){
 clearCart() {
   this._CartService.ClearUserCart().subscribe({
     next: () => {
-     const emptyCart: Cart = {
-  _id: '',
-  user: '',
-  cartItems: [],
-  appliedCoupons: [],
-  totalPrice: 0,
-  createdAt: '',
-  updatedAt: '',
-  numOfCartItems: 0, 
-  __v: 0 
-};
+      const emptyCart: Cart = {
+        _id: '',
+        user: '',
+        cartItems: [],
+        appliedCoupons: [],
+        totalPrice: 0,
+        createdAt: '',
+        updatedAt: '',
+        numOfCartItems: 0,
+        __v: 0
+      };
 
       this._store.dispatch(getTotal({ cartData: emptyCart }));
       this._store.dispatch(updateCount({ qun: [] }));
+
+      // <-- هنا حدثت الـ cart count علطول عشان يظهر في الهيدر
+      // لو الـ API بيرجع عدد العناصر في الاستجابة، ممكن تغيّر الرقم لـ res.numOfCartItems
+      this._CartService.cartCount.next(0);
     },
     error: (err) => console.error('❌ خطأ في مسح الكارت', err)
   });
 }
 
 
+
 increaseQuantity(item: CartItem) {
   const newCount = item.count + 1;
-  
+
   this._CartService.UpdateCartProductQuantity(item.idProduct, newCount).subscribe({
     next: (res) => {
       console.log('✅ الكمية اتعدلت على السيرفر', res);
@@ -190,6 +198,8 @@ increaseQuantity(item: CartItem) {
 
         this._store.dispatch(getTotal({ cartData: res.cart }));
         this._store.dispatch(updateCount({ qun: updatedItems }));
+          this.loadCart()
+
       }
        if (res.message === "success") {
           this.cartData = res;
@@ -225,6 +235,8 @@ increaseQuantity(item: CartItem) {
 
             this._store.dispatch(getTotal({ cartData: res.cart }));
             this._store.dispatch(updateCount({ qun: updatedItems }));
+          this.loadCart()
+
           }
            if (res.message === "success") {
           this.cartData = res;
@@ -269,7 +281,7 @@ removeProduct(item: CartItem) {
       detail: 'All products cleared',
       life: 4000,
     });
-         
+
           this.cartData = {numOfCartItems:0} as CartInterface;
           this._CartService.cartCount.next(res.numOfCartItems);
 

@@ -1,0 +1,588 @@
+<section class="p-7 overflow-x-hidden">
+  <h3 class="text-2xl font-semibold mb-6">
+    @if (id()) { Update Product: {{ productToEdit().title }} } @else {Add a New
+    Product}
+  </h3>
+
+  <form
+    class="p-6 bg-white rounded-2xl overflow-x-hidden"
+    (ngSubmit)="onSubmit()"
+    #formImage
+    [formGroup]="form"
+  >
+    <div class="w-full max-w-[700px] flex flex-col gap-4 overflow-x-hidden">
+      <!-- Title -->
+      <div class="grid">
+        @let titleCtrl = form.get('title');
+        <label
+          for="title"
+          [ngClass]="{
+            'text-red-500':
+              titleCtrl?.invalid && (titleCtrl?.touched || titleCtrl?.dirty)
+          }"
+        >
+          Title <span class="text-red">*</span>
+        </label>
+        <input
+          class="border rounded-rd-sm p-4 w-full"
+          [ngClass]="{
+            'border-red-500':
+              titleCtrl?.invalid && (titleCtrl?.touched || titleCtrl?.dirty),
+            'border-zinc-200': !(
+              titleCtrl?.invalid &&
+              (titleCtrl?.touched || titleCtrl?.dirty)
+            )
+          }"
+          type="text"
+          name="title"
+          formControlName="title"
+          id="title"
+          placeholder="Enter product title"
+        />
+        @if (titleCtrl?.touched && titleCtrl?.getError('required')) {
+        <app-form-error [control]="titleCtrl" fieldName="Product title" />
+        }
+      </div>
+
+      <!-- Description -->
+      <div class="grid">
+        @let descriptionCtrl = form.get('description');
+        <label
+          for="description"
+          [ngClass]="{
+            'text-red-500':
+              descriptionCtrl?.invalid &&
+              (descriptionCtrl?.touched || descriptionCtrl?.dirty)
+          }"
+        >
+          Description <span class="text-red">*</span>
+        </label>
+
+        <textarea
+          class="border rounded-rd-sm p-4 w-full"
+          [ngClass]="{
+            'border-red-500':
+              descriptionCtrl?.invalid &&
+              (descriptionCtrl?.touched || descriptionCtrl?.dirty),
+            'border-zinc-200': !(
+              descriptionCtrl?.invalid &&
+              (descriptionCtrl?.touched || descriptionCtrl?.dirty)
+            )
+          }"
+          rows="5"
+          pTextarea
+          name="description"
+          formControlName="description"
+          id="description"
+          placeholder="Enter product description"
+        ></textarea>
+
+        @if (descriptionCtrl?.touched && descriptionCtrl?.getError('required'))
+        {
+        <app-form-error
+          [control]="descriptionCtrl"
+          fieldName="Product description"
+        />
+        }
+      </div>
+
+      <!-- Price Discount After-Discount -->
+      <div class="price-details grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        <!-- Price -->
+        <div class="flex flex-col">
+          @let PriceCtrl = form.get('price');
+          <label
+            for="price"
+            [ngClass]="{
+              'text-red-500':
+                PriceCtrl?.invalid && (PriceCtrl?.touched || PriceCtrl?.dirty)
+            }"
+          >
+            Price <span class="text-red">*</span>
+          </label>
+          <input
+            class="border rounded-rd-sm p-4 w-full"
+            [ngClass]="{
+              'border-red-500':
+                PriceCtrl?.invalid && (PriceCtrl?.touched || PriceCtrl?.dirty),
+              'border-zinc-200': !(
+                PriceCtrl?.invalid &&
+                (PriceCtrl?.touched || PriceCtrl?.dirty)
+              )
+            }"
+            type="number"
+            name="price"
+            formControlName="price"
+            id="price"
+            placeholder="Example: 5000"
+          />
+          <div class="min-h-[20px] mt-1">
+            @if (PriceCtrl?.touched && PriceCtrl?.getError('required')) {
+            <app-form-error [control]="PriceCtrl" fieldName="Product price" />
+            } @if (PriceCtrl?.getError('min')) {
+            <app-form-error [control]="PriceCtrl" fieldName="Product price" />
+            }
+          </div>
+        </div>
+
+        <!-- Discount -->
+        <div class="flex flex-col">
+          @let discountCtrl = form.get('discount');
+          <label
+            for="discount"
+            [ngClass]="{
+              'text-red-500':
+                discountCtrl?.invalid &&
+                (discountCtrl?.touched || discountCtrl?.dirty)
+            }"
+          >
+            Discount
+          </label>
+          <input
+            class="border rounded-rd-sm p-4 w-full"
+            [ngClass]="{
+              'border-red-500':
+                discountCtrl?.invalid &&
+                (discountCtrl?.touched || discountCtrl?.dirty),
+              'border-zinc-200': !(
+                discountCtrl?.invalid &&
+                (discountCtrl?.touched || discountCtrl?.dirty)
+              )
+            }"
+            type="number"
+            name="discount"
+            formControlName="discount"
+            id="discount"
+            placeholder="Example: 5"
+          />
+          <div class="min-h-[20px] mt-1">
+            @if ( (discountCtrl?.touched || discountCtrl?.dirty) &&
+            (discountCtrl?.getError('max') || discountCtrl?.getError('min')) ) {
+            <app-form-error [control]="discountCtrl" fieldName="Discount" />
+            }
+          </div>
+        </div>
+
+        <!-- After-Discount -->
+        <div class="flex flex-col">
+          @let afterDiscountCtrl = form.get('priceAfterDiscount');
+          <label for="priceAfterDiscount">Price after discount</label>
+          <input
+            class="border border-zinc-100 bg-zinc-100 rounded-rd-sm p-4 w-full"
+            type="number"
+            name="priceAfterDiscount"
+            formControlName="priceAfterDiscount"
+            id="priceAfterDiscount"
+            placeholder="Example: 5"
+            readonly
+          />
+          <div class="min-h-[20px] mt-1"></div>
+        </div>
+      </div>
+
+      <!-- Quantity -->
+      <div class="grid">
+        @let quantityCtrl = form.get('quantity');
+        <label
+          for="quantity"
+          [ngClass]="{
+            'text-red-500':
+              quantityCtrl?.invalid &&
+              (quantityCtrl?.touched || quantityCtrl?.dirty)
+          }"
+        >
+          Quantity <span class="text-red">*</span>
+        </label>
+        <input
+          class="border rounded-rd-sm p-4 w-full"
+          [ngClass]="{
+            'border-red-500':
+              quantityCtrl?.invalid &&
+              (quantityCtrl?.touched || quantityCtrl?.dirty),
+            'border-zinc-200': !(
+              quantityCtrl?.invalid &&
+              (quantityCtrl?.touched || quantityCtrl?.dirty)
+            )
+          }"
+          type="number"
+          name="quantity"
+          formControlName="quantity"
+          id="quantity"
+          placeholder="Example: 200"
+        />
+        @if (quantityCtrl?.touched && quantityCtrl?.getError('required')) {
+        <app-form-error [control]="quantityCtrl" fieldName="Product quantity" />
+        } @if (quantityCtrl?.getError('min')) {
+        <app-form-error [control]="quantityCtrl" fieldName="Product quantity" />
+        }
+      </div>
+
+      <!-- Product cover + gallery -->
+      <div class="flex flex-col md:flex-row gap-4 w-full overflow-x-hidden">
+        <!-- Product cover -->
+        <div class="grid w-full md:w-1/2">
+          @let imageCtrl = form.get('imgCover');
+          <label
+            for="image"
+            [ngClass]="{
+              'text-red-500':
+                imageCtrl?.invalid && (imageCtrl?.touched || imageCtrl?.dirty)
+            }"
+          >
+            Product cover <span class="text-red">*</span>
+          </label>
+          <div class="relative w-full">
+            <input
+              type="text"
+              [value]="selectedCoverName"
+              readonly
+              class="w-full border rounded-rd-sm p-4 py-3 pr-32 pl-4 outline-none cursor-pointer"
+              [ngClass]="{
+                'border-red-500':
+                  imageCtrl?.invalid &&
+                  (imageCtrl?.touched || imageCtrl?.dirty),
+                'border-zinc-200': !(
+                  imageCtrl?.invalid &&
+                  (imageCtrl?.touched || imageCtrl?.dirty)
+                )
+              }"
+              name="image"
+              formControlName="imgCover"
+              id="image"
+              (click)="coverInput.click()"
+            />
+
+            <div
+              class="absolute inset-y-0 right-4 flex items-center gap-2 cursor-pointer text-red-500"
+              tabindex="0"
+              role="button"
+              (click)="coverInput.click()"
+              (keyup.enter)="coverInput.click()"
+            >
+              <i class="pi pi-upload text-red-500 text-lg"></i>
+              <span class="text-red-500 font-medium text-sm">Upload File</span>
+            </div>
+
+            <input
+              type="file"
+              #coverInput
+              class="hidden"
+              (change)="onCoverChange($event)"
+            />
+          </div>
+
+          @if (imageCtrl?.touched && imageCtrl?.getError('required')) {
+          <app-form-error [control]="imageCtrl" fieldName="Product cover" />
+          }
+        </div>
+
+        <!-- Product gallery -->
+        <div class="grid w-full md:w-1/2">
+          @let productGalleryCtrl = form.get('productGallery');
+          <label
+            for="productGallery"
+            [ngClass]="{
+              'text-red-500':
+                productGalleryCtrl?.invalid &&
+                (productGalleryCtrl?.touched || productGalleryCtrl?.dirty)
+            }"
+          >
+            Product gallery <span class="text-red">*</span>
+          </label>
+          <div class="relative w-full">
+            <input
+              type="text"
+              [value]="selectedGalleryNames"
+              readonly
+              class="w-full border rounded-rd-sm p-4 py-3 pr-32 pl-4 outline-none cursor-pointer"
+              [ngClass]="{
+                'border-red-500':
+                  productGalleryCtrl?.invalid &&
+                  (productGalleryCtrl?.touched || productGalleryCtrl?.dirty),
+                'border-zinc-200': !(
+                  productGalleryCtrl?.invalid &&
+                  (productGalleryCtrl?.touched || productGalleryCtrl?.dirty)
+                )
+              }"
+              name="productGallery"
+              formControlName="productGallery"
+              id="productGallery"
+              (click)="galleryInput.click()"
+            />
+
+            <div
+              class="absolute inset-y-0 right-4 flex items-center gap-2 cursor-pointer text-red-500"
+              tabindex="0"
+              role="button"
+              (click)="galleryInput.click()"
+              (keyup.enter)="galleryInput.click()"
+            >
+              <i class="pi pi-upload text-red-500 text-lg"></i>
+              <span class="text-red-500 font-medium text-sm">Upload File</span>
+            </div>
+
+            <input
+              type="file"
+              #galleryInput
+              multiple
+              class="hidden"
+              (change)="onGalleryChange($event)"
+            />
+          </div>
+
+          @if (productGalleryCtrl?.touched &&
+          productGalleryCtrl?.getError('required')) {
+          <app-form-error
+            [control]="productGalleryCtrl"
+            fieldName=" Product Gallery"
+          />
+          }
+        </div>
+      </div>
+
+      <!-- select Category -->
+      <div class="grid">
+        @let CategoryCtrl = form.get('category');
+        <label
+          for="category"
+          [ngClass]="{
+            'text-red-500':
+              CategoryCtrl?.invalid &&
+              (CategoryCtrl?.touched || CategoryCtrl?.dirty)
+          }"
+        >
+          Category <span class="text-red">*</span>
+        </label>
+        <p-dropdown
+          type="text"
+          name="category"
+          formControlName="category"
+          id="category"
+          [options]="categories()"
+          optionLabel="name"
+          placeholder="Select an option"
+          (onChange)="onCategoryChange($event)"
+          optionValue="_id"
+          [ngClass]="{
+            'border-red-500':
+              CategoryCtrl?.invalid &&
+              (CategoryCtrl?.touched || CategoryCtrl?.dirty),
+            'border-zinc-200': !(
+              CategoryCtrl?.invalid &&
+              (CategoryCtrl?.touched || CategoryCtrl?.dirty)
+            )
+          }"
+          styleClass="border rounded-rd-sm h-[48px] flex items-center"
+        ></p-dropdown>
+        @if (CategoryCtrl?.invalid && (CategoryCtrl?.touched ||
+        CategoryCtrl?.dirty)) {
+        <span class="mt-2">
+          <p-message severity="error" size="small">
+            Please select a category for the product
+          </p-message>
+        </span>
+        }
+      </div>
+
+      <!-- select Occasion -->
+      <div class="grid">
+        @let occasionCtrl = form.get('occasion');
+        <label
+          for="occasion"
+          [ngClass]="{
+            'text-red-500':
+              occasionCtrl?.invalid &&
+              (occasionCtrl?.touched || occasionCtrl?.dirty)
+          }"
+        >
+          Occasion <span class="text-red">*</span>
+        </label>
+        <p-dropdown
+          type="text"
+          name="occasion"
+          formControlName="occasion"
+          id="occasion"
+          [options]="occasions()"
+          optionLabel="name"
+          placeholder="Select an option"
+          (onChange)="onOccasionChange($event)"
+          optionValue="_id"
+          [ngClass]="{
+            'border-red-500':
+              occasionCtrl?.invalid &&
+              (occasionCtrl?.touched || occasionCtrl?.dirty),
+            'border-zinc-200': !(
+              occasionCtrl?.invalid &&
+              (occasionCtrl?.touched || occasionCtrl?.dirty)
+            )
+          }"
+          styleClass="border rounded-rd-sm h-[48px] flex items-center"
+        ></p-dropdown>
+        @if (occasionCtrl?.invalid && (occasionCtrl?.touched ||
+        occasionCtrl?.dirty)) {
+        <span class="mt-2">
+          <p-message severity="error" size="small">
+            Please select a occasion for the product
+          </p-message>
+        </span>
+        }
+      </div>
+      <div
+        class="flex flex-col md:flex-row md:justify-end gap-4 w-full overflow-x-hidden"
+      >
+        <!-- Button View product cover -->
+  
+
+
+    @if (id()) {
+
+      <div class="flex justify-end">
+        <button
+          type="button"
+          (click)="showCoverDialog()"
+          class="text-blue-600 border border-zinc-300 rounded-2xl p-2.5 flex gap-1.5 items-center"
+        >
+          <span>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.75 11.25L13.4355 8.9355C13.1542 8.65429 12.7727 8.49632 12.375 8.49632C11.9773 8.49632 11.5958 8.65429 11.3145 8.9355L4.5 15.75M3.75 2.25H14.25C15.0784 2.25 15.75 2.92157 15.75 3.75V14.25C15.75 15.0784 15.0784 15.75 14.25 15.75H3.75C2.92157 15.75 2.25 15.0784 2.25 14.25V3.75C2.25 2.92157 2.92157 2.25 3.75 2.25ZM8.25 6.75C8.25 7.57843 7.57843 8.25 6.75 8.25C5.92157 8.25 5.25 7.57843 5.25 6.75C5.25 5.92157 5.92157 5.25 6.75 5.25C7.57843 5.25 8.25 5.92157 8.25 6.75Z"
+                stroke="#155DFC"
+                stroke-width="0.9375"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+           <span>View product cover</span>
+        </button>
+
+        <p-dialog [(visible)]="visibleCover" [modal]="true">
+        <img class=" max-h-[380px] items-center m-auto" [src]="productToEdit().imgCover" alt="View imgCover" />
+        </p-dialog>
+      </div>
+
+      }
+
+        <!-- Button View product gallery -->
+        @if (id()) {
+        <div class="w-full md:w-auto flex justify-start md:justify-end">
+       <button
+          type="button"
+          (click)="showGalleryDialog()"
+          class="text-blue-600 border border-zinc-300 rounded-2xl p-2.5 flex gap-1.5 items-center"
+        >
+          <span>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.75 11.25L13.4355 8.9355C13.1542 8.65429 12.7727 8.49632 12.375 8.49632C11.9773 8.49632 11.5958 8.65429 11.3145 8.9355L4.5 15.75M3.75 2.25H14.25C15.0784 2.25 15.75 2.92157 15.75 3.75V14.25C15.75 15.0784 15.0784 15.75 14.25 15.75H3.75C2.92157 15.75 2.25 15.0784 2.25 14.25V3.75C2.25 2.92157 2.92157 2.25 3.75 2.25ZM8.25 6.75C8.25 7.57843 7.57843 8.25 6.75 8.25C5.92157 8.25 5.25 7.57843 5.25 6.75C5.25 5.92157 5.92157 5.25 6.75 5.25C7.57843 5.25 8.25 5.92157 8.25 6.75Z"
+                stroke="#155DFC"
+                stroke-width="0.9375"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+           <span>View product gallery</span>
+        </button>
+
+    
+<p-dialog [(visible)]="visibleGallery" [modal]="true" [style]="{ width: '993px', height: '690px' }" >
+  <div class="custom-gallery">
+    <p-carousel
+      #galleryCarousel
+      [value]="productToEdit().images"
+      [numVisible]="3"
+      [numScroll]="1"
+      [responsiveOptions]="responsiveOptions"
+      [showIndicators]="false"
+      [showNavigators]="false" 
+
+      [page]="currentCarouselPage"
+ (onPage)="currentCarouselPage = $event.page ?? 0"
+    >
+      <ng-template let-product #item>
+        <div class="m-2">
+          <div class="rounded-rd-sm overflow-hidden max-h-[380px]">
+            <img class="max-h-[380px] items-center m-auto" [src]="product" alt="View product gallery" />
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+    <!-- footer: dots on left, arrows on right -->
+    <div class="carousel-footer">
+      <!-- dots (left) -->
+      <div class="footer-dots" role="tablist" aria-label="Image thumbnails">
+        <ng-container *ngIf="productToEdit() && productToEdit().images?.length">
+          <button
+            *ngFor="let img of productToEdit().images; let i = index; trackBy: trackByIndex"
+            type="button"
+            class="dot"
+            [class.active]="i === currentImageIndex"
+            (click)="goToIndex(i)"
+            (keydown.enter)="goToIndex(i)"
+            (keydown.space)="$event.preventDefault(); goToIndex(i)"
+            [attr.aria-label]="(i + 1)"
+          ></button>
+        </ng-container>
+      </div>
+
+      <!-- arrows (right) -->
+      <div class="footer-arrows">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-chevron-left"
+          class="p-button-rounded p-button-text arrow-btn  "
+          (click)="prevImage()"
+          (keydown.enter)="prevImage()"
+          (keydown.space)="$event.preventDefault(); prevImage()"
+          aria-label="pervious"
+        ></button>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-chevron-right"
+          class="p-button-rounded p-button-text arrow-btn"
+          (click)="nextImage()"
+          (keydown.enter)="nextImage()"
+          (keydown.space)="$event.preventDefault(); nextImage()"
+          aria-label="next"
+        ></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+
+    
+    
+    </div>
+  }
+
+</div>
+
+
+         
+
+      <div class="mt-12 text-white">
+        <lib-ui-button
+          [label]="id() ? 'Update Product' : 'Add Product'"
+          [isSubmitting]="isSubmitting()"
+        />
+      </div>
+    </div>
+  </form>
+</section>

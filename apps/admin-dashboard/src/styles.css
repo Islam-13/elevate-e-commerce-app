@@ -14,7 +14,8 @@
 }
 @font-face {
   font-family: 'Nunito Sans';
-  src: url('/fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  src: url('/fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf')
+    format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -46,6 +47,7 @@
     --color-card-bg: #E4E4E7;
     --color-zink-100: #F4F4F5;
     --bg-dialog: #fff;
+    --p-breadcrumb-background: transparent !important;
   }
 
   &[data-theme='dark'] {
@@ -127,8 +129,15 @@ button { cursor: pointer; }
     @apply min-w-10 min-h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
   }
 }
-
-/* ===== PrimeReact / PrimeFlex overrides ===== */
+/* tr hover */
+.p-datatable-tbody > tr:hover {
+  background-color: var(--color-bg-main);
+  cursor: pointer;
+}
+.p-paginator-page.p-paginator-page-selected {
+  color: white !important;
+  background: var(--color-main) !important;
+}
 .p-menu {
   background: white !important;
   box-shadow: 0px 4px 9px 0px #00000026;
@@ -177,4 +186,22 @@ button { cursor: pointer; }
   background: #3b82f6;
   color: #fff;
   border-color: #2563eb;
+}
+
+@keyframes marquee-move {
+  to {
+    transform: translateX(calc(-100cqw - 100%));
+  }
+} 
+
+@theme {
+  --color-bg-icon1: #a6252a;
+  --color-bg-icon2: #0063d0;
+  --color-bg-icon3: #753cbf;
+  --color-bg-icon4: #008961;
+  --color-bg-s1: #fbeaea;
+  --color-bg-s2: #0063d00d;
+  --color-bg-s3: #753cbf0d;
+  --color-bg-s4: #0089610d;
+  --none: red;
 }

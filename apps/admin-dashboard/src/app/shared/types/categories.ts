@@ -3,6 +3,10 @@ export interface CategoriesRes {
   metadata: Metadata;
   categories: Category[];
 }
+export interface CategoryRes {
+  message: string;
+  category: Category;
+}
 
 export interface Category {
   _id: string;
@@ -19,4 +23,9 @@ export interface Metadata {
   limit: number;
   totalPages: number;
   totalItems: number;
+}
+
+export interface AddCategoryData {
+  name: string;
+  image: File;
 }

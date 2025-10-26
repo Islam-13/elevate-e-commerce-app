@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative flex justify-end">
   <!-- menu button -->
 
   <button class="md:hidden" (click)="toggleMenu($event)">
@@ -44,12 +44,12 @@
   </button>
 
   <div
-    class="md:flex gap-2 absolute top-0 right-8 md:relative"
-    [class]="`${isOpen() ? 'block border rounded-md bg-white' : 'hidden'}`"
+    class="md:flex gap-2 absolute top-0 right-8 md:static"
+    [class]="`${(isOpen() && categoryId() === openId()) ? 'block border rounded-md bg-white' : 'hidden'}`"
   >
     <a
       role="button"
-      [routerLink]="`update-category/${categoryId()}`"
+      [routerLink]="editNavigate()"
       class="text-blue-600 md:bg-[#0063D01A] py-1 px-2 rounded-md flex items-center gap-1.5"
     >
       <span>

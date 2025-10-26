@@ -1,65 +1,62 @@
-import { inject, Injectable } from '@angular/core';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  NavigationEnd,
-  Router,
-} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
-import { filter } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BreadcrumbService {
-  breadcrumbs: MenuItem[] = [];
+  private _breadcrumbs$ = new BehaviorSubject<MenuItem[]>([]);
+  breadcrumbs$ = this._breadcrumbs$.asObservable();
 
   constructor(private router: Router) {
+   // console.log('BreadcrumbService created');
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        console.log('router', this.router.routerState.snapshot.root);
-        this.breadcrumbs = this.createBreadcrumbs(
-          this.router.routerState.snapshot.root
-        );
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe((e) => {
+        // debug: confirm nav fires
+        console.log('NavigationEnd ->', this.router.url);
+        const root = this.router.routerState.snapshot.root;
+        const crumbs = this.buildBreadCrumb(root);
+        this._breadcrumbs$.next(crumbs);
       });
   }
 
-  private createBreadcrumbs(
+  private buildBreadCrumb(
     route: ActivatedRouteSnapshot,
     url: string = '',
     breadcrumbs: MenuItem[] = []
   ): MenuItem[] {
-    const children: ActivatedRouteSnapshot[] = route.children;
+    // get label from data (if any)
+    const label = (route.data && route.data['breadcrumb']) || '';
+    // build path from URL segments (actual values for params included)
+    const path = route.url.map((segment) => segment.path).join('/');
+    // accumulate url (avoid duplicate slashes)
+    const nextUrl = path ? `${url}/${path}` : url;
 
-    if (children.length === 0) {
-      return breadcrumbs;
+    if (label) {
+      // merge params and resolved data into one object
+      const values = { ...route.params, ...route.data };
+      const labelWithParams = this.replaceLabelParams(label, values);
+      breadcrumbs.push({ label: labelWithParams, routerLink: nextUrl || '/' });
+      // const labelWithParams = this.replaceLabelParams(label, route.params);
+      // breadcrumbs.push({ label: labelWithParams, routerLink: nextUrl || '/' });
     }
-
-    for (const child of children) {
-      if (
-        child.routeConfig &&
-        child.routeConfig.data &&
-        child.routeConfig.data['breadcrumb']
-      ) {
-        const routeURL: string = child.url
-          .map((segment) => segment.path)
-          .join('/');
-        url += `/${routeURL}`;
-
-        const breadcrumb: MenuItem = {
-          label: child.routeConfig.data['breadcrumb'],
-          routerLink: url,
-        };
-
-        breadcrumbs.push(breadcrumb);
-      }
-
-      return this.createBreadcrumbs(child, url, breadcrumbs);
+    if (route.firstChild) {
+      return this.buildBreadCrumb(route.firstChild, nextUrl, breadcrumbs);
     }
-    console.log(breadcrumbs);
-
     return breadcrumbs;
+  }
+  // optionally replace placeholders in label with params, e.g. 'Update :id' -> 'Update 5'
+  private replaceLabelParams(
+    label: string,
+    params: { [k: string]: any }
+  ): string {
+    // replace :paramName occurrences in label if present
+    return Object.keys(params || {}).reduce((acc, key) => {
+      return acc.replace(new RegExp(`:${key}`, 'g'), params[key]);
+    }, label);
   }
 }

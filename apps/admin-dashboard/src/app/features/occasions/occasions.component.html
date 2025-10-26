@@ -1,0 +1,74 @@
+<main class="m-4 p-6 flex flex-col gap-5 bg-white rounded-2xl">
+  <app-feature-heading
+    headText="All Occasions"
+    btnText="Add a new occasion"
+    addBtnNavigate="add-occasion"
+  />
+
+  <div class="grid relative">
+    <input
+      pInputText
+      type="text"
+      placeholder="Search..."
+      class="p-4 ps-11 border border-zinc-300 rounded-rd-sm"
+      [(ngModel)]="searchValue"
+      (input)="dt2.filterGlobal(searchValue(), 'contains')"
+    />
+
+    <span class="absolute top-1/2 left-4 -translate-y-1/2">
+      <i class="pi pi-search"></i>
+    </span>
+  </div>
+
+  <div>
+    <div class="card">
+      <p-table
+        #dt2
+        [value]="occasions()"
+        dataKey="id"
+        [rows]="5"
+        [rowsPerPageOptions]="[5, 15, 25]"
+        [loading]="isLoading()"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'productsCount']"
+        [tableStyle]="{ width: '100%' }"
+      >
+        <ng-template #header>
+          <tr>
+            <th style="width: 22%">Name</th>
+            <th style="width: 22%">Products</th>
+            <th style="width: 22%"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template #body let-occasion>
+          <tr>
+            <td class="font-semibold capitalize">
+              {{ occasion.name }}
+            </td>
+
+            <td>{{ occasion.productsCount }} products</td>
+
+            <td>
+              <app-action-btns
+                (deleteItem)="deleteOccasion(occasion._id)"
+                [categoryId]="occasion._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
+                [openId]="openId()"
+                (setOpenId)="changeId($event)"
+                [editNavigate]="`update-occasion/${occasion._id}`"
+                message="occasion"
+              />
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+          <tr>
+            <td colspan="3">No occasions found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</main>

@@ -1,5 +1,9 @@
 <main class="m-4 p-6 flex flex-col gap-5 bg-white rounded-2xl">
-  <app-feature-heading headText="All Categories" btnText="Add a new category" />
+  <app-feature-heading
+    headText="All Categories"
+    btnText="Add a new category"
+    addBtnNavigate="add-category"
+  />
 
   <div class="grid relative">
     <input
@@ -39,17 +43,22 @@
 
         <ng-template #body let-category>
           <tr>
-            <td class="font-semibold">
+            <td class="font-semibold capitalize">
               {{ category.name }}
             </td>
 
             <td>{{ category.productsCount }} products</td>
 
-            <td class="flex justify-end">
+            <td>
               <app-action-btns
+                (deleteItem)="deleteCategory(category._id)"
                 [categoryId]="category._id"
+                [isOpen]="isOpen()"
+                (setIsOpen)="toggleIsOpen($event)"
                 [openId]="openId()"
                 (setOpenId)="changeId($event)"
+                [editNavigate]="`update-category/${category._id}`"
+                message="category"
               />
             </td>
           </tr>
