@@ -1,13 +1,11 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
 import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-
-import { Category } from '../../shared/types/categories';
-import { CategoriesService } from '../../shared/services/categories/categories.service';
-import { ActionBtnsComponent } from '../components/action-btns/action-btns.component';
-import { FeatureHeadingComponent } from '../components/feature-heading/feature-heading.component';
+import { FeatureHeadingComponent } from '../../components/feature-heading/feature-heading.component';
+import { ActionBtnsComponent } from '../../components/action-btns/action-btns.component';
+import { Category } from '../../../shared/types/categories';
+import { CategoriesService } from '../../../shared/services/categories/categories.service';
 
 @Component({
   selector: 'app-categories',

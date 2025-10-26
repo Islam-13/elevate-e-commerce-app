@@ -1,7 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global imports */
 @import 'tailwindcss';
 @import 'primeicons/primeicons.css';
 
+/* Tailwind variant for dark */
+@custom-variant dark (:where([data-theme="dark"], [data-theme="dark"] *) &);
+
+/* Fonts */
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
@@ -15,13 +19,14 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Mulish';
   src: url('/fonts/Mulish-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
+/* Color tokens */
 :root {
   &,
   &[data-theme='light'] {
@@ -37,6 +42,11 @@
 
     --bg-color: #fafafa;
     --normal-txt: #27272a;
+
+    /* extras from second block */
+    --color-card-bg: #E4E4E7;
+    --color-zink-100: #F4F4F5;
+    --bg-dialog: #fff;
     --p-breadcrumb-background: transparent !important;
   }
 
@@ -53,9 +63,12 @@
 
     --bg-color: #27272a;
     --normal-txt: #fafafa;
+
+    --bg-dialog: #080101;
   }
 }
 
+/* Tailwind @theme tokens */
 @theme {
   --color-bg-bg: var(--bg-color);
   --color-bg-main: var(--color-bg-main);
@@ -70,9 +83,12 @@
   --color-icon: var(--color-icon);
 
   --color-star: #fba707;
+
   --radius-rd-sm: 10px;
   --radius-rd-md: 20px;
   --radius-rd-full: 100px;
+
+  /* extra tokens from the first block so you can use them in Tailwind */
   --font-nunito: 'Nunito Sans';
   --font-mulish: 'Mulish';
   --font-inter: 'Inter';
@@ -83,17 +99,35 @@
 }
 
 body {
-  /* font-family: 'Inter'; */
+  font-family: 'Inter';
   background: var(--bg-color);
   color: var(--normal-txt);
 }
+
+button { cursor: pointer; }
+
+/* ===== Utilities / Layout ===== */
+.wrapper { @apply max-w-[1440px] m-auto; }
+.heading { @apply text-xl text-title font-bold capitalize lg:text-3xl; }
+.underline { @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1; }
+
+/* ===== Components Layer ===== */
 @layer components {
   .text-nav {
-    @apply font-nunito text-sm font-bold p-[.5em] flex-1 rounded-xl flex flex-col  gap-2 items-center md:flex-row  md:text-lg md:mx-[20px];
+    @apply font-nunito text-sm font-bold p-[.5em] flex-1 rounded-xl flex flex-col gap-2 items-center md:flex-row md:text-lg md:mx-[20px];
   }
-}
-button {
-  cursor: pointer;
+
+  .btn-primary {
+    @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
+  }
+
+  .auth-btn {
+    @apply w-full bg-main rounded-rd-sm py-2.5 text-white my-9 disabled:cursor-not-allowed disabled:opacity-65;
+  }
+
+  .icon {
+    @apply min-w-10 min-h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
+  }
 }
 /* tr hover */
 .p-datatable-tbody > tr:hover {
@@ -107,9 +141,6 @@ button {
 .p-menu {
   background: white !important;
   box-shadow: 0px 4px 9px 0px #00000026;
-  /* color: var(--p-menu-color);
-    border: 1px solid var(--p-menu-border-color);
-    border-radius: var(--p-menu-border-radius); */
   min-width: 12.5rem;
   padding-top: 2em;
   padding-right: 16px;
@@ -119,47 +150,49 @@ button {
   border-top-right-radius: 20px !important;
   margin-bottom: 10px;
 }
+.p-menu-item-label { padding: 10px; }
 
-/* .p-menu-item-label {
-  padding: 10px;
-} */
+/* Carousel indicators */
+.p-carousel-indicator-active .p-carousel-indicator-button { background: #f82ba9 !important; }
+.p-carousel-indicator-button:hover { background: #f82ba9 !important; }
+.p-carousel-indicator-list { display: none !important; }
 
-.btn-primary {
-  @apply flex gap-1.5 items-center bg-main text-white font-medium rounded-rd-sm p-2 lg:py-2.5 lg:px-5 cursor-pointer outline-main outline-offset-2 disabled:cursor-not-allowed disabled:opacity-65;
-}
-
-/* .wrapper {
-  @apply max-w-[1440px] m-auto;
-} */
-
-/* .heading {
-  @apply text-xl text-title font-bold capitalize lg:text-3xl;
-}
-
-.underline {
-  @apply absolute w-40 h-0.5 bg-main left-0 -bottom-1;
-}
-
-
-
-.auth-btn {
-  @apply w-full bg-main rounded-rd-sm py-2.5 text-white my-9 disabled:cursor-not-allowed disabled:opacity-65;
-}
-
-.icon {
-  @apply min-w-10 min-h-10 text-white text-xl flex items-center justify-center cursor-pointer rounded-rd-full;
-}
-
+/* ===== Marquee ===== */
 .marquee-item {
   animation: marquee-move var(--speed) linear infinite;
   animation-delay: calc(var(--single-slide-speed) * var(--position) * -1);
+}
+@keyframes marquee-move {
+  to { transform: translateX(calc(-100cqw - 100%)); }
+}
+
+/* ===== Toast (PrimeToast) ===== */
+.my-toast .p-toast-message {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  border-left: 4px solid transparent;
+}
+.my-toast .p-toast-message-success {
+  background: #0b8c61e6;
+  color: #fff;
+  border-color: #008a5e;
+}
+.my-toast .p-toast-message-error {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ba1d1d;
+}
+.my-toast .p-toast-message-info {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
 }
 
 @keyframes marquee-move {
   to {
     transform: translateX(calc(-100cqw - 100%));
   }
-} */
+} 
 
 @theme {
   --color-bg-icon1: #a6252a;

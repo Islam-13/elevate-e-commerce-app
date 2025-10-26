@@ -45,30 +45,16 @@
     --normal-txt: #fafafa;
 
     --bg-dialog: #080101;
-
   }
 }
 
 @theme {
-  --color-bg-bg: var(--bg-color);
-  --color-bg-main: var(--color-bg-main);
-  --color-main: var(--color-main);
-  --color-title: var(--color-title);
-  --color-mini-paragraph: var(--color-mini-paragraph);
-  --color-normal-txt: var(--normal-txt);
-
-  --color-span: var(--color-span);
-
-  --color-price: var(--color-price);
-  --color-icon: var(--color-icon);
-
   --color-star: #fba707;
   --radius-rd-sm: 10px;
   --radius-rd-md: 20px;
   --radius-rd-full: 100px;
 }
 
-/* carousel ...> Categories */
 .p-carousel-indicator-active .p-carousel-indicator-button {
   background: #f82ba9 !important;
 }
@@ -147,14 +133,3 @@ button {
   border-color:#2563eb; 
 }
 /*======= End Toast Styles =======*/
-
-/*======= Start Dialog Styles =======*/
-
-/* ::ng-deep .p-confirmdialog {
-  background: white !important;
-  border: none !important;
-} */
-
-
-
-/*======= End Dialog Styles =======*/

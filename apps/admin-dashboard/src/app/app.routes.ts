@@ -32,7 +32,7 @@ export const appRoutes: Route[] = [
           {
             path: '',
             loadComponent: () =>
-              import('./features/categories/categories.component').then(
+              import('./features/pages/categories/categories.component').then(
                 (c) => c.CategoriesComponent
               ),
             data: { breadcrumb: '' },
@@ -41,7 +41,7 @@ export const appRoutes: Route[] = [
             path: 'add-category',
             loadComponent: () =>
               import(
-                './features/add-update-category/add-update-category.component'
+                './features/components/add-update-category/add-update-category.component'
               ).then((c) => c.AddUpdateCategoryComponent),
             data: { breadcrumb: 'Add Category' },
           },
@@ -49,7 +49,7 @@ export const appRoutes: Route[] = [
             path: 'update-category/:id',
             loadComponent: () =>
               import(
-                './features/add-update-category/add-update-category.component'
+                './features/components/add-update-category/add-update-category.component'
               ).then((c) => c.AddUpdateCategoryComponent),
             resolve: { categoryName: CategoryResolver },
             data: {
@@ -59,6 +59,30 @@ export const appRoutes: Route[] = [
         ],
       },
 
+          {
+            path: 'settings',
+            loadComponent: () =>
+              import(
+                './features/settings/pages/settings-shell/settings-shell.component'
+              ).then((c) => c.SettingsShellComponent),
+              children: [
+                {path: '', redirectTo:'profile', pathMatch: 'full'},
+                {
+                  path:'profile',
+                  loadComponent: () => 
+                    import('./features/settings/pages/update-profile/update-profile.component').then(
+                      (c) => c.UpdateProfileComponent
+                    )
+                },
+                {
+                  path:'password',
+                  loadComponent: () => 
+                    import('./features/settings/pages/update-password/update-password.component').then(
+                      (c) => c.UpdatePasswordComponent
+                    )
+                },
+              ]
+          },
       {
         path: 'occasions',
         data: { breadcrumb: 'Occasions' },

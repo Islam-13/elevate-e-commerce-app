@@ -1,0 +1,116 @@
+<section>
+  <form class="md:space-y-4 space-y-3" [formGroup]="updateProfileForm" (ngSubmit)="updateProfileSubmit()">
+    <!-- Avatar  -->
+    <div class="flex items-center gap-6">
+      <div class="relative ">
+        <img [src]="accountInfo()?.photo"
+          class="h-24 w-24 rounded-full  object-cover ring-0 ring-white shadow shrink-0"
+          alt="Avatar" />
+        <button type="button" (click)="fileInput.click()"
+            class="absolute dark:bg-pink-200 -bottom-2 -right-2 inline-flex items-center justify-center h-9 w-9 rounded-full bg-white border border-gray-200 shadow hover:bg-gray-50"
+            title="Upload">
+          <i class="fa-solid fa-upload dark:text-pink-800"></i>
+        </button>
+        <input #fileInput type="file"
+          accept="image/png,image/jpeg,image/gif"
+          class="hidden"
+          (change)="onAvatarSelected($event)"/>
+      </div>
+      <div class="text-sm text-gray-600">
+        <h4 class="font-bold text-base text-gray-900 dark:text-zinc-100">Upload Photo</h4>
+        <p class="text-zinc-500 dark:text-zinc-400">You can upload a .jpg, .png, or .gif photo with max size of 5MB.</p>
+      </div>
+    </div>
+
+    <!-- Names -->
+    <div class="grid grid-cols-1 md:grid-cols-2 md:gap-6 gap-3">
+        <app-base-input
+          id="input-frist"
+          [label]="'firstName'"
+          type="text"
+          formControlName="firstName"
+        />
+        <app-base-input
+          id="input-last"
+          [label]="'lastName'"
+          type="text"
+          formControlName="lastName"
+        />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <app-base-input
+        id="input-email"
+        [label]="'email'"
+        type="email"
+        formControlName="email"
+      />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <app-base-input
+        id="input-phone"
+        [label]="'phone'"
+        type="tel"
+        inputmode="numeric"
+        formControlName="phone"
+      />
+      </div>
+
+    <!-- Gender (disabled like design) -->
+    <div>
+      <app-base-input
+        id="input-gender"
+        [label]="'gender'"
+        type="text"
+        formControlName="gender"
+      />
+    </div>
+
+  <div class="md:mt-10 mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 w-full">
+    <div class="flex items-center gap-4 mx-6 sm:mx-0 justify-between">
+      <button type="button" (click)="confirmDialog()" 
+        class="text-red-600 transition-all hover:text-red-700 font-bold">
+        deleteMyAccount
+      </button>
+      <button type="button" [routerLink]="['/settings','password']"
+        class="text-zinc-700 transition-all hover:text-zinc-900 font-bold">
+        Change Password
+      </button>
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting()"
+      class="inline-flex items-center justify-center md:px-8 md:py-3 sm:px-6 sm:py-2 px-6 py-2 
+        rounded-xl bg-red-600 text-white font-medium hover:bg-red-700 
+      disabled:bg-zinc-600 disabled:cursor-not-allowed 
+        w-full md:w-auto">
+      @if (!isSubmitting()) {
+        Save Changes
+      }
+      @else {
+        <i class="fa-solid fa-circle-notch fa-spin fa-lg text-white me-1"></i> Save Changes
+      }
+    </button>
+  </div>
+
+  </form>
+  <!-- Dialog -->
+  <div class="card flex justify-center">
+      <p-toast />
+      <p-confirmdialog>
+          <ng-template #message let-message>
+              <div class="flex flex-col items-center w-full">
+                <i [ngClass]="message.icon" class="text-3xl mb-12"></i>
+                <p class="text-base text-black text-center dark:text-white fw-semibold mb-2.5">
+                  {{ message.message.split('?')[0] }}?
+                </p>
+                <p class="text-red-500 text-base fw-normal mb-10">
+                  {{ message.message.split('?')[1] }}
+                </p>
+              </div>
+          </ng-template>
+      </p-confirmdialog>
+  </div>
+</section>
