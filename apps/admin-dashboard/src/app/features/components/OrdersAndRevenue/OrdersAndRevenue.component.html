@@ -21,7 +21,6 @@
                 [style.background-color]="chartColors()[i]"
               >
               </span>
-
               @if (item.count > 0) {
               {{ item._id | titlecase}}
               }
@@ -40,9 +39,7 @@
     </div>
   </div>
 
-  <div
-    class="w-full bg-white shadow rounded-lg p-6 min-w-[100px] overflow-y-auto"
-  >
+  <div class="md:w-[90%] w-full bg-white shadow-lg rounded-lg  min-w-[100px] overflow-y-auto">
     <div class="bg-white rounded-2xl p-4">
       <div class="flex items-center justify-between mb-3">
         <h2 class="text-2xl font-bold">Revenue</h2>
@@ -67,8 +64,8 @@
         </div>
       </div>
 
-      <div style="height: 10rem">
-        <p-chart  type="line" [data]="data" [options]="options"> </p-chart>
+      <div>
+        <p-chart type="line" [data]="data" [options]="options" height="325px" width="100%"> </p-chart>
       </div>
     </div>
   </div>
