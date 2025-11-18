@@ -55,6 +55,25 @@
   --radius-rd-full: 100px;
 }
 
+@theme {
+  --color-bg-bg: var(--bg-color);
+  --color-bg-main: var(--color-bg-main);
+  --color-main: var(--color-main);
+  --color-title: var(--color-title);
+  --color-mini-paragraph: var(--color-mini-paragraph);
+  --color-normal-txt: var(--normal-txt);
+
+  --color-span: var(--color-span);
+
+  --color-price: var(--color-price);
+  --color-icon: var(--color-icon);
+
+  --color-star: #fba707;
+  --radius-rd-sm: 10px;
+  --radius-rd-md: 20px;
+  --radius-rd-full: 100px;
+}
+
 .p-carousel-indicator-active .p-carousel-indicator-button {
   background: #f82ba9 !important;
 }
@@ -118,18 +137,18 @@ button {
   border-left: 4px solid transparent;
 }
 .my-toast .p-toast-message-success {
-  background: #0b8c61e6;         
+  background: #0b8c61e6;
   color: #fff;
-  border-color: #008a5e;    
+  border-color: #008a5e;
 }
 .my-toast .p-toast-message-error {
-  background: #ef4444;         
+  background: #ef4444;
   color: #fff;
-  border-color: #ba1d1d;     
+  border-color: #ba1d1d;
 }
 .my-toast .p-toast-message-info {
-  background:#3b82f6; 
+  background:#3b82f6;
   color:#fff;
-  border-color:#2563eb; 
+  border-color:#2563eb;
 }
 /*======= End Toast Styles =======*/
