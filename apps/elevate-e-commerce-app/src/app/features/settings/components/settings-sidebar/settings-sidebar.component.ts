@@ -6,11 +6,10 @@ import { UpdateProfileService } from '../../services/update-profile/update-profi
 import { NotificationService } from '@shared/services/notification/notification.service';
 import { Store } from '@ngrx/store';
 import { SessionActions } from '../../../../store/auth-session/session.actions';
-import { HttpClientModule } from '@angular/common/module.d-CnjH8Dlt';
 
 @Component({
   selector: 'app-settings-sidebar',
-  imports: [CommonModule, RouterLinkActive, RouterLink, TranslateModule , HttpClientModule],
+  imports: [CommonModule, RouterLinkActive, RouterLink, TranslateModule ],
   templateUrl: './settings-sidebar.component.html',
   styleUrl: './settings-sidebar.component.css',
 })
